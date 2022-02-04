@@ -53,6 +53,7 @@ const endMeeting = (code) => {
 
 const AppContainer = (props) => {
   const layoutContext = useContext(LayoutContext);
+  console.log(layoutContext);
   const { layoutContextState, layoutContextDispatch } = layoutContext;
 
   function usePrevious(value) {
@@ -114,6 +115,7 @@ const AppContainer = (props) => {
           settingsLayout,
           pushLayoutToEveryone,
           deviceType,
+          layoutContext,
           layoutContextDispatch,
           sidebarNavPanel,
           sidebarNavigationIsOpen,

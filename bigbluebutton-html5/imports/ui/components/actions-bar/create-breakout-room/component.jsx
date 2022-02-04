@@ -1060,6 +1060,9 @@ class BreakoutRoom extends PureComponent {
 
     return (
       <Modal
+        overlayClassName={styles.overlay}
+        className={styles.modal}
+        hideBorder
         title={
           isInvitation
             ? intl.formatMessage(intlMessages.invitationTitle)
@@ -1084,6 +1087,7 @@ class BreakoutRoom extends PureComponent {
           label: intl.formatMessage(intlMessages.dismissLabel),
         }}
         preventClosing={preventClosing}
+
       >
         <div className={styles.content}>
           {isInvitation || this.renderTitle()}

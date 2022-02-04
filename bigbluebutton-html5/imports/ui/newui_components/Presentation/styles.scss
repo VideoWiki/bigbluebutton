@@ -1,0 +1,146 @@
+.Presentation_Box {
+    flex: 1 1 0%;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    padding: 2rem;
+    padding-top: 1rem;
+}
+
+.arrowBox,
+.PresenationTitle,
+.Recording {
+    height: fit-content;
+}
+
+.arrowBox {
+    background: #F0F1F3;
+    border-radius: 5px;
+    padding: 0.7rem;
+    padding-bottom: 0.2rem;
+    padding-top: 0.4rem;
+}
+
+.PresenationTitle {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    margin-left: 1rem;
+    margin-top: 0.4rem;
+    line-height: 20px;
+}
+
+.Recording {
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+    background: #F0F1F3;
+    border-radius: 100px;
+    padding: 0.3rem;
+    padding-bottom: 0.2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    color: #9EA5AF;
+    display: flex;
+}
+
+.InOneLine {
+    display: flex;
+}
+
+.arrowBox:hover {
+    background-color: #9EA5AF;
+    cursor: pointer;
+}
+
+.arrowBox:hover .arrow {
+    stroke: #F0F1F3;
+}
+
+.arrowBox:hover,
+.arrowBox:hover .arrow {
+    transition-duration: 0.2s;
+}
+
+.centerAlign {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Presentation {
+    flex: 1 1 0%;
+    margin-top: 2rem;
+    width: 50rem;
+    height: 80vh;
+    border-radius: 12px;
+    background-color: #9EA5AF;
+}
+
+.PImage {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.VoiceBox {
+    display: flex;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(35px);
+    border-radius: 100px;
+    padding: 0.2rem;
+    margin: 0.5rem;
+    margin-right: 0rem;
+}
+
+.SpeakerName {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    margin-left: 0.2rem;
+    color: #FFFFFF;
+}
+
+.MeetingOption {
+    display: flex;
+    justify-content: space-around;
+    margin-top: -12vh;
+}
+.CircularBox,.SquareBox{    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.CircularBox {
+    height:3rem;
+    width:3rem;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(35px);
+    border-radius: 400px;
+    margin-right: 1rem;
+}
+.SquareBox{
+    height: 4rem;
+    width: 4rem;
+    margin-left: 1rem;
+    margin-right: 2rem;
+    margin-top: -1vh;
+    background: #E64980;
+    border-radius: 20px;    
+}
+.SquareBox:hover,.SquareBox:hover .call{
+    cursor: pointer;
+    background-color: white;
+    fill:#E64980;
+    transition-duration: 0.2s;
+}
+.CircularBox:hover,.CircularBox:hover .video,.CircularBox:hover .microphone,.CircularBox:hover .cast,.CircularBox:hover .Expand{
+    cursor: pointer;
+    background-color: white;
+    fill:#9EA5AF;   
+    transition-duration: 0.2s;
+}

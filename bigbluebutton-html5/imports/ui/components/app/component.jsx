@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -48,6 +48,8 @@ import { NAVBAR_HEIGHT, LARGE_NAVBAR_HEIGHT } from '/imports/ui/components/layou
 import Settings from '/imports/ui/services/settings';
 import LayoutService from '/imports/ui/components/layout/service';
 import { registerTitleView } from '/imports/utils/dom-utils';
+import MySidebar from '../../newui_components/sidebar_navigation/sidebar';
+import Option_Flow from '../../newui_components/Options/options_Flow';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -135,11 +137,12 @@ class App extends Component {
     this.state = {
       enableResize: !window.matchMedia(MOBILE_MEDIA).matches,
     };
-
+    console.log(this.props);
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
     this.shouldAriaHide = this.shouldAriaHide.bind(this);
     this.renderWebcamsContainer = App.renderWebcamsContainer.bind(this);
-
+    this.renderNewUI=this.renderNewUI.bind(this);
+    this.renderOldUI=this.renderOldUI.bind(this);
     this.throttledDeviceType = throttle(() => this.setDeviceType(),
       50, { trailing: true, leading: true }).bind(this);
   }
@@ -238,6 +241,7 @@ class App extends Component {
       layoutContextDispatch,
       mountRandomUserModal,
     } = this.props;
+
 
     if (meetingLayout !== prevProps.meetingLayout) {
       layoutContextDispatch({
@@ -443,8 +447,69 @@ class App extends Component {
         return <CustomLayout />;
     }
   }
+  
+  renderNewUI()
+  {
+    const {
+      customStyle,
+      customStyleUrl,
+      audioAlertEnabled,
+      pushAlertEnabled,
+      shouldShowPresentation,
+      shouldShowScreenshare,
+      shouldShowExternalVideo,
+      isPresenter,
+    } = this.props;
+    return (
+      <>
+        {this.renderLayoutManager()}
+        <div
+          id="layout"
+          className={styles.layout}
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          {this.renderActivityCheck()}
+          {this.renderUserInformation()}
+          <BannerBarContainer />
+          <NotificationsBarContainer />
+          <MySidebar/>
+          <Option_Flow/>
+          <NavBarContainer main="new" />
+          {this.renderWebcamsContainer()}
+          {shouldShowScreenshare ? <ScreenshareContainer /> : null}
+          {
+            shouldShowExternalVideo
+            ? <ExternalVideoContainer isPresenter={isPresenter} />
+            : null
+          }
+          {this.renderCaptions()}
+          <UploaderContainer />
+          <BreakoutRoomInvitation />
+          <ToastContainer rtl />
+          {(audioAlertEnabled || pushAlertEnabled)
+            && (
+              <ChatAlertContainer
+                audioAlertEnabled={audioAlertEnabled}
+                pushAlertEnabled={pushAlertEnabled}
+              />
+            )}
+          <WaitingNotifierContainer />
+          <LockNotifier />
+          <StatusNotifier status="raiseHand" />
+          <ManyWebcamsNotifier />
+          <PollingContainer />
+          {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
+          {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
+        </div>
+      </>
+    );
+  }
 
-  render() {
+  renderOldUI()
+  {
     const {
       customStyle,
       customStyleUrl,
@@ -485,7 +550,7 @@ class App extends Component {
           {this.renderCaptions()}
           <UploaderContainer />
           <BreakoutRoomInvitation />
-          <AudioContainer />
+          <AudioContainer />    
           <ToastContainer rtl />
           {(audioAlertEnabled || pushAlertEnabled)
             && (
@@ -504,6 +569,12 @@ class App extends Component {
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
           {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
         </div>
+      </>);
+  }
+
+  render() {
+    return (<>
+      {this.renderNewUI()}
       </>
     );
   }

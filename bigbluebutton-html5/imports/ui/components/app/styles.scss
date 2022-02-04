@@ -11,15 +11,19 @@
   --poll-pane-min-width: 20em;
   --panel-margin-left: 0.1em;
 }
-
+.Meet{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
 .main {
   @extend %flex-column;
   position: relative;
 }
 
 .layout {
-  @extend %flex-column;
-  background-color: #06172a;
+  @extend %flex-row;
+  background-color: #06172A;
 }
 
 .navbar {

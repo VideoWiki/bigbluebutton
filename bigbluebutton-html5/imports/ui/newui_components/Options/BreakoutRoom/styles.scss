@@ -1,0 +1,196 @@
+.breakoutRoomFlow{
+    height: 100%;
+    background-color:#EEF0F5;
+}
+.BreakoutroomHeading{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;   
+}
+.BreakoutroomHeadingOuter{
+    padding: 1.5rem;
+    padding-left: 1rem;
+}
+.BreakoutInput{
+    display: flex;
+}
+.createBreakOutBox{
+    width: 90%;
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.centerAlign{
+    display: flex;
+    justify-content: space-around;
+}
+.AllRoomsBox{
+    height: 50%;
+    overflow-y: auto;
+    padding: 0.9rem;
+    padding-left: 1.1rem;
+}
+.AllRoomsBox::-webkit-scrollbar{
+    width:8px;
+}
+.AllRoomsBox::-webkit-scrollbar-track{
+    margin-top: 1rem;
+}
+.AllRoomsBox::-webkit-scrollbar-thumb {
+    background: #CFD2DA; 
+    border-radius: 100px;
+}
+.InputBox{
+    margin-left: 4rem;
+}
+.createBreakoutHeading{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 1rem;
+    line-height: 26px;    
+    text-transform: capitalize;
+    color: #333333;
+}
+.InputHeadings{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+    color: #000000;
+}
+.InputRooms,.InputDuration,.mylabel{
+    padding: 0.5rem;
+    border: 1px solid #EBEDF0;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;   
+    letter-spacing: -0.02em;
+    color: #888888;
+}
+.InputDuration{
+    width: 40%;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+}
+.InputRooms{
+    border-radius: 6px;
+    width: 200%;
+    cursor: pointer;
+}
+.mylabel{
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.Check{
+    margin-top: 1rem;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: -0.02em;
+}
+.Tick{
+    margin-top: 0.8rem;
+    margin-right: 0.2rem;
+    cursor: pointer;
+}
+.close{
+    padding: 0.5rem;
+    padding-bottom: 0rem;
+    width: fit-content;
+}
+.create{
+    text-align: center;
+    padding-top: 0.5rem;
+    width: 12rem;
+}
+.close,.create{
+    background: #F4F6F8;
+    border-radius: 6px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+.close:hover,.create:hover,.close:hover .cross{
+    background:#333333;
+    color: #F4F6F8;
+    stroke: #F4F6F8;
+    transition-duration: 0.2s;
+}
+.alignAtcorners{
+    display: flex;
+    justify-content: space-between;
+}
+.userRoom{
+    width: 2rem;
+    height: 2rem;
+    margin-left: -0.5rem;
+}
+.RoomName{
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #333333;
+}
+.RoomDuration{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+    color: #787D8D;
+}
+.PlusButton{
+    background: rgba(68, 204, 136, 0.1);
+    border-radius: 6px;
+    padding: 0.4rem;
+    padding-bottom: 0rem;
+    margin-top: 1rem;
+}
+.PlusButton:hover .add,.PlusButton:hover{
+    stroke: white;
+    background-color: #44CC88;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+.ImageGroup{
+    margin-top: 1rem;
+    display: flex;
+}
+.RoomBox{
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 12px;
+}
+.remaining{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100px;
+    background-color: #7816F7;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Montserrat',sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 26px;
+    color: #FFFFFF;
+    margin-left: -0.5rem;
+}

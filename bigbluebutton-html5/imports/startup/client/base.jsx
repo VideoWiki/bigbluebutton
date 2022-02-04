@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import Auth from '/imports/ui/services/auth';
-import AppContainer from '/imports/ui/components/app/container';
+import AppContainer from "../../ui/components/app/container";
 import ErrorScreen from '/imports/ui/components/error-screen/component';
 import MeetingEnded from '/imports/ui/components/meeting-ended/component';
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
@@ -58,7 +58,6 @@ const fullscreenChangedEvents = [
 class Base extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       loading: false,
       meetingExisted: false,

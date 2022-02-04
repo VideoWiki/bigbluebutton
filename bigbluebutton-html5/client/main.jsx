@@ -17,7 +17,7 @@
 */
 /* eslint no-unused-vars: 0 */
 
-import React from 'react';
+import React,{createContext} from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import logger from '/imports/startup/client/logger';
@@ -34,7 +34,9 @@ import GroupChatAdapter from '/imports/ui/components/components-data/group-chat-
 import('/imports/api/audio/client/bridge/bridge-whitelist').catch(() => {
   // bridge loading
 });
-
+// const FeatureContext=React.createContext({theme:"none",toggleTheme:(ele)=>{
+//   theme:ele
+// }});
 Meteor.startup(() => {
   // Logs all uncaught exceptions to the client logger
   window.addEventListener('error', (e) => {
@@ -60,22 +62,22 @@ Meteor.startup(() => {
 
   // TODO make this a Promise
   render(
-    <ContextProviders>
-      <React.Fragment>
-        <JoinHandler>
-          <AuthenticatedHandler>
-            <Subscriptions>
-              <IntlStartup>
-                <Base />
-              </IntlStartup>
-            </Subscriptions>
-          </AuthenticatedHandler>
-        </JoinHandler>
-        <UsersAdapter />
-        <ChatAdapter />
-        <GroupChatAdapter />
-      </React.Fragment>
-    </ContextProviders>,
-    document.getElementById('app'),
-  );
+      <ContextProviders>
+        <React.Fragment>
+          <JoinHandler>
+            <AuthenticatedHandler>
+              <Subscriptions>
+                <IntlStartup>
+                  <Base />
+                </IntlStartup>
+              </Subscriptions>
+            </AuthenticatedHandler>
+          </JoinHandler>
+          <UsersAdapter />
+          <ChatAdapter />
+          <GroupChatAdapter />
+        </React.Fragment>
+      </ContextProviders>
+      ,document.getElementById('app'),
+      );
 });

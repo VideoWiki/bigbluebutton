@@ -1,0 +1,47 @@
+@import '/imports/ui/stylesheets/variables/_all';
+@import '/imports/ui/stylesheets/mixins/_indicators';
+
+.OuterSideBox{
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  width: 4.5%;  //55px
+  height: 100%;
+}
+.LogoBox{
+  padding: 1rem;
+  padding-left: 0.8rem;
+  margin-bottom: 5rem;
+}
+.IconBox{
+  margin-left: 0.63rem;
+  margin-bottom: 0.63rem;
+  padding-right: 0.31rem;
+  max-width: fit-content;
+  cursor: pointer;
+}
+.IconBox:hover{
+  border-right: solid 4px #7816F7;
+  border-radius: 5px;
+  transition-duration: 0.2s;
+}
+.IconBox:hover .chat,.IconBox:hover .breakoutroom,.IconBox:hover .poll,.IconBox:hover .document,.IconBox:hover .user,.IconBox:hover .video,.IconBox:hover .settings{
+  fill: #7816F7;
+  transition-duration: 0.2s;
+}
+.IconOuter{
+  top:6.25rem;
+}
+.IconShadow{
+  padding: 0.44rem;
+  padding-bottom: 0.2rem;
+  width: fit-content;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.selectedBox{
+  padding: 0.44rem;
+  padding-bottom: 0.2rem;
+  width: fit-content;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgba(120, 22, 247, 0.1);
+}

@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/variables/breakpoints";
 @import "/imports/ui/stylesheets/variables/placeholders";
 @import "/imports/ui/stylesheets/mixins/_scrollable";
+@import "/imports/ui/components/modal/simple/styles";
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -384,4 +385,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     content: "\E926";
     color: var(--color-gray-light);
   }
+}
+.overlay {
+  @extend .overlay;
+}
+
+.modal {
+  @extend .modal;
+  align-self: center;
+  padding: 1.5rem;
+  min-height: 32rem;
 }

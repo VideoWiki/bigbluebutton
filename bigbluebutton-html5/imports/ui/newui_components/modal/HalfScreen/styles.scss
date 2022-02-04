@@ -1,0 +1,130 @@
+@import "../../../stylesheets/variables/breakpoints";
+@import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/stylesheets/mixins/_indicators";
+
+:root {
+  --popout-rtl-left: -0.5rem;
+  --modal-title-fw: 400;
+}
+
+.modal {
+  @extend %highContrastOutline;
+  outline-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding: calc(var(--line-height-computed) / 2) var(--line-height-computed);
+
+  @include mq($small-only) {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.centerAlign{
+  display: flex;
+  justify-content: space-around;
+}
+
+.content {
+  width: 90%;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  // color: var(--color-text);
+  // @extend %flex-column;
+  // padding: var(--line-height-computed) 0;
+}
+
+.header {
+  display: flex;
+  padding: var(--line-height-computed) 0;
+  border-bottom: var(--border-size) solid var(--color-gray-lighter);
+}
+
+.actions {
+  flex: 0 1 35%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  @extend %text-elipsis;
+  flex: 1;
+  margin: 0;
+  font-weight: var(--modal-title-fw);
+}
+
+%btn {
+  flex: 0 1 48%;
+}
+
+.dismiss,
+.confirm {
+  @extend %btn;
+}
+
+.popout {
+  > i {
+    bottom: var(--border-size);
+    left: var(--sm-padding-x);
+
+    [dir="rtl"] & {
+      left: var(--popout-rtl-left);
+      transform: rotateY(180deg);
+    }
+  }
+}
+
+.BreakoutroomHeading{
+  font-family: 'Montserrat',sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;   
+}
+.BreakoutroomHeadingOuter{
+  padding: 1rem;
+  padding-left: 1.5rem;
+}
+
+.dismiss {
+}
+
+.confirm {
+  color: var(--color-white) !important;
+  background-color: var(--color-link) !important;
+}
+.close{
+  padding: 0.2rem;
+  padding-bottom: 0rem;
+  width: fit-content;
+}
+.create,.back{
+  font-family: 'Montserrat',sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;   
+  text-align: center;
+  padding-top: 0.2rem;
+  width: 10rem;
+  color:#333333;
+}
+.back{
+  width: 6rem;
+}
+.close,.create,.back{
+  background: #F4F6F8;
+  border-radius: 6px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+.close:hover,.create:hover,.close:hover .cross,.back:hover{
+  background:#333333;
+  color: #F4F6F8;
+  stroke: #F4F6F8;
+  transition-duration: 0.2s;
+}
