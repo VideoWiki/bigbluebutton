@@ -221,7 +221,7 @@ class UserOptions extends PureComponent {
       isMeteorConnected,
       dynamicGuestPolicy,
     } = this.props;
-
+    console.log(this.props);
     const canCreateBreakout = amIModerator
       && !meetingIsBreakout
       && !hasBreakoutRoom

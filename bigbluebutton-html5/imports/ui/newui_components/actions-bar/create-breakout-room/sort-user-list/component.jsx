@@ -54,12 +54,17 @@ class SortUsers extends Component {
     const {
       onCheck,
       onUncheck,
+      // updateState,
+      // selectedUsers
     } = this.props;
     return (ev) => {
       const check = ev.target.checked;
+      
       if (check) {
+        // updateState({selectedUsers:selectedUsers-1});
         return onCheck(userId, room);
       }
+      // updateState({selectedUsers:selectedUsers+1});
       return onUncheck(userId, room);
     };
   }

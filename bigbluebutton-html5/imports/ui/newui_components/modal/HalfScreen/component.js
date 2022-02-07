@@ -98,6 +98,7 @@ class ModalHalfscreen extends PureComponent {
       updateState,
       CurrentShow,
       level,
+      isInvitation,
       Validity,
       ...otherProps
     } = this.props;
@@ -108,13 +109,23 @@ class ModalHalfscreen extends PureComponent {
     if (popoutIcon) {
       confirmAriaLabel = `${confirmAriaLabel} ${intl.formatMessage(intlMessages.newTabLabel)}`;
     }
-    console.log(confirm.label,intl.formatMessage(intlMessages.modalDone));
+
     return (
       <div>
         <header className={styles.BreakoutroomHeadingOuter}>
           <h1 className={styles.BreakoutroomHeading}>{title}</h1>
         </header>
-        <div className={styles.centerAlign}>
+        {isInvitation && level===1&&
+          <div className={styles.RightAlign}>
+            <Button 
+            label="Send Invites" 
+            className={styles.create}
+            onClick={() => updateState({
+              formFillLevel:level+1
+            })}
+            />
+          </div>}
+        {(!isInvitation||level>=2) && <div className={styles.centerAlign}>
           <div className={styles.content}>
             {children}
             {CurrentShow && <div className={styles.centerAlign}>
@@ -141,7 +152,7 @@ class ModalHalfscreen extends PureComponent {
                 onClick={() => updateState({ formFillLevel: level + 1 })}
               />
               }
-              {level === 2 && <Button
+              {level === 2 && !isInvitation && <Button
                 data-test="modalConfirmButton"
                 className={styles.back}
                 label="Back"
@@ -158,16 +169,16 @@ class ModalHalfscreen extends PureComponent {
                 label={confirm.label || intl.formatMessage(intlMessages.modalDone)}
                 aria-label={confirmAriaLabel}
                 disabled={confirm.disabled}
-                onClick={() => { 
+                onClick={() => {
                   this.handleAction('confirm');
-                  updateState({formFillLevel:level-1});
+                  updateState({ formFillLevel: level - 1 });
                 }}
                 aria-describedby="modalConfirmDescription"
                 iconRight={popoutIcon}
               />}
             </div>}
           </div>
-        </div>
+        </div>}
         <div id="modalDismissDescription" hidden>{intl.formatMessage(intlMessages.modalCloseDescription)}</div>
         <div id="modalConfirmDescription" hidden>{intl.formatMessage(intlMessages.modalDoneDescription)}</div>
       </div>

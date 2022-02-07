@@ -28,7 +28,7 @@ const TimeWindowChatItemContainer = (props) => {
   const user = users[Auth.meetingID][sender];
   const messageKey = key;
   const handleReadMessage = (tstamp) => ChatService.updateUnreadMessage(tstamp, idChatOpen);
-  
+  console.log(users);
   return (
     <TimeWindowChatItem
       {

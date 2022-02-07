@@ -21,9 +21,16 @@
   }
 }
 
-.centerAlign{
+.centerAlign {
   display: flex;
   justify-content: space-around;
+}
+
+.RightAlign {
+  display: flex;
+  justify-content: right;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
 }
 
 .content {
@@ -67,7 +74,7 @@
 }
 
 .popout {
-  > i {
+  >i {
     bottom: var(--border-size);
     left: var(--sm-padding-x);
 
@@ -78,52 +85,72 @@
   }
 }
 
-.BreakoutroomHeading{
-  font-family: 'Montserrat',sans-serif;
+.BreakoutroomHeading {
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  line-height: 20px;   
+  line-height: 20px;
 }
-.BreakoutroomHeadingOuter{
+
+.BreakoutroomHeadingOuter {
   padding: 1rem;
   padding-left: 1.5rem;
 }
 
-.dismiss {
-}
+.dismiss {}
 
 .confirm {
   color: var(--color-white) !important;
   background-color: var(--color-link) !important;
 }
-.close{
+
+.close {
   padding: 0.2rem;
   padding-bottom: 0rem;
   width: fit-content;
 }
-.create,.back{
-  font-family: 'Montserrat',sans-serif;
+.create,
+.back {
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
-  line-height: 20px;   
+  line-height: 20px;
   text-align: center;
   padding-top: 0.2rem;
   width: 10rem;
-  color:#333333;
+  color: #333333;
 }
-.back{
+
+.back {
   width: 6rem;
 }
-.close,.create,.back{
+
+.close,
+.create,
+.back {
   background: #F4F6F8;
   border-radius: 6px;
   margin-top: 1rem;
   cursor: pointer;
 }
-.close:hover,.create:hover,.close:hover .cross,.back:hover{
-  background:#333333;
+
+.create{
+  color: white;
+  background-color: #333333;
+}
+
+.create:hover{
+  background-color: #CFD2DA;
+  color: #333333;
+  transition-duration: 0.2s;
+}
+
+.close:hover,
+.close:hover .cross,
+.back:hover {
+  background: #333333;
   color: #F4F6F8;
   stroke: #F4F6F8;
   transition-duration: 0.2s;

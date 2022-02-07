@@ -115,6 +115,7 @@ export default injectNotify(injectIntl(withTracker(({
         notify(alertMessage, 'info', 'rooms');
       }
       data.message = intl.formatMessage(messageDuration, { 0: humanizeSeconds(time) });
+      // data.message = humanizeSeconds(time);
     } else {
       clearInterval(timeRemainingInterval);
       data.message = intl.formatMessage(timeEndedMessage || intlMessages.breakoutWillClose);

@@ -474,7 +474,7 @@ class BreakoutRoom extends PureComponent {
   getUsersByRoomSequence(sequence) {
     const { breakoutJoinedUsers } = this.state;
     if (!breakoutJoinedUsers) return [];
-    return breakoutJoinedUsers.filter((room) => room.sequence === sequence)[0].joinedUsers || [];
+    return breakoutJoinedUsers?.filter((room) => room.sequence === sequence)[0]?.joinedUsers || [];
   }
 
   getRoomName(position) {
@@ -1047,6 +1047,7 @@ class BreakoutRoom extends PureComponent {
 
   render() {
     const { intl, isInvitation } = this.props;
+    console.log(isInvitation);
     const {
       preventClosing,
       leastOneUserIsValid,

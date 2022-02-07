@@ -209,7 +209,8 @@ class BreakoutRoom extends PureComponent {
       seletedId: '',
       users: [],
       durationTime: 15,
-      freeJoin: false,
+      freeJoin:false,
+      roomNameDuplicatedIsValid: false,
       formFillLevel: 1,
       roomNamesChanged: [],
       roomSelected: 0,
@@ -221,7 +222,8 @@ class BreakoutRoom extends PureComponent {
       record: false,
       durationIsValid: true,
       breakoutJoinedUsers: null,
-      WantCreate: true
+      WantCreate: true,
+      selectedUsers:0
     };
 
     this.btnLevelId = _.uniqueId('btn-set-level-');
@@ -406,7 +408,7 @@ class BreakoutRoom extends PureComponent {
       freeJoin,
       sequence: seq,
     }));
-
+    console.log(freeJoin);
     createBreakoutRoom(rooms, durationTime, record);
     Session.set('isUserListOpen', true);
   }
@@ -453,7 +455,7 @@ class BreakoutRoom extends PureComponent {
     const { getBreakouts } = this.props;
     this.setState({
       numberOfRooms: getBreakouts().length,
-      formFillLevel: 2,
+      formFillLevel: 1,
     });
   }
 
@@ -494,7 +496,7 @@ class BreakoutRoom extends PureComponent {
   getUsersByRoomSequence(sequence) {
     const { breakoutJoinedUsers } = this.state;
     if (!breakoutJoinedUsers) return [];
-    return breakoutJoinedUsers.filter((room) => room.sequence === sequence)[0].joinedUsers || [];
+    return breakoutJoinedUsers?.filter((room) => room.sequence === sequence)[0]?.joinedUsers || [];
   }
 
   getRoomName(position) {
@@ -786,6 +788,7 @@ class BreakoutRoom extends PureComponent {
       users,
       roomSelected,
       breakoutJoinedUsers,
+      // selectedUsers
     } = this.state;
     const { isInvitation } = this.props;
 
@@ -794,6 +797,8 @@ class BreakoutRoom extends PureComponent {
         confirm={() => this.setState({ formFillLevel: 2 })}
         users={users}
         room={roomSelected}
+        // selectedUsers={selectedUsers}
+        // updateState={this.update}
         breakoutJoinedUsers={isInvitation && breakoutJoinedUsers}
         onCheck={this.changeUserRoom}
         onUncheck={(userId) => this.changeUserRoom(userId, 0)}
@@ -1033,14 +1038,14 @@ class BreakoutRoom extends PureComponent {
       preventClosing,
       leastOneUserIsValid,
       numberOfRoomsIsValid,
-      roomNameDuplicatedIsValid,
-      roomNameEmptyIsValid,
       durationIsValid,
-      
+      selectedUsers,
+      roomNameDuplicatedIsValid,
+      roomNameEmptyIsValid
     } = this.state;
 
     const { isMobile } = deviceInfo;
-
+    
     return (<div>
       <Modal
         title={
@@ -1055,11 +1060,10 @@ class BreakoutRoom extends PureComponent {
               : intl.formatMessage(intlMessages.confirmButton),
             callback: isInvitation ? this.onInviteBreakout : this.onCreateBreakouts,
             disabled: !leastOneUserIsValid
-              || !numberOfRoomsIsValid
-              || !roomNameDuplicatedIsValid
-              || !roomNameEmptyIsValid
-              || !durationIsValid
-            ,
+            || !numberOfRoomsIsValid
+            || !roomNameDuplicatedIsValid
+            || !roomNameEmptyIsValid
+            || !durationIsValid
           }
         }
         dismiss={{
@@ -1070,20 +1074,21 @@ class BreakoutRoom extends PureComponent {
         CurrentShow={this.state.WantCreate}
         level={this.state.formFillLevel}
         preventClosing={preventClosing}
+        isInvitation={isInvitation}
         Validity={!durationIsValid || !numberOfRoomsIsValid}
       >
         <div>
-          <div className={styles.AlignCorners}>
+          {!isInvitation && <div className={styles.AlignCorners}>
             <div className={styles.createBreakoutHeading}>Create breakout rooms</div>
             {!this.state.WantCreate && <div className={styles.PlusButton} onClick={() => this.setState({ WantCreate: true })}>
               <Plus />
             </div>}
+          </div>}
           </div>
-        </div>
         {this.state.WantCreate && this.renderMobile()}
       </Modal>
       <div className={styles.AlignCenter}>
-        {this.state.formFillLevel===1&&<BreakoutRoomContainer WantCreate={this.state.WantCreate}/>}
+        {(this.state.formFillLevel === 1) && <BreakoutRoomContainer WantCreate={this.state.WantCreate} isInvitation={isInvitation} />}
       </div>
     </div>
     );

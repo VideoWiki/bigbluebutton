@@ -15,7 +15,7 @@
     direction: rtl;
   }
   background-color: #EEF0F5;
-  width: 90%;
+  width: 94%;
   margin-left: 0.9rem;
 }
 .systemitem {
@@ -159,20 +159,22 @@
   > span {
     vertical-align: sub;
   }
+  margin-right: 1rem;
 }
 
 .messages {
   > .message:first-child {
     margin-top: calc(var(--line-height-computed) / 4);
+    margin-top: 0px;
   }
 }
 
 .message, .hyperlink {
   flex: 1;
   margin-top: calc(var(--line-height-computed) / 3);
+  // margin-top: 0px;
   margin-bottom: 0;
   color: #2E364F;
-  border-radius: 0px 10px 10px 10px;
   background-color: #fff;
   padding: 0.6rem;
   max-width:fit-content;  
@@ -181,6 +183,12 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
+}
+.message1{
+  border-radius: 0px 10px 10px 10px;
+}
+.message2{
+  border-radius: 10px 0px 10px 10px;
 }
 
 .hyperlink {
@@ -204,4 +212,12 @@
 
 .emphasizedMessage{
   font-weight: bold;
+}
+
+.RightAlign{
+  display: flex;
+  justify-content: right;
+}
+.timeAlign{
+  text-align: right;
 }

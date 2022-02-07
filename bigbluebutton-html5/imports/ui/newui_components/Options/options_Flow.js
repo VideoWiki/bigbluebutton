@@ -3,7 +3,7 @@ import ChatContainer from '/imports/ui/newui_components/chat/container';
 import { LayoutContextFunc } from "../../components/layout/context";
 import BreakoutRoom from '/imports/ui/newui_components/actions-bar/create-breakout-room/container';
 import { styles } from "./styles.scss";
-import UsersContainer from "./Users/container";
+import UsersContainer from "./Users/container"
 
 const Option_flow = (props) => {
     
@@ -14,7 +14,7 @@ const Option_flow = (props) => {
 
     return (<div className={sidebarContentPanel != "none" ? styles.optionOuter : ""}>
         {sidebarContentPanel === "chat" && <ChatContainer />}
-        {sidebarContentPanel === "breakoutroom" && <BreakoutRoom isBreakoutRecordable={false} isInvitation={false}/>}
+        {sidebarContentPanel === "breakoutroom" && <BreakoutRoom/>}
         {sidebarContentPanel === "user" && <UsersContainer />}
     </div>)
 }

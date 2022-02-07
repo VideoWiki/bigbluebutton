@@ -8,6 +8,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   height: 45vh;
+
   width: 95%;
  }
  .Height1{
@@ -77,7 +78,7 @@
   font-weight: var(--headings-font-weight);
   color: var(--color-primary);
   & > button {
-    padding: 0 0 0 .5rem;
+    // padding: 0 0 0 .5rem;
   }
   & > .alreadyConnected {
     padding: 0 .5rem 0 0;
@@ -100,12 +101,18 @@
 }
 
 .endButton {
-  padding: .5rem;
+  font-family: 'Montserrat',sans-serif;
+  background: #333333;
+  padding: .7rem;
   font-weight: var(--headings-font-weight) !important;
-  border-radius: .2rem;
+  border-radius: .4rem;
   font-size: var(--font-size-small);  
 }
-
+.endButton:hover{
+  background-color: #CFD2DA;
+  color: #333333;
+  transition-duration: 0.2s;
+}
 .overlayContainer {
   position: fixed;
   top: 0; 
@@ -202,7 +209,6 @@
 .joinedUserNames {
   overflow-wrap: break-word;
   white-space: pre-line;
-  margin-left: 1rem;
   font-size: var(--font-size-small);
 }
 
@@ -248,4 +254,64 @@
   width: 100%;
   background: #FFFFFF;
   border-radius: 12px;
+}
+.avatarWrapper {
+  flex-basis: 2.25rem;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: 0 calc(var(--line-height-computed) / 2) 0 0;
+
+  [dir="rtl"] & {
+    margin: 0 0 0 calc(var(--line-height-computed) / 2);
+  }
+}
+
+.avatar {
+  font-size: .85rem;
+}
+.wrapper {
+  display: flex;
+  flex-flow: row;
+  flex: 1;
+  position: relative;
+  margin:var(--border-size) 0 0 var(--border-size);
+
+  [dir="rtl"] & {
+    margin: var(--border-size) var(--border-size) 0 0;
+  }
+}
+.AlignCorners{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.PlusButton{
+  background: rgba(68, 204, 136, 0.1);
+  border-radius: 6px;
+  padding: 0.1rem;
+  padding-bottom: 0rem;
+  margin-top: 0.4rem;
+}
+.PlusButton:hover .add,.PlusButton:hover{
+  stroke: white;
+  background-color: #44CC88;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+.duration{
+  font-family: 'Montserrat',sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-top: -1rem;
+}
+.NoUser{
+  font-family: 'Montserrat',sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.AlignCenter{
+  display: flex;
+  justify-content: space-around;
 }

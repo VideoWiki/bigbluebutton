@@ -5,11 +5,17 @@ import AudioManager from '/imports/ui/services/audio-manager';
 import BreakoutComponent from './component';
 import Service from './service';
 import LayoutContext from '../../components/layout/context';
+import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
+import Auth from '/imports/ui/services/auth';
 
 const BreakoutContainer = (props) => {
   const layoutContext = useContext(LayoutContext);
   const { layoutContextDispatch } = layoutContext;
-  return <BreakoutComponent {...{ layoutContextDispatch, ...props }}/>;
+  const usingUsersContext = useContext(UsersContext);
+  const { users } = usingUsersContext;
+  const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
+
+    return <BreakoutComponent {...{ layoutContextDispatch, ...props }} users={users[Auth.meetingID]} ROLE_MODERATOR={ROLE_MODERATOR} />;
 };
 
 export default withTracker((props) => {
