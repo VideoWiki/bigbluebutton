@@ -13,14 +13,14 @@
   display: flex;
   border-radius: 2em 2em;
   align-items: center;
-
+  
   span {
     border: none;
     box-shadow: none;
     background-color: transparent !important;
     color: var(--color-white) !important;
   }
-
+  
   &:hover {
     color: var(--color-white) !important;
     cursor: pointer;
@@ -34,9 +34,7 @@
 
 .recordingControlON {
   @extend %recordingControl;
-
   padding: 5px;
-  background-color: var(--color-primary);
   border: var(--border-size-large) solid var(--color-primary);
 
   &:focus {
@@ -49,8 +47,9 @@
   @extend %recordingControl;
 
   padding: 7px;
+  background-color: transparent;
   border: var(--border-size-small) solid var(--color-white);
-  
+
   &:focus {
     padding: 5px;
     border: var(--border-size-large) solid var(--color-white);

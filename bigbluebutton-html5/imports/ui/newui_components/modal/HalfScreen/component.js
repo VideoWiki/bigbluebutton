@@ -96,10 +96,11 @@ class ModalHalfscreen extends PureComponent {
       modalisOpen,
       preventClosing,
       updateState,
-      CurrentShow,
-      level,
+      WantCreate,
+      formFillLevel,
       isInvitation,
       Validity,
+      amIModerator,
       ...otherProps
     } = this.props;
 
@@ -115,21 +116,21 @@ class ModalHalfscreen extends PureComponent {
         <header className={styles.BreakoutroomHeadingOuter}>
           <h1 className={styles.BreakoutroomHeading}>{title}</h1>
         </header>
-        {isInvitation && level===1&&
+        {isInvitation && amIModerator && formFillLevel === 1 &&
           <div className={styles.RightAlign}>
-            <Button 
-            label="Send Invites" 
-            className={styles.create}
-            onClick={() => updateState({
-              formFillLevel:level+1
-            })}
+            <Button
+              label="Send Invites"
+              className={styles.create}
+              onClick={() => updateState({
+                formFillLevel: formFillLevel + 1
+              })}
             />
           </div>}
-        {(!isInvitation||level>=2) && <div className={styles.centerAlign}>
+        {(!isInvitation || formFillLevel >= 2) &&amIModerator&& <div className={styles.centerAlign}>
           <div className={styles.content}>
             {children}
-            {CurrentShow && <div className={styles.centerAlign}>
-              {level == 1 && <Button
+            {WantCreate && <div className={styles.centerAlign}>
+              {formFillLevel == 1 && <Button
                 data-test="modalDismissButton"
                 className={styles.close}
                 aria-label={`${intl.formatMessage(intlMessages.modalClose)} ${title}`}
@@ -145,25 +146,25 @@ class ModalHalfscreen extends PureComponent {
                 <Cross />
               </Button>
               }
-              {level == 1 && <Button
+              {formFillLevel == 1 && amIModerator&& <Button
                 className={styles.create}
                 label="Next"
                 disabled={Validity}
-                onClick={() => updateState({ formFillLevel: level + 1 })}
+                onClick={() => updateState({ formFillLevel: formFillLevel + 1 })}
               />
               }
-              {level === 2 && !isInvitation && <Button
+              {formFillLevel === 2 && !isInvitation && amIModerator&& <Button
                 data-test="modalConfirmButton"
                 className={styles.back}
                 label="Back"
                 onClick={() => updateState({
-                  formFillLevel: level - 1,
+                  formFillLevel: formFillLevel - 1,
                   leastOneUserIsValid: true,
                   roomNameDuplicatedIsValid: true,
                   roomNameEmptyIsValid: true
                 })}
               />}
-              {level === 2 && <Button
+              {formFillLevel === 2 && amIModerator&& <Button
                 data-test="modalConfirmButton"
                 className={popoutIcon ? cx(styles.create, styles.popout) : styles.create}
                 label={confirm.label || intl.formatMessage(intlMessages.modalDone)}
@@ -171,7 +172,7 @@ class ModalHalfscreen extends PureComponent {
                 disabled={confirm.disabled}
                 onClick={() => {
                   this.handleAction('confirm');
-                  updateState({ formFillLevel: level - 1 });
+                  updateState({ formFillLevel: formFillLevel - 1 });
                 }}
                 aria-describedby="modalConfirmDescription"
                 iconRight={popoutIcon}

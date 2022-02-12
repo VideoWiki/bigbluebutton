@@ -15,7 +15,7 @@ const BreakoutContainer = (props) => {
   const { users } = usingUsersContext;
   const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
-    return <BreakoutComponent {...{ layoutContextDispatch, ...props }} users={users[Auth.meetingID]} ROLE_MODERATOR={ROLE_MODERATOR} />;
+  return <BreakoutComponent {...{ layoutContextDispatch, ...props }} users={users[Auth.meetingID]} ROLE_MODERATOR={ROLE_MODERATOR} />;
 };
 
 export default withTracker((props) => {

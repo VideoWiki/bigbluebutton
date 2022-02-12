@@ -375,7 +375,7 @@ class BreakoutRoom extends PureComponent {
       requestedBreakoutId,
     } = this.state;
 
-    console.log(intlMessages.breakoutDuration);
+    console.log(breakoutRooms);
 
     const roomItems = breakoutRooms.map((breakout) => (
       <div
@@ -547,7 +547,7 @@ class BreakoutRoom extends PureComponent {
       isInvitation
     } = this.props;
     return (
-      <div className={cx(styles.panel, (!WantCreate || isInvitation) && styles.Height1)} ref={(n) => this.panel = n}>
+      <div className={cx(styles.panel, (!WantCreate || isInvitation) && styles.Height1, !amIModerator && styles.Height2)} ref={(n) => this.panel = n}>
         {this.renderBreakoutRooms()}
         <div className={styles.AlignCenter}>
           {

@@ -26,6 +26,7 @@ import UploaderContainer from '/imports/ui/components/presentation/presentation-
 import RandomUserSelectContainer from '/imports/ui/components/modal/random-user/container';
 import NewWebcamContainer from '../webcam/container';
 import PresentationAreaContainer from '../presentation/presentation-area/container';
+import MyPresentationAreaContainer from '../../newui_components/presentation/presentation-area/container';
 import ScreenshareContainer from '../screenshare/container';
 import ExternalVideoContainer from '../external-video-player/container';
 import { styles } from './styles';
@@ -40,6 +41,7 @@ import SmartLayout from '../layout/layout-manager/smartLayout';
 import PresentationFocusLayout from '../layout/layout-manager/presentationFocusLayout';
 import VideoFocusLayout from '../layout/layout-manager/videoFocusLayout';
 import NavBarContainer from '../nav-bar/container';
+import MyNavBarContainer from '/imports/ui/newui_components/nav-bar/container';
 import SidebarNavigationContainer from '../sidebar-navigation/container';
 import SidebarContentContainer from '../sidebar-content/container';
 import { makeCall } from '/imports/ui/services/api';
@@ -477,8 +479,9 @@ class App extends Component {
           <NotificationsBarContainer />
           <MySidebar/>
           <Option_Flow/>
-          <NavBarContainer main="new" />
+          <MyNavBarContainer main="new" />
           {this.renderWebcamsContainer()}
+          {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
           {shouldShowScreenshare ? <ScreenshareContainer /> : null}
           {
             shouldShowExternalVideo
@@ -501,6 +504,7 @@ class App extends Component {
           <StatusNotifier status="raiseHand" />
           <ManyWebcamsNotifier />
           <PollingContainer />
+          {this.renderActionsBar()}
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
           {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
         </div>
@@ -563,7 +567,7 @@ class App extends Component {
           <LockNotifier />
           <StatusNotifier status="raiseHand" />
           <ManyWebcamsNotifier />
-          <PollingContainer />
+          <PollingContainer />z
           <ModalContainer />
           {this.renderActionsBar()}
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}

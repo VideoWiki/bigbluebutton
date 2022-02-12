@@ -10,31 +10,40 @@
   height: 45vh;
 
   width: 95%;
- }
- .Height1{
-  height: 75vh;
- }
- .panel::-webkit-scrollbar{
-  width:8px;
 }
-.panel::-webkit-scrollbar-track{
+
+.Height1 {
+  height: 75vh;
+}
+
+.Height2 {
+  height: 85vh;
+}
+
+.panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.panel::-webkit-scrollbar-track {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
-.Height1::-webkit-scrollbar-track{
+
+.Height1::-webkit-scrollbar-track {
   margin-top: 0.25rem;
   margin-bottom: 1rem;
 }
+
 .panel::-webkit-scrollbar-thumb {
-  background: #CFD2DA; 
+  background: #CFD2DA;
   border-radius: 100px;
 }
+
 .link {
   text-decoration: none;
 }
 
-.breakoutActions
-.content,
+.breakoutActions .content,
 .header {
   display: flex;
   flex-direction: row;
@@ -47,13 +56,14 @@
   padding-left: 0;
   padding-right: inherit;
   background: none !important;
+
   [dir="rtl"] & {
     margin: 0 0 2rem auto;
     padding-left: inherit;
     padding-right: 0;
   }
-  
-  > i  {
+
+  >i {
     color: var(--color-gray-dark);
 
     [dir="rtl"] & {
@@ -77,10 +87,12 @@
 .breakoutActions {
   font-weight: var(--headings-font-weight);
   color: var(--color-primary);
-  & > button {
+
+  &>button {
     // padding: 0 0 0 .5rem;
   }
-  & > .alreadyConnected {
+
+  &>.alreadyConnected {
     padding: 0 .5rem 0 0;
     display: inline-block;
     vertical-align: middle;
@@ -101,21 +113,23 @@
 }
 
 .endButton {
-  font-family: 'Montserrat',sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #333333;
   padding: .7rem;
   font-weight: var(--headings-font-weight) !important;
   border-radius: .4rem;
-  font-size: var(--font-size-small);  
+  font-size: var(--font-size-small);
 }
-.endButton:hover{
+
+.endButton:hover {
   background-color: #CFD2DA;
   color: #333333;
   transition-duration: 0.2s;
 }
+
 .overlayContainer {
   position: fixed;
-  top: 0; 
+  top: 0;
   left: 0;
   right: auto;
   z-index: 100;
@@ -132,12 +146,13 @@
   }
 }
 
-.connectingAnimation{
+.connectingAnimation {
   &:after {
     overflow: hidden;
     display: inline-block;
     vertical-align: bottom;
-    content: "\2026"; /* ascii code for the ellipsis character */
+    content: "\2026";
+    /* ascii code for the ellipsis character */
     width: 0;
     margin: 0 1.25em 0 0;
 
@@ -146,7 +161,7 @@
     }
 
     :global(.animationsEnabled) & {
-      animation: ellipsis steps(4,end) 900ms infinite;
+      animation: ellipsis steps(4, end) 900ms infinite;
     }
   }
 }
@@ -173,6 +188,7 @@
   width: 50%;
   text-align: center;
   padding: .25rem;
+
   &::placeholder {
     color: var(--color-gray);
     opacity: 1;
@@ -201,6 +217,7 @@
     margin: 0 .25em 0 0;
   }
 }
+
 .breakoutItems {
   margin-bottom: 1rem;
 
@@ -239,22 +256,25 @@
   outline-color: transparent !important;
   background: none;
 }
-.RoomName{
-  font-family: 'Montserrat',sans-serif;
+
+.RoomName {
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
   text-transform: uppercase;
-  color: #333333; 
+  color: #333333;
 }
-.RoomBox{
+
+.RoomBox {
   margin-bottom: 1rem;
   padding: 1rem;
   width: 100%;
   background: #FFFFFF;
   border-radius: 12px;
 }
+
 .avatarWrapper {
   flex-basis: 2.25rem;
   flex-shrink: 0;
@@ -269,49 +289,57 @@
 .avatar {
   font-size: .85rem;
 }
+
 .wrapper {
   display: flex;
   flex-flow: row;
   flex: 1;
   position: relative;
-  margin:var(--border-size) 0 0 var(--border-size);
+  margin: var(--border-size) 0 0 var(--border-size);
 
   [dir="rtl"] & {
     margin: var(--border-size) var(--border-size) 0 0;
   }
 }
-.AlignCorners{
+
+.AlignCorners {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.PlusButton{
+
+.PlusButton {
   background: rgba(68, 204, 136, 0.1);
   border-radius: 6px;
   padding: 0.1rem;
   padding-bottom: 0rem;
   margin-top: 0.4rem;
 }
-.PlusButton:hover .add,.PlusButton:hover{
+
+.PlusButton:hover .add,
+.PlusButton:hover {
   stroke: white;
   background-color: #44CC88;
   cursor: pointer;
   transition-duration: 0.2s;
 }
-.duration{
-  font-family: 'Montserrat',sans-serif;
+
+.duration {
+  font-family: 'Montserrat', sans-serif;
   font-size: 11px;
   font-weight: 600;
   line-height: 20px;
   margin-top: -1rem;
 }
-.NoUser{
-  font-family: 'Montserrat',sans-serif;
+
+.NoUser {
+  font-family: 'Montserrat', sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
 }
-.AlignCenter{
+
+.AlignCenter {
   display: flex;
   justify-content: space-around;
 }

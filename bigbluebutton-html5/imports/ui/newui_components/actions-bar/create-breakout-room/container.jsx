@@ -26,10 +26,7 @@ const CreateBreakoutRoomContainer = (props) => {
     && getUsersNotAssigned(users).length;
 
   return (
-    amIModerator
-    && (
-      <CreateBreakoutRoomModal {...props} isInvitation={false}/>
-    )
+      <CreateBreakoutRoomModal {...props} isInvitation={canInviteUsers}/>
   );
 };
 

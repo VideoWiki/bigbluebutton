@@ -209,7 +209,7 @@ class BreakoutRoom extends PureComponent {
       seletedId: '',
       users: [],
       durationTime: 15,
-      freeJoin:false,
+      freeJoin: false,
       roomNameDuplicatedIsValid: false,
       formFillLevel: 1,
       roomNamesChanged: [],
@@ -223,7 +223,7 @@ class BreakoutRoom extends PureComponent {
       durationIsValid: true,
       breakoutJoinedUsers: null,
       WantCreate: true,
-      selectedUsers:0
+      selectedUsers: 0
     };
 
     this.btnLevelId = _.uniqueId('btn-set-level-');
@@ -1033,19 +1033,20 @@ class BreakoutRoom extends PureComponent {
   }
 
   render() {
-    const { intl, isInvitation } = this.props;
+    const { intl, isInvitation, amIModerator } = this.props;
     const {
       preventClosing,
       leastOneUserIsValid,
       numberOfRoomsIsValid,
       durationIsValid,
-      selectedUsers,
       roomNameDuplicatedIsValid,
-      roomNameEmptyIsValid
+      roomNameEmptyIsValid,
+      formFillLevel,
+      WantCreate
     } = this.state;
 
     const { isMobile } = deviceInfo;
-    
+
     return (<div>
       <Modal
         title={
@@ -1060,10 +1061,10 @@ class BreakoutRoom extends PureComponent {
               : intl.formatMessage(intlMessages.confirmButton),
             callback: isInvitation ? this.onInviteBreakout : this.onCreateBreakouts,
             disabled: !leastOneUserIsValid
-            || !numberOfRoomsIsValid
-            || !roomNameDuplicatedIsValid
-            || !roomNameEmptyIsValid
-            || !durationIsValid
+              || !numberOfRoomsIsValid
+              || !roomNameDuplicatedIsValid
+              || !roomNameEmptyIsValid
+              || !durationIsValid
           }
         }
         dismiss={{
@@ -1071,24 +1072,24 @@ class BreakoutRoom extends PureComponent {
           label: intl.formatMessage(intlMessages.dismissLabel),
         }}
         updateState={this.update}
-        CurrentShow={this.state.WantCreate}
-        level={this.state.formFillLevel}
         preventClosing={preventClosing}
-        isInvitation={isInvitation}
+        {...{ amIModerator, isInvitation, formFillLevel, WantCreate }}
         Validity={!durationIsValid || !numberOfRoomsIsValid}
       >
-        <div>
-          {!isInvitation && <div className={styles.AlignCorners}>
-            <div className={styles.createBreakoutHeading}>Create breakout rooms</div>
-            {!this.state.WantCreate && <div className={styles.PlusButton} onClick={() => this.setState({ WantCreate: true })}>
-              <Plus />
+        {amIModerator && <div>
+          <div>
+            {!isInvitation && <div className={styles.AlignCorners}>
+              <div className={styles.createBreakoutHeading}>Create breakout rooms</div>
+              {!WantCreate && <div className={styles.PlusButton} onClick={() => this.setState({ WantCreate: true })}>
+                <Plus />
+              </div>}
             </div>}
-          </div>}
           </div>
-        {this.state.WantCreate && this.renderMobile()}
+          {WantCreate && this.renderMobile()}
+        </div>}
       </Modal>
       <div className={styles.AlignCenter}>
-        {(this.state.formFillLevel === 1) && <BreakoutRoomContainer WantCreate={this.state.WantCreate} isInvitation={isInvitation} />}
+        {(formFillLevel === 1) && <BreakoutRoomContainer {...{ WantCreate, isInvitation }} />}
       </div>
     </div>
     );
