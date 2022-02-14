@@ -56,19 +56,6 @@ class UserContent extends PureComponent {
         data-test="userListContent"
         className={styles.content}
       >
-        {CHAT_ENABLED
-          ? (
-            <UserMessages
-              {...{
-                isPublicChat,
-                compact,
-                intl,
-                roving,
-                currentClosedChats,
-                startedChats,
-              }}
-            />
-          ) : null}
         {currentUser.role === ROLE_MODERATOR
           ? (
             <UserCaptionsContainer
@@ -77,11 +64,7 @@ class UserContent extends PureComponent {
               }}
             />
           ) : null}
-        <UserNotesContainer
-          {...{
-            intl,
-          }}
-        />
+
         {pendingUsers.length > 0 && currentUser.role === ROLE_MODERATOR
           ? (
             <WaitingUsers
@@ -93,23 +76,8 @@ class UserContent extends PureComponent {
               }}
             />
           ) : null}
-        <UserPolls
-          isPresenter={currentUser.presenter}
-          {...{
-            pollIsOpen,
-            forcePollOpen,
-            sidebarContentPanel,
-            layoutContextDispatch,
-          }}
-        />
-        <BreakoutRoomItem
-          isPresenter={currentUser.presenter}
-          {...{
-            hasBreakoutRoom,
-            sidebarContentPanel,
-            layoutContextDispatch,
-          }}
-        />
+
+
         <UserParticipantsContainer
           {...{
             compact,
@@ -121,6 +89,43 @@ class UserContent extends PureComponent {
             requestUserInformation,
           }}
         />
+      <div className={styles.mbSep}>
+        <UserPolls
+            isPresenter={currentUser.presenter}
+            {...{
+              pollIsOpen,
+              forcePollOpen,
+              sidebarContentPanel,
+              layoutContextDispatch,
+            }}
+        />
+        <UserNotesContainer
+            {...{
+              intl,
+            }}
+        />
+        <BreakoutRoomItem
+            isPresenter={currentUser.presenter}
+            {...{
+              hasBreakoutRoom,
+              sidebarContentPanel,
+              layoutContextDispatch,
+            }}
+        />
+          {CHAT_ENABLED
+              ? (
+                  <UserMessages
+                      {...{
+                        isPublicChat,
+                        compact,
+                        intl,
+                        roving,
+                        currentClosedChats,
+                        startedChats,
+                      }}
+                  />
+              ) : null}
+      </div>
       </div>
     );
   }

@@ -26,12 +26,12 @@ public:
     # "media.setsinkid.enabled" to make it work properly
     # enableDynamicAudioDeviceSelection: true
     #
-    clientTitle: BigBlueButton
-    appName: BigBlueButton HTML5 Client
+    clientTitle: VideoWiki
+    appName: VideoWiki HTML5 Client
     bbbServerVersion: 2.4
-    copyright: '©2021 BigBlueButton Inc.'
+    copyright: '©2021 VideoWiki Inc.'
     html5ClientBuild: HTML5_CLIENT_VERSION
-    helpLink: https://bigbluebutton.org/html5/
+    helpLink: https://beta.class.video.wiki/
     lockOnJoin: true
     cdn: ''
     basename: '/html5client'
@@ -205,7 +205,7 @@ public:
   externalVideoPlayer:
     enabled: true
   kurento:
-    wsUrl: HOST
+    wsUrl: wss://beta.class.video.wiki/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -455,7 +455,7 @@ public:
     timeBetweenFetchs: 1000
     enableSaveAndCopyPublicChat: true
     bufferChatInsertsMs: 0
-    startClosed: false
+    startClosed: true
     min_message_length: 1
     max_message_length: 5000
     grouping_messages_window: 10000

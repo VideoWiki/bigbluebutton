@@ -366,7 +366,6 @@ class App extends Component {
           }
         }
       >
-        {captions}
       </div>
     );
   }
@@ -485,7 +484,7 @@ class App extends Component {
           {this.renderCaptions()}
           <UploaderContainer />
           <BreakoutRoomInvitation />
-          <AudioContainer />
+          <AudioContainer />    
           <ToastContainer rtl />
           {(audioAlertEnabled || pushAlertEnabled)
             && (

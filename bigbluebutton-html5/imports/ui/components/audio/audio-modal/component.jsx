@@ -380,6 +380,7 @@ class AudioModal extends Component {
     const arrow = isRTL ? '←' : '→';
     const dialAudioLabel = `${intl.formatMessage(intlMessages.audioDialTitle)} ${arrow}`;
 
+    // button on default display for mic and listen
     return (
       <div>
         <span className={styles.audioOptions}>

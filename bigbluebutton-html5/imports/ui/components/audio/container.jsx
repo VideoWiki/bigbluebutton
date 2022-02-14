@@ -81,7 +81,7 @@ class AudioContainer extends PureComponent {
 
   componentDidMount() {
     const { meetingIsBreakout } = this.props;
-
+    console.log(this.init);
     this.init().then(() => {
       if (meetingIsBreakout && !Service.isUsingAudio()) {
         this.joinAudio();
@@ -234,7 +234,7 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
         userSelectedMicrophone
         && userSelectedListenOnly
         && meetingIsBreakout)) {
-        openAudioModal();
+      //  openAudioModal();
         didMountAutoJoin = true;
       }
       return Promise.resolve(true);

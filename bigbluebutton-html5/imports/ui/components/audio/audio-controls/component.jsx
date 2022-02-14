@@ -63,6 +63,7 @@ class AudioControls extends PureComponent {
     }
   }
 
+  // Audio button at bottom of
   renderJoinButton() {
     const {
       handleJoinAudio,

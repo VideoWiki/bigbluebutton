@@ -16,7 +16,8 @@
   --color-blue-lighter: #92BCEA;
   --color-blue-lightest: #E4ECF2;
 
-  --color-primary: #0F70D7;
+  --color-primary: #FFFFFF;
+  --color-secondary: #FFFFFF;
   --color-success: #008081;
   --color-danger: #DF2721;
   --color-warning: purple;
@@ -65,4 +66,6 @@
 
   --list-item-bg-hover: #dce4ed;
   --item-focus-border: var(--color-blue-lighter);
+
+  --banner-bg: none;
 }

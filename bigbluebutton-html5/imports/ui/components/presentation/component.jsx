@@ -112,6 +112,7 @@ class Presentation extends PureComponent {
 
   componentDidMount() {
     this.getInitialPresentationSizes();
+    // eslint-disable-next-line max-len
     this.refPresentationContainer.addEventListener(FULLSCREEN_CHANGE_EVENT, this.onFullscreenChange);
     window.addEventListener('resize', this.onResize, false);
 
@@ -225,6 +226,7 @@ class Presentation extends PureComponent {
     const { fullscreenContext, layoutContextDispatch } = this.props;
 
     window.removeEventListener('resize', this.onResize, false);
+    // eslint-disable-next-line max-len
     this.refPresentationContainer.removeEventListener(FULLSCREEN_CHANGE_EVENT, this.onFullscreenChange);
 
     if (fullscreenContext) {
@@ -864,7 +866,7 @@ class Presentation extends PureComponent {
           width: presentationBounds.width,
           height: presentationBounds.height,
           zIndex: fullscreenContext ? presentationBounds.zIndex : undefined,
-          backgroundColor: '#06172A',
+          backgroundColor: 'rgba(255,255,255,0.8)',
         }}
       >
         {isFullscreen && <PollingContainer />}

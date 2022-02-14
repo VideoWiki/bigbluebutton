@@ -1060,6 +1060,9 @@ class BreakoutRoom extends PureComponent {
 
     return (
       <Modal
+        overlayClassName={styles.overlay}
+        className={styles.modal}
+        hideBorder
         title={
           isInvitation
             ? intl.formatMessage(intlMessages.invitationTitle)
