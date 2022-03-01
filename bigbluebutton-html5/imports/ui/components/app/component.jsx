@@ -143,8 +143,8 @@ class App extends Component {
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
     this.shouldAriaHide = this.shouldAriaHide.bind(this);
     this.renderWebcamsContainer = App.renderWebcamsContainer.bind(this);
-    this.renderNewUI=this.renderNewUI.bind(this);
-    this.renderOldUI=this.renderOldUI.bind(this);
+    this.renderNewUI = this.renderNewUI.bind(this);
+    this.renderOldUI = this.renderOldUI.bind(this);
     this.throttledDeviceType = throttle(() => this.setDeviceType(),
       50, { trailing: true, leading: true }).bind(this);
   }
@@ -449,9 +449,8 @@ class App extends Component {
         return <CustomLayout />;
     }
   }
-  
-  renderNewUI()
-  {
+
+  renderNewUI() {
     const {
       customStyle,
       customStyleUrl,
@@ -477,43 +476,44 @@ class App extends Component {
           {this.renderUserInformation()}
           <BannerBarContainer />
           <NotificationsBarContainer />
-          <MySidebar/>
-          <Option_Flow/>
-          <MyNavBarContainer main="new" />
-          {this.renderWebcamsContainer()}
-          {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
-          {shouldShowScreenshare ? <ScreenshareContainer /> : null}
-          {
-            shouldShowExternalVideo
-            ? <ExternalVideoContainer isPresenter={isPresenter} />
-            : null
-          }
-          {this.renderCaptions()}
-          <UploaderContainer />
-          <BreakoutRoomInvitation />
-          <ToastContainer rtl />
-          {(audioAlertEnabled || pushAlertEnabled)
-            && (
-              <ChatAlertContainer
-                audioAlertEnabled={audioAlertEnabled}
-                pushAlertEnabled={pushAlertEnabled}
-              />
-            )}
-          <WaitingNotifierContainer />
-          <LockNotifier />
-          <StatusNotifier status="raiseHand" />
-          <ManyWebcamsNotifier />
-          <PollingContainer />
-          {this.renderActionsBar()}
-          {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
-          {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
+          <MySidebar />
+          <Option_Flow />
+          <div className="main-right">
+            <MyNavBarContainer main="new" />
+            {this.renderWebcamsContainer()}
+            {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
+            {shouldShowScreenshare ? <ScreenshareContainer /> : null}
+            {
+              shouldShowExternalVideo
+                ? <ExternalVideoContainer isPresenter={isPresenter} />
+                : null
+            }
+            {this.renderCaptions()}
+            <UploaderContainer />
+            <BreakoutRoomInvitation />
+            <ToastContainer rtl />
+            {(audioAlertEnabled || pushAlertEnabled)
+              && (
+                <ChatAlertContainer
+                  audioAlertEnabled={audioAlertEnabled}
+                  pushAlertEnabled={pushAlertEnabled}
+                />
+              )}
+            <WaitingNotifierContainer />
+            <LockNotifier />
+            <StatusNotifier status="raiseHand" />
+            <ManyWebcamsNotifier />
+            <PollingContainer />
+            {this.renderActionsBar()}
+            {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
+            {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
+          </div>
         </div>
       </>
     );
   }
 
-  renderOldUI()
-  {
+  renderOldUI() {
     const {
       customStyle,
       customStyleUrl,
@@ -554,7 +554,7 @@ class App extends Component {
           {this.renderCaptions()}
           <UploaderContainer />
           <BreakoutRoomInvitation />
-          <AudioContainer />    
+          <AudioContainer />
           <ToastContainer rtl />
           {(audioAlertEnabled || pushAlertEnabled)
             && (
@@ -579,7 +579,7 @@ class App extends Component {
   render() {
     return (<>
       {this.renderNewUI()}
-      </>
+    </>
     );
   }
 }

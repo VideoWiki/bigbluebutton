@@ -3,8 +3,14 @@
 
 .OuterSideBox{
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  width: 56px;  //55px
+  width: 90px;  //55px
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 34px;
+  padding-bottom: 34px;
+  background-color: white;
 }
 .LogoBox{
   padding: 1rem;
@@ -12,10 +18,10 @@
   margin-bottom: 5rem;
 }
 .IconBox{
-  margin-left: 0.63rem;
+  // margin-left: 0.63rem;
   margin-bottom: 0.63rem;
-  padding-right: 0.31rem;
-  max-width: fit-content;
+  // padding-right: 0.31rem;
+  // max-width: fit-content;
   cursor: pointer;
 }
 .IconBox:hover{
@@ -29,6 +35,10 @@
 }
 .IconOuter{
   top:6.25rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .IconShadow{
   padding: 0.44rem;
