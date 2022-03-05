@@ -427,11 +427,11 @@ class ScreenshareComponent extends React.Component {
       <div
         style={
           {
-            position: 'absolute',
+            position: 'relative',
             display,
-            top,
-            left,
-            right,
+            // top,
+            // left,
+            // right,
             height,
             width,
             zIndex: fullscreenContext ? zIndex : undefined,

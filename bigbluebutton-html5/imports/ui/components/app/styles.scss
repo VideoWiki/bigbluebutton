@@ -226,8 +226,19 @@
 }
 
 .actionsbar {
-  flex: 1;
+  // flex: 1;
   padding: var(--bars-padding);
   position: relative;
   order: 3;
+  margin: 10px;
+}
+
+
+.mainright {
+  background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -147,12 +147,12 @@ class NavBar extends Component {
         style={
           main === 'new'
             ? {
-              position: 'absolute',
-              top: style.top,
-              // left: style.left,
-              left: isExpanded ? style.left - 70 : style.left - 150,
+              // position: 'absolute',
+              // top: style.top,
+              //1 left: style.left,
+              // left: isExpanded ? style.left - 70 : style.left - 150,
               height: style.height,
-              // width: style.width
+              //1 width: style.width
               width: isExpanded ? style.width : style.width + 150
             }
             : {

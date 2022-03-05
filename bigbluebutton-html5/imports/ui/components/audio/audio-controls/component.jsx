@@ -80,8 +80,8 @@ class AudioControls extends PureComponent {
         aria-label={intl.formatMessage(intlMessages.joinAudio)}
         label={intl.formatMessage(intlMessages.joinAudio)}
         data-test="joinAudio"
-        color="default"
-        ghost
+        // color="default"
+        // ghost
         icon="no_audio"
         size="lg"
         circle

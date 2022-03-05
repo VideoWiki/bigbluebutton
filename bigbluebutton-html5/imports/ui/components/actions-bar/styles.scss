@@ -114,8 +114,17 @@
 .btn {
   span {
     box-shadow: none;
-    background-color: transparent !important;
-    border-color: var(--color-white) !important;
+    color: white;
+    // background-color: transparent !important;
+    background-color: #E64980;
+    // border-color: rgba(255, 255, 255, 0.35);
+  }
+}
+.btn:hover {
+  span {
+    i {
+      color: pink;
+    }
   }
 }
 

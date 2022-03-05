@@ -29,6 +29,10 @@ import PresentationAreaContainer from '../presentation/presentation-area/contain
 import MyPresentationAreaContainer from '../../newui_components/presentation/presentation-area/container';
 import ScreenshareContainer from '../screenshare/container';
 import ExternalVideoContainer from '../external-video-player/container';
+
+//new Imports
+
+
 import { styles } from './styles';
 import {
   LAYOUT_TYPE, DEVICE_TYPE, ACTIONS,
@@ -377,7 +381,39 @@ class App extends Component {
     );
   }
 
-  renderActionsBar() {
+  // renderActionsBar() {
+  //   const {
+  //     actionsbar,
+  //     intl,
+  //     actionsBarStyle,
+  //     hideActionsBar,
+  //   } = this.props;
+
+  //   if (!actionsbar || hideActionsBar) return null;
+
+  //   return (
+  //     <section
+  //       role="region"
+  //       className={styles.actionsbar}
+  //       aria-label={intl.formatMessage(intlMessages.actionsBarLabel)}
+  //       aria-hidden={this.shouldAriaHide()}
+  //       style={
+  //         {
+  //           position: 'absolute',
+  //           top: actionsBarStyle.top,
+  //           left: actionsBarStyle.left,
+  //           height: actionsBarStyle.height,
+  //           width: actionsBarStyle.width,
+  //           padding: actionsBarStyle.padding,
+  //         }
+  //       }
+  //     >
+  //       {actionsbar}
+  //     </section>
+  //   );
+  // }
+
+  renderNewActionsBar() {
     const {
       actionsbar,
       intl,
@@ -395,12 +431,12 @@ class App extends Component {
         aria-hidden={this.shouldAriaHide()}
         style={
           {
-            position: 'absolute',
-            top: actionsBarStyle.top,
-            left: actionsBarStyle.left,
-            height: actionsBarStyle.height,
-            width: actionsBarStyle.width,
-            padding: actionsBarStyle.padding,
+            // position: 'absolute',
+            // top: actionsBarStyle.top,
+            // left: actionsBarStyle.left,
+            // height: actionsBarStyle.height,
+            // width: actionsBarStyle.width,
+            // padding: actionsBarStyle.padding,
           }
         }
       >
@@ -478,7 +514,7 @@ class App extends Component {
           <NotificationsBarContainer />
           <MySidebar />
           <Option_Flow />
-          <div className="main-right">
+          <div className={styles.mainright}>
             <MyNavBarContainer main="new" />
             {this.renderWebcamsContainer()}
             {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
@@ -504,7 +540,7 @@ class App extends Component {
             <StatusNotifier status="raiseHand" />
             <ManyWebcamsNotifier />
             <PollingContainer />
-            {this.renderActionsBar()}
+            {this.renderNewActionsBar()}
             {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
             {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
           </div>
@@ -567,9 +603,9 @@ class App extends Component {
           <LockNotifier />
           <StatusNotifier status="raiseHand" />
           <ManyWebcamsNotifier />
-          <PollingContainer />z
+          <PollingContainer />
           <ModalContainer />
-          {this.renderActionsBar()}
+          {this.renderNewActionsBar()}
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
           {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
         </div>
