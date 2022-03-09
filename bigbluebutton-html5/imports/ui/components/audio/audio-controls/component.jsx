@@ -70,7 +70,6 @@ class AudioControls extends PureComponent {
       intl,
       shortcuts,
     } = this.props;
-
     return (
       <Button
         className={styles.btn}

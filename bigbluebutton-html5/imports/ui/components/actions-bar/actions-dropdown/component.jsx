@@ -269,12 +269,12 @@ class ActionsDropdown extends PureComponent {
         accessKey={OPEN_ACTIONS_AK}
         trigger={
           <Button
-            className={isDropdownOpen ? styles.hideDropdownButton : ''}
+            className={isDropdownOpen+" "+styles.btn ? styles.hideDropdownButton+" "+styles.btn : ''}
             hideLabel
             aria-label={intl.formatMessage(intlMessages.actionsLabel)}
             label={intl.formatMessage(intlMessages.actionsLabel)}
             icon="plus"
-            color="primary"
+            // color="#E6498"
             size="lg"
             circle
             onClick={() => null}
