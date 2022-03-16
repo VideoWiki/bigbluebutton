@@ -69,7 +69,7 @@ class ActionsBar extends PureComponent {
             : null}
         </div>
         <div className={styles.center}>
-          <AudioControlsContainer />
+          {/* <AudioControlsContainer /> */}
           {enableVideo
             ? (
               <JoinVideoOptionsContainer />

@@ -62,7 +62,7 @@ const Chat = (props) => {
   return (
     <div
       data-test={chatID !== PUBLIC_CHAT_ID ? 'privateChat' : 'publicChat'}
-    // className={styles.chat}
+      className={styles.chatWidth}
     >
       <div className={styles.ChatHeadingOuter}>
         <div className={styles.CustomInline}>

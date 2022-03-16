@@ -231,3 +231,12 @@
   position: relative;
   order: 3;
 }
+
+.mainright {
+  // background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
