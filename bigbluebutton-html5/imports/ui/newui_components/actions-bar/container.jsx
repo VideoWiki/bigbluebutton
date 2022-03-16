@@ -6,19 +6,19 @@ import getFromUserSettings from '/imports/ui/services/users-settings';
 import Auth from '/imports/ui/services/auth';
 import PresentationService from '/imports/ui/components/presentation/service';
 import Presentations from '/imports/api/presentations';
-import { UsersContext } from '../components-data/users-context/context';
+import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
 import ActionsBar from './component';
 import Service from './service';
-import UserListService from '/imports/ui/newui_components/user-list/service';
+import UserListService from '/imports/ui/components/user-list/service'; //import from newuicomponents to components
 import ExternalVideoService from '/imports/ui/components/external-video-player/service';
 import CaptionsService from '/imports/ui/components/captions/service';
-import LayoutContext from '../layout/context';
+import LayoutContext from '/imports/ui/components/layout/context';
 import { isVideoBroadcasting } from '/imports/ui/components/screenshare/service';
 
 import MediaService, {
   getSwapLayout,
   shouldEnableSwapLayout,
-} from '../media/service';
+} from '/imports/ui/components/media/service';
 
 const ActionsBarContainer = (props) => {
   const usingUsersContext = useContext(UsersContext);

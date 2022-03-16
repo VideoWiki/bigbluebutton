@@ -110,3 +110,15 @@
     }
   }
 }
+
+.actionBtn{
+  background-color: #E64980;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

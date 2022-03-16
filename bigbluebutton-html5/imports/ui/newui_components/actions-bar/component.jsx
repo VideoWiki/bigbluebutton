@@ -7,7 +7,7 @@ import { styles } from './styles.scss';
 import ActionsDropdown from './actions-dropdown/container';
 import ScreenshareButtonContainer from '/imports/ui/newui_components/actions-bar/screenshare/container';
 import AudioControlsContainer from '../audio/audio-controls/container';
-import JoinVideoOptionsContainer from '../video-provider/video-button/container';
+import JoinVideoOptionsContainer from '/imports/ui/components/video-provider/video-button/container';
 import PresentationOptionsContainer from './presentation-options/component';
 
 class ActionsBar extends PureComponent {
@@ -69,7 +69,7 @@ class ActionsBar extends PureComponent {
             : null}
         </div>
         <div className={styles.center}>
-          {/* <AudioControlsContainer /> */}
+          <AudioControlsContainer />
           {enableVideo
             ? (
               <JoinVideoOptionsContainer />

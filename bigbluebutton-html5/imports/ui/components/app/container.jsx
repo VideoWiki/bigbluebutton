@@ -26,7 +26,7 @@ import {
 import { withModalMounter, getModal } from '../modal/service';
 
 import App from './component';
-import ActionsBarContainer from '../actions-bar/container';
+import ActionsBarContainer from '/imports/ui/newui_components/actions-bar/container';
 
 const CUSTOM_STYLE_URL = Meteor.settings.public.app.customStyleUrl;
 

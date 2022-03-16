@@ -53,6 +53,14 @@ class AudioControls extends PureComponent {
       .renderLeaveButtonWithoutLiveStreamSelector.bind(this);
 
     this.renderJoinLeaveButton = this.renderJoinLeaveButton.bind(this);
+    this.state = {
+      check: true
+    };
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(){
+    this.setState({ check: !this.state.check })
   }
 
   componentDidMount() {
@@ -71,6 +79,13 @@ class AudioControls extends PureComponent {
       shortcuts,
     } = this.props;
 
+    // function changeState(){
+    //   this.setState({ check: !this.state.check })
+    //   console.log(this)
+    // }
+
+    
+
     return (
       // <Button
       //   className={styles.btn}
@@ -87,7 +102,12 @@ class AudioControls extends PureComponent {
       //   circle
       //   accessKey={shortcuts.joinaudio}
       // />
-      <button>join audio</button>
+      <button className={styles.actionBtn}
+        onClick={this.handleClick}>
+        {
+          this.state.check ? <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg" alt="Join audio"/> : <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg" alt="Join audio"/>
+        }
+      </button>
     );
   }
 
