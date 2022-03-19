@@ -5,6 +5,7 @@ import Button from '/imports/ui/newui_components/button/component';
 import MediaService from '/imports/ui/components/media/service';
 import cx from 'classnames';
 import { styles } from '../styles';
+import ActionButton from '../actions-button/ActionButton';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -68,6 +69,11 @@ const PresentationOptionsContainer = ({
       ghost={isLayoutSwapped}
       disabled={!isThereCurrentPresentation}
     />
+
+    // <ActionButton
+    //   onClick={() => toggleSwapLayout(layoutContextDispatch)}
+    //   icon={isLayoutSwapped ? "":""}
+    // />
   );
 };
 

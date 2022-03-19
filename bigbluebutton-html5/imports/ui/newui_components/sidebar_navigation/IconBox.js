@@ -8,12 +8,12 @@ import Video from "./Icons/video";
 import Chat from "./Icons/chat";
 import { ACTIONS } from "../../components/layout/enums";
 import { styles } from "./styles";
+import ExternalPresentation from "./Icons/external_presentation";
 
 function IconBox(props) {
 
     const { sidebarContent, icon, contextDispatch } = props;
     const { sidebarContentPanel } = sidebarContent;
-
     function updateSelectedFeature() {
         if (sidebarContentPanel === icon) {
             contextDispatch({
@@ -59,6 +59,9 @@ function IconBox(props) {
                 sidebarContentPanel={sidebarContentPanel}
             />}
             {icon === "settings" && <Settings
+                sidebarContentPanel={sidebarContentPanel}
+            />}
+            {icon === "externalpresentation" && <ExternalPresentation
                 sidebarContentPanel={sidebarContentPanel}
             />}
         </div>

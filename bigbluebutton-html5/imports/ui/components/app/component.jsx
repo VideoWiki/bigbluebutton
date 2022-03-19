@@ -395,11 +395,11 @@ class App extends Component {
         aria-hidden={this.shouldAriaHide()}
         style={
           {
-            position: 'absolute',
-            top: actionsBarStyle.top,
-            left: actionsBarStyle.left,
+            // position: 'absolute',
+            // top: actionsBarStyle.top,
+            // left: actionsBarStyle.left,
             height: actionsBarStyle.height,
-            width: actionsBarStyle.width,
+            // width: actionsBarStyle.width,
             padding: actionsBarStyle.padding,
           }
         }
@@ -567,7 +567,7 @@ class App extends Component {
           <LockNotifier />
           <StatusNotifier status="raiseHand" />
           <ManyWebcamsNotifier />
-          <PollingContainer />z
+          <PollingContainer />
           <ModalContainer />
           {this.renderActionsBar()}
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}

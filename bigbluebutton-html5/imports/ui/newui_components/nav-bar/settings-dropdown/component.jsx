@@ -180,6 +180,7 @@ class SettingsDropdown extends PureComponent {
     makeCall('userLeftMeeting');
     // we don't check askForFeedbackOnLogout here,
     // it is checked in meeting-ended component
+
     Session.set('codeError', this.LOGOUT_CODE);
   }
 
@@ -254,19 +255,19 @@ class SettingsDropdown extends PureComponent {
       );
     }
 
-    if (allowLogoutSetting && isMeteorConnected) {
-      this.menuItems.push(
-        {
-          key: 'list-item-logout',
-          dataTest: 'logout',
-          icon: 'logout',
-          label: intl.formatMessage(intlMessages.leaveSessionLabel),
-          // description: intl.formatMessage(intlMessages.leaveSessionDesc),
-          className: styles.leaveMeetingButton,
-          onClick: () => this.leaveSession(),
-        },
-      );
-    }
+    // if (allowLogoutSetting && isMeteorConnected) {
+    //   this.menuItems.push(
+    //     {
+    //       key: 'list-item-logout',
+    //       dataTest: 'logout',
+    //       icon: 'logout',
+    //       label: intl.formatMessage(intlMessages.leaveSessionLabel),
+    //       // description: intl.formatMessage(intlMessages.leaveSessionDesc),
+    //       className: styles.leaveMeetingButton,
+    //       onClick: () => this.leaveSession(),
+    //     },
+    //   );
+    // }
 
     return this.menuItems;
   }

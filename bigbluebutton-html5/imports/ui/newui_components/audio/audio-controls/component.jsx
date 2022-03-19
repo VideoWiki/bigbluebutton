@@ -9,6 +9,7 @@ import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import InputStreamLiveSelectorContainer from './input-stream-live-selector/container';
 import MutedAlert from '/imports/ui/components/muted-alert/component';
 import { styles } from './styles';
+import ActionButton from '../../actions-bar/actions-button/ActionButton.jsx';
 
 const intlMessages = defineMessages({
   joinAudio: {
@@ -102,12 +103,29 @@ class AudioControls extends PureComponent {
       //   circle
       //   accessKey={shortcuts.joinaudio}
       // />
-      <button className={styles.actionBtn}
-        onClick={this.handleClick}>
-        {
-          this.state.check ? <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg" alt="Join audio"/> : <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg" alt="Join audio"/>
-        }
-      </button>
+
+      // <button className={styles.actionBtn}
+      //   onClick={handleJoinAudio}
+      //   disabled={disable}
+      //   accessKey={shortcuts.joinaudio}
+      //   >
+      //   {
+      //     this.state.check ? <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg" alt="Join audio"/> : <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg" alt="Join audio"/>
+      //   }
+      // </button>
+
+
+      // <button className={styles.actionBtn}
+      //   onClick={this.handleClick}>
+      //   {
+      //     this.state.check ? <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg" alt="Join audio"/> : <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg" alt="Join audio"/>
+      //   }
+      // </button>
+
+      <ActionButton
+        onClick={this.handleClick}
+        icon = "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg"
+      />
     );
   }
 
@@ -207,19 +225,22 @@ class AudioControls extends PureComponent {
       : intl.formatMessage(intlMessages.muteAudio);
 
     const toggleMuteBtn = (
-      <Button
-        className={cx(styles.muteToggle, !talking || styles.glow, !muted || styles.btn)}
-        onClick={handleToggleMuteMicrophone}
-        disabled={disable}
-        hideLabel
-        label={label}
-        aria-label={label}
-        color={!muted ? 'primary' : 'default'}
-        ghost={muted}
-        icon={muted ? 'mute' : 'unmute'}
-        size="lg"
-        circle
-        accessKey={shortcuts.togglemute}
+      // <Button
+      //   className={cx(styles.muteToggle, !talking || styles.glow, !muted || styles.btn)}
+      //   onClick={handleToggleMuteMicrophone}
+      //   disabled={disable}
+      //   hideLabel
+      //   label={label}
+      //   aria-label={label}
+      //   color={!muted ? 'primary' : 'default'}
+      //   ghost={muted}
+      //   icon={muted ? 'mute' : 'unmute'}
+      //   size="lg"
+      //   circle
+      //   accessKey={shortcuts.togglemute}
+      // />
+      <ActionButton
+        icon="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg"
       />
     );
 

@@ -16,6 +16,7 @@ import {
   screenshareHasEnded,
 } from '/imports/ui/components/screenshare/service';
 import { SCREENSHARING_ERRORS } from '/imports/api/screenshare/client/bridge/errors';
+import ActionButton from '../actions-button/ActionButton';
 
 const { isMobile } = deviceInfo;
 const { isSafari } = browserInfo;
@@ -171,18 +172,31 @@ const ScreenshareButton = ({
 
   return shouldAllowScreensharing
     ? (
-      <Button
-        className={cx(isVideoBroadcasting || styles.btn)}
-        disabled={(!isMeteorConnected && !isVideoBroadcasting) || !screenshareDataSavingSetting}
-        icon={isVideoBroadcasting ? 'desktop' : 'desktop_off'}
-        data-test={isVideoBroadcasting ? 'stopScreenShare' : 'startScreenShare'}
-        label={intl.formatMessage(vLabel)}
-        description={intl.formatMessage(vDescr)}
-        color={isVideoBroadcasting ? 'primary' : 'default'}
-        ghost={!isVideoBroadcasting}
-        hideLabel
-        circle
-        size="lg"
+      // <Button
+      //   className={cx(isVideoBroadcasting || styles.btn)}
+      //   disabled={(!isMeteorConnected && !isVideoBroadcasting) || !screenshareDataSavingSetting}
+      //   icon={isVideoBroadcasting ? 'desktop' : 'desktop_off'}
+      //   data-test={isVideoBroadcasting ? 'stopScreenShare' : 'startScreenShare'}
+      //   label={intl.formatMessage(vLabel)}
+      //   description={intl.formatMessage(vDescr)}
+      //   color={isVideoBroadcasting ? 'primary' : 'default'}
+      //   ghost={!isVideoBroadcasting}
+      //   hideLabel
+      //   circle
+      //   size="lg"
+      //   onClick={isVideoBroadcasting
+      //     ? screenshareHasEnded
+      //     : () => {
+      //       if (isSafari && !ScreenshareBridgeService.HAS_DISPLAY_MEDIA) {
+      //         renderScreenshareUnavailableModal();
+      //       } else {
+      //         shareScreen(handleFailure);
+      //       }
+      //     }}
+      //   id={isVideoBroadcasting ? 'unshare-screen-button' : 'share-screen-button'}
+      // />
+
+      <ActionButton
         onClick={isVideoBroadcasting
           ? screenshareHasEnded
           : () => {
@@ -192,8 +206,21 @@ const ScreenshareButton = ({
               shareScreen(handleFailure);
             }
           }}
-        id={isVideoBroadcasting ? 'unshare-screen-button' : 'share-screen-button'}
+        icon={isVideoBroadcasting ? "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/screenshare.svg"  : "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/screenshare-off.svg"}
       />
+
+      // <button
+      // onClick={isVideoBroadcasting
+      //       ? screenshareHasEnded
+      //       : () => {
+      //         if (isSafari && !ScreenshareBridgeService.HAS_DISPLAY_MEDIA) {
+      //           renderScreenshareUnavailableModal();
+      //         } else {
+      //           shareScreen(handleFailure);
+      //         }
+      //       }}
+      //   >share</button>
+
     ) : null;
 };
 

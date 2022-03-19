@@ -7,10 +7,28 @@ import { styles } from './styles.scss';
 import ActionsDropdown from './actions-dropdown/container';
 import ScreenshareButtonContainer from '/imports/ui/newui_components/actions-bar/screenshare/container';
 import AudioControlsContainer from '../audio/audio-controls/container';
-import JoinVideoOptionsContainer from '/imports/ui/components/video-provider/video-button/container';
+import JoinVideoOptionsContainer from '/imports/ui/newui_components/video-provider/video-button/container';
 import PresentationOptionsContainer from './presentation-options/component';
+import ActionButton from './actions-button/ActionButton';
+import { makeCall } from '/imports/ui/services/api';
 
 class ActionsBar extends PureComponent {
+
+  constructor() {
+    super();
+    // Set the logout code to 680 because it's not a real code and can be matched on the other side
+    this.LOGOUT_CODE = '680';
+    this.leaveSession = this.leaveSession.bind(this);
+  }
+
+  leaveSession() {
+    makeCall('userLeftMeeting');
+    // we don't check askForFeedbackOnLogout here,
+    // it is checked in meeting-ended component
+
+    Session.set('codeError', this.LOGOUT_CODE);
+  }
+
   render() {
     const {
       amIPresenter,
@@ -70,6 +88,10 @@ class ActionsBar extends PureComponent {
         </div>
         <div className={styles.center}>
           <AudioControlsContainer />
+          <ActionButton
+            onClick={() => this.leaveSession()}
+            icon="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/phone-off.svg"
+          />
           {enableVideo
             ? (
               <JoinVideoOptionsContainer />
