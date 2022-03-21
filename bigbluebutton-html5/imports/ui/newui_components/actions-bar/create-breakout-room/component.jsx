@@ -247,6 +247,7 @@ class BreakoutRoom extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevstate) {
+    console.log("states ",this.state);
     if (this.listOfUsers) {
       for (let i = 0; i < this.listOfUsers.children.length; i += 1) {
         const roomWrapperChildren = this.listOfUsers.children[i].getElementsByTagName('div');
@@ -700,7 +701,8 @@ class BreakoutRoom extends PureComponent {
       </div>
     );
   }
-
+  
+  //RoomForm
   renderBreakoutForm() {
     const {
       intl,

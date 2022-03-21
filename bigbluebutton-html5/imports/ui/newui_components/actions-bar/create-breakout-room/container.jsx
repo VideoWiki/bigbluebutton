@@ -5,6 +5,10 @@ import UserListService from '/imports/ui/components/user-list/service';
 import CreateBreakoutRoomModal from './component';
 import { meetingIsBreakout } from '/imports/ui/components/app/service';
 
+import CreateBreakoutRoom from '/imports/ui/newui_components/Options/BreakoutRoom/CreateBreakout';
+
+import BreakoutRoom_flow from '../../Options/BreakoutRoom/BreakoutRoom_flow';
+
 const CreateBreakoutRoomContainer = (props) => {
   const {
     meetingIsBreakout,
@@ -14,7 +18,6 @@ const CreateBreakoutRoomContainer = (props) => {
     amIModerator,
     users    
   } = props;
-
   // const canCreateBreakout = amIModerator
   //   && !meetingIsBreakout
   //   && !hasBreakoutRoom
@@ -26,7 +29,7 @@ const CreateBreakoutRoomContainer = (props) => {
     && getUsersNotAssigned(users).length;
 
   return (
-      <CreateBreakoutRoomModal {...props} isInvitation={canInviteUsers}/>
+      <BreakoutRoom_flow {...props} isInvitation={canInviteUsers}/>
   );
 };
 

@@ -5,6 +5,8 @@ import _ from 'lodash';
 import { withModalMounter } from '/imports/ui/components/modal/service';
 import BreakoutRoom from '/imports/ui/newui_components/actions-bar/create-breakout-room/container';
 
+import NewBreakoutRoom from '/imports/ui/newui_components/Options/BreakoutRoom/BreakoutRoom_flow'
+
 const propTypes = {
   users: PropTypes.arrayOf(Object).isRequired,
   meetingIsBreakout: PropTypes.bool.isRequired,
