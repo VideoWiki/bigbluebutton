@@ -10,36 +10,39 @@ function CreateBreakout(props) {
     // const MAX_BREAKOUT_ROOMS = BREAKOUT_LIM > MIN_BREAKOUT_ROOMS ? BREAKOUT_LIM : MIN_BREAKOUT_ROOMS;
     // const MIN_BREAKOUT_TIME = 5;
 
-    const [state, setState] = useState({
-        numberOfRooms: MIN_BREAKOUT_ROOMS,
-        seletedId: '',
-        users: [],
-        durationTime: 15,
-        freeJoin: false,
-        roomNameDuplicatedIsValid: false,
-        formFillLevel: 1,
-        roomNamesChanged: [],
-        roomSelected: 0,
-        preventClosing: true,
-        leastOneUserIsValid: true,
-        numberOfRoomsIsValid: true,
-        roomNameDuplicatedIsValid: true,
-        roomNameEmptyIsValid: true,
-        record: false,
-        durationIsValid: true,
-        breakoutJoinedUsers: null,
-        WantCreate: true,
-        selectedUsers: 0
-    });
+    // const [state, setState] = useState({
+    //     numberOfRooms: MIN_BREAKOUT_ROOMS,
+    //     seletedId: '',
+    //     users: [],
+    //     durationTime: 15,
+    //     freeJoin: false,
+    //     roomNameDuplicatedIsValid: false,
+    //     formFillLevel: 1,
+    //     roomNamesChanged: [],
+    //     roomSelected: 0,
+    //     preventClosing: true,
+    //     leastOneUserIsValid: true,
+    //     numberOfRoomsIsValid: true,
+    //     roomNameDuplicatedIsValid: true,
+    //     roomNameEmptyIsValid: true,
+    //     record: false,
+    //     durationIsValid: true,
+    //     breakoutJoinedUsers: null,
+    //     WantCreate: true,
+    //     selectedUsers: 0
+    // });
+
+    const [room, setRoom] = useState(0);
 
     const handleMinuteChange = (e) =>{
-        setState({...state, durationTime: parseInt(e.target.value)});
+        e.preventDefault();
+        props.setState({...props.state, durationTime: parseInt(e.target.value)});
     }
 
     const handleRoomNoChange = (e) =>{
-        setState({...state, numberOfRooms: parseInt(e.target.value)});
+        e.preventDefault();
+        props.setState({...props.state, numberOfRooms: parseInt(e.target.value)});
     }
-    console.log("states ", state)
 
     return (
         <div className={styles.centerAlign1}>
@@ -57,7 +60,7 @@ function CreateBreakout(props) {
                     </div>
                     <div className={styles.InputBox}>
                         <div className={styles.InputHeadings}>Duration</div>
-                        <input className={styles.InputDuration} type="number" value={state.durationTime} onChange={handleMinuteChange}/>
+                        <input className={styles.InputDuration} type="number" value={props.state.durationTime} onChange={handleMinuteChange}/>
                         <label className={styles.mylabel}>Minutes</label>
                     </div>
                 </div>
@@ -66,11 +69,11 @@ function CreateBreakout(props) {
                     <div className={styles.Check}>Allow users to choose a breakout room to join</div>
                 </div>
                 <div className={styles.centerAlign}>
-                    <div className={styles.close}><Cross /></div>
-                    <div className={styles.create} onClick={() => console.log("Say hello")}>Create Room</div>
+                    <div className={styles.close} ><Cross /></div>
+                    <div className={styles.create}>Create Room</div>
                 </div>
             </div>
-            <RoomGroup {...state}/>
+            
         </div>);
 }
 export default CreateBreakout;

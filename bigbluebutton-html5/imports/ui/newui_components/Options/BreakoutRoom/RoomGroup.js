@@ -3,25 +3,22 @@ import Room from "./Room";
 import { styles } from "./styles.scss";
 
 function RoomGroup(props) {
-    const [state, setState] = useState({numberOfRooms:0});
-    const [rooms, setRooms] = useState([]);
+
+    const [room, setRoom] = useState([]);
 
     useEffect(()=>{
         let arr = [];
-        for(let i=1; i<=props.numberOfRooms; i++){
+        for(let i=1;i<=props.state.numberOfRooms;i++){
             arr.push(i);
         }
-        setRooms(arr);
-    },[])
+        setRoom(arr);
+    },[props])
 
-    return (
-    <div className={styles.AllRoomsBox}>
+    return (<div className={styles.AllRoomsBox}>
         <div>
             {
-                rooms.map(()=>{
-                    return (
-                        <Room/>
-                    )
+                room.map((obj)=>{
+                    return <Room room={obj} key={obj} state={props.state} setState={props.setState}/>
                 })
             }
         </div>
