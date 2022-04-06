@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Plus from "../Icons/Plus";
+import Button from '/imports/ui/newui_components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
+import AudioManager from '/imports/ui/services/audio-manager';
+import { Session } from 'meteor/session';
+import VideoService from '/imports/ui/components/video-provider/service';
+import logger from '/imports/startup/client/logger';
+import UserListService from '/imports/ui/components/user-list/service';
+import { screenshareHasEnded } from '/imports/ui/components/screenshare/service';
 import BreakoutRoomContainer from '../../../breakout-room/breakout-remaining-time/container'
 
 import { styles } from "../styles.scss";
@@ -70,28 +77,191 @@ const intlMessages = defineMessages({
 
 function Joinroom(props) {
 
-  console.log("Room ", props)
   const [users, setUsers] = useState([]);
-
+  const [state, setState] = useState({
+    requestedBreakoutId: '',
+    waiting: false,
+    generated: false,
+    joinedAudioOnly: false,
+    breakoutId: '',
+    visibleExtendTimeForm: false,
+    visibleExtendTimeHigherThanMeetingTimeError: false,
+    extendTime: 5,
+  });
+  console.log("join", props, state)
   useEffect(() => {
     let arr = [];
     let count = 1;
-    props.state.users.forEach((user) => {
+    props.breakoutRoom.joinedUsers.forEach((user) => {
       if (user.room == props.room) {
         arr.push({ ...user, count: count })
         count += 1;
       }
     })
     setUsers(arr);
-  }, [])
+  }, [props.breakoutRoom])
 
-  useEffect(()=>{
+  const getBreakoutLabel = (breakoutId)=> {
+    const { intl, getBreakoutRoomUrl } = props.breakout;
+    const { requestedBreakoutId, generated } = state;
 
-  },[props.breakout.breakoutRooms])
+    const breakoutRoomUrlData = getBreakoutRoomUrl(breakoutId);
 
-  const openSelectUserModal = (e) => {
-    e.preventDefault();
-    props.setState({ ...props.state, formFillLevel: 2, openRoom: props.room });
+    if (generated && requestedBreakoutId === breakoutId) {
+      return intl.formatMessage(intlMessages.breakoutJoin);
+    }
+
+    if (breakoutRoomUrlData) {
+      return intl.formatMessage(intlMessages.breakoutJoin);
+    }
+
+    return intl.formatMessage(intlMessages.askToJoin);
+  }
+
+  const getBreakoutURL = (breakoutId)=> {
+    Session.set('lastBreakoutOpened', breakoutId);
+    const { requestJoinURL, getBreakoutRoomUrl } = props.breakout;
+    const { waiting } = state;
+    const breakoutRoomUrlData = getBreakoutRoomUrl(breakoutId);
+    if (!breakoutRoomUrlData && !waiting) {
+      setState(
+        { ...state,
+          waiting: true,
+          generated: false,
+          requestedBreakoutId: breakoutId,
+        },
+        () => requestJoinURL(breakoutId),
+      );
+    }
+
+    if (breakoutRoomUrlData) {
+      window.open(breakoutRoomUrlData.redirectToHtml5JoinURL, '_blank');
+      setState({...state, waiting: false, generated: false });
+    }
+    return null;
+  }
+
+  const returnBackToMeeeting = (breakoutId)=> {
+    const { transferUserToMeeting, meetingId } = props.breakout;
+    transferUserToMeeting(breakoutId, meetingId);
+    setState({...state, joinedAudioOnly: false, breakoutId });
+  }
+
+  const transferUserToBreakoutRoom = (breakoutId)=> {
+    const { transferToBreakout } = props.breakout;
+    transferToBreakout(breakoutId);
+    setState({...state, joinedAudioOnly: true, breakoutId });
+  }
+
+  const renderUserActions = (breakoutId, joinedUsers, number)=> {
+    const {
+      isMicrophoneUser,
+      amIModerator,
+      intl,
+      isUserInBreakoutRoom,
+      exitAudio,
+      setBreakoutAudioTransferStatus,
+      getBreakoutAudioTransferStatus,
+    } = props.breakout;
+
+    const {
+      joinedAudioOnly,
+      breakoutId: _stateBreakoutId,
+      requestedBreakoutId,
+      waiting,
+      generated,
+    } = state;
+
+    const {
+      breakoutMeetingId: currentAudioTransferBreakoutId,
+      status,
+    } = getBreakoutAudioTransferStatus();
+
+    const isInBreakoutAudioTransfer = status
+      === AudioManager.BREAKOUT_AUDIO_TRANSFER_STATES.CONNECTED;
+
+    const stateBreakoutId = _stateBreakoutId || currentAudioTransferBreakoutId;
+    const moderatorJoinedAudio = isMicrophoneUser && amIModerator;
+    const disable = waiting && requestedBreakoutId !== breakoutId;
+    const audioAction = joinedAudioOnly || isInBreakoutAudioTransfer
+      ? () => {
+        setBreakoutAudioTransferStatus({
+          breakoutMeetingId: breakoutId,
+          status: AudioManager.BREAKOUT_AUDIO_TRANSFER_STATES.RETURNING,
+        });
+        returnBackToMeeeting(breakoutId);
+        return logger.debug({
+          logCode: 'breakoutroom_return_main_audio',
+          extraInfo: { logType: 'user_action' },
+        }, 'Returning to main audio (breakout room audio closed)');
+      }
+      : () => {
+        setBreakoutAudioTransferStatus({
+          breakoutMeetingId: breakoutId,
+          status: AudioManager.BREAKOUT_AUDIO_TRANSFER_STATES.CONNECTED,
+        });
+        transferUserToBreakoutRoom(breakoutId);
+        return logger.debug({
+          logCode: 'breakoutroom_join_audio_from_main_room',
+          extraInfo: { logType: 'user_action' },
+        }, 'joining breakout room audio (main room audio closed)');
+      };
+    return (
+      <div className={styles.breakoutActions}>
+        {
+          isUserInBreakoutRoom(joinedUsers)
+            ? (
+              <span className={styles.alreadyConnected}>
+                {intl.formatMessage(intlMessages.alreadyConnected)}
+              </span>
+            )
+            : (
+              <Button
+                data-test="breakoutJoin"
+                aria-label={`${getBreakoutLabel(breakoutId)} ${props.breakout.breakoutRooms[number - 1]?.shortName}`}
+                onClick={() => {
+                  getBreakoutURL(breakoutId);
+                  // leave main room's audio,
+                  // and stops video and screenshare when joining a breakout room
+                  exitAudio();
+                  logger.debug({
+                    logCode: 'breakoutroom_join',
+                    extraInfo: { logType: 'user_action' },
+                  }, 'joining breakout room closed audio in the main room');
+                  VideoService.storeDeviceIds();
+                  VideoService.exitVideo();
+                  if (UserListService.amIPresenter()) screenshareHasEnded();
+                }}
+                disabled={disable}
+                className={styles.PlusButton}
+              >
+                <Plus />
+              </Button>
+            )
+        }
+        {
+          moderatorJoinedAudio
+            ? [
+              ('|'),
+              (
+                <Button
+                  label={
+                    stateBreakoutId === breakoutId
+                      && (joinedAudioOnly || isInBreakoutAudioTransfer)
+                      ? intl.formatMessage(intlMessages.breakoutReturnAudio)
+                      : intl.formatMessage(intlMessages.breakoutJoinAudio)
+                  }
+                  className={styles.button}
+                  disabled={stateBreakoutId !== breakoutId && joinedAudioOnly}
+                  key={`join-audio-${breakoutId}`}
+                  onClick={audioAction}
+                />
+              ),
+            ]
+            : null
+        }
+      </div>
+    );
   }
 
   return (<div className={styles.RoomBox}>
@@ -110,18 +280,28 @@ function Joinroom(props) {
             if (user.count <= 6) {
               // return <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/user.svg" className={styles.userRoom} />
               return (
-                <div className={styles.userRoom} ><span>{user.userName.charAt(0)}</span></div>
+                <div className={styles.userRoom} ><span>{user.name.charAt(0)}</span></div>
               )
             }
           })
         }
         {
-          users.length > 6 ? <div className={styles.remaining}>+{users.length - 6}</div> : null
+          props.breakoutRoom.joinedUsers > 6 ? <div className={styles.remaining}>+{props.breakoutRoom.joinedUsers.length - 6}</div> : null
         }
 
       </div>
       <div className={styles.PlusButton}>
-        <Plus />
+        {state.waiting && state.requestedBreakoutId === props.breakoutRoom.breakoutId ? (
+              <span>
+                {props.breakout.intl.formatMessage(intlMessages.generatingURL)}
+                <span className={styles.connectingAnimation} />
+              </span>
+            ) : renderUserActions(
+              props.breakoutRoom.breakoutId,
+              props.breakoutRoom.joinedUsers,
+              props.breakoutRoom.sequence.toString(),
+        )}
+        {/* <Plus /> */}
       </div>
     </div>
   </div>);

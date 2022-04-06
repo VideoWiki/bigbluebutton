@@ -7,7 +7,7 @@ import SelectUserModal from "./select-user/SelectUserModal";
 import { withModalMounter } from '/imports/ui/newui_components/modal/service';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
-
+import AudioManager from '/imports/ui/services/audio-manager';
 import Service from '../../breakout-room/service'
 import AudioService from '/imports/ui/components/audio/service';
 
@@ -111,21 +111,20 @@ function BreakoutRoom_flow(props)
             {
                 breakoutRooms.length > 1 ?
                 <>
-                <Joincontainer action={props} breakout={breakout} state={state} setState={setState}/>
-                {/* <RoomGroup action={props} breakout={breakout} state={state} setState={setState}/> */}
-                <button onClick={handleBreakoutEnd}>End All Breakout</button>
+                    <Joincontainer action={props} breakout={breakout} state={state} setState={setState}/>
+                    <button onClick={handleBreakoutEnd}>End All Breakout</button>
                 </> :
                 <>
-                {
-                state.formFillLevel=="1" &&
-                <>
-                    <CreateBreakout action={props} breakout={breakout} state={state} setState={setState}/>
-                    <RoomGroup action={props} breakout={breakout} state={state} setState={setState}/>
-                </> 
-            }
-            {
-                state.formFillLevel=="2" && <SelectUserModal state={state} setState={setState}/>
-            }
+                    {
+                        state.formFillLevel=="1" &&
+                        <>
+                            <CreateBreakout action={props} breakout={breakout} state={state} setState={setState}/>
+                            <RoomGroup action={props} breakout={breakout} state={state} setState={setState}/>
+                        </> 
+                    }
+                    {
+                        state.formFillLevel=="2" && <SelectUserModal state={state} setState={setState}/>
+                    }
                 </>
             }
         </div>

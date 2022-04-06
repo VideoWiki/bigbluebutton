@@ -10,7 +10,7 @@ export default function Joincontainer(props) {
                 {
                     props.breakout.breakoutRooms.map((obj) => {
                         return (
-                            <Joinroom action={props.action} breakout={props.breakout} state={props.state} setState={props.setState} />
+                            <Joinroom action={props.action} breakoutRoom={obj} breakout={props.breakout} state={props.state} setState={props.setState} />
                         )
                     })
                 }

@@ -67,8 +67,7 @@ const intlMessages = defineMessages({
   });
 
 function Room(props) {
-
-    console.log("Room ",props)
+  
     const [users, setUsers] = useState([]);
 
     useEffect(()=>{
