@@ -59,7 +59,7 @@ const defaultProps = {
 class ModalHalfscreen extends PureComponent {
   constructor(props) {
     super(props);
-
+    console.log("modal props", props)
     this.handleAction = this.handleAction.bind(this);
   }
 
@@ -67,7 +67,6 @@ class ModalHalfscreen extends PureComponent {
     const { confirm, dismiss, modalHide } = this.props;
     const { callback: callBackConfirm } = confirm;
     const { callback: callBackDismiss } = dismiss;
-    console.log(this.props);
 
     let callback;
 

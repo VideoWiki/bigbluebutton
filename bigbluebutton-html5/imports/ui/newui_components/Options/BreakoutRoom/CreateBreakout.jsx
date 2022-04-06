@@ -2,14 +2,153 @@ import React, { useState } from "react";
 import Cross from "./Icons/Cross";
 import Button from '/imports/ui/components/button/component';
 import { styles } from "./styles";
+import { defineMessages, injectIntl } from 'react-intl';
+import _ from 'lodash';
 import RoomGroup from "./RoomGroup";
+
+const intlMessages = defineMessages({
+    modalClose: {
+      id: 'app.modal.close',
+      description: 'Close',
+    },
+    modalCloseDescription: {
+      id: 'app.modal.close.description',
+      description: 'Disregards changes and closes the modal',
+    },
+    modalDone: {
+      id: 'app.modal.confirm',
+      description: 'Close',
+    },
+    modalDoneDescription: {
+      id: 'app.modal.confirm.description',
+      description: 'Disregards changes and closes the modal',
+    },
+    breakoutRoomTitle: {
+      id: 'app.createBreakoutRoom.title',
+      description: 'modal title',
+    },
+    breakoutRoomDesc: {
+      id: 'app.createBreakoutRoom.modalDesc',
+      description: 'modal description',
+    },
+    confirmButton: {
+      id: 'app.createBreakoutRoom.confirm',
+      description: 'confirm button label',
+    },
+    dismissLabel: {
+      id: 'app.presentationUploder.dismissLabel',
+      description: 'used in the button that close modal',
+    },
+    numberOfRooms: {
+      id: 'app.createBreakoutRoom.numberOfRooms',
+      description: 'number of rooms label',
+    },
+    duration: {
+      id: 'app.createBreakoutRoom.durationInMinutes',
+      description: 'duration time label',
+    },
+    randomlyAssign: {
+      id: 'app.createBreakoutRoom.randomlyAssign',
+      description: 'randomly assign label',
+    },
+    randomlyAssignDesc: {
+      id: 'app.createBreakoutRoom.randomlyAssignDesc',
+      description: 'randomly assign label description',
+    },
+    breakoutRoom: {
+      id: 'app.createBreakoutRoom.room',
+      description: 'breakout room',
+    },
+    freeJoinLabel: {
+      id: 'app.createBreakoutRoom.freeJoin',
+      description: 'free join label',
+    },
+    roomLabel: {
+      id: 'app.createBreakoutRoom.room',
+      description: 'Room label',
+    },
+    leastOneWarnBreakout: {
+      id: 'app.createBreakoutRoom.leastOneWarnBreakout',
+      description: 'warn message label',
+    },
+    notAssigned: {
+      id: 'app.createBreakoutRoom.notAssigned',
+      description: 'Not assigned label',
+    },
+    breakoutRoomLabel: {
+      id: 'app.createBreakoutRoom.breakoutRoomLabel',
+      description: 'breakout room label',
+    },
+    addParticipantLabel: {
+      id: 'app.createBreakoutRoom.addParticipantLabel',
+      description: 'add Participant label',
+    },
+    nextLabel: {
+      id: 'app.createBreakoutRoom.nextLabel',
+      description: 'Next label',
+    },
+    backLabel: {
+      id: 'app.audio.backLabel',
+      description: 'Back label',
+    },
+    invitationTitle: {
+      id: 'app.invitation.title',
+      description: 'isInvitationto breakout title',
+    },
+    invitationConfirm: {
+      id: 'app.invitation.confirm',
+      description: 'Invitation to breakout confirm button label',
+    },
+    minusRoomTime: {
+      id: 'app.createBreakoutRoom.minusRoomTime',
+      description: 'aria label for btn to decrease room time',
+    },
+    addRoomTime: {
+      id: 'app.createBreakoutRoom.addRoomTime',
+      description: 'aria label for btn to increase room time',
+    },
+    record: {
+      id: 'app.createBreakoutRoom.record',
+      description: 'label for checkbox to allow record',
+    },
+    roomTime: {
+      id: 'app.createBreakoutRoom.roomTime',
+      description: 'used to provide current room time for aria label',
+    },
+    numberOfRoomsIsValid: {
+      id: 'app.createBreakoutRoom.numberOfRoomsError',
+      description: 'Label an error message',
+    },
+    roomNameEmptyIsValid: {
+      id: 'app.createBreakoutRoom.emptyRoomNameError',
+      description: 'Label an error message',
+    },
+    roomNameDuplicatedIsValid: {
+      id: 'app.createBreakoutRoom.duplicatedRoomNameError',
+      description: 'Label an error message',
+    },
+    you: {
+      id: 'app.userList.you',
+      description: 'Text for identifying your user',
+    },
+    minimumDurationWarnBreakout: {
+      id: 'app.createBreakoutRoom.minimumDurationWarnBreakout',
+      description: 'minimum duration warning message label',
+    },
+    roomNameInputDesc: {
+      id: 'app.createBreakoutRoom.roomNameInputDesc',
+      description: 'aria description for room name change',
+    }
+  });
+
 function CreateBreakout(props) {
 
-    // const BREAKOUT_LIM = Meteor.settings.public.app.breakouts.breakoutRoomLimit;
+    const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
+    const BREAKOUT_LIM = Meteor.settings.public.app.breakouts.breakoutRoomLimit;
     const MIN_BREAKOUT_ROOMS = 2;
-    // const MAX_BREAKOUT_ROOMS = BREAKOUT_LIM > MIN_BREAKOUT_ROOMS ? BREAKOUT_LIM : MIN_BREAKOUT_ROOMS;
-    // const MIN_BREAKOUT_TIME = 5;
-
+    const MAX_BREAKOUT_ROOMS = BREAKOUT_LIM > MIN_BREAKOUT_ROOMS ? BREAKOUT_LIM : MIN_BREAKOUT_ROOMS;
+    const MIN_BREAKOUT_TIME = 5;
+    console.log("break",props);
     // const [state, setState] = useState({
     //     numberOfRooms: MIN_BREAKOUT_ROOMS,
     //     seletedId: '',
@@ -44,6 +183,103 @@ function CreateBreakout(props) {
         props.setState({...props.state, numberOfRooms: parseInt(e.target.value)});
     }
 
+    const getUserByRoom = (room)=> {
+        const { users } = props.state;
+        return users.filter((user) => user.room === room);
+      }
+    const hasNameDuplicated = (position)=> {
+        const { numberOfRooms } = props.state;
+        const currName = getRoomName(position).trim();
+        const equals = _.range(1, numberOfRooms + 1)
+          .filter((n) => getRoomName(n).trim() === currName);
+        if (equals.length > 1) return true;
+    
+        return false;
+      }
+
+    const getRoomName = (position)=> {
+        const { intl } = props.action;
+        const { roomNamesChanged } = props.state;
+    
+        if (hasNameChanged(position)) {
+          return roomNamesChanged[position];
+        }
+    
+        return intl.formatMessage(intlMessages.breakoutRoom, { 0: position });
+    }
+
+    const getFullName = (position)=> {
+        const { meetingName } = props.action;
+    
+        return `${meetingName} (${getRoomName(position)})`;
+      }
+
+    const hasNameChanged = (position)=> {
+        const { intl } = props.action;
+        const { roomNamesChanged } = props.state;
+    
+        if (typeof roomNamesChanged[position] !== 'undefined'
+          && roomNamesChanged[position] !== intl
+            .formatMessage(intlMessages.breakoutRoom, { 0: position })) {
+          return true;
+        }
+        return false;
+      }
+
+    const handleCreateAction = (e) =>{
+        e.preventDefault();
+        const { createBreakoutRoom } = props.action;
+        const {
+            users,
+            freeJoin,
+            record,
+            numberOfRoomsIsValid,
+            numberOfRooms,
+            durationTime,
+            durationIsValid,
+          } = props.state;
+
+        if ((durationTime || 0) < MIN_BREAKOUT_TIME) {
+            props.setState({ durationIsValid: false });
+            return;
+        }
+
+        if (users.length === getUserByRoom(0).length && !freeJoin) {
+            props.setState({ leastOneUserIsValid: false });
+            return;
+        }
+        if (!numberOfRoomsIsValid || !durationIsValid) {
+            return;
+        }
+
+        const duplicatedNames = _.range(1, numberOfRooms + 1).filter((n) => hasNameDuplicated(n));
+        if (duplicatedNames.length > 0) {
+            props.setState({ roomNameDuplicatedIsValid: false });
+            return;
+        }
+        const emptyNames = _.range(1, numberOfRooms + 1).filter((n) => getRoomName(n).length === 0);
+        if (emptyNames.length > 0) {
+            props.setState({ roomNameEmptyIsValid: false });
+            return;
+        }
+
+        const rooms = _.range(1, numberOfRooms + 1).map((seq) => ({
+            users: getUserByRoom(seq).map((u) => u.userId),
+            name: getFullName(seq),
+            shortName: getRoomName(seq),
+            isDefaultName: !hasNameChanged(seq),
+            freeJoin,
+            sequence: seq,
+        }));
+        createBreakoutRoom(rooms, durationTime, record);
+        props.setState({...props.state, formFillLevel: 3});
+    }
+
+    const handleCancelAction = (e) =>{
+        e.preventDefault();
+        props.setState({...props.state, formFillLevel: 2});
+    }
+
     return (
         <div className={styles.centerAlign1}>
             <div className={styles.createBreakOutBox}>
@@ -69,11 +305,12 @@ function CreateBreakout(props) {
                     <div className={styles.Check}>Allow users to choose a breakout room to join</div>
                 </div>
                 <div className={styles.centerAlign}>
-                    <div className={styles.close} ><Cross /></div>
-                    <div className={styles.create}>Create Room</div>
+                    <div className={styles.close} onClick={handleCancelAction}><Cross /></div>
+                    <div className={styles.create} onClick={handleCreateAction}>Create Room</div>
                 </div>
             </div>
             
         </div>);
 }
+
 export default CreateBreakout;

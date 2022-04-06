@@ -427,7 +427,7 @@ class ScreenshareComponent extends React.Component {
       <div
         style={
           {
-            position: 'absolute',
+            // position: 'absolute',
             display,
             top,
             left,

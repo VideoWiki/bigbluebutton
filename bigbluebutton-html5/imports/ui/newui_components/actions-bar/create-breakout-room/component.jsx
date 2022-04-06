@@ -225,7 +225,6 @@ class BreakoutRoom extends PureComponent {
       WantCreate: true,
       selectedUsers: 0
     };
-
     this.btnLevelId = _.uniqueId('btn-set-level-');
 
     this.handleMoveEvent = this.handleMoveEvent.bind(this);
@@ -409,7 +408,7 @@ class BreakoutRoom extends PureComponent {
       freeJoin,
       sequence: seq,
     }));
-    console.log(freeJoin);
+    console.log("free",freeJoin);
     createBreakoutRoom(rooms, durationTime, record);
     Session.set('isUserListOpen', true);
   }

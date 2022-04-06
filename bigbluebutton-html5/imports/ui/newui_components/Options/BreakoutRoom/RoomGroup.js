@@ -18,7 +18,7 @@ function RoomGroup(props) {
         <div>
             {
                 room.map((obj)=>{
-                    return <Room room={obj} key={obj} state={props.state} setState={props.setState}/>
+                    return <Room room={obj} action={props.action} breakout={props.breakout} key={obj} state={props.state} setState={props.setState}/>
                 })
             }
         </div>

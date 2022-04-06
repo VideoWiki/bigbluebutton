@@ -27,9 +27,8 @@ const CreateBreakoutRoomContainer = (props) => {
     && !meetingIsBreakout
     && hasBreakoutRoom
     && getUsersNotAssigned(users).length;
-
   return (
-      <CreateBreakoutRoomModal {...props} isInvitation={canInviteUsers}/>
+      <BreakoutRoom_flow {...props} isInvitation={canInviteUsers}/>
   );
 };
 

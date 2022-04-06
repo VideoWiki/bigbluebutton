@@ -153,11 +153,25 @@
     display: flex;
     justify-content: space-between;
 }
+// .userRoom{
+//     width: 2rem;
+//     height: 2rem;
+//     margin-left: -0.5rem;
+// }
+
 .userRoom{
     width: 2rem;
     height: 2rem;
     margin-left: -0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #7816F7;
+    color: white;
+    border-radius: 50%;
+    border: 2px solid white;
 }
+
 .RoomName{
     font-family: 'Montserrat',sans-serif;
     font-style: normal;
