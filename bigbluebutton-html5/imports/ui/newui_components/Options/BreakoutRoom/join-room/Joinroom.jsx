@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Plus from "../Icons/Plus";
 import Button from '/imports/ui/newui_components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
+import _ from 'lodash';
 import AudioManager from '/imports/ui/services/audio-manager';
 import { Session } from 'meteor/session';
 import VideoService from '/imports/ui/components/video-provider/service';
@@ -76,7 +77,7 @@ const intlMessages = defineMessages({
 });
 
 function Joinroom(props) {
-
+  let prevBreakoutData = {};
   const [users, setUsers] = useState([]);
   const [state, setState] = useState({
     requestedBreakoutId: '',
@@ -89,19 +90,67 @@ function Joinroom(props) {
     extendTime: 5,
   });
   console.log("join", props, state)
-  useEffect(() => {
-    let arr = [];
-    let count = 1;
-    props.breakoutRoom.joinedUsers.forEach((user) => {
-      if (user.room == props.room) {
-        arr.push({ ...user, count: count })
-        count += 1;
-      }
-    })
-    setUsers(arr);
-  }, [props.breakoutRoom])
 
-  const getBreakoutLabel = (breakoutId)=> {
+  const clearJoinedAudioOnly = ()=> {
+    setState({...state, joinedAudioOnly: false });
+  }
+
+  // useEffect(() => {
+  //   let arr = [];
+  //   let count = 1;
+  //   props.breakoutRoom.joinedUsers.forEach((user) => {
+  //     if (user.room == props.room) {
+  //       arr.push({ ...user, count: count })
+  //       count += 1;
+  //     }
+  //   })
+  //   setUsers(arr);
+  // }, [props.breakoutRoom])
+
+  // useEffect(()=>{
+  //   const {
+  //     getBreakoutRoomUrl,
+  //     setBreakoutAudioTransferStatus,
+  //     isMicrophoneUser,
+  //     isReconnecting,
+  //     breakoutRooms,
+  //   } = props.breakout;
+
+  //   const {
+  //     waiting,
+  //     requestedBreakoutId,
+  //     joinedAudioOnly,
+  //     generated,
+  //   } = state;
+
+  //   if (breakoutRooms.length === 0) {
+  //     return true
+  //   }
+
+  //   if (waiting && !generated) {
+  //     const breakoutUrlData = getBreakoutRoomUrl(requestedBreakoutId);
+
+  //     if (!breakoutUrlData) return false;
+  //     if (breakoutUrlData.redirectToHtml5JoinURL !== ''
+  //       && breakoutUrlData.redirectToHtml5JoinURL !== prevBreakoutData.redirectToHtml5JoinURL) {
+  //       prevBreakoutData = breakoutUrlData;
+  //       window.open(breakoutUrlData.redirectToHtml5JoinURL, '_blank');
+  //       _.delay(() => setState({...state, generated: true, waiting: false }), 1000);
+  //     }
+  //   }
+
+  //   if (joinedAudioOnly && (!isMicrophoneUser || isReconnecting)) {
+  //     clearJoinedAudioOnly();
+  //     setBreakoutAudioTransferStatus({
+  //       breakoutMeetingId: '',
+  //       status: AudioManager.BREAKOUT_AUDIO_TRANSFER_STATES.DISCONNECTED,
+  //     });
+  //   }
+  //   return true;
+
+  // },[])
+
+  const getBreakoutLabel = (breakoutId) => {
     const { intl, getBreakoutRoomUrl } = props.breakout;
     const { requestedBreakoutId, generated } = state;
 
@@ -118,14 +167,16 @@ function Joinroom(props) {
     return intl.formatMessage(intlMessages.askToJoin);
   }
 
-  const getBreakoutURL = (breakoutId)=> {
+  const getBreakoutURL = (breakoutId) => {
     Session.set('lastBreakoutOpened', breakoutId);
     const { requestJoinURL, getBreakoutRoomUrl } = props.breakout;
     const { waiting } = state;
     const breakoutRoomUrlData = getBreakoutRoomUrl(breakoutId);
+    console.log("url", breakoutRoomUrlData, breakoutId) //
     if (!breakoutRoomUrlData && !waiting) {
       setState(
-        { ...state,
+        {
+          ...state,
           waiting: true,
           generated: false,
           requestedBreakoutId: breakoutId,
@@ -136,24 +187,24 @@ function Joinroom(props) {
 
     if (breakoutRoomUrlData) {
       window.open(breakoutRoomUrlData.redirectToHtml5JoinURL, '_blank');
-      setState({...state, waiting: false, generated: false });
+      setState({ ...state, waiting: false, generated: false });
     }
     return null;
   }
 
-  const returnBackToMeeeting = (breakoutId)=> {
+  const returnBackToMeeeting = (breakoutId) => {
     const { transferUserToMeeting, meetingId } = props.breakout;
     transferUserToMeeting(breakoutId, meetingId);
-    setState({...state, joinedAudioOnly: false, breakoutId });
+    setState({ ...state, joinedAudioOnly: false, breakoutId });
   }
 
-  const transferUserToBreakoutRoom = (breakoutId)=> {
+  const transferUserToBreakoutRoom = (breakoutId) => {
     const { transferToBreakout } = props.breakout;
     transferToBreakout(breakoutId);
-    setState({...state, joinedAudioOnly: true, breakoutId });
+    setState({ ...state, joinedAudioOnly: true, breakoutId });
   }
 
-  const renderUserActions = (breakoutId, joinedUsers, number)=> {
+  const renderUserActions = (breakoutId, joinedUsers, number) => {
     const {
       isMicrophoneUser,
       amIModerator,
@@ -216,7 +267,8 @@ function Joinroom(props) {
               </span>
             )
             : (
-              <Button
+              <>
+                {/* <Button
                 data-test="breakoutJoin"
                 aria-label={`${getBreakoutLabel(breakoutId)} ${props.breakout.breakoutRooms[number - 1]?.shortName}`}
                 onClick={() => {
@@ -235,8 +287,27 @@ function Joinroom(props) {
                 disabled={disable}
                 className={styles.PlusButton}
               >
-                <Plus />
-              </Button>
+                
+              </Button> */}
+                <Plus
+                  data-test="breakoutJoin"
+                  aria-label={`${getBreakoutLabel(breakoutId)} ${props.breakout.breakoutRooms[number - 1]?.shortName}`}
+                  onClick={() => {
+                    getBreakoutURL(breakoutId);
+                    // leave main room's audio,
+                    // and stops video and screenshare when joining a breakout room
+                    exitAudio();
+                    logger.debug({
+                      logCode: 'breakoutroom_join',
+                      extraInfo: { logType: 'user_action' },
+                    }, 'joining breakout room closed audio in the main room');
+                    VideoService.storeDeviceIds();
+                    VideoService.exitVideo();
+                    if (UserListService.amIPresenter()) screenshareHasEnded();
+                  }}
+                  disabled={disable}
+                />
+              </>
             )
         }
         {
@@ -266,7 +337,7 @@ function Joinroom(props) {
 
   return (<div className={styles.RoomBox}>
     <div className={styles.alignAtcorners}>
-      <div className={styles.RoomName}>Room {props.room}</div>
+      <div className={styles.RoomName}>Room {props.breakoutRoom.sequence}</div>
       <BreakoutRoomContainer
         messageDuration={intlMessages.breakoutDuration}
         breakoutRoom={props.breakout.breakoutRooms[0]}
@@ -292,14 +363,14 @@ function Joinroom(props) {
       </div>
       <div className={styles.PlusButton}>
         {state.waiting && state.requestedBreakoutId === props.breakoutRoom.breakoutId ? (
-              <span>
-                {props.breakout.intl.formatMessage(intlMessages.generatingURL)}
-                <span className={styles.connectingAnimation} />
-              </span>
-            ) : renderUserActions(
-              props.breakoutRoom.breakoutId,
-              props.breakoutRoom.joinedUsers,
-              props.breakoutRoom.sequence.toString(),
+          <span>
+            {props.breakout.intl.formatMessage(intlMessages.generatingURL)}
+            <span className={styles.connectingAnimation} />
+          </span>
+        ) : renderUserActions(
+          props.breakoutRoom.breakoutId,
+          props.breakoutRoom.joinedUsers,
+          props.breakoutRoom.sequence.toString(),
         )}
         {/* <Plus /> */}
       </div>

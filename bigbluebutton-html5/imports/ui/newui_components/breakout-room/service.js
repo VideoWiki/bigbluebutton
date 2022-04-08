@@ -24,14 +24,18 @@ const findBreakouts = () => {
 };
 
 const getBreakoutRoomUrl = (breakoutId) => {
+  console.log("service", breakoutId)
   const breakoutRooms = findBreakouts();
+  console.log("service1", breakoutRooms)
   const breakoutRoom = breakoutRooms
     .filter((breakout) => breakout.breakoutId === breakoutId)
     .shift();
+  console.log("service2", breakoutRoom)
   const breakoutUrlData =
     breakoutRoom && breakoutRoom[`url_${Auth.userID}`]
       ? breakoutRoom[`url_${Auth.userID}`]
       : null;
+      console.log("service3", breakoutUrlData)
   return breakoutUrlData;
 };
 

@@ -109,10 +109,13 @@ function BreakoutRoom_flow(props)
         <div className={styles.breakoutRoomFlow}>
             <BreakoutroomHeading/>
             {
-                breakoutRooms.length > 1 ?
+                breakoutRooms.length > 0 ?
                 <>
                     <Joincontainer action={props} breakout={breakout} state={state} setState={setState}/>
-                    <button onClick={handleBreakoutEnd}>End All Breakout</button>
+                    {/* <button onClick={handleBreakoutEnd}>End All Breakout</button> */}
+                    <div className={styles.smBottomDiv}>
+                        <button className={styles.create1} onClick={handleBreakoutEnd}>End All Breakout</button>
+                    </div>
                 </> :
                 <>
                     {
