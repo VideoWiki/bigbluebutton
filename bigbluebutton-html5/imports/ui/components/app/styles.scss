@@ -16,6 +16,7 @@
   height: 100%;
   width: 100%;
 }
+
 .main {
   @extend %flex-column;
   position: relative;
@@ -23,8 +24,8 @@
 
 .layout {
   @extend %flex-row;
-  background-color: #06172A;
-  // background-color: white;
+  // background-color: #06172A;
+  background-color: white;
 }
 
 .navbar {
@@ -232,9 +233,17 @@
   order: 3;
 }
 
-.mainright {
+.mainrighthalf {
   // background-color: #ffffff;
-  width: 100%;
+  width: calc(100% - 425px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.mainrightfull {
+  // background-color: #ffffff;
+  width: calc(100% - 75px);
   display: flex;
   flex-direction: column;
   align-items: center;

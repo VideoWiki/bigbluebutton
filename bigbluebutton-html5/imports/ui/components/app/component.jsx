@@ -53,6 +53,9 @@ import { registerTitleView } from '/imports/utils/dom-utils';
 import MySidebar from '../../newui_components/sidebar_navigation/sidebar';
 import Option_Flow from '../../newui_components/Options/options_Flow';
 
+import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/container';
+import AudioModalContainer from '/imports/ui/newui_components/audio-new/audio-modal/container'
+
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
 const DESKTOP_FONT_SIZE = APP_CONFIG.desktopFontSize;
@@ -139,7 +142,6 @@ class App extends Component {
     this.state = {
       enableResize: !window.matchMedia(MOBILE_MEDIA).matches,
     };
-    console.log(this.props);
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
     this.shouldAriaHide = this.shouldAriaHide.bind(this);
     this.renderWebcamsContainer = App.renderWebcamsContainer.bind(this);
@@ -450,6 +452,38 @@ class App extends Component {
     }
   }
 
+  renderNewActionsBar() {
+    const {
+      actionsbar,
+      intl,
+      actionsBarStyle,
+      hideActionsBar,
+    } = this.props;
+
+    if (!actionsbar || hideActionsBar) return null;
+
+    return (
+      <section
+        role="region"
+        className={styles.actionsbar}
+        aria-label={intl.formatMessage(intlMessages.actionsBarLabel)}
+        aria-hidden={this.shouldAriaHide()}
+        style={
+          {
+            // position: 'absolute',
+            // top: actionsBarStyle.top,
+            // left: actionsBarStyle.left,
+            height: actionsBarStyle.height,
+            // width: actionsBarStyle.width,
+            padding: actionsBarStyle.padding,
+          }
+        }
+      >
+        <ActionsBarContainer/>
+      </section>
+    );
+  }
+
   renderNewUI() {
     const {
       customStyle,
@@ -460,6 +494,7 @@ class App extends Component {
       shouldShowScreenshare,
       shouldShowExternalVideo,
       isPresenter,
+      sidebarContentIsOpen
     } = this.props;
     return (
       <>
@@ -478,7 +513,7 @@ class App extends Component {
           <NotificationsBarContainer />
           <MySidebar />
           <Option_Flow />
-          <div className={styles.mainright}>
+          <div className={`${sidebarContentIsOpen ? styles.mainrighthalf : styles.mainrightfull}`}>
             <MyNavBarContainer main="new" />
             {this.renderWebcamsContainer()}
             {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
@@ -490,6 +525,8 @@ class App extends Component {
             }
             {this.renderCaptions()}
             <UploaderContainer />
+            {/* <AudioContainer /> */}
+
             <BreakoutRoomInvitation />
             <ToastContainer rtl />
             {(audioAlertEnabled || pushAlertEnabled)
@@ -503,8 +540,10 @@ class App extends Component {
             <LockNotifier />
             <StatusNotifier status="raiseHand" />
             <ManyWebcamsNotifier />
-            <PollingContainer />
-            {this.renderActionsBar()}
+            {/* <ModalContainer /> */}
+            {/* <AudioModalContainer/> */}
+            {/* <PollingContainer /> */}
+            {this.renderNewActionsBar()}
             {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
             {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
           </div>

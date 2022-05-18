@@ -5,7 +5,7 @@ import { styles } from "./styles";
 
 const MySidebar = (props) => {
 
-    const iconTypes = ["chat", "user", "document", "breakoutroom", "poll", "video", "settings","externalpresentation"];
+    const iconTypes = ["chat", "user", "document", "breakoutroom", "poll", "video", "presentation", "settings", "waitingusers"];
     const { layoutContextState, layoutContextDispatch } = props;
     const { input } = layoutContextState;
 

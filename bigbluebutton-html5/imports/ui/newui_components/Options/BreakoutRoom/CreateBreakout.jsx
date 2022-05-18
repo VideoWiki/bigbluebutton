@@ -5,6 +5,7 @@ import { styles } from "./styles";
 import { defineMessages, injectIntl } from 'react-intl';
 import _ from 'lodash';
 import RoomGroup from "./RoomGroup";
+import Random from "./Icons/Random";
 
 const intlMessages = defineMessages({
     modalClose: {
@@ -148,7 +149,6 @@ function CreateBreakout(props) {
     const MIN_BREAKOUT_ROOMS = 2;
     const MAX_BREAKOUT_ROOMS = BREAKOUT_LIM > MIN_BREAKOUT_ROOMS ? BREAKOUT_LIM : MIN_BREAKOUT_ROOMS;
     const MIN_BREAKOUT_TIME = 5;
-    console.log("break",props);
     // const [state, setState] = useState({
     //     numberOfRooms: MIN_BREAKOUT_ROOMS,
     //     seletedId: '',
@@ -271,6 +271,7 @@ function CreateBreakout(props) {
             freeJoin,
             sequence: seq,
         }));
+        console.log("rooms",rooms)
         createBreakoutRoom(rooms, durationTime, record);
         props.setState({...props.state, formFillLevel: 3});
     }
@@ -278,6 +279,45 @@ function CreateBreakout(props) {
     const handleCancelAction = (e) =>{
         e.preventDefault();
         props.setState({...props.state, formFillLevel: 2});
+    }
+
+    const changeUserRoom = (userId, room) => {
+      const { users, freeJoin } = props.state;
+  
+      const idxUser = users.findIndex((user) => user.userId === userId);
+  
+      const usersCopy = [...users];
+  
+      usersCopy[idxUser].room = room;
+      props.setState({
+        ...props.state,
+        users: usersCopy,
+        leastOneUserIsValid: (getUserByRoom(0).length !== users.length || freeJoin),
+      });
+    }
+
+    const onAssignRandomly = () => {
+      const { numberOfRooms } = props.state;
+      const { users } = props.state;
+      // We only want to assign viewers so filter out the moderators. We also want to get
+      // all users each run so that clicking the button again will reshuffle
+      const viewers = users.filter((user) => !user.isModerator);
+      // We want to keep assigning users until all viewers have been assigned a room
+      while (viewers.length > 0) {
+        // We cycle through the rooms picking one user for each room so that the rooms
+        // will have an equal number of people in each one
+        for (let i = 1; i <= numberOfRooms && viewers.length > 0; i += 1) {
+          // Select a random user for the room
+          const userIdx = Math.floor(Math.random() * (viewers.length));
+          changeUserRoom(viewers[userIdx].userId, i);
+          // Remove the picked user so they aren't selected again
+          viewers.splice(userIdx, 1);
+        }
+      }
+    }
+
+    const setFreeJoin = (e)=>{
+      props.setState({...props.state, freeJoin: e.target.checked, leastOneUserIsValid: true });
     }
 
     return (
@@ -301,11 +341,11 @@ function CreateBreakout(props) {
                     </div>
                 </div>
                 <div className={styles.centerAlign}>
-                    <div className={styles.Tick}><input type="checkbox" /></div>
+                    <div className={styles.Tick}><input type="checkbox" onChange={setFreeJoin} checked={props.state.freeJoin}/></div>
                     <div className={styles.Check}>Allow users to choose a breakout room to join</div>
                 </div>
                 <div className={styles.centerAlign}>
-                    <div className={styles.close} onClick={handleCancelAction}><Cross /></div>
+                    <div className={styles.close} onClick={onAssignRandomly}><Random/></div>
                     <div className={styles.create} onClick={handleCreateAction}>Create Room</div>
                 </div>
             </div>

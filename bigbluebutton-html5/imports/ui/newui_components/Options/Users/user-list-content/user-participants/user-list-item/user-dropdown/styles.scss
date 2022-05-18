@@ -193,3 +193,63 @@
     color: var(--color-primary);
   }
 }
+
+.userlistcardWrapper{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.userDP{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.userlistDp img{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.userListName {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  justify-content: center;
+}
+.userName{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-transform: capitalize;
+  color: #333333;
+}
+.userPos{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-transform: capitalize;
+  color: #9EA5AF;
+}
+.userListLeft{
+  display: flex;
+}
+.userlistActions{
+  display: flex;
+  align-items: center;
+}
+.userlistActions img{
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  color: black;
+  margin-right: 10px;
+}

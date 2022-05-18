@@ -48,6 +48,7 @@ class MyUserContent extends PureComponent {
     return (
       <div
         data-test="userListContent"
+        className={styles.userSidebar}
         // className={styles.content}
       >
         <MyUserParticipantsContainer

@@ -547,7 +547,7 @@ class VideoPlayer extends Component {
     return (
       <span
         style={{
-          position: 'absolute',
+          // position: 'absolute',
           top,
           left,
           right,

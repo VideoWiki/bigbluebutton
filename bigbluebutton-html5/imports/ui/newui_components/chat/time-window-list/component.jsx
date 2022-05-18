@@ -195,10 +195,9 @@ class TimeWindowList extends PureComponent {
       dispatch,
       chatId,
     } = this.props;
-
+    console.log("index", index)
     const { scrollArea } = this.state;
     const message = timeWindowsValues[index];
-     console.log(message); 
     ChatLogger.debug('TimeWindowList::rowRender', this.props);
     return (
       <CellMeasurer

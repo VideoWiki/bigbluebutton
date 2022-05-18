@@ -85,7 +85,7 @@ class TimeWindowChatItem extends PureComponent {
     if (messages && messages[0].id.includes(CHAT_POLL_RESULTS_MESSAGE)) {
       return this.renderPollItem();
     }
-
+    console.log("messages", messages)
     return (
       <div className={styles.systemitem} key={`time-window-chat-item-${messageKey}`}>
         <div className={styles.messages}>
@@ -219,6 +219,7 @@ class TimeWindowChatItem extends PureComponent {
       handleReadMessage,
     } = this.props;
 
+    console.log("check 1",this.props)
     const dateTime = new Date(timestamp);
 
     return messages ? (
@@ -264,6 +265,7 @@ class TimeWindowChatItem extends PureComponent {
     const {
       systemMessage,
     } = this.props;
+    console.log(this.props)
     ChatLogger.debug('TimeWindowChatItem::render', { ...this.props });
     if (systemMessage) {
       return this.renderSystemMessage();

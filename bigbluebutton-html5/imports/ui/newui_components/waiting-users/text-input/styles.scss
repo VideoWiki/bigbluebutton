@@ -1,0 +1,39 @@
+@import "/imports/ui/stylesheets/mixins/focus";
+@import "/imports/ui/stylesheets/mixins/_indicators";
+@import "/imports/ui/stylesheets/variables/_all";
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.textarea {
+  background: #FBFBFC;
+  border: 1px solid #EBEDF0;
+  border-radius: 6px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  letter-spacing: -0.02em;
+  color: #888888;
+  padding: 13px;
+  width: 100%;
+}
+
+.button {
+  margin:0 0 0 var(--sm-padding-x);
+  align-self: center;
+  font-size: 0.9rem;
+
+  [dir="rtl"]  & {
+    margin: 0 var(--sm-padding-x) 0 0;
+    -webkit-transform: scale(-1, 1);
+    -moz-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+  }
+}

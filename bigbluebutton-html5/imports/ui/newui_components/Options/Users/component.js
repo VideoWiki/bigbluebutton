@@ -32,6 +32,7 @@ class MyUserList extends PureComponent {
       hasBreakoutRoom,
       requestUserInformation,
     } = this.props;
+    console.log("users",this.props)
     return (
       <div>
         <MyUserContentContainer

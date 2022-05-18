@@ -10,6 +10,7 @@ import logger from '/imports/startup/client/logger';
 import UserListService from '/imports/ui/components/user-list/service';
 import { screenshareHasEnded } from '/imports/ui/components/screenshare/service';
 import BreakoutRoomContainer from '../../../breakout-room/breakout-remaining-time/container'
+import cx from 'classnames';
 
 import { styles } from "../styles.scss";
 
@@ -91,21 +92,21 @@ function Joinroom(props) {
   });
   console.log("join", props, state)
 
-  const clearJoinedAudioOnly = ()=> {
-    setState({...state, joinedAudioOnly: false });
+  const clearJoinedAudioOnly = () => {
+    setState({ ...state, joinedAudioOnly: false });
   }
 
-  // useEffect(() => {
-  //   let arr = [];
-  //   let count = 1;
-  //   props.breakoutRoom.joinedUsers.forEach((user) => {
-  //     if (user.room == props.room) {
-  //       arr.push({ ...user, count: count })
-  //       count += 1;
-  //     }
-  //   })
-  //   setUsers(arr);
-  // }, [props.breakoutRoom])
+  useEffect(() => {
+    let arr = [];
+    let count = 1;
+    props.breakoutRoom.joinedUsers.forEach((user) => {
+      if (user.room == props.room) {
+        arr.push({ ...user, count: count })
+        count += 1;
+      }
+    })
+    setUsers(arr);
+  }, [props.breakoutRoom])
 
   // useEffect(()=>{
   //   const {
@@ -123,9 +124,9 @@ function Joinroom(props) {
   //     generated,
   //   } = state;
 
-  //   if (breakoutRooms.length === 0) {
-  //     return true
-  //   }
+  //   // if (breakoutRooms.length === 0) {
+  //   //   return true
+  //   // }
 
   //   if (waiting && !generated) {
   //     const breakoutUrlData = getBreakoutRoomUrl(requestedBreakoutId);
@@ -148,7 +149,7 @@ function Joinroom(props) {
   //   }
   //   return true;
 
-  // },[])
+  // },[state])
 
   const getBreakoutLabel = (breakoutId) => {
     const { intl, getBreakoutRoomUrl } = props.breakout;
@@ -172,6 +173,7 @@ function Joinroom(props) {
     const { requestJoinURL, getBreakoutRoomUrl } = props.breakout;
     const { waiting } = state;
     const breakoutRoomUrlData = getBreakoutRoomUrl(breakoutId);
+    console.log("breakout5", breakoutId, breakoutRoomUrlData)
     console.log("url", breakoutRoomUrlData, breakoutId) //
     if (!breakoutRoomUrlData && !waiting) {
       setState(
@@ -203,6 +205,20 @@ function Joinroom(props) {
     transferToBreakout(breakoutId);
     setState({ ...state, joinedAudioOnly: true, breakoutId });
   }
+
+  // const handleJoinBreakout = (breakoutId,exitAudio)=>{
+  //   getBreakoutURL(breakoutId);
+  //   // leave main room's audio,
+  //   // and stops video and screenshare when joining a breakout room
+  //   exitAudio();
+  //   logger.debug({
+  //     logCode: 'breakoutroom_join',
+  //     extraInfo: { logType: 'user_action' },
+  //   }, 'joining breakout room closed audio in the main room');
+  //   VideoService.storeDeviceIds();
+  //   VideoService.exitVideo();
+  //   if (UserListService.amIPresenter()) screenshareHasEnded();
+  // }
 
   const renderUserActions = (breakoutId, joinedUsers, number) => {
     const {
@@ -335,27 +351,136 @@ function Joinroom(props) {
     );
   }
 
+  const showExtendTimeForm = () => {
+    setState({ ...state, visibleExtendTimeForm: true });
+  }
+  const changeExtendTime = (event) => {
+    const newExtendTime = Number.parseInt(event.target.value, 10) || 0;
+    setState({ ...state, extendTime: newExtendTime >= 0 ? newExtendTime : 0 });
+  }
+  const resetExtendTimeForm = () => {
+    setState({ ...state, visibleExtendTimeForm: false, extendTime: 5 });
+  }
+  const showExtendTimeHigherThanMeetingTimeError = (show) => {
+    setState({ ...state, visibleExtendTimeHigherThanMeetingTimeError: show });
+  }
+
+  const renderDuration = () => {
+
+    const {
+      intl,
+      breakoutRooms,
+      amIModerator,
+      isMeteorConnected,
+      extendBreakoutsTime,
+      isExtendTimeHigherThanMeetingRemaining,
+    } = props.breakout;
+    const {
+      extendTime,
+      visibleExtendTimeForm,
+      visibleExtendTimeHigherThanMeetingTimeError,
+    } = state;
+
+    return (
+      <>
+        <BreakoutRoomContainer
+          messageDuration={intlMessages.breakoutDuration}
+          breakoutRoom={props.breakout.breakoutRooms[0]}
+        />
+        {amIModerator && visibleExtendTimeForm ? (
+          <div className={styles.extendTimeContainer}>
+            <label
+              htmlFor="inputExtendTimeSelector"
+              className={cx(styles.label, styles.labelSmall)}
+            >
+              {intl.formatMessage(intlMessages.extendTimeInMinutes)}
+            </label>
+            <br />
+            <input
+              id="inputExtendTimeSelector"
+              type="number"
+              className={styles.extendDuration}
+              min="1"
+              value={extendTime}
+              onChange={changeExtendTime}
+              aria-label={intl.formatMessage(intlMessages.extendTimeInMinutes)}
+            />
+            <br />
+            <br />
+            {visibleExtendTimeHigherThanMeetingTimeError ? (
+              <span className={styles.withError}>
+                {intl.formatMessage(intlMessages.extendTimeHigherThanMeetingTimeError)}
+                <br />
+                <br />
+              </span>
+            ) : null}
+            <Button
+              color="primary"
+              disabled={!isMeteorConnected}
+              size="sm"
+              label={intl.formatMessage(intlMessages.extendTimeCancel)}
+              className={styles.endButton}
+              onClick={resetExtendTimeForm}
+            />
+            <Button
+              color="primary"
+              disabled={!isMeteorConnected}
+              size="sm"
+              label={intl.formatMessage(intlMessages.extendTimeLabel)}
+              className={styles.endButton}
+              onClick={() => {
+                showExtendTimeHigherThanMeetingTimeError(false);
+
+                if (isExtendTimeHigherThanMeetingRemaining(extendTime)) {
+                  showExtendTimeHigherThanMeetingTimeError(true);
+                } else if (extendBreakoutsTime(extendTime)) {
+                  resetExtendTimeForm();
+                }
+              }}
+            />
+          </div>
+        ) : null}
+      </>
+    )
+  }
+
   return (<div className={styles.RoomBox}>
     <div className={styles.alignAtcorners}>
       <div className={styles.RoomName}>Room {props.breakoutRoom.sequence}</div>
-      <BreakoutRoomContainer
-        messageDuration={intlMessages.breakoutDuration}
-        breakoutRoom={props.breakout.breakoutRooms[0]}
-      />
+      {props.breakout.amIModerator && !props.breakout.visibleExtendTimeForm
+        ? (
+          <Button
+            onClick={showExtendTimeForm}
+            color="default"
+            icon="add"
+            circle
+            hideLabel
+            size="sm"
+            label={props.breakout.intl.formatMessage(intlMessages.extendTimeLabel)}
+            aria-label={props.breakout.intl.formatMessage(intlMessages.extendTimeLabel)}
+          // disabled={!isMeteorConnected}
+          />
+        )
+        : null}
 
     </div>
+    {
+      renderDuration()
+    }
     <div className={styles.alignAtcorners}>
       <div className={styles.ImageGroup}>
         {
-          users.map((user) => {
-            if (user.count <= 6) {
-              // return <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/user.svg" className={styles.userRoom} />
-              return (
-                <div className={styles.userRoom} ><span>{user.name.charAt(0)}</span></div>
-              )
-            }
-          })
+          users.length == 0 ? <span>no one else is here</span> :
+            users.map((user) => {
+              if (user.count <= 6) {
+                // return <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/user.svg" className={styles.userRoom} />
+                return (
+                  <div className={styles.userRoom} ><span>{user.name.charAt(0)}</span></div>
+                )
+              }
+            })
         }
+
         {
           props.breakoutRoom.joinedUsers > 6 ? <div className={styles.remaining}>+{props.breakoutRoom.joinedUsers.length - 6}</div> : null
         }

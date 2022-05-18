@@ -9,7 +9,7 @@ import { styles } from './styles';
 import { validIOSVersion } from '/imports/ui/components/app/service';
 import deviceInfo from '/imports/utils/deviceInfo';
 import { debounce } from 'lodash';
-import ActionButton from '../../actions-bar/actions-button/ActionButton';
+// import ActionButton from '../../actions-bar-new/actions-button/ActionButton';
 
 const ENABLE_WEBCAM_SELECTOR_BUTTON = Meteor.settings.public.app.enableWebcamSelectorButton;
 
@@ -102,26 +102,26 @@ const JoinVideoButton = ({
   );
 
   return (
-    // <div className={styles.offsetBottom}>
-    //   <Button
-    //     label={label}
-    //     data-test={hasVideoStream ? 'leaveVideo' : 'joinVideo'}
-    //     className={cx(hasVideoStream || styles.btn)}
-    //     onClick={handleOnClick}
-    //     hideLabel
-    //     color={hasVideoStream ? 'primary' : 'default'}
-    //     icon={hasVideoStream ? 'video' : 'video_off'}
-    //     ghost={!hasVideoStream}
-    //     size="lg"
-    //     circle
-    //     disabled={!!disableReason}
-    //   />
-    //   {renderEmojiButton()}
-    // </div>
-    
-    <ActionButton
-        icon={hasVideoStream ? "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/webcam.svg" : "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/webcam-off.svg"} 
+    <div className={styles.offsetBottom}>
+      <Button
+        label={label}
+        data-test={hasVideoStream ? 'leaveVideo' : 'joinVideo'}
+        className={cx(hasVideoStream || styles.btn)}
+        onClick={handleOnClick}
+        hideLabel
+        color={hasVideoStream ? 'primary' : 'default'}
+        icon={hasVideoStream ? 'video' : 'video_off'}
+        ghost={!hasVideoStream}
+        size="lg"
+        circle
+        disabled={!!disableReason}
       />
+      {renderEmojiButton()}
+    </div>
+    
+    // <ActionButton
+    //     icon={hasVideoStream ? "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/webcam.svg" : "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/webcam-off.svg"} 
+    //   />
   );
 };
 

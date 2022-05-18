@@ -80,7 +80,7 @@ function Room(props) {
             }
         })
         setUsers(arr);
-    },[])
+    },[props.state.users])
     const openSelectUserModal = (e)=>{
         e.preventDefault();
         props.setState({...props.state, formFillLevel: 2, openRoom: props.room});

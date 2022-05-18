@@ -27,7 +27,7 @@
 }
 .centerAlign{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .centerAlign1{
     display: flex;
@@ -121,7 +121,8 @@
 .create{
     text-align: center;
     padding-top: 0.5rem;
-    width: 12rem;
+    width: 100%;
+    margin-left: 15px;
 }
 .close,.create{
     background: #F4F6F8;
@@ -322,3 +323,47 @@
     align-items: center;
     justify-content: center;
 }
+
+
+//new css
+
+.extendTimeContainer {
+    border-top: 1px solid var(--systemMessage-border-color);
+    border-bottom: 1px solid var(--systemMessage-border-color);
+    padding: 10px 0px;
+  }
+
+  .extendDuration {
+    width: 50%;
+    text-align: center;
+    padding: .25rem;
+  
+    &::placeholder {
+      color: var(--color-gray);
+      opacity: 1;
+    }
+  }
+
+  .withError {
+    color: var(--color-danger);
+  }
+
+  .endButton {
+    font-family: 'Montserrat', sans-serif;
+    background: #333333;
+    padding: .7rem;
+    font-weight: var(--headings-font-weight) !important;
+    border-radius: .4rem;
+    font-size: var(--font-size-small);
+    margin-right: 10px;
+  }
+  
+  .endButton:hover {
+    background-color: #CFD2DA;
+    color: #333333;
+    transition-duration: 0.2s;
+  }
+
+  .close:hover .randomIcon{
+    fill: white;
+  }

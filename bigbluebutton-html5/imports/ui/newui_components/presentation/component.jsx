@@ -864,10 +864,10 @@ class Presentation extends PureComponent {
           width: presentationBounds.width,
           height: presentationBounds.height,
           zIndex: fullscreenContext ? presentationBounds.zIndex : undefined,
-          backgroundColor: '#06172A',
+          // backgroundColor: '#06172A',
         }}
       >
-        {isFullscreen && <PollingContainer />}
+        {/* {isFullscreen && <PollingContainer />} */}
 
         <div
           ref={(ref) => { this.refPresentation = ref; }}

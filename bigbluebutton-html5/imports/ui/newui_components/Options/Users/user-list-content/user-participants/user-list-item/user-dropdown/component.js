@@ -16,6 +16,7 @@ import { styles } from './styles.scss';
 import MyUserName from '../user-name/component';
 import { PANELS,ACTIONS } from '../../../../../../../components/layout/enums';
 import WhiteboardService from '/imports/ui/components/whiteboard/service';
+import UserlistCard from './UserlistCard';
 
 const messages = defineMessages({
   presenter: {
@@ -656,32 +657,35 @@ class MyUserDropdown extends PureComponent {
     );
 
     const contents = (
-      <div
-        data-test={isMe(user.userId) ? 'userListItemCurrent' : 'userListItem'}
-        className={!actions.length ? styles.noActionsListItem : null}
-        style={{ direction: isRTL ? 'rtl' : 'ltr', width: '100%' }}
-      >
-        <div 
-        className={styles.userItemContents}
-        >
-          <div 
-          className={styles.userAvatar}
-          >
-            {this.renderUserAvatar()}
-          </div>
-          <MyUserName
-            {...{
-              user,
-              compact,
-              intl,
-              isThisMeetingLocked,
-              userAriaLabel,
-              isActionsOpen,
-              isMe,
-            }}
-          />
-        </div>
+      <div>
+        <UserlistCard value={this.props}/>
       </div>
+      // <div
+      //   data-test={isMe(user.userId) ? 'userListItemCurrent' : 'userListItem'}
+      //   className={!actions.length ? styles.noActionsListItem : null}
+      //   style={{ direction: isRTL ? 'rtl' : 'ltr', width: '100%' }}
+      // >
+      //   <div 
+      //   className={styles.userItemContents}
+      //   >
+      //     <div 
+      //     className={styles.userAvatar}
+      //     >
+      //       {this.renderUserAvatar()}
+      //     </div>
+      //     <MyUserName
+      //       {...{
+      //         user,
+      //         compact,
+      //         intl,
+      //         isThisMeetingLocked,
+      //         userAriaLabel,
+      //         isActionsOpen,
+      //         isMe,
+      //       }}
+      //     />
+      //   </div>
+      // </div>
     );
 
     if (!actions.length) return contents;
@@ -694,7 +698,8 @@ class MyUserDropdown extends PureComponent {
               tabIndex={-1}
               onClick={() => this.setState({ selected: true })}
               className={cx(userItemContentsStyle)}
-              style={{ width: '100%', marginLeft: '.5rem' }}
+              // style={{ width: '100%', marginLeft: '.5rem' }}
+              style={{ width: '100%'}}
               onKeyPress={() => {}}
               role="button"
             >

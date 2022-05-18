@@ -1,0 +1,40 @@
+.btn {
+  --icon-offset: -.4em;
+  --square-side-length: 1.56rem;
+
+  z-index: 3;
+
+  flex: 0 0;
+  margin-top: auto;
+
+  cursor: pointer;
+
+  span:first-child {
+    width: var(--square-side-length);
+    height: var(--square-side-length);
+  }
+
+
+  i {
+    color: var(--color-gray-dark) !important;
+    top: var(--icon-offset);
+    left: var(--icon-offset);
+  }
+
+  &:hover,
+  &:focus {
+    > span:first-child {
+      background-color: transparent !important;
+    }
+  }
+}
+.chatOptions{
+  background-color: transparent;
+  color: black;
+  font-size: 1rem;
+  margin-left: -2rem;
+}
+.OptionsMenu{
+  margin-left: -1rem;
+  
+}

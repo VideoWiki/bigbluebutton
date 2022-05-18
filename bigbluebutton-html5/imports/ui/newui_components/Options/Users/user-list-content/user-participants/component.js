@@ -96,7 +96,6 @@ class MyUserParticipants extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { selectedUser } = this.state;
-
     if (selectedUser) {
       const { firstChild } = selectedUser;
       if (!firstChild.isEqualNode(document.activeElement)) {
@@ -198,7 +197,7 @@ class MyUserParticipants extends Component {
     console.log(users,isOpen);
     return (
       <div className={styles.userListColumn}>
-        {
+        {/* {
           !compact
             ? (
               <div className={styles.container}>
@@ -212,7 +211,10 @@ class MyUserParticipants extends Component {
               </div>
             )
             : <hr className={styles.separator} />
-        }
+        } */}
+        <div className={styles.userListHeader}>
+          <h3>Users ({users.length})</h3>
+        </div>
         <div
           id={'user-list-virtualized-scroll'}
           aria-label="Users list"

@@ -8,7 +8,7 @@ import { withModalMounter } from '/imports/ui/newui_components/modal/service';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import AudioManager from '/imports/ui/services/audio-manager';
-import Service from '../../breakout-room/service'
+import Service from '/imports/ui/components/breakout-room/service'
 import AudioService from '/imports/ui/components/audio/service';
 
 import {styles} from "./styles.scss";
@@ -38,6 +38,7 @@ function BreakoutRoom_flow(props)
         selectedUsers: 0,
         openRoom: 0,
     });
+    console.log("breaak",props)
 
     const {
         endAllBreakouts,
@@ -83,8 +84,6 @@ function BreakoutRoom_flow(props)
         getBreakoutAudioTransferStatus,
       }
 
-    console.log("breakout1",breakoutRooms)
-
     useEffect(()=>{
         let arr = [];
         props.users.forEach((user)=>{
@@ -100,6 +99,7 @@ function BreakoutRoom_flow(props)
         }
         setState({...state, users:arr});
     },[])
+    
     // endAllBreakouts
     const handleBreakoutEnd  = ()=>{
         endAllBreakouts();

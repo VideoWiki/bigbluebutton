@@ -13,6 +13,7 @@ import ChatDropdownContainer from './chat-dropdown/container';
 import { PANELS, ACTIONS } from '../../components/layout/enums';
 import { UserSentMessageCollection } from './service';
 import Auth from '/imports/ui/services/auth';
+import Share from "./Icons/share";
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
@@ -55,10 +56,16 @@ const Chat = (props) => {
   } = props;
 
   const userSentMessage = UserSentMessageCollection.findOne({ userId: Auth.userID, sent: true });
-
   const HIDE_CHAT_AK = shortcuts.hideprivatechat;
   const CLOSE_CHAT_AK = shortcuts.closeprivatechat;
   ChatLogger.debug('ChatComponent::render', props);
+
+  const copyLink = () => {
+    let url = "https://beta.class.video.wiki/b/sus-fyi-z9b-cyo";
+    navigator.clipboard.writeText(url);
+    alert("Link Copied: " + url);
+  }
+
   return (
     <div
       data-test={chatID !== PUBLIC_CHAT_ID ? 'privateChat' : 'publicChat'}
@@ -69,7 +76,13 @@ const Chat = (props) => {
           <div
             data-test="chatTitle"
             className={styles.ChatHeading}>{title}</div>
-          <div>
+          <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
+            <div className={styles.sideTooltipWrapper}>
+              <div className={styles.sidebarTipArrow}></div>
+              <div className={styles.sidebarTooltip}><p>CopyLink</p></div>
+            </div>
+          </div>
+          {/* <div>
             {
               chatID !== PUBLIC_CHAT_ID
                 ? (<div></div>
@@ -81,7 +94,7 @@ const Chat = (props) => {
                   />
                 )
             }
-          </div>
+          </div> */}
         </div>
       </div>
       <div>

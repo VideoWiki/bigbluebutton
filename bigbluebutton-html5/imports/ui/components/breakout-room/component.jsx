@@ -129,7 +129,7 @@ class BreakoutRoom extends PureComponent {
       isReconnecting,
       breakoutRooms,
     } = this.props;
-
+    console.log("helo",this.props)
     const {
       waiting,
       requestedBreakoutId,
@@ -369,7 +369,7 @@ class BreakoutRoom extends PureComponent {
       waiting,
       requestedBreakoutId,
     } = this.state;
-
+    console.log("req", this.state)
     const roomItems = breakoutRooms.map((breakout) => (
       <div
         className={styles.breakoutItems}

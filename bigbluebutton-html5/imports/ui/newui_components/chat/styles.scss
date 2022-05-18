@@ -143,9 +143,65 @@
 }
 .CustomInline{
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 
 .chatWidth { 
   width: 350px;
+}
+.shareUrlIcon{
+  height: 35px;
+  width: 35px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.sidebarTooltip{
+  height: 23px;
+  position: absolute;
+  background-color: black;
+  color: white;
+  top: 5px;
+  left: 40px;
+  border-radius: 100px;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 999;
+}
+.sidebarTipArrow{
+  height: 8px;
+  width: 20px;
+  background-color: black;
+  border-radius: 100%;
+  position: absolute;
+  left: 35px;
+  top: 12px;
+  z-index: 999;
+}
+.sidebarTooltip p {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.shareUrlIcon .sideTooltipWrapper {
+  opacity: 0;
+  z-index: 999;
+  transition: 0.3s all ease-in-out;
+}
+
+.shareUrlIcon:hover .sideTooltipWrapper {
+  opacity: 1;
 }

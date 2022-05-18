@@ -80,29 +80,29 @@ class AudioControls extends PureComponent {
       shortcuts,
     } = this.props;
 
-    // function changeState(){
-    //   this.setState({ check: !this.state.check })
-    //   console.log(this)
-    // }
+    function changeState(){
+      this.setState({ check: !this.state.check })
+      console.log(this)
+    }
 
     
 
     return (
-      // <Button
-      //   className={styles.btn}
-      //   onClick={handleJoinAudio}
-      //   disabled={disable}
-      //   hideLabel
-      //   aria-label={intl.formatMessage(intlMessages.joinAudio)}
-      //   label={intl.formatMessage(intlMessages.joinAudio)}
-      //   data-test="joinAudio"
-      //   color="default"
-      //   ghost
-      //   icon="no_audio"
-      //   size="lg"
-      //   circle
-      //   accessKey={shortcuts.joinaudio}
-      // />
+      <Button
+        className={styles.btn}
+        onClick={handleJoinAudio}
+        disabled={disable}
+        hideLabel
+        aria-label={intl.formatMessage(intlMessages.joinAudio)}
+        label={intl.formatMessage(intlMessages.joinAudio)}
+        data-test="joinAudio"
+        color="default"
+        ghost
+        icon="no_audio"
+        size="lg"
+        circle
+        accessKey={shortcuts.joinaudio}
+      />
 
       // <button className={styles.actionBtn}
       //   onClick={handleJoinAudio}
@@ -122,10 +122,10 @@ class AudioControls extends PureComponent {
       //   }
       // </button>
 
-      <ActionButton
-        onClick={this.handleClick}
-        icon = "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg"
-      />
+      // <ActionButton
+      //   onClick={this.handleClick}
+      //   icon = "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg"
+      // />
     );
   }
 

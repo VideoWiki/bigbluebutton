@@ -26,7 +26,8 @@ import {
 import { withModalMounter, getModal } from '../modal/service';
 
 import App from './component';
-import ActionsBarContainer from '/imports/ui/newui_components/actions-bar/container';
+// import ActionsBarContainer from '/imports/ui/newui_components/actions-bar/container';
+import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/container';
 
 const CUSTOM_STYLE_URL = Meteor.settings.public.app.customStyleUrl;
 
@@ -53,7 +54,7 @@ const endMeeting = (code) => {
 
 const AppContainer = (props) => {
   const layoutContext = useContext(LayoutContext);
-  console.log(layoutContext);
+  console.log("context",layoutContext);
   const { layoutContextState, layoutContextDispatch } = layoutContext;
 
   function usePrevious(value) {

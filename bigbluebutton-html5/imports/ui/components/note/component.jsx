@@ -41,12 +41,13 @@ const Note = ({
 
   useEffect(() => {
     NoteService.getNoteId().then((response) => {
+      console.log("response ",response)
       setNoteURL(NoteService.buildNoteURL(response));
     });
   }, [isLocked, isRTL]);
 
   useEffect(() => () => NoteService.setLastRevs(), []);
-
+  console.log("url ",noteURL)
   return (
     <div
       data-test="note"

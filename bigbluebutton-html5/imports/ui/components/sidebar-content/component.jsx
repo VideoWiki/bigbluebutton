@@ -52,7 +52,7 @@ const SidebarContent = (props) => {
   const [isResizing, setIsResizing] = useState(false);
   const [resizeStartWidth, setResizeStartWidth] = useState(0);
   const [resizeStartHeight, setResizeStartHeight] = useState(0);
-
+  console.log("panel",PANELS)
   useEffect(() => {
     if (!isResizing) {
       setResizableWidth(width);

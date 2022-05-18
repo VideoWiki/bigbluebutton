@@ -1,4 +1,5 @@
 import React from "react";
+import Share from "../../chat/Icons/share";
 import {styles} from "./styles.scss";
 function ChatHeading()
 {

@@ -47,6 +47,7 @@ class breakoutRemainingTimeContainer extends React.Component {
   }
 
   render() {
+    
     const { message } = this.props;
     if (_.isEmpty(message)) {
       return null;

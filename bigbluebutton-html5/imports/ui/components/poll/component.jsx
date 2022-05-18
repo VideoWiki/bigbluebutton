@@ -287,6 +287,7 @@ class Poll extends Component {
 
   handleTextareaChange(e) {
     const { type, error } = this.state;
+    console.log("type", type, this.state)
     const { pollTypes } = this.props;
     const validatedQuestion = validateInput(e.target.value);
     const clearError = validatedQuestion.length > 0 && type === pollTypes.Response;
@@ -665,6 +666,7 @@ class Poll extends Component {
                             intl.formatMessage(intlMessages.true),
                             intl.formatMessage(intlMessages.false),
                           );
+                          console.log("veri1", verifiedPollType, type)
                           const verifiedOptions = optList.map((o) => {
                             if (o.val.length > 0) return o.val;
                             return null;
