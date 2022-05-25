@@ -98,6 +98,16 @@ function IconBox(props) {
                         <div className={styles.sidebarTooltip}><span>Breakoutroom</span></div>
                     </div>
                 </div>}
+            {icon === "newbreakoutroom" &&
+                <div className={styles.sidebarIcon}>
+                    <BreakoutRoom
+                        sidebarContentPanel={sidebarContentPanel}
+                    />
+                    <div className={styles.sideTooltipWrapper}>
+                        <div className={styles.sidebarTipArrow}></div>
+                        <div className={styles.sidebarTooltip}><span>Breakoutroom</span></div>
+                    </div>
+                </div>}
             {icon === "poll" &&
                 <div className={styles.sidebarIcon}>
                     <Poll
@@ -138,11 +148,16 @@ function IconBox(props) {
                         <div className={styles.sidebarTooltip}><span>Settings</span></div>
                     </div>
                 </div>}
-            {icon === "waitingusers" && (props.authenticatedUsers.length!=0 || props.guestUsers.length) !=0 && 
+            {icon === "waitingusers" && (props.authenticatedUsers.length != 0 || props.guestUsers.length) != 0 &&
                 <div className={styles.sidebarIcon}>
                     <Settings
                         sidebarContentPanel={sidebarContentPanel}
                     />
+                    <div className={styles.sidebarBadge}>
+                        <div className={styles.userIconBadge}>
+                            <span>{props.authenticatedUsers.length+props.guestUsers.length}</span>
+                        </div>
+                    </div>
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
                         <div className={styles.sidebarTooltip}><span>Waiting</span></div>

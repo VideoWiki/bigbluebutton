@@ -84,6 +84,7 @@
 }
 .sideTooltipWrapper{
   position: relative;
+  pointer-events: none;
 }
 .sidebarTooltip{
   height: 23px;

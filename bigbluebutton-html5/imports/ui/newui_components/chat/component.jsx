@@ -63,7 +63,9 @@ const Chat = (props) => {
   const copyLink = () => {
     let url = "https://beta.class.video.wiki/b/sus-fyi-z9b-cyo";
     navigator.clipboard.writeText(url);
-    alert("Link Copied: " + url);
+    // alert("Link Copied: " + url);
+    const p = document.getElementById("shareUrlIcon");
+    p.innerText="LinkCopied!";
   }
 
   return (
@@ -79,7 +81,7 @@ const Chat = (props) => {
           <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
             <div className={styles.sideTooltipWrapper}>
               <div className={styles.sidebarTipArrow}></div>
-              <div className={styles.sidebarTooltip}><p>CopyLink</p></div>
+              <div className={styles.sidebarTooltip}><p id="shareUrlIcon">CopyLink</p></div>
             </div>
           </div>
           {/* <div>
