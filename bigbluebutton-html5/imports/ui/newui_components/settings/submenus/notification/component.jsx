@@ -44,6 +44,11 @@ const intlMessages = defineMessages({
     id: 'app.submenu.notification.raiseHandLabel',
     description: 'label for raise hand emoji notifications',
   },
+
+  savebuttonLabel: {
+    id: 'app.settings.main.save.label',
+    description: 'setting save button label',
+  }
 });
 
 class NotificationMenu extends BaseMenu {
@@ -259,7 +264,7 @@ class NotificationMenu extends BaseMenu {
               </div>
             </div>
           ) : null}
-            <button className={styles.saveSettingButton} onClick={this.saveSetting}>Save</button>
+            <button className={styles.saveSettingButton} onClick={this.saveSetting}>{intl.formatMessage(intlMessages.savebuttonLabel)}</button>
         </div>
       </div>
     );

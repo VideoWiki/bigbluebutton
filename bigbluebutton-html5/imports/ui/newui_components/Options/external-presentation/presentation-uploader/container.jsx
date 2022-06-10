@@ -5,7 +5,7 @@ import ErrorBoundary from '/imports/ui/components/error-boundary/component';
 import FallbackModal from '/imports/ui/components/fallback-errors/fallback-modal/component';
 import Service from '/imports/ui/components/presentation/presentation-uploader/service';
 import PresentationService from '/imports/ui/components/presentation/service';
-import PresentationUploader from './component1';
+import PresentationUploader from './component';
 
 import PresentationUploaderService from '/imports/ui/components/presentation/presentation-uploader/service';
 import Presentations from '/imports/api/presentations';

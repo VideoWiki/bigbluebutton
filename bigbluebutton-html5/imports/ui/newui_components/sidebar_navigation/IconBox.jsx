@@ -10,15 +10,63 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { ACTIONS } from "../../components/layout/enums";
 import { styles } from "./styles";
 import ExternalPresentation from "./Icons/external_presentation";
+import { defineMessages, injectIntl } from 'react-intl';
+import PropTypes from 'prop-types';
 
 import UserListService from '/imports/ui/newui_components/Options/Users/service';
 import GuestUsers from '/imports/api/guest-users/';
 import Auth from '/imports/ui/services/auth';
+import Waitinguser from "./Icons/waitinguser";
 // import WaitingUserService from '/imports/ui/components/waiting-users/service';
+
+const intlMessages = defineMessages({
+    chatLabel: {
+        id: 'app.chat.label',
+        description: 'Aria-label for Chat Section',
+    },
+    usersTitle: {
+        id: 'app.userList.usersTitle',
+        description: 'Title for the Header',
+    },
+    notesTitle: {
+        id: 'app.userList.notesTitle',
+        description: 'Title for the notes list',
+    },
+    breakoutTitle: {
+        id: 'app.createBreakoutRoom.title',
+        description: 'breakout title',
+    },
+    pollingTitleLabel: {
+        id: 'app.poll.pollingTitleLabel',
+        description: 'Polling Title Label'
+    },
+    sharevideoTitleLabel: {
+        id: 'app.externalVideo.titleLabel',
+        description: 'share video title label',
+    },
+    presentationTitleLabel: {
+        id: 'app.presentationUploder.presentationLabel',
+        description: 'presentation title label',
+    },
+    SettingsLabel: {
+        id: 'app.settings.main.label',
+        description: 'General settings label',
+    },
+    waitinguserTitle: {
+        id: 'app.userList.guest.waitingUsers',
+        description: 'Label for the waiting users',
+    },
+});
+
+const propTypes = {
+    intl: PropTypes.shape({
+        formatMessage: PropTypes.func.isRequired,
+    }).isRequired
+};
 
 function IconBox(props) {
 
-    const { sidebarContent, icon, contextDispatch } = props;
+    const { sidebarContent, icon, contextDispatch, intl} = props;
     const { sidebarContentPanel } = sidebarContent;
     // const users = UserListService.getUsers();
     // const [userCount, setUserCount] = useState(UserListService.getUsers().length);
@@ -27,6 +75,7 @@ function IconBox(props) {
     //     setUserCount(UserListService.getUsers().length);
     //     console.log("updateUser", UserListService.getUsers().length)
     // },[UserListService.getUsers])
+    console.log("sidebar", props)
 
     function updateSelectedFeature() {
         if (sidebarContentPanel === icon) {
@@ -60,7 +109,7 @@ function IconBox(props) {
                     <Chat sidebarContentPanel={sidebarContentPanel} />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Chats</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.chatLabel)}</span></div>
                     </div>
                 </div>
             }
@@ -75,7 +124,7 @@ function IconBox(props) {
                     </div>
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Users</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.usersTitle)}</span></div>
                     </div>
                 </div>}
             {icon === "document" &&
@@ -85,7 +134,7 @@ function IconBox(props) {
                     />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Notes</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.notesTitle)}</span></div>
                     </div>
                 </div>}
             {icon === "breakoutroom" &&
@@ -95,7 +144,7 @@ function IconBox(props) {
                     />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Breakoutroom</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.breakoutTitle)}</span></div>
                     </div>
                 </div>}
             {icon === "newbreakoutroom" &&
@@ -105,7 +154,7 @@ function IconBox(props) {
                     />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Breakoutroom</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.breakoutTitle)}</span></div>
                     </div>
                 </div>}
             {icon === "poll" &&
@@ -115,7 +164,7 @@ function IconBox(props) {
                     />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Poll</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.pollingTitleLabel)}</span></div>
                     </div>
                 </div>}
             {icon === "video" &&
@@ -125,7 +174,7 @@ function IconBox(props) {
                     />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Video</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.sharevideoTitleLabel)}</span></div>
                     </div>
                 </div>}
             {icon === "presentation" &&
@@ -135,7 +184,7 @@ function IconBox(props) {
                     />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Presentation</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.presentationTitleLabel)}</span></div>
                     </div>
                 </div>}
             {icon === "settings" &&
@@ -145,22 +194,22 @@ function IconBox(props) {
                     />
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Settings</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.SettingsLabel)}</span></div>
                     </div>
                 </div>}
             {icon === "waitingusers" && (props.authenticatedUsers.length != 0 || props.guestUsers.length) != 0 &&
                 <div className={styles.sidebarIcon}>
-                    <Settings
+                    <Waitinguser
                         sidebarContentPanel={sidebarContentPanel}
                     />
                     <div className={styles.sidebarBadge}>
                         <div className={styles.userIconBadge}>
-                            <span>{props.authenticatedUsers.length+props.guestUsers.length}</span>
+                            <span>{props.authenticatedUsers.length + props.guestUsers.length}</span>
                         </div>
                     </div>
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>Waiting</span></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.waitinguserTitle)}</span></div>
                     </div>
                 </div>}
 
@@ -168,6 +217,7 @@ function IconBox(props) {
     </div>);
 }
 // export default IconBox;
+IconBox.propTypes = propTypes;
 export default withTracker(() => {
 
     const guestUsers = GuestUsers.find({
@@ -190,4 +240,4 @@ export default withTracker(() => {
         authenticatedUsers,
         users: UserListService.getUsers(),
     });
-})(IconBox);
+})(injectIntl(IconBox));

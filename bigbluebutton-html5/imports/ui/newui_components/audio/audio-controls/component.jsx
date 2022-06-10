@@ -9,7 +9,10 @@ import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import InputStreamLiveSelectorContainer from './input-stream-live-selector/container';
 import MutedAlert from '/imports/ui/components/muted-alert/component';
 import { styles } from './styles';
-import ActionButton from '../../actions-bar/actions-button/ActionButton.jsx';
+import Micon from '../icons/Micon';
+import Micoff from '../icons/Micoff';
+import Speakeron from '../icons/Speakeron';
+import Speakeroff from '../icons/Speakeroff';
 
 const intlMessages = defineMessages({
   joinAudio: {
@@ -54,14 +57,6 @@ class AudioControls extends PureComponent {
       .renderLeaveButtonWithoutLiveStreamSelector.bind(this);
 
     this.renderJoinLeaveButton = this.renderJoinLeaveButton.bind(this);
-    this.state = {
-      check: true
-    };
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick(){
-    this.setState({ check: !this.state.check })
   }
 
   componentDidMount() {
@@ -80,51 +75,27 @@ class AudioControls extends PureComponent {
       shortcuts,
     } = this.props;
 
-    function changeState(){
-      this.setState({ check: !this.state.check })
-      console.log(this)
-    }
-
-    
-
     return (
-      <Button
-        className={styles.btn}
+      <button
+        className={styles.iconBg}
         onClick={handleJoinAudio}
-        disabled={disable}
-        hideLabel
-        aria-label={intl.formatMessage(intlMessages.joinAudio)}
-        label={intl.formatMessage(intlMessages.joinAudio)}
-        data-test="joinAudio"
-        color="default"
-        ghost
-        icon="no_audio"
-        size="lg"
-        circle
-        accessKey={shortcuts.joinaudio}
-      />
-
-      // <button className={styles.actionBtn}
+      >
+        <Speakeroff/>
+      </button>
+      // <Button
+      //   className={styles.btn}
       //   onClick={handleJoinAudio}
       //   disabled={disable}
+      //   hideLabel
+      //   aria-label={intl.formatMessage(intlMessages.joinAudio)}
+      //   label={intl.formatMessage(intlMessages.joinAudio)}
+      //   data-test="joinAudio"
+      //   color="default"
+      //   ghost
+      //   icon="no_audio"
+      //   size="lg"
+      //   circle
       //   accessKey={shortcuts.joinaudio}
-      //   >
-      //   {
-      //     this.state.check ? <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg" alt="Join audio"/> : <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg" alt="Join audio"/>
-      //   }
-      // </button>
-
-
-      // <button className={styles.actionBtn}
-      //   onClick={this.handleClick}>
-      //   {
-      //     this.state.check ? <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg" alt="Join audio"/> : <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg" alt="Join audio"/>
-      //   }
-      // </button>
-
-      // <ActionButton
-      //   onClick={this.handleClick}
-      //   icon = "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic-off.svg"
       // />
     );
   }
@@ -157,6 +128,13 @@ class AudioControls extends PureComponent {
     }
 
     return (
+      // <button
+      //   onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
+      //   disabled={disable}
+      //   data-test={inAudio ? 'leaveAudio' : 'joinAudio'}
+      // >
+      //   <Speakeron/>
+      // </button>
       <Button
         className={cx(inAudio || styles.btn)}
         onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
@@ -225,6 +203,15 @@ class AudioControls extends PureComponent {
       : intl.formatMessage(intlMessages.muteAudio);
 
     const toggleMuteBtn = (
+      <button
+        className={styles.iconBg}
+        onClick={handleToggleMuteMicrophone}
+      >
+        {
+          muted ? <Micoff /> : <Micon/>
+        }
+        
+      </button>
       // <Button
       //   className={cx(styles.muteToggle, !talking || styles.glow, !muted || styles.btn)}
       //   onClick={handleToggleMuteMicrophone}
@@ -239,9 +226,6 @@ class AudioControls extends PureComponent {
       //   circle
       //   accessKey={shortcuts.togglemute}
       // />
-      <ActionButton
-        icon="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/mic.svg"
-      />
     );
 
     const MUTE_ALERT_CONFIG = Meteor.settings.public.app.mutedAlert;

@@ -218,6 +218,11 @@ const intlMessages = defineMessages({
   uploadViewTitle: {
     id: 'app.presentationUploder.uploadViewTitle',
     description: 'view name apended to document title',
+  },
+
+  uploadfileLabel: {
+    id: 'app.presentationUploder.uploadfileLabel',
+    description: 'upload file label',
   }
 });
 
@@ -253,32 +258,33 @@ class PresentationUploader extends Component {
     // utilities
     this.deepMergeUpdateFileKey = this.deepMergeUpdateFileKey.bind(this);
     this.updateFileKey = this.updateFileKey.bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.handleDismiss();
   }
+
   componentDidUpdate(prevProps) {
     const { isOpen, presentations: propPresentations, intl } = this.props;
     const { presentations } = this.state;
-
     if (!isOpen && prevProps.isOpen) {
       unregisterTitleView();
     }
-
     // Updates presentation list when chat modal opens to avoid missing presentations
     if (isOpen && !prevProps.isOpen) {
       registerTitleView(intl.formatMessage(intlMessages.uploadViewTitle));
-      const  focusableElements =
+      const focusableElements =
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
       const modal = document.getElementById('upload-modal');
       const firstFocusableElement = modal?.querySelectorAll(focusableElements)[0];
       const focusableContent = modal?.querySelectorAll(focusableElements);
       const lastFocusableElement = focusableContent[focusableContent.length - 1];
-      
+
       firstFocusableElement.focus();
-  
-      modal.addEventListener('keydown', function(e) {
+
+      modal.addEventListener('keydown', function (e) {
         let tab = e.key === 'Tab' || e.keyCode === TAB;
         if (!tab) return;
         if (e.shiftKey) {
@@ -430,6 +436,7 @@ class PresentationUploader extends Component {
   }
 
   handleCurrentChange(id) {
+    console.log("item", id)
     const { presentations, disableActions } = this.state;
 
     if (disableActions) return;
@@ -643,7 +650,6 @@ class PresentationUploader extends Component {
     const { intl } = this.props;
 
     let presentationsSorted = presentations;
-
     try {
       presentationsSorted = presentations
         .sort((a, b) => a.uploadTimestamp - b.uploadTimestamp)
@@ -663,22 +669,25 @@ class PresentationUploader extends Component {
     }
 
     return (
-      <div className={styles.fileList}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th className={styles.visuallyHidden} colSpan={3}>
-                {intl.formatMessage(intlMessages.filename)}
-              </th>
-              <th className={styles.visuallyHidden}>{intl.formatMessage(intlMessages.status)}</th>
-              <th className={styles.visuallyHidden}>{intl.formatMessage(intlMessages.options)}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {presentationsSorted.map((item) => this.renderPresentationItem(item))}
-          </tbody>
-        </table>
+      <div>
+        {presentationsSorted.map((item) => this.renderPresentationItem(item))}
       </div>
+      // <div className={styles.fileList}>
+      //   <table className={styles.table}>
+      //     <thead>
+      //       <tr>
+      //         <th className={styles.visuallyHidden} colSpan={3}>
+      //           {intl.formatMessage(intlMessages.filename)}
+      //         </th>
+      //         <th className={styles.visuallyHidden}>{intl.formatMessage(intlMessages.status)}</th>
+      //         <th className={styles.visuallyHidden}>{intl.formatMessage(intlMessages.options)}</th>
+      //       </tr>
+      //     </thead>
+      //     <tbody>
+      //       {presentationsSorted.map((item) => this.renderPresentationItem(item))}
+      //     </tbody>
+      //   </table>
+      // </div>
     );
   }
 
@@ -746,14 +755,21 @@ class PresentationUploader extends Component {
     );
   }
 
+  handleChange(id){
+    this.handleCurrentChange(id);
+    this.handleConfirm(false);
+  }
+
   renderPresentationItem(item) {
+    console.log("items",item)
     const { disableActions } = this.state;
     const {
       intl,
       selectedToBeNextCurrent,
-      allowDownloadable
+      allowDownloadable,
+      setPresentation,
+      podIds,
     } = this.props;
-
     const isActualCurrent = selectedToBeNextCurrent ? item.id === selectedToBeNextCurrent : item.isCurrent;
     const isUploading = !item.upload.done && item.upload.progress > 0;
     const isConverting = !item.conversion.done && item.upload.done;
@@ -771,9 +787,9 @@ class PresentationUploader extends Component {
       [styles.tableItemError]: hasError,
       [styles.tableItemAnimated]: isProcessing,
     };
-	
+
     const itemActions = {
-        [styles.notDownloadable]: !allowDownloadable,
+      [styles.notDownloadable]: !allowDownloadable,
     };
 
     const formattedDownloadableLabel = !item.isDownloadable
@@ -787,32 +803,12 @@ class PresentationUploader extends Component {
       : cx(styles.itemAction, styles.itemActionRemove);
 
     return (
-      <tr
-        key={item.id}
-        className={cx(itemClassName)}
-      >
-        <td className={styles.tableItemIcon}>
-          <Icon iconName="file" />
-        </td>
-        {
-          isActualCurrent
-            ? (
-              <th className={styles.tableItemCurrent}>
-                <span className={styles.currentLabel}>
-                  {intl.formatMessage(intlMessages.current)}
-                </span>
-              </th>
-            )
-            : null
-        }
-        <th className={styles.tableItemName} colSpan={!isActualCurrent ? 2 : 0}>
-          <span>{item.filename}</span>
-        </th>
-        <td className={styles.tableItemStatus} colSpan={hasError ? 2 : 0}>
-          {this.renderPresentationItemStatus(item)}
-        </td>
-        {hasError ? null : (
-          <td className={cx(styles.tableItemActions, itemActions)}>
+      <div className={styles.presentList}>
+        <div className={styles.presentItem}>
+          <div className={styles.presentItem1}>
+            <span>{item.filename}</span>
+          </div>
+          <div className={styles.presentItem1}>
             {allowDownloadable ? (
               <Button
                 disabled={disableActions}
@@ -825,16 +821,18 @@ class PresentationUploader extends Component {
                 icon={item.isDownloadable ? 'download' : 'download-off'}
                 onClick={() => this.handleToggleDownloadable(item)}
               />
-              ) : null
+            ) : null
             }
-            <Checkbox
+            {/* {item.upload.done && <Checkbox
               ariaLabel={`${intl.formatMessage(intlMessages.setAsCurrentPresentation)} ${item.filename}`}
               checked={item.isCurrent}
               className={styles.itemAction}
               keyValue={item.id}
-              onChange={() => this.handleCurrentChange(item.id)}
+              onClick={()=> this.handleChange(item.id)}
               disabled={disableActions}
-            />
+            />} */}
+            {item.upload.done && <input className={styles.inpRadio} type="radio" checked={item.isCurrent} onClick={()=> this.handleChange(item.id)} name={item.id}></input>}
+            {/* {item.upload.done && <button onClick={()=> this.handleChange(item.id)}>change</button>} */}
             <Button
               disabled={disableActions}
               className={cx(styles.itemAction, styles.itemActionRemove)}
@@ -846,9 +844,81 @@ class PresentationUploader extends Component {
               hideLabel
               onClick={() => this.handleRemove(item)}
             />
+            {
+              isActualCurrent ?
+                <span className={styles.currentLabel}>
+                  {intl.formatMessage(intlMessages.current)}
+                </span>
+                : null
+            }
+          </div>
+        </div>
+        {/* <tr
+          key={item.id}
+          className={cx(itemClassName)}
+        >
+          <td className={styles.tableItemIcon}>
+            <Icon iconName="file" />
           </td>
-        )}
-      </tr>
+          {
+            isActualCurrent
+              ? (
+                <th className={styles.tableItemCurrent}>
+                  <span className={styles.currentLabel}>
+                    {intl.formatMessage(intlMessages.current)}
+                  </span>
+                </th>
+              )
+              : null
+          }
+          <th className={styles.tableItemName} colSpan={!isActualCurrent ? 2 : 0}>
+            <span>{item.filename}</span>
+          </th>
+          
+        </tr>
+        <tr>
+        <td className={styles.tableItemStatus} colSpan={hasError ? 2 : 0}>
+            {this.renderPresentationItemStatus(item)}
+          </td>
+          {hasError ? null : (
+            <td className={cx(styles.tableItemActions, itemActions)}>
+              {allowDownloadable ? (
+                <Button
+                  disabled={disableActions}
+                  className={isDownloadableStyle}
+                  label={formattedDownloadableLabel}
+                  data-test={item.isDownloadable ? 'disallowPresentationDownload' : 'allowPresentationDownload'}
+                  aria-label={formattedDownloadableAriaLabel}
+                  hideLabel
+                  size="sm"
+                  icon={item.isDownloadable ? 'download' : 'download-off'}
+                  onClick={() => this.handleToggleDownloadable(item)}
+                />
+              ) : null
+              }
+              <Checkbox
+                ariaLabel={`${intl.formatMessage(intlMessages.setAsCurrentPresentation)} ${item.filename}`}
+                checked={item.isCurrent}
+                className={styles.itemAction}
+                keyValue={item.id}
+                onChange={() => this.handleCurrentChange(item.id)}
+                disabled={disableActions}
+              />
+              <Button
+                disabled={disableActions}
+                className={cx(styles.itemAction, styles.itemActionRemove)}
+                label={intl.formatMessage(intlMessages.removePresentation)}
+                data-test="removePresentation"
+                aria-label={`${intl.formatMessage(intlMessages.removePresentation)} ${item.filename}`}
+                size="sm"
+                icon="delete"
+                hideLabel
+                onClick={() => this.handleRemove(item)}
+              />
+            </td>
+          )}
+        </tr> */}
+      </div>
     );
   }
 
@@ -1011,43 +1081,92 @@ class PresentationUploader extends Component {
       if (item.id.indexOf(item.filename) !== -1 && item.upload.progress === 0) hasNewUpload = true;
     });
 
-    return isOpen ? (
-      // <div id="upload-modal" className={styles.modal}>
-        <div
-          className={styles.modalInner}
-        >
-          <div className={styles.modalHeader}>
-            <h1>{intl.formatMessage(intlMessages.title)}</h1>
-            <div className={styles.actionWrapper}>
-              <Button
-                className={styles.dismiss}
-                color="default"
-                onClick={this.handleDismiss}
-                label={intl.formatMessage(intlMessages.dismissLabel)}
-                aria-describedby={intl.formatMessage(intlMessages.dismissDesc)}
-              />
-              <Button
-                className={styles.confirm}
-                data-test="confirmManagePresentation"
-                color="primary"
-                onClick={() => this.handleConfirm(hasNewUpload)}
-                disabled={disableActions}
-                label={hasNewUpload
-                  ? intl.formatMessage(intlMessages.uploadLabel)
-                  : intl.formatMessage(intlMessages.confirmLabel)}
-              />
+    return (
+      <>
+        <div className={styles.extPresentationDiv}>
+          <h3>{intl.formatMessage(intlMessages.title)}</h3>
+
+          <div className={styles.presentationWrapper}>
+
+
+
+            <div className={styles.content}>
+              <div className={styles.videoUrl}>
+                <h4>{intl.formatMessage(intlMessages.uploadfileLabel)}</h4>
+
+                {/* {this.renderPresentationList()} */}
+                {isMobile ? this.renderPicDropzone() : null}
+                {this.renderDropzone()}
+
+                <div className={styles.actionWrapper}>
+                  <button
+                    className={styles.startBtn}
+                    color="default"
+                    onClick={this.handleDismiss}
+                    label={intl.formatMessage(intlMessages.dismissLabel)}
+                    aria-describedby={intl.formatMessage(intlMessages.dismissDesc)}
+                  >{intl.formatMessage(intlMessages.dismissLabel)}</button>
+                  <button
+                    className={styles.startBtn}
+                    data-test="confirmManagePresentation"
+                    color="primary"
+                    onClick={() => this.handleConfirm(hasNewUpload)}
+                    disabled={disableActions}
+                    label={hasNewUpload
+                      ? intl.formatMessage(intlMessages.uploadLabel)
+                      : intl.formatMessage(intlMessages.confirmLabel)}
+                  >{hasNewUpload
+                    ? intl.formatMessage(intlMessages.uploadLabel)
+                    : intl.formatMessage(intlMessages.confirmLabel)}</button>
+                </div>
+                <div className={styles.modalHint}>
+                  {`${intl.formatMessage(intlMessages.message)}`}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              {this.renderPresentationList()}
             </div>
           </div>
+        </div>
 
-          <div className={styles.modalHint}>
-            {`${intl.formatMessage(intlMessages.message)}`}
+        {/* <div
+        className={styles.modalInner}
+      >
+        <div className={styles.modalHeader}>
+          <h1>{intl.formatMessage(intlMessages.title)}</h1>
+          <div className={styles.actionWrapper}>
+            <Button
+              className={styles.dismiss}
+              color="default"
+              onClick={this.handleDismiss}
+              label={intl.formatMessage(intlMessages.dismissLabel)}
+              aria-describedby={intl.formatMessage(intlMessages.dismissDesc)}
+            />
+            <Button
+              className={styles.confirm}
+              data-test="confirmManagePresentation"
+              color="primary"
+              onClick={() => this.handleConfirm(hasNewUpload)}
+              disabled={disableActions}
+              label={hasNewUpload
+                ? intl.formatMessage(intlMessages.uploadLabel)
+                : intl.formatMessage(intlMessages.confirmLabel)}
+            />
           </div>
-          {this.renderPresentationList()}
-          {isMobile ? this.renderPicDropzone() : null}
-          {this.renderDropzone()}
-        {/* </div> */}
-      </div>
-    ) : null;
+        </div>
+
+        <div className={styles.modalHint}>
+          {`${intl.formatMessage(intlMessages.message)}`}
+        </div>
+        {this.renderPresentationList()}
+        {isMobile ? this.renderPicDropzone() : null}
+        {this.renderDropzone()}
+      </div> */}
+
+      </>
+    )
   }
 }
 

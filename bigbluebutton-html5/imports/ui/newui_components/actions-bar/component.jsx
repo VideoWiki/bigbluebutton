@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react';
 import cx from 'classnames';
-import Button from '/imports/ui/newui_components/button/component';
-import CaptionsButtonContainer from '/imports/ui/newui_components/actions-bar/captions/container';
+import Button from '/imports/ui/components/button/component';
+import CaptionsButtonContainer from '/imports/ui/components/actions-bar/captions/container';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles.scss';
 import ActionsDropdown from './actions-dropdown/container';
 import ScreenshareButtonContainer from '/imports/ui/newui_components/actions-bar/screenshare/container';
 import AudioControlsContainer from '../audio/audio-controls/container';
-import JoinVideoOptionsContainer from '/imports/ui/newui_components/video-provider/video-button/container';
+import JoinVideoOptionsContainer from '../video-provider/video-button/container';
 import PresentationOptionsContainer from './presentation-options/component';
-import ActionButton from './actions-button/ActionButton';
+import Handraise from './icon/Handraise';
+import Leavecall from './icon/Leavecall';
 import { makeCall } from '/imports/ui/services/api';
 
 class ActionsBar extends PureComponent {
@@ -67,7 +68,7 @@ class ActionsBar extends PureComponent {
         }
       >
         <div className={styles.left}>
-          <ActionsDropdown {...{
+          {/* <ActionsDropdown {...{
             amIPresenter,
             amIModerator,
             isPollingEnabled,
@@ -79,7 +80,7 @@ class ActionsBar extends PureComponent {
             stopExternalVideoShare,
             isMeteorConnected,
           }}
-          />
+          /> */}
           {isCaptionsAvailable
             ? (
               <CaptionsButtonContainer {...{ intl }} />
@@ -88,15 +89,17 @@ class ActionsBar extends PureComponent {
         </div>
         <div className={styles.center}>
           <AudioControlsContainer />
-          <ActionButton
-            onClick={() => this.leaveSession()}
-            icon="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/phone-off.svg"
-          />
           {enableVideo
             ? (
               <JoinVideoOptionsContainer />
             )
             : null}
+          <button
+           className={styles.iconBg}
+           onClick={()=>this.leaveSession()}
+          >
+            <Leavecall/>
+          </button>
           <ScreenshareButtonContainer {...{
             amIPresenter,
             isMeteorConnected,
@@ -119,30 +122,42 @@ class ActionsBar extends PureComponent {
             : null}
           {isRaiseHandButtonEnabled
             ? (
-              <Button
-                icon="hand"
-                label={intl.formatMessage({
-                  id: `app.actionsBar.emojiMenu.${
-                    currentUser.emoji === 'raiseHand'
-                      ? 'lowerHandLabel'
-                      : 'raiseHandLabel'
-                  }`,
-                })}
-                accessKey={shortcuts.raisehand}
-                color={currentUser.emoji === 'raiseHand' ? 'primary' : 'default'}
-                data-test={currentUser.emoji === 'raiseHand' ? 'lowerHandLabel' : 'raiseHandLabel'}
-                ghost={currentUser.emoji !== 'raiseHand'}
-                className={cx(currentUser.emoji === 'raiseHand' || styles.btn)}
-                hideLabel
-                circle
-                size="lg"
-                onClick={() => {
-                  setEmojiStatus(
-                    currentUser.userId,
-                    currentUser.emoji === 'raiseHand' ? 'none' : 'raiseHand',
-                  );
-                }}
-              />
+              <>
+                <button
+                  className={styles.iconBg}
+                  onClick={() => {
+                    setEmojiStatus(
+                      currentUser.userId,
+                      currentUser.emoji === 'raiseHand' ? 'none' : 'raiseHand',
+                    );
+                  }}
+                >
+                  <Handraise/>
+                </button>
+                {/* <Button
+                  icon="hand"
+                  label={intl.formatMessage({
+                    id: `app.actionsBar.emojiMenu.${currentUser.emoji === 'raiseHand'
+                        ? 'lowerHandLabel'
+                        : 'raiseHandLabel'
+                      }`,
+                  })}
+                  accessKey={shortcuts.raisehand}
+                  color={currentUser.emoji === 'raiseHand' ? 'primary' : 'default'}
+                  data-test={currentUser.emoji === 'raiseHand' ? 'lowerHandLabel' : 'raiseHandLabel'}
+                  ghost={currentUser.emoji !== 'raiseHand'}
+                  className={cx(currentUser.emoji === 'raiseHand' || styles.btn)}
+                  hideLabel
+                  circle
+                  size="lg"
+                  onClick={() => {
+                    setEmojiStatus(
+                      currentUser.userId,
+                      currentUser.emoji === 'raiseHand' ? 'none' : 'raiseHand',
+                    );
+                  }}
+                /> */}
+              </>
             )
             : null}
         </div>

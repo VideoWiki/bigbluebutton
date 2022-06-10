@@ -4,6 +4,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/mixins/_indicators";
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .modal {
   @extend .modal;
@@ -50,7 +51,7 @@
 .center,
 .right {
   > * {
-    margin: 0 var(--sm-padding-x);
+    // margin: 0 var(--sm-padding-x);
 
     @include mq($small-only) {
       margin: 0 var(--sm-padding-y);
@@ -174,4 +175,18 @@
   @include mq($small-only) {
     max-height: 100%;
   }
+}
+
+.iconBg{
+  background: $primaryColor;
+  border-radius: 50%;
+  height: 43px;
+  width: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  margin: 0px 8px;
+  cursor: pointer;
 }

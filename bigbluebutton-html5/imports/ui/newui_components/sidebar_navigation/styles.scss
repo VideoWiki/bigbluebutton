@@ -1,14 +1,14 @@
 @import '/imports/ui/stylesheets/variables/_all';
 @import '/imports/ui/stylesheets/mixins/_indicators';
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .OuterSideBox{
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   // width: 56px; 
   // height: 100%;
-  background-color: white;
+  background-color: $colorWhite;
   width: 75px;
   height: 100%;
-  background-color: white;
   position: relative;
 }
 .LogoBox{
@@ -37,12 +37,12 @@
   // border-left: solid 4px #ffffff;
 }
 .IconFill {
-  border-right: solid 4px #7966FA;
-  border-left: solid 4px #ffffff;
+  border-right: solid 4px $sidebarIconDark;
+  border-left: solid 4px $colorWhite;
 }
 .IconUnfill{
-  border-right: solid 4px #ffffff;
-  border-left: solid 4px #ffffff;
+  border-right: solid 4px $colorWhite;
+  border-left: solid 4px $colorWhite;
 }
 // .IconBox:hover{
 //   border-right: solid 4px #7816F7;
@@ -76,7 +76,7 @@
   width: fit-content;
   border-radius: 6px;
   cursor: pointer;
-  background-color: rgba(120, 22, 247, 0.1);
+  background-color: $sidebarIconShadow;
 }
 
 .sidebarIcon{
@@ -89,8 +89,8 @@
 .sidebarTooltip{
   height: 23px;
   position: absolute;
-  background-color: black;
-  color: white;
+  background-color: $tooltipBgColor;
+  color: $tooltipColor;
   top: 0;
   left: 7px;
   border-radius: 100px;
@@ -103,7 +103,7 @@
 .sidebarTipArrow{
   height: 8px;
   width: 20px;
-  background-color: black;
+  background-color: $tooltipBgColor;
   border-radius: 100%;
   position: absolute;
   left: 2px;
@@ -115,7 +115,8 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 26px;
-  color: rgba(255, 255, 255, 0.9);
+  color: $tooltipColor;
+  white-space: nowrap;
 }
 
 .sidebarIcon .sideTooltipWrapper {
@@ -137,8 +138,8 @@
     height: 19px;
     left: -9px;
     top: -5px;
-    background: #E64980;
-    border: 1px solid #FFFFFF;
+    background: $primaryColor;
+    border: 1px solid $colorWhite;
     border-radius: 100px;
 }
 
@@ -149,7 +150,7 @@
   font-size: 12px;
   line-height: 15px;
   text-align: center;
-  color: #FFFFFF;
+  color: $colorWhite;
   flex: none;
   order: 0;
   flex-grow: 0;

@@ -4,7 +4,7 @@ import Presentations from '/imports/api/presentations';
 import PresentationUploaderService from '/imports/ui/components/presentation/presentation-uploader/service';
 import PresentationPodService from '/imports/ui/components/presentation-pod/service';
 import ActionsDropdown from './component';
-import LayoutContext from '../../../components/layout/context';
+import LayoutContext from '/imports/ui/components/layout/context';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 
 const ActionsDropdownContainer = (props) => {

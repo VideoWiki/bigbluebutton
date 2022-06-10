@@ -104,6 +104,11 @@ const intlMessages = defineMessages({
     id: 'app.layout.style.customPush',
     description: 'label for custom layout style (push to all)',
   },
+
+  savebuttonLabel: {
+    id: 'app.settings.main.save.label',
+    description: 'setting save button label',
+  }
 });
 
 class ApplicationMenu extends BaseMenu {
@@ -512,7 +517,7 @@ class ApplicationMenu extends BaseMenu {
             </div>
           </div>
           {this.renderChangeLayout()}
-          <button className={styles.saveSettingButton} onClick={this.saveSetting}>Save</button>
+          <button className={styles.saveSettingButton} onClick={this.saveSetting}>{intl.formatMessage(intlMessages.savebuttonLabel)}</button>
         </div>
       </div>
     );

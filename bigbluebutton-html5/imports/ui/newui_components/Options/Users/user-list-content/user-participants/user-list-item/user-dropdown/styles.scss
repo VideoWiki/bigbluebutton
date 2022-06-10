@@ -246,10 +246,6 @@
   display: flex;
   align-items: center;
 }
-.userlistActions img{
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  color: black;
-  margin-right: 10px;
+.userlistActions *{
+  margin: 0px 5px;
 }

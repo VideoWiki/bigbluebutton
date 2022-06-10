@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import PresentationService from '/imports/ui/newui_components/presentation/service';
+import PresentationService from '/imports/ui/components/presentation/service';
 import MediaService from '/imports/ui/components/media/service';
-import Service from '/imports/ui/newui_components/actions-bar/service';
+import Service from '/imports/ui/components/actions-bar/service';
 import PollService from '/imports/ui/components/poll/service';
 import { makeCall } from '/imports/ui/services/api';
 import PresentationToolbar from './component';
-import PresentationToolbarService from './service';
+import PresentationToolbarService from '/imports/ui/components/presentation/presentation-toolbar/service';
 
 const POLLING_ENABLED = Meteor.settings.public.poll.enabled;
 

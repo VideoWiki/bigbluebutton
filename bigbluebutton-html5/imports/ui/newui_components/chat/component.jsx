@@ -28,6 +28,14 @@ const intlMessages = defineMessages({
     id: 'app.chat.hideChatLabel',
     description: 'aria-label for hiding chat button',
   },
+  copyLinkLabel: {
+    id: 'app.tooltip.copyLinkLabel',
+    description: 'Copy Link Label',
+  },
+  copiedLabel: {
+    id: 'app.tooltip.copiedLabel',
+    description: 'Link Copied Label',
+  },
 });
 
 const Chat = (props) => {
@@ -65,7 +73,7 @@ const Chat = (props) => {
     navigator.clipboard.writeText(url);
     // alert("Link Copied: " + url);
     const p = document.getElementById("shareUrlIcon");
-    p.innerText="LinkCopied!";
+    p.innerText= intl.formatMessage(intlMessages.copiedLabel);
   }
 
   return (
@@ -81,7 +89,7 @@ const Chat = (props) => {
           <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
             <div className={styles.sideTooltipWrapper}>
               <div className={styles.sidebarTipArrow}></div>
-              <div className={styles.sidebarTooltip}><p id="shareUrlIcon">CopyLink</p></div>
+              <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
             </div>
           </div>
           {/* <div>

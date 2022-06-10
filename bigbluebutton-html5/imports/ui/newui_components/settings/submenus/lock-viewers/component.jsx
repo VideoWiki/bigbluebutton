@@ -83,6 +83,11 @@ const intlMessages = defineMessages({
     id: 'app.lock-viewers.unlocked',
     description: 'unlocked element label',
   },
+
+  savebuttonLabel: {
+    id: 'app.settings.main.save.label',
+    description: 'setting save button label',
+  }
 });
 
 const propTypes = {
@@ -376,7 +381,7 @@ class LockViewersComponent extends Component {
               updateLockSettings(lockSettingsProps);
               updateWebcamsOnlyForModerator(usersProp.webcamsOnlyForModerator);
               // closeModal();
-            }}>Save</button>
+            }}>{intl.formatMessage(intlMessages.savebuttonLabel)}</button>
           </div>
         </div>
       </div>

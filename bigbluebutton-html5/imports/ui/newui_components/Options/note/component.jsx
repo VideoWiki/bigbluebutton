@@ -80,7 +80,7 @@ const Note = ({
       <div className={styles.noteBox}>
         <div className={styles.noteboxWrapper}>
           <div className={styles.noteboxHeading}>
-            <h3>Shared Note</h3>
+            <h3>{intl.formatMessage(intlMessages.title)}</h3>
           </div>
           <div className={styles.noteboxBottom}>
             <iframe

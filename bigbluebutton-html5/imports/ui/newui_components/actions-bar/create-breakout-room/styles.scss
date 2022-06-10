@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/variables/breakpoints";
 @import "/imports/ui/stylesheets/variables/placeholders";
 @import "/imports/ui/stylesheets/mixins/_scrollable";
+@import "/imports/ui/components/modal/simple/styles";
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -25,10 +26,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 .breakoutSettings {
   display: grid;
-  grid-template-columns: 2fr 2fr; 
+  grid-template-columns: 2fr 2fr 1fr; 
   grid-template-rows: 1fr;
-  grid-gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  grid-gap: 1rem;
 
   @include mq($small-only) {
     grid-template-columns: 1fr ;
@@ -42,37 +42,26 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 .labelText {
+  color: var(--color-gray);
   white-space: nowrap;
-  font-family: 'Montserrat',sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 22px;
-  margin-bottom: 0.5rem;
-  text-transform: capitalize;
+  margin-bottom: .5rem;
 }
 .duration,
 .inputRooms {
   background-color: var(--color-white);
-  font-family: 'Montserrat',sans-serif;
-  border: 1px solid #EBEDF0;
-  letter-spacing: -0.02em;
-  font-style: normal;
-  cursor: pointer; 
-  color: #888888;
-  width: 90%;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;   
-  padding: 0.5rem;
+  color: var(--color-gray);
+  border: 1px solid var(--color-gray-lighter);
+  border-radius: var(--border-radius);
+  width: 100%;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding: .25rem 0 .25rem .25rem;
 }
-.inputRooms{
-  border-radius: 6px;
-}
+
 .duration {
+  width: 50%;
   text-align: center;
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
+  padding: .25rem;
   &::placeholder {
     color: var(--color-gray);
     opacity: 1;
@@ -95,7 +84,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 .durationArea {
   display: flex;
   align-items: center;
-  // justify-content: space-between;
+  justify-content: space-between;
 }
 
 .randomlyAssignBtn {
@@ -111,8 +100,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 .freeJoinCheckbox {
-  // width: 1rem;
-  // height: 1rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 .freeJoinLabel {
@@ -128,14 +117,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     }
   }
 }
-.ExtraCheck{
-  font-family: 'Montserrat',sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 15px;
-  letter-spacing: -0.02em;
-}
+
 .boxContainer {
   display: grid;
   grid-template-columns: repeat(3, minmax(4rem, 16rem));
@@ -259,12 +241,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   position: fixed;
   display: block;
   height: 100vh;
+  width: 100%;
   background-color: var(--color-white);
   z-index: 1002;
   top: 0;
-  left:4rem;
   bottom: 0;
-  width:28%;
+  left: 0;
+  right: 0;
 }
 
 .header {
@@ -373,15 +356,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 .checkBoxesContainer {
   @extend %flex-row;
-  margin-top: 1.5rem;
-}
-
-.leastOneWarn{
-  font-family: 'Montserrat',sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;    
+  margin-top: 2rem;
 }
 
 .withError {
@@ -411,65 +386,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     color: var(--color-gray-light);
   }
 }
-.mylabel{
-  font-family: 'Montserrat',sans-serif;
-  border-bottom-right-radius: 6px;
-  border-top-right-radius: 6px; 
-  border: 1px solid #EBEDF0;
-  background-color: #fff;
-  letter-spacing: -0.02em;
-  font-style: normal;
-  line-height: 17px;   
-  font-weight: 500;
-  color: #888888;
-  font-size: 14px;
-  padding: 0.5rem;
+.overlay {
+  @extend .overlay;
 }
-.centerAlign{
-  display: flex;
-  justify-content: space-around;
-}
-.createBreakoutHeading{
-  font-family: 'Montserrat',sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 26px;    
-  text-transform: capitalize;
-  color: #333333;
-}
-.PlusButton{
-  background: rgba(68, 204, 136, 0.1);
-  border-radius: 6px;
-  padding: 0.4rem;
-  padding-bottom: 0rem;
-  // margin-top: 1rem;
-}
-.PlusButton:hover .add,.PlusButton:hover{
-  stroke: white;
-  background-color: #44CC88;
-  cursor: pointer;
-  transition-duration: 0.2s;
-}
-.AlignCorners{
-  display: flex;
-  justify-content: space-between;
-}
-.roomList{
-  overflow-y:auto;
-  max-height: 65vh;
-}
-.roomList::-webkit-scrollbar{
-  width:8px;
-}
-.roomList::-webkit-scrollbar-track{
-  margin-top: 1rem;
-}
-.roomList::-webkit-scrollbar-thumb {
-  background: #CFD2DA; 
-  border-radius: 100px;
-}
-.AlignCenter{
-  display: flex;
-  justify-content: space-around;
+
+.modal {
+  @extend .modal;
+  align-self: center;
+  padding: 1.5rem;
+  min-height: 32rem;
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { defineMessages, injectIntl } from 'react-intl';
 import _ from 'lodash';
-import VideoService from './service';
+import VideoService from '/imports/ui/components/video-provider/service';
 import VideoListContainer from './video-list/container';
 import {
   fetchWebRTCMappedStunTurnServers,

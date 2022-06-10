@@ -41,6 +41,15 @@ const intlMessages = defineMessages({
     id: 'app.poll.liveResult.secretLabel',
     description: 'label shown instead of users in poll responses if poll is secret',
   },
+
+  pollingTitleLabel: {
+    id: 'app.poll.pollingTitleLabel',
+    description: 'Polling Title Label'
+  },
+  pollrestartLabel: {
+    id: 'app.poll.pollrestartLabel',
+    description: 'Restart Poll Label'
+  }
 });
 
 const getResponseString = (obj) => {
@@ -120,24 +129,48 @@ class LiveResult extends PureComponent {
 
       }, []);
     const pollStats = [];
+
+    let maxKey = 0;
+    let max = 0;
+    answers.reduce(caseInsensitiveReducer, []).map((obj) => {
+      if (obj.numVotes > max) {
+        max = obj.numVotes;
+        maxKey = obj.key;
+      }
+    })
     answers.reduce(caseInsensitiveReducer, []).map((obj) => {
       const formattedMessageIndex = obj.key.toLowerCase();
       const pct = Math.round(obj.numVotes / numResponders * 100);
+      // const percent = Number.isNaN(pct) ? 0 : pct;
       const pctFotmatted = `${Number.isNaN(pct) ? 0 : pct}%`;
 
+      // const calculatedWidth = {
+      //   width: pctFotmatted,
+      //   backgroundColor: keys[obj.id].bgColor
+      // };
       const calculatedWidth = {
         width: pctFotmatted,
-        backgroundColor: keys[obj.id].bgColor
+        backgroundColor: (obj.key === maxKey ? "#44CC881A" : "#7966fa1a")
       };
+      console.log(obj.id, maxKey)
       const boxStyle = {
-        border: `1px solid ${keys[obj.id].color}`
+        border: `1px solid ${(obj.key === maxKey ? '#44CC88' : '#7966FA')}`
       };
       const backgroundStyle = {
-        backgroundColor: keys[obj.id].color
+        backgroundColor: (obj.key === maxKey ? "#44CC88" : "#7966FA")
       }
       const textStyle = {
-        color: keys[obj.id].color
+        color: (obj.key === maxKey ? "#44CC88" : "#7966FA")
       }
+      // const boxStyle = {
+      //   border: `1px solid ${keys[obj.id].color}`
+      // };
+      // const backgroundStyle = {
+      //   backgroundColor: keys[obj.id].color
+      // }
+      // const textStyle = {
+      //   color: keys[obj.id].color
+      // }
 
       return pollStats.push(
         // <div className={styles.main} key={_.uniqueId('stats-')}>
@@ -182,8 +215,10 @@ class LiveResult extends PureComponent {
       userAnswers,
       pollStats,
       currentPollQuestion,
+      maxKey,
     };
   }
+
 
   constructor(props) {
     super(props);
@@ -192,7 +227,8 @@ class LiveResult extends PureComponent {
       userAnswers: null,
       pollStats: null,
       currentPollQuestion: null,
-      answerList: null
+      answerList: null,
+      maxKey: null,
     };
   }
 
@@ -207,7 +243,7 @@ class LiveResult extends PureComponent {
       currentPoll,
     } = this.props;
 
-    const { userAnswers, pollStats, currentPollQuestion, answerList } = this.state;
+    const { userAnswers, pollStats, currentPollQuestion, answerList, maxKey } = this.state;
 
     let waiting;
     let userCount = 0;
@@ -225,11 +261,11 @@ class LiveResult extends PureComponent {
 
       waiting = respondedCount !== userAnswers.length && currentPoll;
     }
-    
+    console.log("answerList", answerList, maxKey)
     return (
       <div>
         <div className={styles.createClassWrapper}>
-          <h1>Poll</h1>
+          <h1>{intl.formatMessage(intlMessages.pollingTitleLabel)}</h1>
           <div className={styles.createBox}>
             {
               currentPollQuestion ? <h3>{currentPollQuestion}</h3> : null
@@ -247,10 +283,9 @@ class LiveResult extends PureComponent {
                       Service.publishPoll();
                       stopPoll();
                     }}
-                    label={intl.formatMessage(intlMessages.publishLabel)}
                     data-test="publishPollingLabel"
                   >
-                    Publish Poll
+                    {intl.formatMessage(intlMessages.publishLabel)}
                   </button>
 
                   <button
@@ -261,9 +296,8 @@ class LiveResult extends PureComponent {
                       Session.set('resetPollPanel', true);
                       stopPoll();
                     }}
-                    label={intl.formatMessage(intlMessages.cancelPollLabel)}
                     data-test="cancelPollLabel">
-                    Cancel
+                    {intl.formatMessage(intlMessages.cancelPollLabel)}
                   </button>
                 </div>
               ) : (
@@ -276,7 +310,7 @@ class LiveResult extends PureComponent {
                   color="primary"
                   data-test="restartPoll"
                   className={styles.createButton}>
-                  Restart Poll
+                  {intl.formatMessage(intlMessages.pollrestartLabel)}
                 </button>
               )
             }
@@ -367,8 +401,8 @@ class LiveResult extends PureComponent {
                         }
                         <span className={styles.ansBoxName}>{obj.name}</span>
                       </div>
-                      <div className={styles.ansBoxOption} style={{ color: obj.color, backgroundColor: obj.bgColor }}>{obj.option}</div>
-                      
+                      <div className={styles.ansBoxOption} style={obj.answer === maxKey ? { color: "#44CC88", backgroundColor: "#44CC881A" } : { color: "#7966FA", backgroundColor: "#7966FA1A" }}>{obj.option}</div>
+
                     </div>
                   )
                 })

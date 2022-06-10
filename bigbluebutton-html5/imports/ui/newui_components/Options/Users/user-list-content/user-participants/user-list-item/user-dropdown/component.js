@@ -356,6 +356,7 @@ class MyUserDropdown extends PureComponent {
       && !meetingIsBreakout
       && isMeteorConnected;
 
+      console.log("userid New", user.userId);
     if (showChatOption) {
       actions.push({
         key: 'activeChat',
@@ -658,7 +659,7 @@ class MyUserDropdown extends PureComponent {
 
     const contents = (
       <div>
-        <UserlistCard value={this.props}/>
+        <UserlistCard {...this.props}/>
       </div>
       // <div
       //   data-test={isMe(user.userId) ? 'userListItemCurrent' : 'userListItem'}

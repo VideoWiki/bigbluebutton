@@ -43,6 +43,15 @@ const intlMessages = defineMessages({
     id: 'app.externalVideo.noteLabel',
     description: 'provides hint about Shared External videos',
   },
+
+  sharevideoTitleLabel: {
+    id: 'app.externalVideo.titleLabel',
+    description: 'share video title label',
+  },
+  sharenowLabel: {
+    id: 'app.externalVideo.sharenowLabel',
+    description: 'share now label',
+  },
 });
 
 class ExternalVideoModal extends Component {
@@ -110,11 +119,11 @@ class ExternalVideoModal extends Component {
         {/* <header data-test="videoModalHeader" className={styles.header}>
           <h3 className={styles.title}>{intl.formatMessage(intlMessages.title)}</h3>
         </header> */}
-        <h3>Share Video</h3>
+        <h3>{intl.formatMessage(intlMessages.sharevideoTitleLabel)}</h3>
 
         <div className={styles.content}>
           <div className={styles.videoUrl}>
-            <h4>External Video URL</h4>
+            <h4>{intl.formatMessage(intlMessages.input)}</h4>
             <label htmlFor="video-modal-input">
               <input
                 id="video-modal-input"
@@ -130,7 +139,7 @@ class ExternalVideoModal extends Component {
           {
             Service.isSharingVideo() ?
               <button className={styles.startBtn} onClick={this.stopExternalVideo}>
-                Stop Sharing
+                {intl.formatMessage(intlMessages.stop)}
               </button>
                :
               <button
@@ -138,7 +147,7 @@ class ExternalVideoModal extends Component {
                 // label={intl.formatMessage(intlMessages.start)}
                 onClick={this.startWatchingHandler}
                 disabled={startDisabled}
-              >Share now</button>
+              >{intl.formatMessage(intlMessages.sharenowLabel)}</button>
           }
 
           <div className={styles.externalVideoNote} id="external-video-note">

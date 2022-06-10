@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
-import Button from '/imports/ui/newui_components/button/component';
+import Button from '/imports/ui/components/button/component';
 import MediaService from '/imports/ui/components/media/service';
 import cx from 'classnames';
 import { styles } from '../styles';
-import ActionButton from '../actions-button/ActionButton';
+import Screenshareon from '../icon/Screenshareon';
+import Videoon from '../icon/Videoon';
+import Presenton from '../icon/Presenton'
+import Screenshareoff from '../icon/Screenshareoff';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -52,27 +55,33 @@ const PresentationOptionsContainer = ({
 
   const isThereCurrentPresentation = hasExternalVideo || hasScreenshare || hasPresentation;
   return (
-    <Button
-      className={cx(!isLayoutSwapped || styles.btn)}
-      icon={`${buttonType}${isLayoutSwapped ? '_off' : ''}`}
-      data-test="restorePresentationButton"
-      label={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationLabel : intlMessages.minimizePresentationLabel)}
-      aria-label={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationLabel : intlMessages.minimizePresentationLabel)}
-      aria-describedby={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationDesc : intlMessages.minimizePresentationDesc)}
-      description={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationDesc : intlMessages.minimizePresentationDesc)}
-      color={!isLayoutSwapped ? "primary" : "default"}
-      hideLabel
-      circle
-      size="lg"
-      onClick={() => toggleSwapLayout(layoutContextDispatch)}
-      id="restore-presentation"
-      ghost={isLayoutSwapped}
+    <button
+      className={styles.iconBg}
       disabled={!isThereCurrentPresentation}
-    />
-
-    // <ActionButton
+      id="restore-presentation"
+      onClick={() => toggleSwapLayout(layoutContextDispatch)}
+    >
+      {isLayoutSwapped && <Screenshareoff/>}
+      {buttonType === "presentation" && !isLayoutSwapped && <Presenton/>}
+      {buttonType === "external-video" && !isLayoutSwapped && <Videoon/>}
+      {buttonType === "desktop" && !isLayoutSwapped && <Screenshareon/>}
+    </button>
+    // <Button
+    //   className={cx(!isLayoutSwapped || styles.btn)}
+    //   icon={`${buttonType}${isLayoutSwapped ? '_off' : ''}`}
+    //   data-test="restorePresentationButton"
+    //   label={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationLabel : intlMessages.minimizePresentationLabel)}
+    //   aria-label={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationLabel : intlMessages.minimizePresentationLabel)}
+    //   aria-describedby={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationDesc : intlMessages.minimizePresentationDesc)}
+    //   description={intl.formatMessage(isLayoutSwapped ? intlMessages.restorePresentationDesc : intlMessages.minimizePresentationDesc)}
+    //   color={!isLayoutSwapped ? "primary" : "default"}
+    //   hideLabel
+    //   circle
+    //   size="lg"
     //   onClick={() => toggleSwapLayout(layoutContextDispatch)}
-    //   icon={isLayoutSwapped ? "":""}
+    //   id="restore-presentation"
+    //   ghost={isLayoutSwapped}
+    //   disabled={!isThereCurrentPresentation}
     // />
   );
 };

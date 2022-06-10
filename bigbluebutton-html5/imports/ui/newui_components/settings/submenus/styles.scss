@@ -2,6 +2,7 @@
 @import '/imports/ui/stylesheets/mixins/_indicators';
 @import '/imports/ui/components/loading-screen/styles';
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .title {
   color: var(--color-gray-dark);
@@ -135,9 +136,9 @@
 }
 
 .saveSettingButton {
-  background: #F4F6F8;
+  background: $buttonBgLight;
   border-radius: 6px;
-  color: #000000;
+  color: $buttonBgDark;
   margin-top: 10px;
   padding: 10px;
   border: none;
@@ -152,6 +153,6 @@
   transition: 0.2s ease;
 }
 .saveSettingButton:hover {
-  color: #ffffff;
-  background-color: #000000;
+  color: $buttonBgLight;
+  background-color: $buttonBgDark;
 }

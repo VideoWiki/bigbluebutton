@@ -38,6 +38,11 @@ const intlMessages = defineMessages({
   responsePlaceholder: {
     id: 'app.polling.responsePlaceholder',
   },
+
+  pollingTitleLabel: {
+    id: 'app.poll.pollingTitleLabel',
+    description: 'Polling Title Label'
+  },
 });
 
 const validateInput = (i) => {
@@ -231,7 +236,7 @@ class Polling extends Component {
       // </div>
       <div>
         <div className={styles.createClassWrapper}>
-          <h1>Poll</h1>
+          <h1>{intl.formatMessage(intlMessages.pollingTitleLabel)}</h1>
           <div className={styles.createBox}>
             <h3>{question}</h3>
 

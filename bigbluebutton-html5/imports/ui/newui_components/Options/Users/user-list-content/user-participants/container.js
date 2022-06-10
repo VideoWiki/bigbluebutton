@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import UserListService from '../../service';
+import UserListService from '/imports/ui/components/user-list/service';
 import MyUserParticipants from './component';
 import { meetingIsBreakout } from '/imports/ui/components/app/service';
-import ChatService from '/imports/ui/newui_components/chat/service';
+import ChatService from '/imports/ui/components/chat/service';
 
 const MyUserParticipantsContainer = (props) => <MyUserParticipants {...props} />;
 

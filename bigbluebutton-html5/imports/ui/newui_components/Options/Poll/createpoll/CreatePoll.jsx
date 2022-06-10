@@ -186,6 +186,23 @@ const intlMessages = defineMessages({
     id: 'app.poll.emptyPollOpt',
     description: 'screen reader for blank poll option',
   },
+
+  createpollTitle: {
+    id: 'app.poll.pollTitleLabel',
+    description: 'create poll title',
+  },
+  askquesLabel: {
+    id: 'app.poll.askquesLabel',
+    description: 'Ask Question Label',
+  },
+  quesplaceholderLabel: {
+    id: 'app.poll.quesplaceholderLabel',
+    description: 'question placeholder label',
+  },
+  choiceLabel: {
+    id: 'app.poll.choiceLabel',
+    description: 'Choice Label',
+  },
 });
 
 function CreatePoll(props) {
@@ -277,17 +294,18 @@ function CreatePoll(props) {
   }
 
   const renderPollOptions = () => {
+    const {intl} = props;
     return (
       < div className="createClass">
         <div className={styles.createClassWrapper}>
-          <h1>Create Poll</h1>
+          <h1>{intl.formatMessage(intlMessages.createpollTitle)}</h1>
           <div className={styles.createBox}>
-            <h3>Ask a Question</h3>
-            <input className={styles.quesInput} onChange={handleTextareaChange} type="text" placeholder='Write your question here...' />
+            <h3>{intl.formatMessage(intlMessages.askquesLabel)}</h3>
+            <input className={styles.quesInput} onChange={handleTextareaChange} type="text" placeholder={intl.formatMessage(intlMessages.quesplaceholderLabel)} />
             {
               state.optList.map((obj, pos) => {
                 return <div className={styles.addChoiceTab}>
-                  <input className={styles.choiceInp} onChange={(e) => handleInputChange(e, pos)} type="text" placeholder={`Choice ${pos + 1}`} value={obj.val} />
+                  <input className={styles.choiceInp} onChange={(e) => handleInputChange(e, pos)} type="text" placeholder={`${intl.formatMessage(intlMessages.choiceLabel)} ${pos + 1}`} value={obj.val} />
                   {pos === state.optList.length - 1 &&
                     <button disabled={state.optList.length == 4} className={styles.addButton} onClick={handleAddOption}>+</button>}
                 </div>
@@ -295,7 +313,7 @@ function CreatePoll(props) {
             }
             <button className={styles.createButton}
               onClick={handleCreatePoll}
-            >Create Poll</button>
+            >{intl.formatMessage(intlMessages.createpollTitle)}</button>
           </div>
         </div>
       </div>

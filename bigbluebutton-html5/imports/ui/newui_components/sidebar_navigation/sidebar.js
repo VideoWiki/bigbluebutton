@@ -6,7 +6,7 @@ import { styles } from "./styles";
 const MySidebar = (props) => {
 
     const iconTypes = ["chat", "user", "document", "newbreakoutroom", "poll", "video", "presentation", "settings", "waitingusers"];
-    const { layoutContextState, layoutContextDispatch } = props;
+    const { layoutContextState, layoutContextDispatch, intl} = props;
     const { input } = layoutContextState;
 
     return (<div className={styles.OuterSideBox}>
@@ -15,7 +15,7 @@ const MySidebar = (props) => {
         </div>
         <div className={styles.IconOuter}>
             {iconTypes.map((item, id) => (
-                <IconBox key={id} icon={item} {...input} 
+                <IconBox key={id} intl={intl} icon={item} {...input} 
                 contextDispatch={layoutContextDispatch} 
                 />
             ))}

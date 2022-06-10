@@ -1,10 +1,12 @@
 import React from "react";
 import ChatContainer from '/imports/ui/newui_components/chat/container';
+// import ChatContainer from '/imports/ui/components/chat/container';
 import { LayoutContextFunc } from "../../components/layout/context";
 import BreakoutRoom from '/imports/ui/newui_components/actions-bar/create-breakout-room/container';
 import NewBreakoutRoom from './newbreakoutroom/container.jsx';
 import { styles } from "./styles.scss";
-import UsersContainer from "./Users/container"
+// import UsersContainer from "./Users/container"
+import UsersContainer from "/imports/ui/components/user-list/container"
 import ExtVideoPlayer from "./external-video-player/modal/container";
 import PollContainer from "./Poll/PollContainer";
 import NoteContainer from './note/container'

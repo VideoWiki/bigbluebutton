@@ -78,7 +78,7 @@ class UserMessages extends PureComponent {
     } = this.props;
 
     let index = -1;
-
+    console.log("activechats", activeChats);
     return activeChats.map(chat => (
       <CSSTransition
         classNames={listTransition}

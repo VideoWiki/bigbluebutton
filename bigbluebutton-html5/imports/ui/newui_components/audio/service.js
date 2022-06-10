@@ -62,7 +62,7 @@ const init = (messages, intl) => {
     voiceBridge,
     microphoneLockEnforced,
   };
-
+  console.log("userD", userData)
   return AudioManager.init(userData, audioEventHandler);
 };
 

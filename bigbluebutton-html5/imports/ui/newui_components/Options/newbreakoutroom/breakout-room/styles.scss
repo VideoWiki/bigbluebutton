@@ -2,6 +2,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/mixins/_indicators";
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .panel {
   // @include scrollbox-vertical();
@@ -238,10 +239,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #7816F7;
-  color: white;
+  background: $sidebarIconDark;
+  color: $colorWhite;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid $colorWhite;
 }
 .ImageGroup{
   margin-top: 1rem;
@@ -260,7 +261,7 @@
   margin-top: 1rem;
 }
 .PlusButton:hover .add,.PlusButton:hover{
-  stroke: white;
+  stroke: $colorWhite;
   background-color: #44CC88;
   cursor: pointer;
   transition-duration: 0.2s;

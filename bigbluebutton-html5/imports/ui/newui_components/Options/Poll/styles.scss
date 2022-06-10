@@ -1,3 +1,5 @@
+@import "/imports/ui/newui_components/css/variables.scss";
+
 .pollContainer{
     width: 350px;
     font-family: 'Montserrat';
@@ -16,7 +18,7 @@
     padding-bottom: 20px;
 }
 .createBox{
-    background-color: white;
+    background-color: $colorWhite;
     padding: 15px;
     border-radius: 12px;
     outline: none;
@@ -55,8 +57,8 @@
     transition: 0.2s ease;
 }
 .addButton:hover{
-    background-color: black;
-    color: white;
+    background-color: $buttonBgDark;
+    color: $buttonBgLight;
 }
 
 .createButton{
@@ -76,8 +78,8 @@
     transition: 0.2s ease;
 }
 .createButton:hover{
-    background-color: black;
-    color: white;
+    background-color: $buttonBgDark;
+    color: $buttonBgLight;
 }
 
 .createClass h1{
@@ -107,8 +109,8 @@
     transition: 0.2s ease;
 }
 .liveFormBttn:hover{
-    background-color: black;
-    color: white;
+    background-color: $buttonBgDark;
+    color: $buttonBgLight;
 }
 //live poll
 .pollBar {
@@ -210,7 +212,7 @@
     justify-content: center;
     font-size: 18px;
     background-color: red;
-    color: white;
+    color: $colorWhite;
 }
 .ansBoxLeft img{
     height: 38px;
@@ -256,7 +258,7 @@
     line-height: 20px;
     letter-spacing: -0.02em;
     margin-right: 10px;
-    color: #FFFFFF;
+    color: $colorWhite;
     display: flex;
     align-items: center;
     justify-content: center;

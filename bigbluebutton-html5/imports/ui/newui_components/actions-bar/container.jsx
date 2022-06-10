@@ -8,8 +8,8 @@ import PresentationService from '/imports/ui/components/presentation/service';
 import Presentations from '/imports/api/presentations';
 import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
 import ActionsBar from './component';
-import Service from './service';
-import UserListService from '/imports/ui/components/user-list/service'; //import from newuicomponents to components
+import Service from '/imports/ui/components/actions-bar/service';
+import UserListService from '/imports/ui/components/user-list/service';
 import ExternalVideoService from '/imports/ui/components/external-video-player/service';
 import CaptionsService from '/imports/ui/components/captions/service';
 import LayoutContext from '/imports/ui/components/layout/context';

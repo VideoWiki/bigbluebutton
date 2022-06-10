@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import VideoProvider from './component';
-import VideoService from './service';
+import VideoService from '/imports/ui/components/video-provider/service';
 
 const VideoProviderContainer = ({ children, ...props }) => {
   const { streams } = props;

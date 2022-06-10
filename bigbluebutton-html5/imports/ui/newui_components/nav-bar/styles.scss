@@ -1,4 +1,5 @@
 @import "../../stylesheets/variables/breakpoints";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 :root {
   --mobile-nav-height: 5rem;
@@ -30,11 +31,15 @@
 }
 
 .left,
-.right,
-.center {
+.right {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+}
+.center {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -94,7 +99,7 @@
 }
 
 .NavToggle {
-  background: #F0F1F3;
+  background: $actionbarShadow;
   border: none;
   border-radius: 5px;
   height: 2rem;
@@ -105,8 +110,8 @@
 .NavToggle:hover,
 .NavToggle:hover .arrowLeft,
 .NavToggle:hover .arrowRight {
-  background-color: #9EA5AF;
-  color: #F0F1F3;
+  background-color: $actionbarShadowDark;
+  color: $actionbarShadow;
   transition-duration: 0.2s;
 }
 
@@ -162,4 +167,13 @@
 
 .leaveMeetingButton {
   color: var(--color-danger) !important;
+}
+
+.dropdownbtn {
+  display: flex;
+  background: none;
+  border: none;
+  outline: none;
+  color: $primaryColor;
+  cursor: pointer;
 }

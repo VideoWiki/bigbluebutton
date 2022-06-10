@@ -862,7 +862,7 @@ class Presentation extends PureComponent {
           left: presentationBounds.left,
           right: presentationBounds.right,
           width: presentationBounds.width,
-          height: presentationBounds.height,
+          // height: presentationBounds.height,
           zIndex: fullscreenContext ? presentationBounds.zIndex : undefined,
           // backgroundColor: '#06172A',
         }}
@@ -880,7 +880,7 @@ class Presentation extends PureComponent {
           <div
             className={styles.svgContainer}
             style={{
-              height: svgHeight + toolbarHeight,
+              height: svgHeight + toolbarHeight - 10,
             }}
           >
             {showSlide && svgWidth > 0 && svgHeight > 0

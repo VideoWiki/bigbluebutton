@@ -9,6 +9,9 @@ import { styles } from './styles';
 import { validIOSVersion } from '/imports/ui/components/app/service';
 import deviceInfo from '/imports/utils/deviceInfo';
 import { debounce } from 'lodash';
+
+import Webcamon from './icon/Webcamon'
+import Webcamoff from './icon/Webcamoff'
 // import ActionButton from '../../actions-bar-new/actions-button/ActionButton';
 
 const ENABLE_WEBCAM_SELECTOR_BUTTON = Meteor.settings.public.app.enableWebcamSelectorButton;
@@ -67,6 +70,7 @@ const JoinVideoButton = ({
     && (!VideoService.isMultipleCamerasEnabled() || shouldEnableWebcamSelectorButton);
 
   const handleOnClick = debounce(() => {
+    console.log("play")
     if (!validIOSVersion()) {
       return VideoService.notify(intl.formatMessage(intlMessages.iOSWarning));
     }
@@ -91,18 +95,31 @@ const JoinVideoButton = ({
 
   const renderEmojiButton = () => (
     shouldEnableWebcamSelectorButton
-      && (
+    && (
       <ButtonEmoji
         onClick={handleOpenAdvancedOptions}
         emoji="device_list_selector"
         hideLabel
         label={intl.formatMessage(intlMessages.advancedVideo)}
       />
-      )
+    )
   );
 
   return (
-    <div className={styles.offsetBottom}>
+    <>
+    <button
+      className={styles.iconBg}
+      onClick={handleOnClick}
+      disabled={!!disableReason}
+      data-test={hasVideoStream ? 'leaveVideo' : 'joinVideo'}
+    >
+      {
+        hasVideoStream ? <Webcamon /> : <Webcamoff />
+      }
+      {renderEmojiButton()}
+
+    </button>
+    {/* <div className={styles.offsetBottom}>
       <Button
         label={label}
         data-test={hasVideoStream ? 'leaveVideo' : 'joinVideo'}
@@ -117,11 +134,8 @@ const JoinVideoButton = ({
         disabled={!!disableReason}
       />
       {renderEmojiButton()}
-    </div>
-    
-    // <ActionButton
-    //     icon={hasVideoStream ? "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/webcam.svg" : "https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/room_2.4/webcam-off.svg"} 
-    //   />
+    </div> */}
+    </>
   );
 };
 

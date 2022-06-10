@@ -4,35 +4,17 @@ import { defineMessages, injectIntl } from 'react-intl';
 import _ from 'lodash';
 import cx from 'classnames';
 import deviceInfo from '/imports/utils/deviceInfo';
-import Button from '/imports/ui/newui_components/button/component';
+import Button from '/imports/ui/components/button/component';
 import { Session } from 'meteor/session';
-import Modal from '/imports/ui/newui_components/modal/HalfScreen/component';
-import { withModalMounter } from '/imports/ui/newui_components/modal/service';
+import Modal from '/imports/ui/components/modal/fullscreen/component';
+import { withModalMounter } from '/imports/ui/components/modal/service';
 import HoldButton from '/imports/ui/components/presentation/presentation-toolbar/zoom-tool/holdButton/component';
 import SortList from './sort-user-list/component';
 import styles from './styles';
-import Plus from '../../Options/BreakoutRoom/Icons/Plus';
-import BreakoutRoomContainer from "../../breakout-room/container";
 
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
 const intlMessages = defineMessages({
-  modalClose: {
-    id: 'app.modal.close',
-    description: 'Close',
-  },
-  modalCloseDescription: {
-    id: 'app.modal.close.description',
-    description: 'Disregards changes and closes the modal',
-  },
-  modalDone: {
-    id: 'app.modal.confirm',
-    description: 'Close',
-  },
-  modalDoneDescription: {
-    id: 'app.modal.confirm.description',
-    description: 'Disregards changes and closes the modal',
-  },
   breakoutRoomTitle: {
     id: 'app.createBreakoutRoom.title',
     description: 'modal title',
@@ -210,7 +192,6 @@ class BreakoutRoom extends PureComponent {
       users: [],
       durationTime: 15,
       freeJoin: false,
-      roomNameDuplicatedIsValid: false,
       formFillLevel: 1,
       roomNamesChanged: [],
       roomSelected: 0,
@@ -222,14 +203,12 @@ class BreakoutRoom extends PureComponent {
       record: false,
       durationIsValid: true,
       breakoutJoinedUsers: null,
-      WantCreate: true,
-      selectedUsers: 0
     };
+
     this.btnLevelId = _.uniqueId('btn-set-level-');
 
     this.handleMoveEvent = this.handleMoveEvent.bind(this);
     this.handleShiftUser = this.handleShiftUser.bind(this);
-    this.update = this.update.bind(this);
   }
 
   componentDidMount() {
@@ -246,7 +225,6 @@ class BreakoutRoom extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevstate) {
-    console.log("states ",this.state);
     if (this.listOfUsers) {
       for (let i = 0; i < this.listOfUsers.children.length; i += 1) {
         const roomWrapperChildren = this.listOfUsers.children[i].getElementsByTagName('div');
@@ -408,7 +386,7 @@ class BreakoutRoom extends PureComponent {
       freeJoin,
       sequence: seq,
     }));
-    console.log("free",freeJoin);
+
     createBreakoutRoom(rooms, durationTime, record);
     Session.set('isUserListOpen', true);
   }
@@ -455,7 +433,7 @@ class BreakoutRoom extends PureComponent {
     const { getBreakouts } = this.props;
     this.setState({
       numberOfRooms: getBreakouts().length,
-      formFillLevel: 1,
+      formFillLevel: 2,
     });
   }
 
@@ -700,8 +678,7 @@ class BreakoutRoom extends PureComponent {
       </div>
     );
   }
-  
-  //RoomForm
+
   renderBreakoutForm() {
     const {
       intl,
@@ -724,10 +701,7 @@ class BreakoutRoom extends PureComponent {
                 && styles.withError)}
               aria-hidden
             >
-              Rooms
-              {
-                // intl.formatMessage(intlMessages.numberOfRooms)
-              }
+              {intl.formatMessage(intlMessages.numberOfRooms)}
             </p>
             <select
               id="numberOfRooms"
@@ -743,12 +717,9 @@ class BreakoutRoom extends PureComponent {
               }
             </select>
           </div>
-          <div htmlFor="breakoutRoomTime" className={!durationIsValid ? styles.changeToWarn : null}>
+          <label htmlFor="breakoutRoomTime" className={!durationIsValid ? styles.changeToWarn : null}>
             <p className={styles.labelText} aria-hidden>
-              Duration
-              {
-                // intl.formatMessage(intlMessages.duration)
-              }
+              {intl.formatMessage(intlMessages.duration)}
             </p>
             <div className={styles.durationArea}>
               <input
@@ -760,18 +731,64 @@ class BreakoutRoom extends PureComponent {
                 onBlur={this.blurDurationTime}
                 aria-label={intl.formatMessage(intlMessages.duration)}
               />
-              <label className={styles.mylabel}>Minutes</label>
+              <HoldButton
+                key="decrease-breakout-time"
+                exec={this.decreaseDurationTime}
+                minBound={MIN_BREAKOUT_ROOMS}
+                value={durationTime}
+                className={styles.btnStyle}
+              >
+                <Button
+                  label={intl.formatMessage(intlMessages.minusRoomTime)}
+                  aria-label={
+                    `${intl.formatMessage(intlMessages.minusRoomTime)} ${intl.formatMessage(intlMessages.roomTime, { 0: durationTime - 1 })}`
+                  }
+                  icon="substract"
+                  onClick={() => { }}
+                  hideLabel
+                  circle
+                  size="sm"
+                />
+              </HoldButton>
+              <HoldButton
+                key="increase-breakout-time"
+                exec={this.increaseDurationTime}
+                className={styles.btnStyle}
+              >
+                <Button
+                  label={intl.formatMessage(intlMessages.addRoomTime)}
+                  aria-label={
+                    `${intl.formatMessage(intlMessages.addRoomTime)} ${intl.formatMessage(intlMessages.roomTime, { 0: durationTime + 1 })}`
+                  }
+                  icon="add"
+                  onClick={() => { }}
+                  hideLabel
+                  circle
+                  size="sm"
+                />
+              </HoldButton>
             </div>
-          </div>
+            <span className={durationIsValid ? styles.dontShow : styles.leastOneWarn}>
+              {
+                intl.formatMessage(
+                  intlMessages.minimumDurationWarnBreakout,
+                  { 0: MIN_BREAKOUT_TIME },
+                )
+              }
+            </span>
+
+          </label>
+          <Button
+            data-test="randomlyAssign"
+            label={intl.formatMessage(intlMessages.randomlyAssign)}
+            aria-describedby="randomlyAssignDesc"
+            className={styles.randomlyAssignBtn}
+            onClick={this.onAssignRandomly}
+            size="sm"
+            color="default"
+            disabled={!numberOfRoomsIsValid}
+          />
         </div>
-        <span className={durationIsValid ? styles.dontShow : styles.leastOneWarn}>
-          {
-            intl.formatMessage(
-              intlMessages.minimumDurationWarnBreakout,
-              { 0: MIN_BREAKOUT_TIME },
-            )
-          }
-        </span>
         <span className={!numberOfRoomsIsValid
           ? styles.withError : styles.dontShow}
         >
@@ -789,7 +806,6 @@ class BreakoutRoom extends PureComponent {
       users,
       roomSelected,
       breakoutJoinedUsers,
-      // selectedUsers
     } = this.state;
     const { isInvitation } = this.props;
 
@@ -798,8 +814,6 @@ class BreakoutRoom extends PureComponent {
         confirm={() => this.setState({ formFillLevel: 2 })}
         users={users}
         room={roomSelected}
-        // selectedUsers={selectedUsers}
-        // updateState={this.update}
         breakoutJoinedUsers={isInvitation && breakoutJoinedUsers}
         onCheck={this.changeUserRoom}
         onUncheck={(userId) => this.changeUserRoom(userId, 0)}
@@ -825,7 +839,7 @@ class BreakoutRoom extends PureComponent {
             checked={freeJoin}
             aria-label={intl.formatMessage(intlMessages.freeJoinLabel)}
           />
-          <span className={styles.ExtraCheck} aria-hidden>{intl.formatMessage(intlMessages.freeJoinLabel)}</span>
+          <span aria-hidden>{intl.formatMessage(intlMessages.freeJoinLabel)}</span>
         </label>
         {
           isBreakoutRecordable ? (
@@ -838,7 +852,7 @@ class BreakoutRoom extends PureComponent {
                 checked={record}
                 aria-label={intl.formatMessage(intlMessages.record)}
               />
-              <span className={styles.ExtraCheck} aria-hidden>
+              <span aria-hidden>
                 {intl.formatMessage(intlMessages.record)}
               </span>
             </label>
@@ -913,7 +927,7 @@ class BreakoutRoom extends PureComponent {
     const onClick = (roomNumber) => this.setState({ formFillLevel: 3, roomSelected: roomNumber });
     return (
       <div className={styles.listContainer}>
-        <span className={styles.roomList}>
+        <span>
           {
             new Array(numberOfRooms).fill(1).map((room, idx) => (
               <div className={styles.roomItem}>
@@ -932,13 +946,14 @@ class BreakoutRoom extends PureComponent {
             ))
           }
         </span>
+        {isInvitation || this.renderButtonSetLevel(1, intl.formatMessage(intlMessages.backLabel))}
       </div>
     );
   }
 
   renderErrorMessages() {
     const {
-      intl
+      intl,
     } = this.props;
     const {
       leastOneUserIsValid,
@@ -980,7 +995,7 @@ class BreakoutRoom extends PureComponent {
     return [
       this.renderBreakoutForm(),
       this.renderCheckboxes(),
-      // this.renderRoomsGrid(),
+      this.renderRoomsGrid(),
     ];
   }
 
@@ -1004,7 +1019,8 @@ class BreakoutRoom extends PureComponent {
     return [
       this.renderErrorMessages(),
       this.renderBreakoutForm(),
-      this.renderCheckboxes()
+      this.renderCheckboxes(),
+      this.renderButtonSetLevel(2, intl.formatMessage(intlMessages.nextLabel)),
     ];
   }
 
@@ -1029,27 +1045,25 @@ class BreakoutRoom extends PureComponent {
     );
   }
 
-  update(nextState) {
-    this.setState(nextState);
-  }
-
   render() {
-    const { intl, isInvitation, amIModerator } = this.props;
+    const { intl, isInvitation } = this.props;
+    console.log(isInvitation);
     const {
       preventClosing,
       leastOneUserIsValid,
       numberOfRoomsIsValid,
-      durationIsValid,
       roomNameDuplicatedIsValid,
       roomNameEmptyIsValid,
-      formFillLevel,
-      WantCreate
+      durationIsValid,
     } = this.state;
 
     const { isMobile } = deviceInfo;
 
-    return (<div>
+    return (
       <Modal
+        overlayClassName={styles.overlay}
+        className={styles.modal}
+        hideBorder
         title={
           isInvitation
             ? intl.formatMessage(intlMessages.invitationTitle)
@@ -1066,33 +1080,21 @@ class BreakoutRoom extends PureComponent {
               || !roomNameDuplicatedIsValid
               || !roomNameEmptyIsValid
               || !durationIsValid
+            ,
           }
         }
         dismiss={{
           callback: this.handleDismiss,
           label: intl.formatMessage(intlMessages.dismissLabel),
         }}
-        updateState={this.update}
         preventClosing={preventClosing}
-        {...{ amIModerator, isInvitation, formFillLevel, WantCreate }}
-        Validity={!durationIsValid || !numberOfRoomsIsValid}
+
       >
-        {amIModerator && <div>
-          <div>
-            {!isInvitation && <div className={styles.AlignCorners}>
-              <div className={styles.createBreakoutHeading}>Create breakout rooms</div>
-              {!WantCreate && <div className={styles.PlusButton} onClick={() => this.setState({ WantCreate: true })}>
-                <Plus />
-              </div>}
-            </div>}
-          </div>
-          {WantCreate && this.renderMobile()}
-        </div>}
+        <div className={styles.content}>
+          {isInvitation || this.renderTitle()}
+          {isMobile ? this.renderMobile() : this.renderDesktop()}
+        </div>
       </Modal>
-      <div className={styles.AlignCenter}>
-        {(formFillLevel === 1) && <BreakoutRoomContainer {...{ WantCreate, isInvitation }} />}
-      </div>
-    </div>
     );
   }
 }

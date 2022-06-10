@@ -17,7 +17,7 @@ import Random from "../Icons/Random";
 import RoomGroup from "../rooms/RoomGroup"
 
 import styles from '../styles';
-import BreakoutroomHeading from '../../BreakoutRoom/BreakoutRoomHeading';
+import BreakoutroomHeading from '../BreakoutRoomHeading';
 import SelectUserModal from '../select-user/SelectUserModal';
 
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
@@ -138,7 +138,21 @@ const intlMessages = defineMessages({
   roomNameInputDesc: {
     id: 'app.createBreakoutRoom.roomNameInputDesc',
     description: 'aria description for room name change',
-  }
+  },
+
+  roomLabels: {
+    id: 'app.createBreakoutRoom.roomLabels',
+    description: 'room label',
+  },
+  createRoomLabel: {
+    id: 'app.createBreakoutRoom.createRoom',
+    description: 'Create Room',
+  },
+
+  selectRandUserLabel: {
+    id: 'app.actionsBar.actionsDropdown.selectRandUserLabel',
+    description: 'Label for selecting a random user',
+  },
 });
 
 const BREAKOUT_LIM = Meteor.settings.public.app.breakouts.breakoutRoomLimit;
@@ -223,7 +237,7 @@ class BreakoutRoom extends PureComponent {
   }
 
   componentDidMount() {
-    const { isInvitation, breakoutJoinedUsers} = this.props;
+    const { isInvitation, breakoutJoinedUsers } = this.props;
     this.setRoomUsers();
     if (isInvitation) {
       this.setInvitationConfig();
@@ -236,13 +250,14 @@ class BreakoutRoom extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevstate) {
+    console.log("intl", this.props.intl)
     if (this.listOfUsers) {
       for (let i = 0; i < this.listOfUsers.children.length; i += 1) {
         const roomWrapperChildren = this.listOfUsers.children[i].getElementsByTagName('div');
         const roomList = roomWrapperChildren[roomWrapperChildren.length > 1 ? 1 : 0];
         roomList.addEventListener('keydown', this.handleMoveEvent, true);
       }
-    } 
+    }
     console.log(this.props, this.state);
     const { numberOfRooms } = this.state;
     const { users } = this.props;
@@ -400,7 +415,7 @@ class BreakoutRoom extends PureComponent {
     }));
 
     createBreakoutRoom(rooms, durationTime, record);
-    changeFormLevel({formFillLevel: 7})
+    changeFormLevel({ formFillLevel: 7 })
     Session.set('isUserListOpen', true);
   }
 
@@ -443,11 +458,11 @@ class BreakoutRoom extends PureComponent {
   }
 
   setInvitationConfig() {
-    const { getBreakouts, changeFormLevel} = this.props;
+    const { getBreakouts, changeFormLevel } = this.props;
     this.setState({
       numberOfRooms: getBreakouts().length,
     });
-    changeFormLevel({formFillLevel: 2})
+    changeFormLevel({ formFillLevel: 2 })
   }
 
   setRoomUsers() {
@@ -820,7 +835,7 @@ class BreakoutRoom extends PureComponent {
       roomSelected,
       breakoutJoinedUsers,
     } = this.state;
-    const { isInvitation, changeFormLevel} = this.props;
+    const { isInvitation, changeFormLevel } = this.props;
 
     return (
       <SortList
@@ -935,11 +950,11 @@ class BreakoutRoom extends PureComponent {
   }
 
   renderRoomSortList() {
-    const { intl, isInvitation, changeFormLevel} = this.props;
+    const { intl, isInvitation, changeFormLevel } = this.props;
     const { numberOfRooms } = this.state;
     const onClick = (roomNumber) => {
-      this.setState({roomSelected: roomNumber });
-      changeFormLevel({formFillLevel: 3});
+      this.setState({ roomSelected: roomNumber });
+      changeFormLevel({ formFillLevel: 3 });
     }
     return (
       <div className={styles.listContainer}>
@@ -1016,7 +1031,7 @@ class BreakoutRoom extends PureComponent {
   }
 
   renderMobile() {
-    const { intl, formFillLevel} = this.props;
+    const { intl, formFillLevel } = this.props;
     if (formFillLevel === 2) {
       return [
         this.renderErrorMessages(),
@@ -1040,7 +1055,7 @@ class BreakoutRoom extends PureComponent {
   }
 
   renderButtonSetLevel(level, label) {
-    const {changeFormLevel} = this.props;
+    const { changeFormLevel } = this.props;
     return (
       <Button
         color="primary"
@@ -1061,15 +1076,15 @@ class BreakoutRoom extends PureComponent {
     );
   }
 
-  updateState(state){
-    this.setState({...state})
+  updateState(state) {
+    this.setState({ ...state })
   }
 
-  renderCreateRoom(){
+  renderCreateRoom() {
     const {
       intl,
       isInvitation,
-      isBreakoutRecordable 
+      isBreakoutRecordable
     } = this.props;
     const {
       numberOfRooms,
@@ -1083,7 +1098,7 @@ class BreakoutRoom extends PureComponent {
     if (isInvitation) return null;
     return (
       <div
-      className={styles.breakoutRoomFlow}
+        className={styles.breakoutRoomFlow}
       // overlayClassName={styles.overlay}
       // className={styles.modal}
       // hideBorder
@@ -1113,76 +1128,82 @@ class BreakoutRoom extends PureComponent {
       // preventClosing={preventClosing}
 
       >
-        <BreakoutroomHeading/>
+        <BreakoutroomHeading intl={intl} />
         {
           this.props.formFillLevel === 1 &&
           <>{/* <div className={styles.content}>
           {isInvitation || this.renderTitle()}
           {isMobile ? this.renderMobile() : this.renderDesktop()}
         </div> */}
-        
-        <div className={styles.centerAlign1}>
-          <div className={styles.createBreakOutBox}>
-            <div className={styles.createBreakoutHeading}>{intl.formatMessage(intlMessages.breakoutRoomTitle)}</div>
-            <div className={styles.BreakoutInput}>
-              <div>
-                <div className={styles.InputHeadings}>Rooms</div>
-                <select className={styles.InputRooms}
-                  id="numberOfRooms"
-                  name="numberOfRooms"
-                  value={numberOfRooms}
-                  onChange={this.changeNumberOfRooms}
-                  aria-label={intl.formatMessage(intlMessages.numberOfRooms)}>
-                  {/* <option value="2">2</option>
+
+            <div className={styles.centerAlign1}>
+              <div className={styles.createBreakOutBox}>
+                <div className={styles.createBreakoutHeading}>{intl.formatMessage(intlMessages.breakoutRoomTitle)}</div>
+                <div className={styles.BreakoutInput}>
+                  <div>
+                    <div className={styles.InputHeadings}>{intl.formatMessage(intlMessages.roomLabels)}</div>
+                    <select className={styles.InputRooms}
+                      id="numberOfRooms"
+                      name="numberOfRooms"
+                      value={numberOfRooms}
+                      onChange={this.changeNumberOfRooms}
+                      aria-label={intl.formatMessage(intlMessages.numberOfRooms)}>
+                      {/* <option value="2">2</option>
                             <option value="4">4</option>
                             <option value="8">8</option>
                             <option value="16">16</option> */}
-                  {
-                    _.range(MIN_BREAKOUT_ROOMS, MAX_BREAKOUT_ROOMS + 1).map((item) => (<option key={_.uniqueId('value-')}>{item}</option>))
-                  }
-                </select>
-              </div>
-              <div className={styles.InputBox}>
-                <div className={styles.InputHeadings}>Duration</div>
-                <input className={styles.InputDuration}
-                  type="number"
-                  // value={props.state.durationTime} 
-                  // onChange={handleMinuteChange} 
-                  // type="number"
-                  // className={styles.duration}
-                  min="1"
-                  value={durationTime}
-                  onChange={this.changeDurationTime}
-                  // onBlur={this.blurDurationTime}
-                  aria-label={intl.formatMessage(intlMessages.duration)}
-                />
-                <label className={styles.mylabel}>Minutes</label>
+                      {
+                        _.range(MIN_BREAKOUT_ROOMS, MAX_BREAKOUT_ROOMS + 1).map((item) => (<option key={_.uniqueId('value-')}>{item}</option>))
+                      }
+                    </select>
+                  </div>
+                  <div className={styles.InputBox}>
+                    <div className={styles.InputHeadings}>{intl.formatMessage(intlMessages.duration)}</div>
+                    <input className={styles.InputDuration}
+                      type="number"
+                      // value={props.state.durationTime} 
+                      // onChange={handleMinuteChange} 
+                      // type="number"
+                      // className={styles.duration}
+                      min="1"
+                      value={durationTime}
+                      onChange={this.changeDurationTime}
+                      // onBlur={this.blurDurationTime}
+                      aria-label={intl.formatMessage(intlMessages.duration)}
+                    />
+                    <label className={styles.mylabel}>Minutes</label>
+                  </div>
+                </div>
+                <div className={styles.centerAlign}>
+                  <div className={styles.Tick}>
+                    <input type="checkbox"
+                      id="freeJoinCheckbox"
+                      className={styles.freeJoinCheckbox}
+                      onChange={this.setFreeJoin}
+                      checked={freeJoin}
+                      aria-label={intl.formatMessage(intlMessages.freeJoinLabel)} />
+                  </div>
+                  <div className={styles.Check}>{intl.formatMessage(intlMessages.freeJoinLabel)}</div>
+                </div>
+                <div className={styles.centerAlign}>
+                  <div className={styles.close} onClick={this.onAssignRandomly}>
+                    <Random />
+                    <div className={styles.sideTooltipWrapper}>
+                      <div className={styles.sidebarTipArrow}></div>
+                      <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.selectRandUserLabel)}</span></div>
+                    </div>
+                  </div>
+                  <div className={styles.create}
+                    onClick={this.onCreateBreakouts}
+                  >{intl.formatMessage(intlMessages.createRoomLabel)}</div>
+                </div>
               </div>
             </div>
-            <div className={styles.centerAlign}>
-              <div className={styles.Tick}>
-                <input type="checkbox"
-                  id="freeJoinCheckbox"
-                  className={styles.freeJoinCheckbox}
-                  onChange={this.setFreeJoin}
-                  checked={freeJoin}
-                  aria-label={intl.formatMessage(intlMessages.freeJoinLabel)} />
-              </div>
-              <div className={styles.Check}>Allow users to choose a breakout room to join</div>
-            </div>
-            <div className={styles.centerAlign}>
-              <div className={styles.close} onClick={this.onAssignRandomly}><Random /></div>
-              <div className={styles.create} 
-              onClick={this.onCreateBreakouts}
-              >Create Room</div>
-            </div>
-          </div>
-        </div>
-        <RoomGroup {...this.state} updateState={this.updateState} changeFormLevel={this.props.changeFormLevel}/></>
+            <RoomGroup {...this.state} intl={intl} updateState={this.updateState} changeFormLevel={this.props.changeFormLevel} /></>
         }
         {
-          this.props.formFillLevel === 6 && 
-          <SelectUserModal {...this.state} updateState={this.updateState} changeFormLevel={this.props.changeFormLevel}/>
+          this.props.formFillLevel === 6 &&
+          <SelectUserModal {...this.state} updateState={this.updateState} changeFormLevel={this.props.changeFormLevel} />
         }
       </div>
     )

@@ -80,6 +80,31 @@ const intlMessages = defineMessages({
     id: 'app.switch.offLabel',
     description: 'label for toggle switch off state',
   },
+
+  settingsTitleLabel: {
+    id: 'app.settings.titleLabel',
+    description:'Settings title label'
+  },
+  applicationTitleLabel: {
+    id: 'app.submenu.application.applicationSectionTitle',
+    description: 'Application Title Label',
+  },
+  notificationTitlelabel: {
+    id: 'app.settings.notificationTab.label',
+    description:'Notification Title Label'
+  },
+  datasavingsTitlelabel: {
+    id: 'app.settings.datasavingsTab.label',
+    description:'Data Savings Title Label'
+  },
+  guestpolicyTitlelabel: {
+    id: 'app.userList.userOptions.guestPolicyLabel',
+    description:'Guest Policy Title Label'
+  },
+  lockviewersTitlelabel: {
+    id: 'app.lock-viewers.title',
+    description:'Lock Viewers Title Label'
+  },
 });
 
 const propTypes = {
@@ -309,14 +334,14 @@ class Settings extends Component {
     return (
       <div>
         <div className={styles.settingWrapper}>
-          <h3>Setting</h3>
+          <h3>{intl.formatMessage(intlMessages.settingsTitleLabel)}</h3>
 
           <div className={styles.settingCardWrapper}>
             <div className={styles.settingCard} style={selectedTab == 1 ? { height: 'auto' } : { height: '70px' }}>
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(1) }}>
                 <div className={styles.settingHeadMain}>
                   <AppIcon />
-                  <h4>Application</h4>
+                  <h4>{intl.formatMessage(intlMessages.applicationTitleLabel)}</h4>
                 </div>
                 <ArrowDown />
               </div>
@@ -337,7 +362,7 @@ class Settings extends Component {
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(2) }}>
                 <div className={styles.settingHeadMain}>
                   <NotifiIcon />
-                  <h4>Notification</h4>
+                  <h4>{intl.formatMessage(intlMessages.notificationTitlelabel)}</h4>
                 </div>
                 <ArrowDown />
               </div>
@@ -356,7 +381,7 @@ class Settings extends Component {
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(3) }}>
                 <div className={styles.settingHeadMain}>
                   <DataSavIcon />
-                  <h4>Data Savings</h4>
+                  <h4>{intl.formatMessage(intlMessages.datasavingsTitlelabel)}</h4>
                 </div>
                 <ArrowDown />
               </div>
@@ -373,7 +398,7 @@ class Settings extends Component {
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(4) }}>
                 <div className={styles.settingHeadMain}>
                   <GuestIcon />
-                  <h4>Guest policy</h4>
+                  <h4>{intl.formatMessage(intlMessages.guestpolicyTitlelabel)}</h4>
                 </div>
                 <ArrowDown />
               </div>
@@ -384,7 +409,7 @@ class Settings extends Component {
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(5) }}>
                 <div className={styles.settingHeadMain}>
                   <LockIcon />
-                  <h4>Lock viewers</h4>
+                  <h4>{intl.formatMessage(intlMessages.lockviewersTitlelabel)}</h4>
                 </div>
                 <ArrowDown />
               </div>

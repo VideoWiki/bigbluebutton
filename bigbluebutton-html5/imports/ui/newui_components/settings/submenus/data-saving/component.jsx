@@ -22,6 +22,11 @@ const intlMessages = defineMessages({
     id: 'app.settings.dataSavingTab.description',
     description: 'description of data savings tab',
   },
+
+  savebuttonLabel: {
+    id: 'app.settings.main.save.label',
+    description: 'setting save button label',
+  }
 });
 
 class DataSaving extends BaseMenu {
@@ -97,7 +102,7 @@ class DataSaving extends BaseMenu {
               </div>
             </div>
           </div>
-          <button className={styles.saveSettingButton} onClick={this.saveSetting}>Save</button>
+          <button className={styles.saveSettingButton} onClick={this.saveSetting}>{intl.formatMessage(intlMessages.savebuttonLabel)}</button>
         </div>
       </div>
     );

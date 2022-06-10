@@ -1,4 +1,5 @@
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 :root {
   --systemMessage-background-color: #F9FBFC;
@@ -14,7 +15,7 @@
   [dir="rtl"] & {
     direction: rtl;
   }
-  background-color: #EEF0F5;
+  background-color: $sidebarBgDark;
   width: 94%;
   margin-left: 0.9rem;
 }
@@ -25,7 +26,7 @@
   [dir="rtl"] & {
     direction: rtl;
   }
-  background-color: #EEF0F5;
+  background-color: $sidebarBgDark;
   width: 90%;
   margin-left: 1.4rem;
 }

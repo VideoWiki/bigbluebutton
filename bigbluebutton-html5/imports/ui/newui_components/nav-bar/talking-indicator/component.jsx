@@ -42,6 +42,7 @@ class TalkingIndicator extends PureComponent {
   }
 
   render() {
+    console.log("talkers", this.props);
     const {
       intl,
       talkers,
@@ -78,31 +79,42 @@ class TalkingIndicator extends PureComponent {
       icon = muted ? 'mute' : icon;
 
       return (
-        <Button
-          key={_.uniqueId(`${callerName}-`)}
-          className={cx(style)}
-          onClick={() => this.handleMuteUser(id)}
-          label={callerName}
-          tooltipLabel={!muted && amIModerator
-            ? `${intl.formatMessage(intlMessages.muteLabel)} ${callerName}`
-            : null}
-          data-test={talking ? 'isTalking' : 'wasTalking'}
-          aria-label={ariaLabel}
-          aria-describedby={talking ? 'description' : null}
-          color="primary"
-          icon={icon}
-          size="sm"
-          style={{
-            backgroundColor: color,
-            border: `solid 2px ${color}`,
-          }}
+        <button
+          className={styles.talkingIndicator}
         >
-          {talking ? (
-            <div id="description" className={styles.hidden}>
-              {`${intl.formatMessage(intlMessages.ariaMuteDesc)}`}
-            </div>
-          ) : null}
-        </Button>
+          {talking ?
+            <div className={styles.talkingCircle}>
+              <div className={styles.pulsatingCircle}></div>
+            </div> 
+            : null
+          }
+          <span>{callerName}</span>
+        </button>
+        // <Button
+        //   key={_.uniqueId(`${callerName}-`)}
+        //   className={cx(style)}
+        //   onClick={() => this.handleMuteUser(id)}
+        //   label={callerName}
+        //   tooltipLabel={!muted && amIModerator
+        //     ? `${intl.formatMessage(intlMessages.muteLabel)} ${callerName}`
+        //     : null}
+        //   data-test={talking ? 'isTalking' : 'wasTalking'}
+        //   aria-label={ariaLabel}
+        //   aria-describedby={talking ? 'description' : null}
+        //   color="primary"
+        //   icon={icon}
+        //   size="sm"
+        //   style={{
+        //     backgroundColor: color,
+        //     border: `solid 2px ${color}`,
+        //   }}
+        // >
+        //   {talking ? (
+        //     <div id="description" className={styles.hidden}>
+        //       {`${intl.formatMessage(intlMessages.ariaMuteDesc)}`}
+        //     </div>
+        //   ) : null}
+        // </Button>
       );
     });
 
@@ -130,7 +142,7 @@ class TalkingIndicator extends PureComponent {
         <Button
           key={_.uniqueId('_has__More_')}
           className={cx(style)}
-          onClick={() => {}} // maybe add a dropdown to show the rest of the users
+          onClick={() => { }} // maybe add a dropdown to show the rest of the users
           label="..."
           tooltipLabel={ariaLabel}
           aria-label={ariaLabel}

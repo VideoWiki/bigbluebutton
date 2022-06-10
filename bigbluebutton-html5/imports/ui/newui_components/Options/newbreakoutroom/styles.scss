@@ -1,6 +1,8 @@
+@import "/imports/ui/newui_components/css/variables.scss";
+
 .breakoutRoomFlow{
     height: 100%;
-    background-color:#EEF0F5;
+    background-color: $sidebarBgDark;
     width: 350px;
     position: relative;
 }
@@ -115,7 +117,7 @@
 }
 .close{
     padding: 0.5rem;
-    padding-bottom: 0rem;
+    display: flex;
     width: fit-content;
 }
 .create{
@@ -434,4 +436,57 @@
     color: #FFFFFF;
     margin-left: -0.5rem;
     border: 2px solid white;
+}
+.PlusActions {
+  display: flex;
+}
+.PlusButton{
+  margin-left: 5px;
+}
+
+.sideTooltipWrapper{
+  position: relative;
+  pointer-events: none;
+}
+.sidebarTooltip{
+  height: 23px;
+  position: absolute;
+  background-color: $tooltipBgColor;
+  color: $tooltipColor;
+  top: 0;
+  left: 15px;
+  border-radius: 100px;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.sidebarTipArrow{
+  height: 8px;
+  width: 20px;
+  background-color: $tooltipBgColor;
+  border-radius: 100%;
+  position: absolute;
+  left: 10px;
+  top: 7px;
+}
+.sidebarTooltip span {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  color: $tooltipColor;
+  white-space: nowrap;
+}
+
+.close .sideTooltipWrapper {
+  opacity: 0;
+  z-index: 999;
+  transition: 0.3s all ease-in-out;
+}
+
+.close:hover .sideTooltipWrapper {
+  opacity: 1;
 }

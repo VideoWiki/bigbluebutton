@@ -6,14 +6,14 @@
   --cam-dropdown-width: 70%;
   --audio-indicator-width: 1.12rem;
   --audio-indicator-fs: 75%;
-  position: absolute;
+  // position: absolute;
   width: 100%;
   min-height: var(--video-height);
   height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,7 +66,9 @@
     right: 0;
     bottom: 0;
     left: 0;
-    border: 5px solid var(--color-primary);
+    // border: 5px solid var(--color-primary);
+    border: 5px solid #938b87;
+    border-radius: 10px;
     opacity: 0;
     pointer-events: none;
 
@@ -76,7 +78,7 @@
   }
 
   &.talking::after {
-    opacity: 0.7;
+    opacity: 1;
   }
 }
 
@@ -112,6 +114,7 @@
   vertical-align: middle;
   border-radius: 1px;
   opacity: 1;
+  border-radius: 10px
 }
 
 .loadingText {
@@ -122,6 +125,7 @@
 
 .media {
   @extend %media-area;
+  border-radius: 10px;
 }
 
 .info {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
-import Button from '/imports/ui/newui_components/button/component';
+import Button from '/imports/ui/components/button/component';
 import { styles } from '../styles';
 
 const propTypes = {
@@ -54,17 +54,12 @@ class SortUsers extends Component {
     const {
       onCheck,
       onUncheck,
-      // updateState,
-      // selectedUsers
     } = this.props;
     return (ev) => {
       const check = ev.target.checked;
-      
       if (check) {
-        // updateState({selectedUsers:selectedUsers-1});
         return onCheck(userId, room);
       }
-      // updateState({selectedUsers:selectedUsers+1});
       return onUncheck(userId, room);
     };
   }

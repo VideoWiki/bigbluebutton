@@ -1,5 +1,7 @@
 @import "/imports/ui/stylesheets/variables/breakpoints";
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/stylesheets/mixins/_scrollable";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .tabs {
   @extend %flex-row;
@@ -122,7 +124,7 @@
 
 .settingCard{
   width: 100%;
-  background: #FFFFFF;
+  background: $colorWhite;
   border-radius: 12px;
   display: flex;
   flex-direction: column;

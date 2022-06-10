@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
+import Micoff from './icons/Micoff';
+import Micon from './icons/Micon';
+import Webcamoff from './icons/Webcamoff';
+import Webcamon from './icons/Webcamon';
 import { styles } from './styles'
 
 export default function UserlistCard(props) {
 
-    const [user, setUser] = useState(props.value.user);
+    const LABEL = Meteor.settings.public.user.label;
+    const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
+    const [user, setUser] = useState(props.user);
+    console.log("userlist",props)
     return (
         <div className={styles.userlistcard}>
             <div className={styles.userlistcardWrapper}>
@@ -35,8 +42,14 @@ export default function UserlistCard(props) {
                     {
                         user ?
                             <>
-                                <img className={styles.userMic} src="https://s3.us-east-2.amazonaws.com/video.wiki/media/room_icons/mic_off.svg" />
-                                <img className={styles.userWebcam} src="https://s3.us-east-2.amazonaws.com/video.wiki/media/room_icons/video_off.svg" />
+                            {
+                                props.voiceUser.isVoiceUser && (props.voiceUser.isMuted ? <Micoff/> : <Micon/>)
+                            }
+                            {
+                                props.user.isSharingWebcam ? <Webcamon/> : <Webcamoff/>
+                            }
+                                {/* <img className={styles.userMic} src="https://s3.us-east-2.amazonaws.com/video.wiki/media/room_icons/mic_off.svg" />
+                                <img className={styles.userWebcam} src="https://s3.us-east-2.amazonaws.com/video.wiki/media/room_icons/video_off.svg" /> */}
                             </>
                             : null
                     }

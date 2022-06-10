@@ -551,7 +551,7 @@ class VideoPlayer extends Component {
           top,
           left,
           right,
-          height,
+          height: height-20,
           width,
           pointerEvents: isResizing ? 'none' : 'inherit',
           display: isMinimized && 'none',

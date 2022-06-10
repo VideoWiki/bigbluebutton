@@ -955,5 +955,29 @@
     "app.learningDashboard.pollsTable.anonymousRowName": "Anonymous",
     "app.learningDashboard.statusTimelineTable.title": "Status Timeline",
     "app.learningDashboard.errors.invalidToken": "Invalid session token",
-    "app.learningDashboard.errors.dataUnavailable": "Data is no longer available"
+    "app.learningDashboard.errors.dataUnavailable": "Data is no longer available",
+
+    "app.createBreakoutRoom.roomLabels": "Rooms",
+    "app.createBreakoutRoom.createRoom": "Create Room",
+
+    "app.settings.titleLabel": "Settings", 
+    "app.settings.notificationTab.label": "Notification",
+    "app.settings.datasavingsTab.label": "Data savings",
+    
+    "app.externalVideo.titleLabel": "Share Video",
+    "app.externalVideo.sharenowLabel": "Share now",
+    "app.externalVideo.stop": "Stop sharing",
+
+    "app.presentationUploder.uploadfileLabel" : "Upload File",
+    "app.presentationUploder.presentationLabel" : "Presentation",
+
+    "app.poll.pollTitleLabel": "Create Poll",
+    "app.poll.askquesLabel": "Ask a Question",
+    "app.poll.quesplaceholderLabel": "Write your question here...",
+    "app.poll.choiceLabel": "Choice",
+    "app.poll.pollingTitleLabel": "Poll",
+    "app.poll.pollrestartLabel": "Restart Poll",
+
+    "app.tooltip.copyLinkLabel": "Copy Link",
+    "app.tooltip.copiedLabel": "Link Copied!"
 }

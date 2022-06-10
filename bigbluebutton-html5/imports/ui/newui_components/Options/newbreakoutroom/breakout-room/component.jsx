@@ -13,7 +13,7 @@ import { PANELS, ACTIONS } from '/imports/ui/components/layout/enums';
 import { screenshareHasEnded } from '/imports/ui/components/screenshare/service';
 import UserListService from '/imports/ui/components/user-list/service';
 import AudioManager from '/imports/ui/services/audio-manager';
-import BreakoutroomHeading from '../../BreakoutRoom/BreakoutRoomHeading';
+import BreakoutroomHeading from '../BreakoutRoomHeading';
 import Plus from "../Icons/Plus";
 
 const intlMessages = defineMessages({
@@ -305,43 +305,47 @@ class BreakoutRoom extends PureComponent {
         }, 'joining breakout room audio (main room audio closed)');
       };
     return (
-      <div>
+      <div className={styles.PlusActions}>
         {
           isUserInBreakoutRoom(joinedUsers)
             ? (
-              <span className={styles.alreadyConnected}>
-                {intl.formatMessage(intlMessages.alreadyConnected)}
-              </span>
+              <div className={styles.PlusButton}>
+                <span className={styles.alreadyConnected}>
+                  {intl.formatMessage(intlMessages.alreadyConnected)}
+                </span>
+              </div>
             )
             : (
-              <Plus
-                label={this.getBreakoutLabel(breakoutId)}
-                data-test="breakoutJoin"
-                aria-label={`${this.getBreakoutLabel(breakoutId)} ${this.props.breakoutRooms[number - 1]?.shortName}`}
-                onClick={() => {
-                  this.getBreakoutURL(breakoutId);
-                  // leave main room's audio,
-                  // and stops video and screenshare when joining a breakout room
-                  exitAudio();
-                  logger.debug({
-                    logCode: 'breakoutroom_join',
-                    extraInfo: { logType: 'user_action' },
-                  }, 'joining breakout room closed audio in the main room');
-                  VideoService.storeDeviceIds();
-                  VideoService.exitVideo();
-                  if (UserListService.amIPresenter()) screenshareHasEnded();
-                }}
-                disabled={disable}
-              // className={styles.joinButton}
-              />
+              <div className={styles.PlusButton}>
+                <Plus
+                  label={this.getBreakoutLabel(breakoutId)}
+                  data-test="breakoutJoin"
+                  aria-label={`${this.getBreakoutLabel(breakoutId)} ${this.props.breakoutRooms[number - 1]?.shortName}`}
+                  onClick={() => {
+                    this.getBreakoutURL(breakoutId);
+                    // leave main room's audio,
+                    // and stops video and screenshare when joining a breakout room
+                    exitAudio();
+                    logger.debug({
+                      logCode: 'breakoutroom_join',
+                      extraInfo: { logType: 'user_action' },
+                    }, 'joining breakout room closed audio in the main room');
+                    VideoService.storeDeviceIds();
+                    VideoService.exitVideo();
+                    if (UserListService.amIPresenter()) screenshareHasEnded();
+                  }}
+                  disabled={disable}
+                // className={styles.joinButton}
+                />
+              </div>
             )
         }
         {
           moderatorJoinedAudio
-            ? [
-              ('|'),
-              (
-                <Button
+            ?
+            (
+              <div className={styles.PlusButton}>
+                <span
                   label={
                     stateBreakoutId === breakoutId
                       && (joinedAudioOnly || isInBreakoutAudioTransfer)
@@ -352,9 +356,14 @@ class BreakoutRoom extends PureComponent {
                   disabled={stateBreakoutId !== breakoutId && joinedAudioOnly}
                   key={`join-audio-${breakoutId}`}
                   onClick={audioAction}
-                />
-              ),
-            ]
+                >{
+                  stateBreakoutId === breakoutId
+                    && (joinedAudioOnly || isInBreakoutAudioTransfer)
+                    ? intl.formatMessage(intlMessages.breakoutReturnAudio)
+                    : intl.formatMessage(intlMessages.breakoutJoinAudio)
+                }</span>
+              </div>
+            )
             : null
         }
       </div>
@@ -408,21 +417,23 @@ class BreakoutRoom extends PureComponent {
               })
             }
             {
-              breakout.joinedUsers.length > 6 && <div className={styles.remaining}>+{breakout.joinedUsers.length-6}</div>
+              breakout.joinedUsers.length > 6 && <div className={styles.remaining}>+{breakout.joinedUsers.length - 6}</div>
             }
           </div>
-          <div className={styles.PlusButton}>
-            {waiting && requestedBreakoutId === breakout.breakoutId ? (
+          {/* <div className={styles.PlusButton}> */}
+          {waiting && requestedBreakoutId === breakout.breakoutId ? (
+            <div className={styles.PlusButton}>
               <span>
                 {intl.formatMessage(intlMessages.generatingURL)}
                 <span className={styles.connectingAnimation} />
               </span>
-            ) : this.renderUserActions(
-              breakout.breakoutId,
-              breakout.joinedUsers,
-              breakout.sequence.toString(),
-            )}
-          </div>
+            </div>
+          ) : this.renderUserActions(
+            breakout.breakoutId,
+            breakout.joinedUsers,
+            breakout.sequence.toString(),
+          )}
+          {/* </div> */}
         </div>
 
         {/* <div className={styles.joinedUserNames}>

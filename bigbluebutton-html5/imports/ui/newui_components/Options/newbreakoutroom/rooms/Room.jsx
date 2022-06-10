@@ -70,6 +70,7 @@ function Room(props) {
   
     const [users, setUsers] = useState([]);
     console.log("room", props)
+    const {intl} = props;
 
     useEffect(()=>{
         let arr = [];
@@ -90,7 +91,7 @@ function Room(props) {
 
     return (<div className={styles.RoomBox}>
         <div className={styles.alignAtcorners}>
-            <div className={styles.RoomName}>Room {props.room}</div>
+            <div className={styles.RoomName}>{intl.formatMessage(intlMessages.breakoutRoom, { 0: props.room })}</div>
             <div className={styles.RoomDuration}>{props.durationTime} min</div>
         </div>
         <div className={styles.alignAtcorners}>

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Modal from '/imports/ui/newui_components/modal/simple/component';
+import Modal from '/imports/ui/components/modal/simple/component';
 import Button from '/imports/ui/components/button/component';
 import { GithubPicker } from 'react-color';
 import { defineMessages, injectIntl } from 'react-intl';

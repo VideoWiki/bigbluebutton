@@ -27,6 +27,11 @@ const intlMessages = defineMessages({
     id: 'app.chat.hideChatLabel',
     description: 'aria-label for hiding chat button',
   },
+
+  pollresultLabel:{
+    id: 'app.chat.pollResult',
+    description: 'Poll result label',
+  }
 });
 
 const Chat = (props) => {
@@ -67,7 +72,7 @@ const Chat = (props) => {
         <div className={styles.CustomInline}>
           <div
             data-test="chatTitle"
-            className={styles.ChatHeading}>Poll Result</div>
+            className={styles.ChatHeading}>{intl.formatMessage(intlMessages.pollresultLabel)} </div>
           {/* <div>
             {
               chatID !== PUBLIC_CHAT_ID

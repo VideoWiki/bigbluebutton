@@ -213,6 +213,14 @@ class TimeWindowChatItem extends PureComponent {
     } = this.props;
     const keys = [{ option: "A", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "B", color: "#44CC88", bgColor: "#44cc881a" }, { option: "C", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "D", color: "#44CC88", bgColor: "#44cc881a" }, { option: "", color: "", bgColor: "" }]
     const numResponders = extra.pollResultData.numResponders;
+    let maxKey = 0;
+    let max = 0;
+    extra.pollResultData.answers.map((obj)=>{
+      if(obj.numVotes > max){
+        max = obj.numVotes;
+        maxKey = obj.key;
+      }
+    })
     return (
       extra.pollResultData.answers.map((obj) => {
 
@@ -221,16 +229,16 @@ class TimeWindowChatItem extends PureComponent {
 
         const calculatedWidth = {
           width: pctFotmatted,
-          backgroundColor: keys[obj.id].bgColor
+          backgroundColor: (obj.key === maxKey ? "#44CC881A" : "#7966fa1a")
         };
         const boxStyle = {
-          border: `1px solid ${keys[obj.id].color}`
+          border: `1px solid ${(obj.key === maxKey ? '#44CC88' : '#7966FA')}`
         };
         const backgroundStyle = {
-          backgroundColor: keys[obj.id].color
+          backgroundColor: (obj.key === maxKey ? "#44CC88" : "#7966FA")
         }
         const textStyle = {
-          color: keys[obj.id].color
+          color: (obj.key === maxKey ? "#44CC88" : "#7966FA")
         }
         return (
           <div className={styles.pollBar} style={boxStyle} key={_.uniqueId('stats-')}>

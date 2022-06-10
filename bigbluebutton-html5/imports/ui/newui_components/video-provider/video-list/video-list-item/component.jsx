@@ -10,7 +10,7 @@ import Button from '/imports/ui/components/button/component';
 import FullscreenService from '/imports/ui/components/fullscreen-button/service';
 import FullscreenButtonContainer from '/imports/ui/components/fullscreen-button/container';
 import { styles } from '../styles';
-import VideoService from '../../service';
+import VideoService from '/imports/ui/components/video-provider/service';
 import {
   isStreamStateUnhealthy,
   subscribeToStreamStateChange,

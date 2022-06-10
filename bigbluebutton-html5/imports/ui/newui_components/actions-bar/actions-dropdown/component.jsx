@@ -2,15 +2,15 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages } from 'react-intl';
-import Button from '/imports/ui/newui_components/button/component';
-import { withModalMounter } from '/imports/ui/newui_components/modal/service';
+import Button from '/imports/ui/components/button/component';
+import { withModalMounter } from '/imports/ui/components/modal/service';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import ExternalVideoModal from '/imports/ui/components/external-video-player/modal/container';
-import RandomUserSelectContainer from '/imports/ui/newui_components/modal/random-user/container';
-import BBBMenu from '/imports/ui/newui_components/menu/component';
+import RandomUserSelectContainer from '/imports/ui/components/modal/random-user/container';
+import BBBMenu from '/imports/ui/components/menu/component';
 import cx from 'classnames';
 import { styles } from '../styles';
-import { PANELS, ACTIONS } from '../../../components/layout/enums';
+import { PANELS, ACTIONS } from '/imports/ui/components/layout/enums';
 
 const propTypes = {
   amIPresenter: PropTypes.bool.isRequired,

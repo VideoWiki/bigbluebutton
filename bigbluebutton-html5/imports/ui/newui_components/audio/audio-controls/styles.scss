@@ -1,5 +1,6 @@
 @import "/imports/ui/stylesheets/variables/breakpoints";
 @import "/imports/ui/components/actions-bar/styles.scss";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .container {
   display: flex;
@@ -29,8 +30,8 @@
   }
   
   > :last-child {
-    margin-left: var(--sm-padding-x);
-    margin-right: 0;
+    // margin-left: var(--sm-padding-x);
+    // margin-right: 0;
 
     @include mq($small-only) {
       margin-left: var(--sm-padding-y);
@@ -111,14 +112,17 @@
   }
 }
 
-.actionBtn{
-  background-color: #E64980;
-  border: none;
-  outline: none;
+.iconBg{
+  background: $primaryColor;
+  // background: #E64980;
   border-radius: 50%;
-  padding: 10px;
+  height: 43px;
+  width: 43px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  outline: none;
+  margin: 0px 8px;
   cursor: pointer;
 }

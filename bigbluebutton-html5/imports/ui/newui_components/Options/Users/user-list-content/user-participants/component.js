@@ -213,7 +213,7 @@ class MyUserParticipants extends Component {
             : <hr className={styles.separator} />
         } */}
         <div className={styles.userListHeader}>
-          <h3>Users ({users.length})</h3>
+          <h3>{intl.formatMessage(intlMessages.usersTitle)} ({users.length})</h3>
         </div>
         <div
           id={'user-list-virtualized-scroll'}

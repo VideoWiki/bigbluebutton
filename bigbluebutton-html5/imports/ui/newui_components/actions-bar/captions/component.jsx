@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from '/imports/ui/newui_components/actions-bar/styles';
-import Button from '/imports/ui/newui_components/button/component';
+import { styles } from '/imports/ui/components/actions-bar/styles';
+import Button from '/imports/ui/components/button/component';
 
 const propTypes = {
   intl: PropTypes.shape({

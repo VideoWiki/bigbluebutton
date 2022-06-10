@@ -1,5 +1,7 @@
+@import "/imports/ui/newui_components/css/variables.scss";
+
 .optionOuter{
     width: 350px;
     min-width: 350px;
-    background-color: #EEF0F5;
+    background-color: $sidebarBgDark;
 }

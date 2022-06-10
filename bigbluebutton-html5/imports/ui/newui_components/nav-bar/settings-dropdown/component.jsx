@@ -14,6 +14,7 @@ import FullscreenService from '../../fullscreen-button/service';
 import browserInfo from '/imports/utils/browserInfo';
 
 import { styles } from '../styles';
+import MoreIcon from './MoreIcon';
 
 const intlMessages = defineMessages({
   optionsLabel: {
@@ -202,14 +203,14 @@ class SettingsDropdown extends PureComponent {
     this.getFullscreenItem(this.menuItems);
 
     this.menuItems.push(
-      {
-        key: 'list-item-settings',
-        icon: 'settings',
-        dataTest: 'settings',
-        label: intl.formatMessage(intlMessages.settingsLabel),
-        // description: intl.formatMessage(intlMessages.settingsDesc),
-        onClick: () => mountModal(<SettingsMenuContainer />),
-      },
+      // {
+      //   key: 'list-item-settings',
+      //   icon: 'settings',
+      //   dataTest: 'settings',
+      //   label: intl.formatMessage(intlMessages.settingsLabel),
+      //   description: intl.formatMessage(intlMessages.settingsDesc),
+      //   onClick: () => mountModal(<SettingsMenuContainer />),
+      // },
       {
         key: 'list-item-about',
         icon: 'about',
@@ -285,18 +286,21 @@ class SettingsDropdown extends PureComponent {
         classes={[styles.offsetTop]}
         accessKey={OPEN_OPTIONS_AK}
         trigger={(
-          <Button
-            label={intl.formatMessage(intlMessages.optionsLabel)}
-            icon="more"
-            data-test="optionsButton"
-            ghost
-            circle
-            hideLabel
-            className={isDropdownOpen ? styles.hideDropdownButton : styles.btn}
-            // FIXME: Without onClick react proptypes keep warning
-            // even after the DropdownTrigger inject an onClick handler
-            onClick={() => null}
-          />
+          <button className={styles.dropdownbtn}>
+            <MoreIcon/>
+          </button>
+          // <Button
+          //   label={intl.formatMessage(intlMessages.optionsLabel)}
+          //   icon="more"
+          //   data-test="optionsButton"
+          //   ghost
+          //   circle
+          //   hideLabel
+          //   className={isDropdownOpen ? styles.hideDropdownButton : styles.btn}
+          //   // FIXME: Without onClick react proptypes keep warning
+          //   // even after the DropdownTrigger inject an onClick handler
+          //   onClick={() => null}
+          // />
         )}
         actions={this.renderMenuItems()}
       />

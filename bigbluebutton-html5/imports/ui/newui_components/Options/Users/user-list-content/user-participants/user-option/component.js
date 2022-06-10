@@ -8,8 +8,6 @@ import LockViewersContainer from '/imports/ui/components/lock-viewers/container'
 import GuestPolicyContainer from '/imports/ui/components/waiting-users/guest-policy/container';
 import BreakoutRoom from '/imports/ui/newui_components/actions-bar/create-breakout-room/container';
 
-import NewBreakoutRoom from '/imports/ui/newui_components/Options/BreakoutRoom/BreakoutRoom_flow'
-
 import CaptionsService from '/imports/ui/components/captions/service';
 import CaptionsWriterMenu from '/imports/ui/components/captions/writer-menu/container';
 import BBBMenu from '/imports/ui/newui_components/menu/component';

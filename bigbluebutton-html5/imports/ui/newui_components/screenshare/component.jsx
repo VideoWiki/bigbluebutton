@@ -2,11 +2,11 @@ import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import FullscreenButtonContainer from '../fullscreen-button/container';
+import FullscreenButtonContainer from '/imports/ui/components/fullscreen-button/container';
 import SwitchButtonContainer from './switch-button/container';
-import VolumeSlider from '../external-video-player/volume-slider/component';
+import VolumeSlider from '/imports/ui/components/external-video-player/volume-slider/component';
 import { styles } from './styles';
-import AutoplayOverlay from '../media/autoplay-overlay/component';
+import AutoplayOverlay from '/imports/ui/components/media/autoplay-overlay/component';
 import logger from '/imports/startup/client/logger';
 import playAndRetry from '/imports/utils/mediaElementPlayRetry';
 import { notify } from '/imports/ui/services/notification';
@@ -427,15 +427,15 @@ class ScreenshareComponent extends React.Component {
       <div
         style={
           {
-            position: 'absolute',
+            // position: 'absolute',
             display,
             top,
             left,
             right,
-            height,
+            height: height-20,
             width,
             zIndex: fullscreenContext ? zIndex : undefined,
-            backgroundColor: '#06172A',
+            // backgroundColor: '#06172A',
           }
         }
       >

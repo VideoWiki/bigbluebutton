@@ -5,12 +5,12 @@ import cx from 'classnames';
 import _ from 'lodash';
 import { styles } from './styles';
 import VideoListItemContainer from './video-list-item/container';
-import AutoplayOverlay from '../../media/autoplay-overlay/component';
+import AutoplayOverlay from '/imports/ui/components/media/autoplay-overlay/component';
 import logger from '/imports/startup/client/logger';
 import playAndRetry from '/imports/utils/mediaElementPlayRetry';
 import VideoService from '/imports/ui/components/video-provider/service';
 import Button from '/imports/ui/components/button/component';
-import { ACTIONS } from '../../layout/enums';
+import { ACTIONS } from '/imports/ui/components/layout/enums';
 
 const propTypes = {
   streams: PropTypes.arrayOf(PropTypes.object).isRequired,

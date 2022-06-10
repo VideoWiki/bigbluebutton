@@ -153,7 +153,7 @@ class NavBar extends Component {
               // top: style.top,
               // left: style.left,
               // left: isExpanded ? style.left - 70 : style.left - 150,
-              height: style.height,
+              // height: style.height,
               // width: style.width
               width: isExpanded ? style.width : style.width + 150
             }
@@ -194,6 +194,9 @@ class NavBar extends Component {
             {ConnectionStatusService.isEnabled() ? <ConnectionStatusButton /> : null}
             <SettingsDropdownContainer amIModerator={amIModerator} />
           </div>
+        </div>
+        <div className={styles.bottom}>
+          <TalkingIndicatorContainer amIModerator={amIModerator} />
         </div>
       </header>
     );

@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/mixins/_scrollable";
 @import "/imports/ui/stylesheets/variables/_all";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .panel {
   // background-color: var(--color-white);
@@ -241,11 +242,11 @@
   margin: 5px 0px;
 }
 .createButton:hover{
-  background-color: black;
-  color: white;
+  background-color: $buttonBgDark;
+  color: $buttonBgLight;
 }
 .waitingUserWrapper{
-  background-color: white;
+  background-color: $colorWhite;
   padding: 10px;
   border-radius: 12px;
 }

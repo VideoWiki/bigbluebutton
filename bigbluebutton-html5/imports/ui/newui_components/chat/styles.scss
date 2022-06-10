@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/variables/breakpoints";
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 :root {
   --toast-content-width: 98%; 
@@ -165,8 +166,8 @@
 .sidebarTooltip{
   height: 23px;
   position: absolute;
-  background-color: black;
-  color: white;
+  background-color: $tooltipBgColor;
+  color: $tooltipColor;
   top: 5px;
   left: 40px;
   border-radius: 100px;
@@ -180,7 +181,7 @@
 .sidebarTipArrow{
   height: 8px;
   width: 20px;
-  background-color: black;
+  background-color: $tooltipBgColor;
   border-radius: 100%;
   position: absolute;
   left: 35px;
@@ -194,6 +195,7 @@
   font-size: 13px;
   line-height: 26px;
   color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
 }
 
 .shareUrlIcon .sideTooltipWrapper {

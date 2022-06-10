@@ -1,3 +1,5 @@
+@import "/imports/ui/newui_components/css/variables.scss";
+
 .Presentation_Box {
     flex: 1 1 0%;
     display: flex;
@@ -129,13 +131,13 @@
     margin-left: 1rem;
     margin-right: 2rem;
     margin-top: -1vh;
-    background: #E64980;
+    background: $primaryColor;
     border-radius: 20px;    
 }
 .SquareBox:hover,.SquareBox:hover .call{
     cursor: pointer;
     background-color: white;
-    fill:#E64980;
+    fill: $primaryColor;
     transition-duration: 0.2s;
 }
 .CircularBox:hover,.CircularBox:hover .video,.CircularBox:hover .microphone,.CircularBox:hover .cast,.CircularBox:hover .Expand{

@@ -24,11 +24,14 @@ import MediaService from '/imports/ui/components/media/service';
 import ManyWebcamsNotifier from '/imports/ui/components/video-provider/many-users-notify/container';
 import UploaderContainer from '/imports/ui/components/presentation/presentation-uploader/container';
 import RandomUserSelectContainer from '/imports/ui/components/modal/random-user/container';
-import NewWebcamContainer from '../webcam/container';
+import OldWebcamContainer from '../webcam/container';
+import NewWebcamContainer from '/imports/ui/newui_components/webcam/container';
 import PresentationAreaContainer from '../presentation/presentation-area/container';
 import MyPresentationAreaContainer from '../../newui_components/presentation/presentation-area/container';
-import ScreenshareContainer from '../screenshare/container';
+// import ScreenshareContainer from '../screenshare/container';
+import ScreenshareContainer from '../../newui_components/screenshare/container';
 import ExternalVideoContainer from '../external-video-player/container';
+
 import { styles } from './styles';
 import {
   LAYOUT_TYPE, DEVICE_TYPE, ACTIONS,
@@ -53,8 +56,8 @@ import { registerTitleView } from '/imports/utils/dom-utils';
 import MySidebar from '../../newui_components/sidebar_navigation/sidebar';
 import Option_Flow from '../../newui_components/Options/options_Flow';
 
-import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/container';
-import AudioModalContainer from '/imports/ui/newui_components/audio-new/audio-modal/container'
+import ActionsBarContainer from '/imports/ui/newui_components/actions-bar/container';
+import AudioModalContainer from '/imports/ui/newui_components/audio/audio-modal/container'
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -479,7 +482,8 @@ class App extends Component {
           }
         }
       >
-        <ActionsBarContainer/>
+        {/* <ActionsBarContainer/> */}
+        {actionsbar}
       </section>
     );
   }
@@ -494,8 +498,13 @@ class App extends Component {
       shouldShowScreenshare,
       shouldShowExternalVideo,
       isPresenter,
-      sidebarContentIsOpen
+      sidebarContentIsOpen,
+      layoutContext
     } = this.props;
+    const { layoutContextState } = layoutContext;
+    const { input } = layoutContextState;
+    const { sidebarContent, sidebarNavigation } = input;
+    console.log("open", sidebarContent.isOpen)
     return (
       <>
         {this.renderLayoutManager()}
@@ -515,17 +524,22 @@ class App extends Component {
           <Option_Flow />
           <div className={`${sidebarContentIsOpen ? styles.mainrighthalf : styles.mainrightfull}`}>
             <MyNavBarContainer main="new" />
-            {this.renderWebcamsContainer()}
-            {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
-            {shouldShowScreenshare ? <ScreenshareContainer /> : null}
-            {
-              shouldShowExternalVideo
-                ? <ExternalVideoContainer isPresenter={isPresenter} />
-                : null
-            }
+            {/* {sidebarContent.isOpen && this.renderWebcamsContainer()} */}
+            <div className={styles.mainMid} style={sidebarContent.isOpen ? {flexDirection: "column"} : {flexDirection: "row-reverse"}}>
+              {this.renderWebcamsContainer()}
+              {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
+              {shouldShowScreenshare ? <ScreenshareContainer /> : null}
+              {
+                shouldShowExternalVideo
+                  ? <ExternalVideoContainer isPresenter={isPresenter} />
+                  : null
+              }
+              {/* {!sidebarContent.isOpen && this.renderWebcamsContainer()} */}
+            </div>
+
             {this.renderCaptions()}
             <UploaderContainer />
-            {/* <AudioContainer /> */}
+            <AudioContainer />
 
             <BreakoutRoomInvitation />
             <ToastContainer rtl />
@@ -540,7 +554,7 @@ class App extends Component {
             <LockNotifier />
             <StatusNotifier status="raiseHand" />
             <ManyWebcamsNotifier />
-            {/* <ModalContainer /> */}
+            <ModalContainer />
             {/* <AudioModalContainer/> */}
             {/* <PollingContainer /> */}
             {this.renderNewActionsBar()}

@@ -9,6 +9,8 @@ import BBBMenu from '/imports/ui/components/menu/component';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 
 import { styles } from '../styles';
+import Speakeron from '../../icons/Speakeron';
+import Audiojoin from '../../icons/Audiojoin';
 
 const AUDIO_INPUT = 'audioinput';
 const AUDIO_OUTPUT = 'audiooutput';
@@ -286,7 +288,7 @@ class InputStreamLiveSelector extends Component {
       <BBBMenu
         trigger={(
           <>
-            <Button
+            {/* <Button
               aria-label={intl.formatMessage(intlMessages.leaveAudio)}
               label={intl.formatMessage(intlMessages.leaveAudio)}
               accessKey={shortcuts.leaveaudio}
@@ -300,7 +302,18 @@ class InputStreamLiveSelector extends Component {
                 e.stopPropagation();
                 handleLeaveAudio();
               }}
-            />
+            /> */}
+            <button
+              className={styles.iconBg}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLeaveAudio();
+              }}
+              aria-label={intl.formatMessage(intlMessages.leaveAudio)}
+              label={intl.formatMessage(intlMessages.leaveAudio)}
+            >
+              {isListenOnly ? <Audiojoin/> : <Speakeron/>}
+            </button>
             <ButtonEmoji
               className={styles.audioDropdown}
               emoji="device_list_selector"

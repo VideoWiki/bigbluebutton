@@ -9,11 +9,11 @@ import MediaService, {
 import {
   isVideoBroadcasting,
   isGloballyBroadcasting,
-} from './service';
+} from '/imports/ui/components/screenshare/service';
 import ScreenshareComponent from './component';
-import LayoutContext from '../layout/context';
+import LayoutContext from '/imports/ui/components/layout/context';
 import getFromUserSettings from '/imports/ui/services/users-settings';
-import { shouldEnableVolumeControl } from './service';
+import { shouldEnableVolumeControl } from '/imports/ui/components/screenshare/service';
 
 const ScreenshareContainer = (props) => {
   const fullscreenElementId = 'Screenshare';
