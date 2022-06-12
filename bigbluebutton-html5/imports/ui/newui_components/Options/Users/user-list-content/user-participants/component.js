@@ -194,7 +194,7 @@ class MyUserParticipants extends Component {
     } = this.props;
     const { isOpen, scrollArea } = this.state;
     const isRTL = Settings.application.isRTL;
-    console.log(users,isOpen);
+
     return (
       <div className={styles.userListColumn}>
         {/* {

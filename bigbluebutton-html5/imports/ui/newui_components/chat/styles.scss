@@ -141,6 +141,8 @@
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(35px);
   z-index:999;
+  display: flex;
+  justify-content: space-between;
 }
 .CustomInline{
   display: flex;
@@ -202,8 +204,21 @@
   opacity: 0;
   z-index: 999;
   transition: 0.3s all ease-in-out;
+  pointer-events: none;
 }
 
 .shareUrlIcon:hover .sideTooltipWrapper {
   opacity: 1;
+}
+
+.cutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cutButton button{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
 }

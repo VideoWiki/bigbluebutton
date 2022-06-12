@@ -3,6 +3,10 @@ import { injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import injectWbResizeEvent from '/imports/ui/components/presentation/resize-wrapper/component';
 import MyUserContentContainer from './user-list-content/container';
+import UserMessages from './user-list-content/user-messages/container';
+import {styles} from "../styles.scss"
+
+const CHAT_ENABLED = Meteor.settings.public.chat.enabled;
 
 const propTypes = {
   compact: PropTypes.bool,
@@ -31,10 +35,12 @@ class MyUserList extends PureComponent {
       roving,
       hasBreakoutRoom,
       requestUserInformation,
+      currentClosedChats,
+      startedChats,
     } = this.props;
     console.log("users",this.props)
     return (
-      <div>
+      <div className={styles.userListBox}>
         <MyUserContentContainer
         {...{
             intl,
@@ -48,6 +54,19 @@ class MyUserList extends PureComponent {
           }
           }
           />
+          {CHAT_ENABLED
+              ? (
+                  <UserMessages
+                      {...{
+                        isPublicChat,
+                        compact,
+                        intl,
+                        roving,
+                        currentClosedChats,
+                        startedChats,
+                      }}
+                  />
+              ) : null}
       </div>
     );
   }

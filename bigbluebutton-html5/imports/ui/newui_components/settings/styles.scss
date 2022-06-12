@@ -110,7 +110,8 @@
 }
 .settingCardWrapper{
   height: calc(100vh - 60px);
-  overflow-y: scroll;
+  @include scrollbox-vertical(var(--user-list-bg));
+  // overflow-y: scroll;
   padding: 5px 20px;
 }
 

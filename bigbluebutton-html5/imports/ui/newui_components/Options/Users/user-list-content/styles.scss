@@ -67,7 +67,7 @@
   }
   margin-left: 0;
   padding-top: 1px;
-  height: 100vh;  
+  height: calc(70vh - 55px);  
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -214,6 +214,7 @@
 
 .userListHeader{
   padding: 0px 25px;
+  height: 55px;
 }
 .userListHeader h3{
   font-family: 'Montserrat';

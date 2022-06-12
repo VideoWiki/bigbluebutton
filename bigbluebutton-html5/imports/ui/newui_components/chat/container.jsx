@@ -137,7 +137,7 @@ const ChatContainer = (props) => {
   const participants = groupChat[idChatOpen]?.participants;
   const chatName = participants?.filter((user) => user.id !== Auth.userID)[0]?.name;
   const title = chatName
-    ? intl.formatMessage(intlMessages.titlePrivate, { 0: chatName })
+    ? chatName
     : intl.formatMessage(intlMessages.titlePublic);
 
   let partnerIsLoggedOut = false;

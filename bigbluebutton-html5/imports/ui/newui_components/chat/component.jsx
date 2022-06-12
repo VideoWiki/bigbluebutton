@@ -14,6 +14,7 @@ import { PANELS, ACTIONS } from '../../components/layout/enums';
 import { UserSentMessageCollection } from './service';
 import Auth from '/imports/ui/services/auth';
 import Share from "./Icons/share";
+import Cross from './Icons/Cross';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
@@ -35,6 +36,10 @@ const intlMessages = defineMessages({
   copiedLabel: {
     id: 'app.tooltip.copiedLabel',
     description: 'Link Copied Label',
+  },
+  titlePrivate: {
+    id: 'app.chat.titlePrivate',
+    description: 'Private chat title',
   },
 });
 
@@ -73,7 +78,7 @@ const Chat = (props) => {
     navigator.clipboard.writeText(url);
     // alert("Link Copied: " + url);
     const p = document.getElementById("shareUrlIcon");
-    p.innerText= intl.formatMessage(intlMessages.copiedLabel);
+    p.innerText = intl.formatMessage(intlMessages.copiedLabel);
   }
 
   return (
@@ -85,27 +90,48 @@ const Chat = (props) => {
         <div className={styles.CustomInline}>
           <div
             data-test="chatTitle"
-            className={styles.ChatHeading}>{title}</div>
+            className={styles.ChatHeading}>
+              {
+              chatID !== PUBLIC_CHAT_ID ? intl.formatMessage(intlMessages.titlePrivate, {0: title}) : title
+              }
+            </div>
           <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
             <div className={styles.sideTooltipWrapper}>
               <div className={styles.sidebarTipArrow}></div>
               <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
             </div>
           </div>
-          {/* <div>
+        </div>
+        <div className={styles.cutButton}>
             {
               chatID !== PUBLIC_CHAT_ID
-                ? (<div></div>
+                ? (
+                  <button
+                    onClick={() => {
+                      actions.handleClosePrivateChat(chatID);
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
+                        value: true,
+                      });
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_ID_CHAT_OPEN,
+                        value: PUBLIC_CHAT_ID,
+                      });
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
+                        value: PANELS.CHAT,
+                      });
+                    }}
+                    aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                    label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                    accessKey={CLOSE_CHAT_AK}
+                  ><Cross/></button>
                 )
                 : (
-                  <ChatDropdownContainer {...{
-                    meetingIsBreakout, isMeteorConnected, amIModerator, timeWindowsValues,
-                  }}
-                  />
+                  null
                 )
             }
-          </div> */}
-        </div>
+          </div>
       </div>
       <div>
         <TimeWindowList

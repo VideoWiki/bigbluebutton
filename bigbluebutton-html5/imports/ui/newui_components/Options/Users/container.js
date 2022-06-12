@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import getFromUserSettings from '/imports/ui/services/users-settings';
-import Service from './service';
+import Service from '/imports/ui/components/user-list/service';
 import MyUserList from "./component";
 
 const propTypes = {
