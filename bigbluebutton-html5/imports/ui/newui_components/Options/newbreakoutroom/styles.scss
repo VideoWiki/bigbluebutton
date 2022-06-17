@@ -1,4 +1,5 @@
 @import "/imports/ui/newui_components/css/variables.scss";
+@import "/imports/ui/stylesheets/mixins/_scrollable";
 
 .breakoutRoomFlow{
     height: 100%;
@@ -37,7 +38,7 @@
     align-items: center;
 }
 .AllRoomsBox{
-    height: 50%;
+    height: 60%;
     overflow-y: auto;
     width: 100%;
     padding: 0.9rem;
@@ -392,7 +393,8 @@
     min-height: 0;
     flex-grow: 1;
     padding: 0.9rem;
-    overflow-y: scroll;
+    @include scrollbox-vertical(var(--user-list-bg));
+    // overflow-y: scroll;
   }
 
   .breakoutItems {

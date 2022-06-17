@@ -91,47 +91,50 @@ const Chat = (props) => {
           <div
             data-test="chatTitle"
             className={styles.ChatHeading}>
-              {
-              chatID !== PUBLIC_CHAT_ID ? intl.formatMessage(intlMessages.titlePrivate, {0: title}) : title
-              }
-            </div>
-          <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
-            <div className={styles.sideTooltipWrapper}>
-              <div className={styles.sidebarTipArrow}></div>
-              <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
-            </div>
-          </div>
-        </div>
-        <div className={styles.cutButton}>
             {
-              chatID !== PUBLIC_CHAT_ID
-                ? (
-                  <button
-                    onClick={() => {
-                      actions.handleClosePrivateChat(chatID);
-                      layoutContextDispatch({
-                        type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
-                        value: true,
-                      });
-                      layoutContextDispatch({
-                        type: ACTIONS.SET_ID_CHAT_OPEN,
-                        value: PUBLIC_CHAT_ID,
-                      });
-                      layoutContextDispatch({
-                        type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
-                        value: PANELS.CHAT,
-                      });
-                    }}
-                    aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                    label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                    accessKey={CLOSE_CHAT_AK}
-                  ><Cross/></button>
-                )
-                : (
-                  null
-                )
+              chatID !== PUBLIC_CHAT_ID ? intl.formatMessage(intlMessages.titlePrivate, { 0: title }) : title
             }
           </div>
+          {
+            chatID == PUBLIC_CHAT_ID &&
+            <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
+              <div className={styles.sideTooltipWrapper}>
+                <div className={styles.sidebarTipArrow}></div>
+                <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
+              </div>
+            </div>
+          }
+        </div>
+        <div className={styles.cutButton}>
+          {
+            chatID !== PUBLIC_CHAT_ID
+              ? (
+                <button
+                  onClick={() => {
+                    actions.handleClosePrivateChat(chatID);
+                    layoutContextDispatch({
+                      type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
+                      value: true,
+                    });
+                    layoutContextDispatch({
+                      type: ACTIONS.SET_ID_CHAT_OPEN,
+                      value: PUBLIC_CHAT_ID,
+                    });
+                    layoutContextDispatch({
+                      type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
+                      value: PANELS.CHAT,
+                    });
+                  }}
+                  aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                  label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                  accessKey={CLOSE_CHAT_AK}
+                ><Cross /></button>
+              )
+              : (
+                null
+              )
+          }
+        </div>
       </div>
       <div>
         <TimeWindowList

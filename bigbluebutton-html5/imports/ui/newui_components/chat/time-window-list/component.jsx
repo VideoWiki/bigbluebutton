@@ -195,10 +195,14 @@ class TimeWindowList extends PureComponent {
       dispatch,
       chatId,
     } = this.props;
+    console.log("sysmsg",this.props)
     console.log("index", index)
     const { scrollArea } = this.state;
     const message = timeWindowsValues[index];
     ChatLogger.debug('TimeWindowList::rowRender', this.props);
+    if(message.id=="SYSTEM_MESSAGE-welcome-msg"){
+      return null;
+    }
     return (
       <CellMeasurer
         key={key}
