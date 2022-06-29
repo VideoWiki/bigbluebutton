@@ -11,7 +11,7 @@ import { UsersContext } from '../../components/components-data/users-context/con
 import ChatLogger from '/imports/ui/newui_components/chat/chat-logger/ChatLogger';
 import lockContextContainer from '/imports/ui/components/lock-viewers/context/container';
 import Chat from '/imports/ui/newui_components/chat/component';
-import ChatService from './service';
+import ChatService from '/imports/ui/components/chat/service';
 import { LayoutContextFunc } from '../../components/layout/context';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;

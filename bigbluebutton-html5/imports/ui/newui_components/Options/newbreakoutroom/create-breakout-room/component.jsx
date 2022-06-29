@@ -250,7 +250,7 @@ class BreakoutRoom extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevstate) {
-    console.log("intl", this.props.intl)
+    console.log("userlist",this.props)
     if (this.listOfUsers) {
       for (let i = 0; i < this.listOfUsers.children.length; i += 1) {
         const roomWrapperChildren = this.listOfUsers.children[i].getElementsByTagName('div');
@@ -258,7 +258,7 @@ class BreakoutRoom extends PureComponent {
         roomList.addEventListener('keydown', this.handleMoveEvent, true);
       }
     }
-    console.log(this.props, this.state);
+    
     const { numberOfRooms } = this.state;
     const { users } = this.props;
     const { users: prevUsers } = prevProps;

@@ -7,7 +7,6 @@ export default function SelectUserModal(props) {
   useEffect(() => {
     setUsers(props.users);
   },[])
-  console.log("modal ", props)
   const handleGoBack = ()=>{
     props.changeFormLevel({formFillLevel: 1})
   }

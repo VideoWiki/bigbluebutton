@@ -18,6 +18,7 @@ import { PANELS, ACTIONS } from '/imports/ui/components/layout/enums';
 import WhiteboardService from '/imports/ui/components/whiteboard/service';
 
 import UserlistCard from './UserlistCard';
+import DropMenu from '/imports/ui/newui_components/Drop-Menu/DropMenu';
 
 const messages = defineMessages({
   presenter: {
@@ -686,27 +687,47 @@ class UserDropdown extends PureComponent {
     );
 
     if (!actions.length) return contents;
-
+    console.log("actions",actions);
     return (
-      <BBBMenu
-        trigger={
-          (
-            <div
-              tabIndex={-1}
-              onClick={() => this.setState({ selected: true })}
-              className={cx(userItemContentsStyle)}
-              style={{ width: '100%', marginLeft: '.5rem' }}
-              onKeyPress={() => {}}
-              role="button"
-            >
-              {contents}
-            </div>
-          )
-        }
-        actions={actions}
-        selectedEmoji={user.emoji}
-        onCloseCallback={() => this.setState({ selected: false, showNestedOptions: false })}
+      <DropMenu
+          trigger={
+            (
+              <div
+                tabIndex={-1}
+                onClick={() => this.setState({ selected: true })}
+                className={cx(userItemContentsStyle)}
+                style={{ width: '100%', marginLeft: '.5rem' }}
+                onKeyPress={() => {}}
+                role="button"
+              >
+                {contents}
+              </div>
+            )
+          }
+          actions={actions}
+          selectedEmoji={user.emoji}
+          onCloseCallback={() => this.setState({ selected: false, showNestedOptions: false })}
       />
+        
+      // <BBBMenu
+      //   trigger={
+      //     (
+      //       <div
+      //         tabIndex={-1}
+      //         onClick={() => this.setState({ selected: true })}
+      //         className={cx(userItemContentsStyle)}
+      //         style={{ width: '100%', marginLeft: '.5rem' }}
+      //         onKeyPress={() => {}}
+      //         role="button"
+      //       >
+      //         {contents}
+      //       </div>
+      //     )
+      //   }
+      //   actions={actions}
+      //   selectedEmoji={user.emoji}
+      //   onCloseCallback={() => this.setState({ selected: false, showNestedOptions: false })}
+      // />
     );
   }
 }

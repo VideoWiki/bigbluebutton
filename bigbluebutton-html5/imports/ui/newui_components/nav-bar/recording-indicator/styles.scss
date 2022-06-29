@@ -38,7 +38,7 @@
   @extend %recordingControl;
 
   padding: 5px 10px;
-  background-color: $actionbarShadow;
+  background-color: $navbarShadow;
   // border: var(--border-size-large) solid var(--color-primary);
 
   &:focus {
@@ -53,7 +53,7 @@
   @extend %recordingControl;
 
   padding: 5px 10px;
-  background-color: $actionbarShadow;
+  background-color: $navbarShadow;
   // border: var(--border-size-large) solid var(--color-white);
   
   &:focus {
@@ -70,7 +70,7 @@
   flex-direction: column;
   justify-content: center;
   font-weight: 200;
-  color: $actionbarShadowDark;
+  color: $navbarShadowDark;
   font-size: var(--font-size-base);
   padding: 0;
   margin-right: 0;

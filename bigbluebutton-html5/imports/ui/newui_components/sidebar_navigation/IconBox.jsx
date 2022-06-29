@@ -13,7 +13,7 @@ import ExternalPresentation from "./Icons/external_presentation";
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import UserListService from '/imports/ui/newui_components/Options/Users/service';
+import UserListService from '/imports/ui/newui_components/user-list/service';
 import GuestUsers from '/imports/api/guest-users/';
 import Auth from '/imports/ui/services/auth';
 import Waitinguser from "./Icons/waitinguser";

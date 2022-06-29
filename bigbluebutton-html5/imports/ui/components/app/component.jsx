@@ -137,6 +137,9 @@ const isLayeredView = window.matchMedia(`(max-width: ${LAYERED_BREAKPOINT}px)`);
 
 class App extends Component {
   static renderWebcamsContainer() {
+    return <OldWebcamContainer />;
+  }
+  static renderNewWebcamsContainer() {
     return <NewWebcamContainer />;
   }
 
@@ -148,6 +151,7 @@ class App extends Component {
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
     this.shouldAriaHide = this.shouldAriaHide.bind(this);
     this.renderWebcamsContainer = App.renderWebcamsContainer.bind(this);
+    this.renderNewWebcamsContainer = App.renderNewWebcamsContainer.bind(this);
     this.renderNewUI = this.renderNewUI.bind(this);
     this.renderOldUI = this.renderOldUI.bind(this);
     this.throttledDeviceType = throttle(() => this.setDeviceType(),
@@ -400,11 +404,11 @@ class App extends Component {
         aria-hidden={this.shouldAriaHide()}
         style={
           {
-            // position: 'absolute',
-            // top: actionsBarStyle.top,
-            // left: actionsBarStyle.left,
+            position: 'absolute',
+            top: actionsBarStyle.top,
+            left: actionsBarStyle.left,
             height: actionsBarStyle.height,
-            // width: actionsBarStyle.width,
+            width: actionsBarStyle.width,
             padding: actionsBarStyle.padding,
           }
         }
@@ -482,8 +486,8 @@ class App extends Component {
           }
         }
       >
-        {/* <ActionsBarContainer/> */}
-        {actionsbar}
+        <ActionsBarContainer/>
+        {/* {actionsbar} */}
       </section>
     );
   }
@@ -504,13 +508,13 @@ class App extends Component {
     const { layoutContextState } = layoutContext;
     const { input } = layoutContextState;
     const { sidebarContent, sidebarNavigation } = input;
-    console.log("open", sidebarContent.isOpen)
+    
     return (
       <>
         {this.renderLayoutManager()}
         <div
           id="layout"
-          className={styles.layout}
+          className={styles.newLayout}
           style={{
             width: '100%',
             height: '100%',
@@ -526,7 +530,7 @@ class App extends Component {
             <MyNavBarContainer main="new" />
             {/* {sidebarContent.isOpen && this.renderWebcamsContainer()} */}
             <div className={styles.mainMid} style={sidebarContent.isOpen ? {flexDirection: "column"} : {flexDirection: "row-reverse"}}>
-              {this.renderWebcamsContainer()}
+              {this.renderNewWebcamsContainer()}
               {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
               {shouldShowScreenshare ? <ScreenshareContainer /> : null}
               {
@@ -631,7 +635,7 @@ class App extends Component {
 
   render() {
     return (<>
-      {this.renderNewUI()}
+      {deviceInfo.isMobile ? this.renderOldUI() : this.renderNewUI()}
     </>
     );
   }

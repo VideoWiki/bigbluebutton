@@ -24,8 +24,22 @@
 
 .layout {
   @extend %flex-row;
+  background-color: #06172A;
+  // background-color: white;
+}
+.newLayout{
+  @extend %flex-row;
   // background-color: #06172A;
-  background-color: white;
+  // background-color: white;
+  background-color: var(--color-primary);
+        background-image: var(--banner-bg);
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
 }
 
 .navbar {
@@ -227,8 +241,8 @@
 }
 
 .actionsbar {
-  // flex: 1;
-  // padding: var(--bars-padding);
+  flex: 1;   
+  padding: var(--bars-padding);
   position: relative;
   order: 3;
 }

@@ -13,6 +13,8 @@ import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import FullscreenService from '../../fullscreen-button/service';
 import browserInfo from '/imports/utils/browserInfo';
 
+import DropMenu from '/imports/ui/newui_components/Drop-Menu/DropMenu';
+
 import { styles } from '../styles';
 import MoreIcon from './MoreIcon';
 
@@ -281,29 +283,38 @@ class SettingsDropdown extends PureComponent {
     } = this.props;
 
     return (
-
-      <BBBMenu
+      <DropMenu
         classes={[styles.offsetTop]}
         accessKey={OPEN_OPTIONS_AK}
         trigger={(
           <button className={styles.dropdownbtn}>
-            <MoreIcon/>
+            <MoreIcon />
           </button>
-          // <Button
-          //   label={intl.formatMessage(intlMessages.optionsLabel)}
-          //   icon="more"
-          //   data-test="optionsButton"
-          //   ghost
-          //   circle
-          //   hideLabel
-          //   className={isDropdownOpen ? styles.hideDropdownButton : styles.btn}
-          //   // FIXME: Without onClick react proptypes keep warning
-          //   // even after the DropdownTrigger inject an onClick handler
-          //   onClick={() => null}
-          // />
         )}
         actions={this.renderMenuItems()}
       />
+      // <BBBMenu
+      //   classes={[styles.offsetTop]}
+      //   accessKey={OPEN_OPTIONS_AK}
+      //   trigger={(
+      //     <button className={styles.dropdownbtn}>
+      //       <MoreIcon/>
+      //     </button>
+      // <Button
+      //   label={intl.formatMessage(intlMessages.optionsLabel)}
+      //   icon="more"
+      //   data-test="optionsButton"
+      //   ghost
+      //   circle
+      //   hideLabel
+      //   className={isDropdownOpen ? styles.hideDropdownButton : styles.btn}
+      //   // FIXME: Without onClick react proptypes keep warning
+      //   // even after the DropdownTrigger inject an onClick handler
+      //   onClick={() => null}
+      // />
+      //   )}
+      //   actions={this.renderMenuItems()}
+      // />
 
     );
   }

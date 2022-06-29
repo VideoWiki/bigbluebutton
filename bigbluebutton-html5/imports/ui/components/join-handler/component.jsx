@@ -173,6 +173,25 @@ class JoinHandler extends Component {
       Session.set('bannerText', resp.bannerText);
       Session.set('bannerColor', resp.bannerColor);
     };
+    //new
+    const setThemeColors = (resp) => {
+      console.log(resp);
+      const pc = resp.metadata[0]['primary-color']; // pc = primary color
+      const sc = resp.metadata[3]['secondary-color']; // sc = secondary color
+      const bi = resp.metadata[4]['back-image']; // bi = background image
+      if (pc) {
+        document.documentElement.style.setProperty('--color-primary', pc);
+      } else {
+        document.documentElement.style.setProperty('--color-primary', '#7247C4');
+      }
+      if (sc) {
+        document.documentElement.style.setProperty('--color-secondary', sc);
+      }
+      if (bi) {
+        document.documentElement.style.setProperty('--banner-bg', `url("${bi}")`);
+      }
+    };
+    //new
 
     // use enter api to get params for the client
     const url = `${APP.bbbWebBase}/api/enter?sessionToken=${sessionToken}`;
@@ -189,7 +208,8 @@ class JoinHandler extends Component {
       setBannerProps(response);
       setLogoURL(response);
       setModOnlyMessage(response);
-
+      setThemeColors(response);
+      
       Tracker.autorun(async (cd) => {
         const user = Users.findOne({ userId: Auth.userID, approved: true }, { fields: { _id: 1 } });
 
