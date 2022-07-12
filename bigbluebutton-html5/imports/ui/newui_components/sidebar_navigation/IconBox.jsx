@@ -66,7 +66,7 @@ const propTypes = {
 
 function IconBox(props) {
 
-    const { sidebarContent, icon, contextDispatch, intl} = props;
+    const { sidebarContent, icon, contextDispatch, intl, meetingIsBreakout} = props;
     const { sidebarContentPanel } = sidebarContent;
     // const users = UserListService.getUsers();
     // const [userCount, setUserCount] = useState(UserListService.getUsers().length);
@@ -135,16 +135,6 @@ function IconBox(props) {
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
                         <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.notesTitle)}</span></div>
-                    </div>
-                </div>}
-            {icon === "breakoutroom" &&
-                <div className={styles.sidebarIcon}>
-                    <BreakoutRoom
-                        sidebarContentPanel={sidebarContentPanel}
-                    />
-                    <div className={styles.sideTooltipWrapper}>
-                        <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.breakoutTitle)}</span></div>
                     </div>
                 </div>}
             {icon === "newbreakoutroom" &&

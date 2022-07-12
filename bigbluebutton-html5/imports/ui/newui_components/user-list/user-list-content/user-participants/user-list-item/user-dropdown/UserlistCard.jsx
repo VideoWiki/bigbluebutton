@@ -6,12 +6,26 @@ import Webcamon from './icons/Webcamon';
 import UserAvatar from '/imports/ui/components/user-avatar/component';
 import Icon from '/imports/ui/components/icon/component';
 import { styles } from './styles'
-
+import { defineMessages } from 'react-intl';
 export default function UserlistCard(props) {
 
     const LABEL = Meteor.settings.public.user.label;
     const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
+    const chatRoles = defineMessages({
+        coHost: {
+            id: 'app.userList.coHost',
+            description: 'Title for the coHost',
+        },
+        participant: {
+            id: 'app.userList.participant',
+            description: 'Title for participant',
+        },
+    });
+
+    const {
+        intl,
+    } = props;
     const [user, setUser] = useState(props.user);
 
     const renderUserAvatar = () => {
@@ -23,7 +37,7 @@ export default function UserlistCard(props) {
             meetingIsBreakout,
             voiceUser,
         } = props;
-        
+
         const { clientType } = user;
         const isVoiceOnly = clientType === 'dial-in-user';
 
@@ -80,7 +94,7 @@ export default function UserlistCard(props) {
                             user ?
                                 <>
                                     <span className={styles.userName}>{user.name}</span>
-                                    <span className={styles.userPos}>{user.role === "MODERATOR" ? "Host" : "Attended"}</span>
+                                    <span className={styles.userPos}>{user.role === "MODERATOR" ?intl.formatMessage(chatRoles.coHost):intl.formatMessage(chatRoles.participant)}</span>
                                 </> : null
                         }
                     </div>

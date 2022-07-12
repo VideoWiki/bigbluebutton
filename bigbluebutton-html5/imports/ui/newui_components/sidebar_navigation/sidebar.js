@@ -4,6 +4,9 @@ import { LayoutContextFunc } from "../../components/layout/context";
 import CustomLogo from '/imports/ui/newui_components/user-list/custom-logo/component';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import Service from '/imports/ui/components/user-list/service';
+
+import BreakoutService from '/imports/ui/components/app/service';
+
 import { styles } from "./styles";
 
 const MySidebar = (props) => {
@@ -13,6 +16,8 @@ const MySidebar = (props) => {
     const { input } = layoutContextState;
     const showBranding = getFromUserSettings('bbb_display_branding_area', Meteor.settings.public.app.branding.displayBrandingArea);
     const CustomLogoUrl = Service.getCustomLogoUrl();
+    const meetingIsBreakout = BreakoutService.meetingIsBreakout();
+    console.log("meeting", meetingIsBreakout)
 
     return (<div className={styles.OuterSideBox}>
         {
@@ -25,6 +30,11 @@ const MySidebar = (props) => {
         </div> */}
         <div className={styles.IconOuter}>
             {iconTypes.map((item, id) => (
+                item=="newbreakoutroom" ?
+                !meetingIsBreakout && <IconBox key={id} intl={intl} icon={item} {...input} 
+                contextDispatch={layoutContextDispatch} 
+                />
+                :
                 <IconBox key={id} intl={intl} icon={item} {...input} 
                 contextDispatch={layoutContextDispatch} 
                 />

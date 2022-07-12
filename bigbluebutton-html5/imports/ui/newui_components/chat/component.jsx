@@ -74,9 +74,8 @@ const Chat = (props) => {
   ChatLogger.debug('ChatComponent::render', props);
 
   const copyLink = () => {
-    let url = "https://beta.class.video.wiki/b/sus-fyi-z9b-cyo";
-    navigator.clipboard.writeText(url);
-    // alert("Link Copied: " + url);
+    let joinUrl = Auth._logoutURL;
+    navigator.clipboard.writeText(joinUrl.substring(0, joinUrl.length-6));
     const p = document.getElementById("shareUrlIcon");
     p.innerText = intl.formatMessage(intlMessages.copiedLabel);
   }
@@ -96,7 +95,7 @@ const Chat = (props) => {
             }
           </div>
           {
-            chatID == PUBLIC_CHAT_ID &&
+            chatID == PUBLIC_CHAT_ID && !meetingIsBreakout &&  
             <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
               <div className={styles.sideTooltipWrapper}>
                 <div className={styles.sidebarTipArrow}></div>

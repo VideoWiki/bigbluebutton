@@ -1,0 +1,13 @@
+@import "/imports/ui/newui_components/css/variables.scss";
+
+.tippy-tooltip .bbbtip-theme{
+    color:#fff;
+    background-color: $colorBlack;
+    padding: .25rem;
+    border-radius: 10px;
+}
+
+.tippy-tooltip.bbbtip-theme > .tippy-svg-arrow{
+    fill: $colorBlack;
+    background-color: transparent;
+}

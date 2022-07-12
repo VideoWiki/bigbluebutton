@@ -166,8 +166,8 @@
 // }
 
 .userRoom{
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     margin-left: -0.5rem;
     display: flex;
     align-items: center;
@@ -222,8 +222,8 @@
     border-radius: 12px;
 }
 .remaining{
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     border-radius: 100px;
     background-color: #7816F7;
     display: flex;
@@ -236,6 +236,8 @@
     line-height: 26px;
     color: #FFFFFF;
     margin-left: -0.5rem;
+    z-index: 1;
+    border: 2px solid white;
 }
 
 .userBox{
@@ -422,23 +424,23 @@
   .breakoutRemainingTime{
     margin-right: 10px;
   }
-  .remaining{
-    width: 2rem;
-    height: 2rem;
-    border-radius: 100px;
-    background-color: #7816F7;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-family: 'Montserrat',sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 11px;
-    line-height: 26px;
-    color: #FFFFFF;
-    margin-left: -0.5rem;
-    border: 2px solid white;
-}
+//   .remaining{
+//     width: 2.25rem;
+//     height: 2.25rem;
+//     border-radius: 100px;
+//     background-color: #7816F7;
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+//     font-family: 'Montserrat',sans-serif;
+//     font-style: normal;
+//     font-weight: bold;
+//     font-size: 11px;
+//     line-height: 26px;
+//     color: #FFFFFF;
+//     margin-left: -0.5rem;
+//     border: 2px solid white;
+// }
 .PlusActions {
   display: flex;
 }

@@ -5,6 +5,7 @@ import AudioManager from '/imports/ui/services/audio-manager';
 import BreakoutComponent from './component';
 import Service from '/imports/ui/components/breakout-room/service';
 import LayoutContext from '/imports/ui/components/layout/context';
+import UserListService from '/imports/ui/components/user-list/service';
 
 const BreakoutContainer = (props) => {
   const layoutContext = useContext(LayoutContext);
@@ -55,5 +56,6 @@ export default withTracker((props) => {
     isReconnecting,
     setBreakoutAudioTransferStatus,
     getBreakoutAudioTransferStatus,
+    users: UserListService.getUsers()
   };
 })(BreakoutContainer);

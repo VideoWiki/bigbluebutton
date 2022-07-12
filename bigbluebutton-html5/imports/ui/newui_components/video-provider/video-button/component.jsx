@@ -12,7 +12,6 @@ import { debounce } from 'lodash';
 
 import Webcamon from './icon/Webcamon'
 import Webcamoff from './icon/Webcamoff'
-// import ActionButton from '../../actions-bar-new/actions-button/ActionButton';
 
 const ENABLE_WEBCAM_SELECTOR_BUTTON = Meteor.settings.public.app.enableWebcamSelectorButton;
 
@@ -106,20 +105,7 @@ const JoinVideoButton = ({
   );
 
   return (
-    <>
-    <button
-      className={styles.iconBg}
-      onClick={handleOnClick}
-      disabled={!!disableReason}
-      data-test={hasVideoStream ? 'leaveVideo' : 'joinVideo'}
-    >
-      {
-        hasVideoStream ? <Webcamon /> : <Webcamoff />
-      }
-      {renderEmojiButton()}
-
-    </button>
-    {/* <div className={styles.offsetBottom}>
+    <div className={styles.offsetBottom}>
       <Button
         label={label}
         data-test={hasVideoStream ? 'leaveVideo' : 'joinVideo'}
@@ -127,15 +113,15 @@ const JoinVideoButton = ({
         onClick={handleOnClick}
         hideLabel
         color={hasVideoStream ? 'primary' : 'default'}
-        icon={hasVideoStream ? 'video' : 'video_off'}
+        // icon={hasVideoStream ? 'video' : 'video_off'}
+        customIcon={hasVideoStream ? <Webcamon /> : <Webcamoff />}
         ghost={!hasVideoStream}
         size="lg"
         circle
         disabled={!!disableReason}
       />
       {renderEmojiButton()}
-    </div> */}
-    </>
+    </div>
   );
 };
 

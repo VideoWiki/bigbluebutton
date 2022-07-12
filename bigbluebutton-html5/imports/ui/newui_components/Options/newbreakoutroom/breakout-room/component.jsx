@@ -15,7 +15,7 @@ import UserListService from '/imports/ui/components/user-list/service';
 import AudioManager from '/imports/ui/services/audio-manager';
 import BreakoutroomHeading from '../BreakoutRoomHeading';
 import Plus from "../Icons/Plus";
-
+import UserAvatar from "../user-avatar/component"
 const intlMessages = defineMessages({
   breakoutTitle: {
     id: 'app.createBreakoutRoom.title',
@@ -80,6 +80,7 @@ const intlMessages = defineMessages({
 });
 
 let prevBreakoutData = {};
+const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
 class BreakoutRoom extends PureComponent {
   static sortById(a, b) {
@@ -131,7 +132,7 @@ class BreakoutRoom extends PureComponent {
       isReconnecting,
       breakoutRooms,
     } = this.props;
-    console.log("helo", this.props)
+
     const {
       waiting,
       requestedBreakoutId,
@@ -357,11 +358,11 @@ class BreakoutRoom extends PureComponent {
                   key={`join-audio-${breakoutId}`}
                   onClick={audioAction}
                 >{
-                  stateBreakoutId === breakoutId
-                    && (joinedAudioOnly || isInBreakoutAudioTransfer)
-                    ? intl.formatMessage(intlMessages.breakoutReturnAudio)
-                    : intl.formatMessage(intlMessages.breakoutJoinAudio)
-                }</span>
+                    stateBreakoutId === breakoutId
+                      && (joinedAudioOnly || isInBreakoutAudioTransfer)
+                      ? intl.formatMessage(intlMessages.breakoutReturnAudio)
+                      : intl.formatMessage(intlMessages.breakoutJoinAudio)
+                  }</span>
               </div>
             )
             : null
@@ -385,7 +386,7 @@ class BreakoutRoom extends PureComponent {
     //   userLst.add({count: i, ...user})
     // }
     // this.setState({usersList: userLst});
-    console.log("req", breakoutRooms)
+
     const roomItems = breakoutRooms.map((breakout) => (
       <div
         className={styles.breakoutItems}
@@ -407,11 +408,28 @@ class BreakoutRoom extends PureComponent {
           <div className={styles.ImageGroup}>
             {
               breakout.joinedUsers.map((user, key) => {
-                console.log("user", user, key)
+                const {users} = this.props;
+                let userInfo = users.filter(nUser => nUser.userId+'-'+breakout.sequence == user.userId);
+                
                 if (key <= 5) {
-                  // return <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/user.svg" className={styles.userRoom} />
                   return (
-                    <div className={styles.userRoom} ><span>{user.name.charAt(0)}</span></div>
+                    // <div className={styles.userRoom} ><span>{user.name.charAt(0)}</span></div>
+                    <div className={styles.userRoom}>
+                      <UserAvatar
+                        children={userInfo[0].name.toLowerCase().slice(0, 2)}
+                        moderator={userInfo[0].role === ROLE_MODERATOR}
+                        // presenter={user.presenter}
+                        // talking={voiceUser.isTalking}
+                        // muted={voiceUser.isMuted}
+                        // listenOnly={voiceUser.isListenOnly}
+                        // voice={voiceUser.isVoiceUser}
+                        // noVoice={!voiceUser.isVoiceUser}
+                        color={userInfo[0].color}
+                        // whiteboardAccess={user.whiteboardAccess}
+                        // emoji={user.emoji !== 'none'}
+                        avatar={userInfo[0].avatar}
+                      />
+                    </div>
                   )
                 }
               })

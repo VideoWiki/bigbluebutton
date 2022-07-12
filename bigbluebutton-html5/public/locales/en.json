@@ -979,5 +979,10 @@
     "app.poll.pollrestartLabel": "Restart Poll",
 
     "app.tooltip.copyLinkLabel": "Copy Link",
-    "app.tooltip.copiedLabel": "Link Copied!"
+    "app.tooltip.copiedLabel": "Link Copied!",
+
+    "app.userList.coHost" : "Co-Host",
+    "app.userList.participant" : "Participant",
+
+    "app.breakoutTimeRemainingNavbarNewMessage": "Time remaining: {0}"
 }

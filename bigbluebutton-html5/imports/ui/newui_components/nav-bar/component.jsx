@@ -15,6 +15,8 @@ import browserInfo from '/imports/utils/browserInfo';
 import deviceInfo from '/imports/utils/deviceInfo';
 import { PANELS, ACTIONS } from '../../components/layout/enums';
 
+import NotificationsBarContainer from '/imports/ui/newui_components/notifications-bar/container';
+
 //change import
 import ConnectionStatusButton from '/imports/ui/components/connection-status/button/container';
 import SettingsDropdownContainer from './settings-dropdown/container';
@@ -189,6 +191,7 @@ class NavBar extends Component {
               mountModal={mountModal}
               amIModerator={amIModerator}
             />
+            <NotificationsBarContainer/>
           </div>
           <div className={styles.right}>
             {ConnectionStatusService.isEnabled() ? <ConnectionStatusButton /> : null}

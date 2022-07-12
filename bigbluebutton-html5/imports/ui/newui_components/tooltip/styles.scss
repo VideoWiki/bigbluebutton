@@ -1,0 +1,67 @@
+@import '/imports/ui/stylesheets/variables/_all';
+@import '/imports/ui/stylesheets/mixins/_indicators';
+@import "/imports/ui/newui_components/css/variables.scss";
+
+
+.tooltipIcon{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative !important;
+}
+
+.tooltipWrapper{
+  position: absolute;
+  top: -20px;
+  pointer-events: none;
+}
+
+.tooltipTitle{
+  height: 26px;
+  background-color: $tooltipBgColor;
+  color: $tooltipColor;
+  border-radius: 100px;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.tooltipTitle span{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  color: $tooltipColor;
+  z-index: 999;
+  white-space: nowrap;
+}
+
+.tooltipTitle:before{
+  content: "";
+  height: 20px;
+  width: 10px;
+  background-color: $tooltipBgColor;
+  border-radius: 100%;
+  position: absolute;
+  left: 50%;
+  top: 11px;
+  transform: translateX(-50%);
+  z-index: 995;
+}
+
+.tooltipIcon .tooltipWrapper {
+  opacity: 0;
+  z-index: 999;
+  // transition: 0.3s all ease-in-out;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltipIcon:hover .tooltipWrapper {
+  opacity: 1;
+  top: -40px;
+}
+  
+  

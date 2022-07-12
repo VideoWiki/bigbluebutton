@@ -56,7 +56,7 @@ import { registerTitleView } from '/imports/utils/dom-utils';
 import MySidebar from '../../newui_components/sidebar_navigation/sidebar';
 import Option_Flow from '../../newui_components/Options/options_Flow';
 
-import ActionsBarContainer from '/imports/ui/newui_components/actions-bar/container';
+import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/container';
 import AudioModalContainer from '/imports/ui/newui_components/audio/audio-modal/container'
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
@@ -252,7 +252,6 @@ class App extends Component {
       layoutContextDispatch,
       mountRandomUserModal,
     } = this.props;
-
 
     if (meetingLayout !== prevProps.meetingLayout) {
       layoutContextDispatch({
@@ -523,7 +522,7 @@ class App extends Component {
           {this.renderActivityCheck()}
           {this.renderUserInformation()}
           <BannerBarContainer />
-          <NotificationsBarContainer />
+          {/* <NotificationsBarContainer /> */}
           <MySidebar />
           <Option_Flow />
           <div className={`${sidebarContentIsOpen ? styles.mainrighthalf : styles.mainrightfull}`}>

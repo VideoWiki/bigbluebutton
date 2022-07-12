@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import deviceInfo from '/imports/utils/deviceInfo';
 import browserInfo from '/imports/utils/browserInfo';
-import Button from '/imports/ui/components/button/component';
+import Button from '/imports/ui/newui_components/button/component';
 import logger from '/imports/startup/client/logger';
 import { notify } from '/imports/ui/services/notification';
 import cx from 'classnames';
@@ -173,8 +173,19 @@ const ScreenshareButton = ({
 
   return shouldAllowScreensharing
     ? (
-      <button
-        className={styles.iconBg}
+      <Button
+        className={cx(isVideoBroadcasting || styles.btn)}
+        disabled={(!isMeteorConnected && !isVideoBroadcasting) || !screenshareDataSavingSetting}
+        // icon={isVideoBroadcasting ? 'desktop' : 'desktop_off'}
+        customIcon={isVideoBroadcasting ? <Screenshareon/> : <Screenshareoff/>}
+        data-test={isVideoBroadcasting ? 'stopScreenShare' : 'startScreenShare'}
+        label={intl.formatMessage(vLabel)}
+        description={intl.formatMessage(vDescr)}
+        color={isVideoBroadcasting ? 'primary' : 'default'}
+        ghost={!isVideoBroadcasting}
+        hideLabel
+        circle
+        size="lg"
         onClick={isVideoBroadcasting
           ? screenshareHasEnded
           : () => {
@@ -185,34 +196,7 @@ const ScreenshareButton = ({
             }
           }}
         id={isVideoBroadcasting ? 'unshare-screen-button' : 'share-screen-button'}
-      >
-        {
-          isVideoBroadcasting ? <Screenshareon/> : <Screenshareoff/>
-        }
-      </button>
-      // <Button
-      //   className={cx(isVideoBroadcasting || styles.btn)}
-      //   disabled={(!isMeteorConnected && !isVideoBroadcasting) || !screenshareDataSavingSetting}
-      //   icon={isVideoBroadcasting ? 'desktop' : 'desktop_off'}
-      //   data-test={isVideoBroadcasting ? 'stopScreenShare' : 'startScreenShare'}
-      //   label={intl.formatMessage(vLabel)}
-      //   description={intl.formatMessage(vDescr)}
-      //   color={isVideoBroadcasting ? 'primary' : 'default'}
-      //   ghost={!isVideoBroadcasting}
-      //   hideLabel
-      //   circle
-      //   size="lg"
-      //   onClick={isVideoBroadcasting
-      //     ? screenshareHasEnded
-      //     : () => {
-      //       if (isSafari && !ScreenshareBridgeService.HAS_DISPLAY_MEDIA) {
-      //         renderScreenshareUnavailableModal();
-      //       } else {
-      //         shareScreen(handleFailure);
-      //       }
-      //     }}
-      //   id={isVideoBroadcasting ? 'unshare-screen-button' : 'share-screen-button'}
-      // />
+      />
     ) : null;
 };
 

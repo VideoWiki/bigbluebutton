@@ -250,7 +250,7 @@ class BreakoutRoom extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevstate) {
-    console.log("userlist",this.props)
+    console.log("userlist", this.props)
     if (this.listOfUsers) {
       for (let i = 0; i < this.listOfUsers.children.length; i += 1) {
         const roomWrapperChildren = this.listOfUsers.children[i].getElementsByTagName('div');
@@ -258,7 +258,7 @@ class BreakoutRoom extends PureComponent {
         roomList.addEventListener('keydown', this.handleMoveEvent, true);
       }
     }
-    
+
     const { numberOfRooms } = this.state;
     const { users } = this.props;
     const { users: prevUsers } = prevProps;
@@ -476,6 +476,8 @@ class BreakoutRoom extends PureComponent {
         userName: user.name,
         isModerator: user.role === ROLE_MODERATOR,
         room: 0,
+        color: user.color,
+        avatar: user.avatar
       }));
 
     this.setState({
@@ -1185,6 +1187,27 @@ class BreakoutRoom extends PureComponent {
                   </div>
                   <div className={styles.Check}>{intl.formatMessage(intlMessages.freeJoinLabel)}</div>
                 </div>
+                {/* Adding Recordable */}
+                <div className={styles.centerAlign}>
+                  {
+                    isBreakoutRecordable ? (
+                      <label htmlFor="recordBreakoutCheckbox" className={styles.freeJoinLabel} key="record-breakouts">
+                        <input
+                          id="recordBreakoutCheckbox"
+                          type="checkbox"
+                          className={styles.freeJoinCheckbox}
+                          onChange={this.setRecord}
+                          checked={record}
+                          aria-label={intl.formatMessage(intlMessages.record)}
+                        />
+                        <span aria-hidden>
+                          {intl.formatMessage(intlMessages.record)}
+                        </span>
+                      </label>
+                    ) : null
+                  }
+                </div>
+
                 <div className={styles.centerAlign}>
                   <div className={styles.close} onClick={this.onAssignRandomly}>
                     <Random />

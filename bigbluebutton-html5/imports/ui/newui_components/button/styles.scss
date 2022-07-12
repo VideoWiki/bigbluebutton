@@ -111,6 +111,8 @@
   display: inline-block;
   cursor: pointer;
 
+  height: 45px;
+  width: 45px;
 
 
   &:focus,
@@ -210,7 +212,7 @@
     }
   }
   .buttonWrapper:hover & {
-    opacity: .75;
+    opacity: 1;
   }
 }
 
@@ -231,7 +233,7 @@
   right: -.2em;
   bottom: 0;
   background-color: var(--btn-default-bg);
-  background-color:#EEF0F5;
+  // background-color:#EEF0F5;
   overflow: hidden;
   z-index: 2;
   border: none;
@@ -258,7 +260,7 @@
   height: 1.4em;
   width: 1.4em;
   background-color: var(--color-background);
-  background-color:#EEF0F5;
+  // background-color:#EEF0F5;
   right: -.4em;
   bottom: -.2em;
   border-radius: 50%;
@@ -270,14 +272,14 @@
 @mixin button-variant($color, $background, $border) {
   color: $color;
   background-color: $background;
-  background-color:#EEF0F5;
+  // background-color:#EEF0F5;
   border: var(--border-size-large) solid transparent;
 
   &:focus,
   .buttonWrapper:focus:not([aria-disabled="true"]) & {
     color: $color;
     background-color: $background;
-    background-color:#EEF0F5;
+    // background-color:#EEF0F5;
     background-clip: padding-box;
     // box-shadow: 0 0 0 var(--border-size) $border;
   }
@@ -300,7 +302,7 @@
   .buttonWrapper:focus & {
     color: $color;
     background-color: $variant;
-    background-color:#EEF0F5;
+    // background-color:#EEF0F5;
     background-clip: padding-box;
     box-shadow: 0 0 0 var(--border-size-large) $color;
   }
@@ -309,7 +311,7 @@
   .buttonWrapper:hover & {
     color: $color;
     background-color: $variant;
-    background-color:#EEF0F5;
+    // background-color:#EEF0F5;
   }
 }
 
@@ -389,10 +391,16 @@
 }
 
 .circle {
-  --btn-sm-padding-x: calc(var(--sm-padding-x) / 2);
-  --btn-md-padding-x: calc(var(--md-padding-x) / 2);
-  --btn-lg-padding-x: calc(var(--lg-padding-x) / 2);
-  --btn-jumbo-padding-x: calc(var(--jumbo-padding-x) / 2);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // --btn-sm-padding-x: calc(var(--sm-padding-x) / 2);
+  // --btn-md-padding-x: calc(var(--md-padding-x) / 2);
+  // --btn-lg-padding-x: calc(var(--lg-padding-x) / 2);
+  // --btn-jumbo-padding-x: calc(var(--jumbo-padding-x) / 2);
 
   border-radius: 50%;
 

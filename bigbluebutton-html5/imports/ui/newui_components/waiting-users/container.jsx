@@ -32,7 +32,7 @@ export default withTracker(() => {
   const meeting = Meetings.findOne({ meetingId: Auth.meetingID });
   const { usersProp } = meeting;
   const { authenticatedGuest } = usersProp;
-
+  
   return {
     guestUsers,
     authenticatedUsers,

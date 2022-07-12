@@ -29,7 +29,7 @@ const PresentationPlaceholder = ({
       // left,
       // right,
       width,
-      height,
+      height: height-20,
       zIndex: fullscreenContext ? zIndex : undefined,
       display: width ? 'flex' : 'none',
     }}
