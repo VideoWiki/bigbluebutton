@@ -7,6 +7,7 @@ import UserAvatar from '/imports/ui/components/user-avatar/component';
 import Icon from '/imports/ui/components/icon/component';
 import { styles } from './styles'
 import { defineMessages } from 'react-intl';
+import { useEffect } from 'react';
 export default function UserlistCard(props) {
 
     const LABEL = Meteor.settings.public.user.label;
@@ -27,6 +28,10 @@ export default function UserlistCard(props) {
         intl,
     } = props;
     const [user, setUser] = useState(props.user);
+
+    useEffect(()=>{
+        setUser(props.user)
+    },[props.user])
 
     const renderUserAvatar = () => {
         const {

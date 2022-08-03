@@ -66,6 +66,8 @@
   align-items: center;
   text-decoration: none;
   width: 100%;
+  margin: 0 15px;
+  font-family: 'Montserrat';
 }
 
 .chatIcon {
@@ -85,13 +87,17 @@
   margin: 0;
   @extend %text-elipsis;
   font-weight: 400;
-  font-size: var(--font-size-small);
+  // font-size: var(--font-size-small);
   color: var(--color-gray-dark);
   flex-grow: 1;
   line-height: 2;
   text-align: left;
   padding: 0 0 0 var(--lg-padding-y);
   text-overflow: ellipsis;
+
+  font-style: normal;
+  font-size: 15px;
+  line-height: 20px;
 
   [dir="rtl"] & {
     text-align: right;

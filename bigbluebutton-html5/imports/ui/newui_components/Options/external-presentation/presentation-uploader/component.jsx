@@ -4,7 +4,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
 import { TAB } from '/imports/utils/keyCodes';
 import deviceInfo from '/imports/utils/deviceInfo';
-import Button from '/imports/ui/components/button/component';
+import Button from '/imports/ui/newui_components/button/component';
 import Checkbox from '/imports/ui/components/checkbox/component';
 import Icon from '/imports/ui/components/icon/component';
 import Dropzone from 'react-dropzone';

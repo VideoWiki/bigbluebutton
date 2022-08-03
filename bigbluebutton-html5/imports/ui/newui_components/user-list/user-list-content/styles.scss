@@ -1,4 +1,4 @@
-@import "/imports/ui/components/user-list/styles.scss";
+@import "/imports/ui/newui_components/user-list/styles.scss";
 @import "/imports/ui/stylesheets/mixins/_scrollable";
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/mixins/_indicators";
@@ -169,7 +169,8 @@
 .smallTitle {
   @extend .smallTitle;
   flex: 1;
-  margin: 0;
+  margin: 5px 0;
+  padding: 0 25px;
 }
 
 .separator {

@@ -92,12 +92,18 @@
 }
 
 .smallTitle {
-  font-size: 0.85rem;
+  font-family: 'Montserrat';
+  font-style: normal;
   font-weight: 600;
-  text-transform: uppercase;
-  padding: 0 var(--sm-padding-x);
-  margin: 0 0 (var(--lg-padding-x) / 2) 0;
-  color: var(--color-gray);
+  font-size: 20px;
+  line-height: 20px;
+  color: #000000;
+  // font-size: 0.85rem;
+  // font-weight: 600;
+  // text-transform: uppercase;
+  // padding: 0 var(--sm-padding-x);
+  // margin: 0 0 (var(--lg-padding-x) / 2) 0;
+  // color: var(--color-gray);
 }
 
 .userListColumn {
