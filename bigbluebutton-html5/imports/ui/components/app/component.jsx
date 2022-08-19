@@ -29,7 +29,7 @@ import NewWebcamContainer from '/imports/ui/newui_components/webcam/container';
 import PresentationAreaContainer from '../presentation/presentation-area/container';
 import MyPresentationAreaContainer from '../../newui_components/presentation/presentation-area/container';
 // import ScreenshareContainer from '../screenshare/container';
-import ScreenshareContainer from '../../newui_components/screenshare/container';
+import ScreenshareContainer from '/imports/ui/components/screenshare/container';
 import ExternalVideoContainer from '../external-video-player/container';
 
 import { styles } from './styles';
@@ -58,6 +58,9 @@ import Option_Flow from '../../newui_components/Options/options_Flow';
 
 import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/container';
 import AudioModalContainer from '/imports/ui/newui_components/audio/audio-modal/container'
+
+//New
+import NewNavBarContainer from '/imports/ui/newui_components/nav-bar-new/container';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -479,13 +482,17 @@ class App extends Component {
             // position: 'absolute',
             // top: actionsBarStyle.top,
             // left: actionsBarStyle.left,
-            height: actionsBarStyle.height,
             // width: actionsBarStyle.width,
+            height: actionsBarStyle.height,
+            position: 'absolute',
+            top: actionsBarStyle.top,
+            left: actionsBarStyle.left,
+            width: actionsBarStyle.width,
             padding: actionsBarStyle.padding,
           }
         }
       >
-        <ActionsBarContainer/>
+        <ActionsBarContainer />
         {/* {actionsbar} */}
       </section>
     );
@@ -507,7 +514,7 @@ class App extends Component {
     const { layoutContextState } = layoutContext;
     const { input } = layoutContextState;
     const { sidebarContent, sidebarNavigation } = input;
-    
+
     return (
       <>
         {this.renderLayoutManager()}
@@ -528,7 +535,7 @@ class App extends Component {
           <div className={`${sidebarContentIsOpen ? styles.mainrighthalf : styles.mainrightfull}`}>
             <MyNavBarContainer main="new" />
             {/* {sidebarContent.isOpen && this.renderWebcamsContainer()} */}
-            <div className={styles.mainMid} style={sidebarContent.isOpen ? {flexDirection: "column"} : {flexDirection: "row-reverse"}}>
+            <div className={styles.mainMid} style={sidebarContent.isOpen ? { flexDirection: "column" } : { flexDirection: "row-reverse" }}>
               {this.renderNewWebcamsContainer()}
               {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
               {shouldShowScreenshare ? <ScreenshareContainer /> : null}
@@ -632,9 +639,76 @@ class App extends Component {
       </>);
   }
 
+  renderUpdateUI() {
+    const {
+      customStyle,
+      customStyleUrl,
+      audioAlertEnabled,
+      pushAlertEnabled,
+      shouldShowPresentation,
+      shouldShowScreenshare,
+      shouldShowExternalVideo,
+      isPresenter,
+    } = this.props;
+
+    return (
+      <>
+        {this.renderLayoutManager()}
+        <div
+          id="layout"
+          className={styles.layout}
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          {this.renderActivityCheck()}
+          {this.renderUserInformation()}
+          <BannerBarContainer />
+          {/* <NotificationsBarContainer /> */}
+          <MySidebar />
+          <Option_Flow />
+
+          {/* <SidebarNavigationContainer /> */}
+          {/* <SidebarContentContainer /> */}
+          <NewNavBarContainer main="new" />
+          {/* <NavBarContainer main="new" /> */}
+          {this.renderWebcamsContainer()}
+          {shouldShowPresentation ? <PresentationAreaContainer /> : null}
+          {shouldShowScreenshare ? <ScreenshareContainer /> : null}
+          {
+            shouldShowExternalVideo
+              ? <ExternalVideoContainer isPresenter={isPresenter} />
+              : null
+          }
+          {this.renderCaptions()}
+          <UploaderContainer />
+          <BreakoutRoomInvitation />
+          <AudioContainer />
+          <ToastContainer rtl />
+          {(audioAlertEnabled || pushAlertEnabled)
+            && (
+              <ChatAlertContainer
+                audioAlertEnabled={audioAlertEnabled}
+                pushAlertEnabled={pushAlertEnabled}
+              />
+            )}
+          <WaitingNotifierContainer />
+          <LockNotifier />
+          <StatusNotifier status="raiseHand" />
+          <ManyWebcamsNotifier />
+          <PollingContainer />
+          <ModalContainer />
+          {this.renderNewActionsBar()}
+          {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
+          {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
+        </div>
+      </>);
+  }
+
   render() {
     return (<>
-      {deviceInfo.isMobile ? this.renderOldUI() : this.renderNewUI()}
+      {deviceInfo.isMobile ? this.renderOldUI() : this.renderUpdateUI()}
     </>
     );
   }

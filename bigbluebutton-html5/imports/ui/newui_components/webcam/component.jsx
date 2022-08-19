@@ -17,6 +17,7 @@ const WebcamComponent = ({
   displayPresentation,
   cameraOptimalGridSize: cameraSize,
   isRTL,
+  input
 }) => {
   const [isResizing, setIsResizing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -31,6 +32,8 @@ const WebcamComponent = ({
     || cameraDock.position === CAMERADOCK_POSITION.CONTENT_BOTTOM;
   const isCameraLeftOrRight = cameraDock.position === CAMERADOCK_POSITION.CONTENT_LEFT
     || cameraDock.position === CAMERADOCK_POSITION.CONTENT_RIGHT;
+  // const isCameraTopOrBottom = input.sidebarContent.isOpen
+  // const isCameraLeftOrRight = !input.sidebarContent.isOpen;
   const isCameraSidebar = cameraDock.position === CAMERADOCK_POSITION.SIDEBAR_CONTENT_BOTTOM;
 
   useEffect(() => {
@@ -50,6 +53,23 @@ const WebcamComponent = ({
   useEffect(() => {
     setIsFullScreen(fullscreen.group === 'webcams');
   }, [fullscreen]);
+
+  // console.log("cameraPos", cameraDock, CAMERADOCK_POSITION, input)
+
+  useEffect(()=>{
+    if(!input.sidebarContent.isOpen){
+      layoutContextDispatch({
+        type: ACTIONS.SET_CAMERA_DOCK_POSITION,
+        value: CAMERADOCK_POSITION.CONTENT_RIGHT,
+      });
+    }else{
+      layoutContextDispatch({
+        type: ACTIONS.SET_CAMERA_DOCK_POSITION,
+        value: CAMERADOCK_POSITION.CONTENT_TOP,
+      });
+    }
+    console.log("cameraPos", input.cameraDock.position)
+  }, [input.sidebarContent.isOpen])
 
   useEffect(() => {
     if (isCameraTopOrBottom && lastHeight > 0) {
@@ -253,8 +273,8 @@ const WebcamComponent = ({
             className={draggableClassName}
             draggable={cameraDock.isDraggable && !isFullscreen ? 'true' : undefined}
             style={{
-              width: isDragging ? cameraSize.width : cameraDock.width,
-              height: isDragging ? cameraSize.height : cameraDock.height-20,
+              // width: isDragging ? cameraSize.width : cameraDock.width,
+              // height: isDragging ? cameraSize.height : cameraDock.height-20,
               opacity: isDragging ? 0.5 : undefined,
             }}
           >

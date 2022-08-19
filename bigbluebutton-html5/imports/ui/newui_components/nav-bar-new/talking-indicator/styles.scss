@@ -1,0 +1,244 @@
+@import "/imports/ui/stylesheets/variables/breakpoints";
+@import "/imports/ui/stylesheets/mixins/_indicators";
+@import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
+
+:root {
+  --spoke-opacity: .5;
+  --talker-margin-sm: .5rem;
+  --talker-padding-lg: .75rem;
+  --talker-padding-xl: 1.62rem;
+  --talker-padding-xsm: .13rem;
+  --talker-max-width: 10rem;
+  --talker-font-weight: 400;
+  --talker-border-radius: 2rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.isTalkingWrapper,
+.speaking,
+.talker,
+.spoke {
+  display: flex;
+  flex-direction: row;
+}
+
+.isTalkingWrapper {
+  position: relative;
+  margin-top: var(--talker-margin-sm);
+  margin-bottom: var(--talker-margin-sm);
+  overflow: hidden;
+}
+
+.speaking {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  // max-height: var(--talker-padding-xl);
+  height: 28px;
+  scrollbar-width: 0; // firefox
+  scrollbar-color: transparent;
+}
+
+.speaking::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
+.talker {
+  @extend %highContrastOutline;
+  flex: 0 0 auto;
+  color: var(--color-white);
+  font-weight: var(--talker-font-weight);
+  border-radius: var(--talker-border-radius) var(--talker-border-radius);
+  font-size: var(--font-size-base);
+  padding: var(--talker-padding-xsm) var(--talker-padding-lg) var(--talker-padding-xsm) var(--talker-padding-lg);
+  margin-left: var(--border-radius);
+  margin-right: var(--border-radius);
+  height: var(--talker-height);
+  box-shadow: none !important;
+
+  @include mq($phone-landscape) {
+    height: 1rem;
+  }
+  
+  i,
+  span {
+    position: relative;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 0 0 0 !important;
+    max-width: var(--talker-max-width);
+    bottom: var(--bottom-offset);
+
+    @include mq($phone-landscape) {
+      font-size: var(--font-size-xs);
+    }
+
+    [dir="rtl"]  & {
+      margin-left: var(--talker-margin-sm);
+    }
+  }
+
+  i {
+    font-size: var(--font-size-smaller);
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    background-color: var(--color-success);
+    border-radius: 50%;
+    position: relative;
+    right: var(--talker-margin-sm);
+
+    @include mq($phone-landscape) {
+      height: var(--talker-margin-sm);
+      width: var(--talker-margin-sm);
+      font-size: var(--font-size-xs);
+    }
+
+    [dir="rtl"]  & {
+      right: calc(var(--talker-margin-sm) * -1);
+    }
+  }
+
+  span:hover {
+    opacity: 1;
+  }
+}
+
+.spoke {
+  opacity: var(--spoke-opacity);
+
+  [dir="rtl"]  & {
+    padding-right: var(--talker-padding-lg)
+  }
+ }
+
+.muted {
+  cursor: default;
+  
+  i {
+    background-color: var(--color-danger);
+  }
+}
+
+.mobileHide {
+  @include mq($small-only) {
+    visibility: hidden;
+  }
+}
+
+.isViewer {
+  cursor: default;
+}
+
+.talkingIndicator{
+  background: $talkingIndicatorBg;
+  backdrop-filter: blur(35px);
+  border-radius: 100px;
+  outline: none;
+  border: none;
+  color: $colorWhite;
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  padding-left: 14px;
+  margin-right: 6px;
+}
+
+.talkingIndicator span{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.pulsatingCircle{
+  position: absolute;
+  // left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 8px;
+  height: 8px;
+}
+
+.pulsatingCircle:before {
+  content: "";
+  position: relative;
+  display: block;
+  width: 300%;
+  height: 300%;
+  box-sizing: border-box;
+  margin-left: -100%;
+  margin-top: -100%;
+  border-radius: 45px;
+  background-color: #44CC88;
+  -webkit-animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+          animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.talkingCircle {
+  display: flex;
+  width: 13px;
+}
+.pulsatingCircle:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  -webkit-animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
+          animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
+}
+
+@-webkit-keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+  80%, 100% {
+    opacity: 0.7;
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+  80%, 100% {
+    opacity: 0.7;
+  }
+}
+@-webkit-keyframes pulse-dot {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}

@@ -1,0 +1,177 @@
+@import "../../stylesheets/variables/breakpoints";
+@import "/imports/ui/newui_components/css/variables.scss";
+
+:root {
+  --mobile-nav-height: 5rem;
+  --mobile-margin-top: .25rem;
+  --arrow-l-offset: .25rem;
+  --arrow-r-offset: .4rem;
+  --arrow-size: 40%;
+}
+
+.navbar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: var(--bars-padding) var(--bars-padding) 0 var(--bars-padding);
+}
+
+.top,
+.bottom {
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom {
+  @include mq($phone-landscape) {
+    margin-top: var(--mobile-margin-top);
+  }
+}
+
+.left,
+.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.right {
+  flex: 0;
+}
+
+.Align {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 70%;
+  flex: 1;
+}
+.center {
+  width: 70%;
+  flex: 1;
+}
+
+.presentationTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  margin-left: 2rem;
+  line-height: 20px;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30vw;
+
+  > [class^="icon-bbb-"] {
+    font-size: 75%;
+  }
+}
+
+.btnWithNotificationDot {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    bottom: var(--border-size);
+    right: 3px;
+    background-color: var(--color-danger);
+    border: var(--border-size) solid var(--color-gray-dark);
+  }
+}
+
+.left {
+  position: relative;
+}
+
+.NavToggle {
+  background: $navbarShadow;
+  border: none;
+  border-radius: 5px;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.NavToggle:hover,
+.NavToggle:hover .arrowLeft,
+.NavToggle:hover .arrowRight {
+  background-color: $navbarShadowDark;
+  color: $navbarShadow;
+  transition-duration: 0.2s;
+}
+.arrowRight,
+.arrowLeft {
+  font-size: 15px;
+  color: #9EA5AF;
+}
+
+.arrowRight {
+  left: var(--arrow-r-offset);
+}
+.arrowLeft {
+  left: var(--arrow-l-offset);
+}
+
+.btn {
+  margin: 0;
+
+  span {
+    border: none;
+    box-shadow: none;
+  }
+
+  z-index: 3;
+
+  &:hover,
+  &:focus {
+    span {
+      background-color: transparent !important;
+      color: var(--color-white) !important;
+      opacity: .75;
+    }
+  }
+}
+
+.dropdown{
+  z-index: 99;
+}
+
+.offsetTop {
+  :global(.MuiPaper-root) {
+    top: 4rem !important;
+    bottom: auto !important;
+  }
+}
+
+.hideDropdownButton {
+  @include mq($small-only) {
+    display: none;
+  }
+}
+
+.leaveMeetingButton {
+  color: var(--color-danger) !important;
+}
+
+.dropdownbtn {
+  display: flex;
+  background: none;
+  border: none;
+  outline: none;
+  color: $colorWhite;
+  cursor: pointer;
+}

@@ -241,35 +241,71 @@ class CustomLayout extends Component {
     };
   }
 
+  // calculatesSidebarNavWidth() {
+  //   const { layoutContextState } = this.props;
+  //   const { deviceType, input } = layoutContextState;
+  //   const {
+  //     sidebarNavMinWidth,
+  //     sidebarNavMaxWidth,
+  //   } = DEFAULT_VALUES;
+  //   let minWidth = 0;
+  //   let width = 0;
+  //   let maxWidth = 0;
+  //   if (input.sidebarNavigation.isOpen) {
+  //     if (deviceType === DEVICE_TYPE.MOBILE) {
+  //       minWidth = windowWidth();
+  //       width = windowWidth();
+  //       maxWidth = windowWidth();
+  //     } else {
+  //       if (input.sidebarNavigation.width === 0) {
+  //         width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
+  //       } else {
+  //         width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
+  //       }
+  //       minWidth = sidebarNavMinWidth;
+  //       maxWidth = sidebarNavMaxWidth;
+  //     }
+  //   } else {
+  //     minWidth = 0;
+  //     width = 0;
+  //     maxWidth = 0;
+  //   }
+  //   return {
+  //     minWidth,
+  //     width,
+  //     maxWidth,
+  //   };
+  // }
+
   calculatesSidebarNavWidth() {
-    const { layoutContextState } = this.props;
-    const { deviceType, input } = layoutContextState;
-    const {
-      sidebarNavMinWidth,
-      sidebarNavMaxWidth,
-    } = DEFAULT_VALUES;
-    let minWidth = 0;
-    let width = 0;
-    let maxWidth = 0;
-    if (input.sidebarNavigation.isOpen) {
-      if (deviceType === DEVICE_TYPE.MOBILE) {
-        minWidth = windowWidth();
-        width = windowWidth();
-        maxWidth = windowWidth();
-      } else {
-        if (input.sidebarNavigation.width === 0) {
-          width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
-        } else {
-          width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
-        }
-        minWidth = sidebarNavMinWidth;
-        maxWidth = sidebarNavMaxWidth;
-      }
-    } else {
-      minWidth = 0;
-      width = 0;
-      maxWidth = 0;
-    }
+    // const { layoutContextState } = this.props;
+    // const { deviceType, input } = layoutContextState;
+    // const {
+    //   sidebarNavMinWidth,
+    //   sidebarNavMaxWidth,
+    // } = DEFAULT_VALUES;
+    let minWidth = 75;
+    let width = 75;
+    let maxWidth = 75;
+    // if (input.sidebarNavigation.isOpen) {
+    //   if (deviceType === DEVICE_TYPE.MOBILE) {
+    //     minWidth = windowWidth();
+    //     width = windowWidth();
+    //     maxWidth = windowWidth();
+    //   } else {
+    //     if (input.sidebarNavigation.width === 0) {
+    //       width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
+    //     } else {
+    //       width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
+    //     }
+    //     minWidth = sidebarNavMinWidth;
+    //     maxWidth = sidebarNavMaxWidth;
+    //   }
+    // } else {
+    //   minWidth = 0;
+    //   width = 0;
+    //   maxWidth = 0;
+    // }
     return {
       minWidth,
       width,
@@ -311,6 +347,46 @@ class CustomLayout extends Component {
     };
   }
 
+  // calculatesSidebarContentWidth() {
+  //   const { layoutContextState } = this.props;
+  //   const { deviceType, input } = layoutContextState;
+  //   const {
+  //     sidebarContentMinWidth,
+  //     sidebarContentMaxWidth,
+  //   } = DEFAULT_VALUES;
+  //   let minWidth = 0;
+  //   let width = 0;
+  //   let maxWidth = 0;
+  //   if (input.sidebarContent.isOpen) {
+  //     if (deviceType === DEVICE_TYPE.MOBILE) {
+  //       minWidth = windowWidth();
+  //       width = windowWidth();
+  //       maxWidth = windowWidth();
+  //     } else {
+  //       if (input.sidebarContent.width === 0) {
+  //         width = min(
+  //           max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
+  //         );
+  //       } else {
+  //         width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
+  //           sidebarContentMaxWidth);
+  //       }
+  //       minWidth = sidebarContentMinWidth;
+  //       maxWidth = sidebarContentMaxWidth;
+  //     }
+  //   } else {
+  //     minWidth = 0;
+  //     width = 0;
+  //     maxWidth = 0;
+  //   }
+
+  //   return {
+  //     minWidth,
+  //     width,
+  //     maxWidth,
+  //   };
+  // }
+
   calculatesSidebarContentWidth() {
     const { layoutContextState } = this.props;
     const { deviceType, input } = layoutContextState;
@@ -322,22 +398,25 @@ class CustomLayout extends Component {
     let width = 0;
     let maxWidth = 0;
     if (input.sidebarContent.isOpen) {
-      if (deviceType === DEVICE_TYPE.MOBILE) {
-        minWidth = windowWidth();
-        width = windowWidth();
-        maxWidth = windowWidth();
-      } else {
-        if (input.sidebarContent.width === 0) {
-          width = min(
-            max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
-          );
-        } else {
-          width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
-            sidebarContentMaxWidth);
-        }
-        minWidth = sidebarContentMinWidth;
-        maxWidth = sidebarContentMaxWidth;
-      }
+      // if (deviceType === DEVICE_TYPE.MOBILE) {
+      //   minWidth = windowWidth();
+      //   width = windowWidth();
+      //   maxWidth = windowWidth();
+      // } else {
+      //   if (input.sidebarContent.width === 0) {
+      //     width = min(
+      //       max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
+      //     );
+      //   } else {
+      //     width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
+      //       sidebarContentMaxWidth);
+      //   }
+      //   minWidth = sidebarContentMinWidth;
+      //   maxWidth = sidebarContentMaxWidth;
+      // }
+      minWidth = 350;
+      width = 350;
+      maxWidth = 350;
     } else {
       minWidth = 0;
       width = 0;
@@ -735,6 +814,7 @@ class CustomLayout extends Component {
     const sidebarNavWidth = this.calculatesSidebarNavWidth();
     const sidebarNavHeight = this.calculatesSidebarNavHeight();
     const sidebarContentWidth = this.calculatesSidebarContentWidth();
+    
     const sidebarNavBounds = this
       .calculatesSidebarNavBounds(sidebarNavWidth.width, sidebarContentWidth.width);
     const sidebarContentBounds = this
@@ -742,6 +822,7 @@ class CustomLayout extends Component {
     const mediaAreaBounds = this
       .calculatesMediaAreaBounds(sidebarNavWidth.width, sidebarContentWidth.width);
     const navbarBounds = this.calculatesNavbarBounds(mediaAreaBounds);
+    console.log("dim",sidebarNavWidth.width, sidebarContentWidth.width, mediaAreaBounds, navbarBounds);
     const actionbarBounds = this.calculatesActionbarBounds(mediaAreaBounds);
     const cameraDockBounds = this.calculatesCameraDockBounds(
       sidebarNavWidth.width, sidebarContentWidth.width, mediaAreaBounds,
