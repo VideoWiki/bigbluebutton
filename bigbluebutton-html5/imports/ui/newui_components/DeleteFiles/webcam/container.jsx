@@ -44,6 +44,7 @@ const WebcamContainer = ({
           isPresenter: currentUser.presenter,
           displayPresentation,
           isRTL,
+          input,
         }}
       />
     )

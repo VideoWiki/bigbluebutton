@@ -1,4 +1,5 @@
-import React, { Component, useContext } from 'react';
+//components imports
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -24,14 +25,10 @@ import MediaService from '/imports/ui/components/media/service';
 import ManyWebcamsNotifier from '/imports/ui/components/video-provider/many-users-notify/container';
 import UploaderContainer from '/imports/ui/components/presentation/presentation-uploader/container';
 import RandomUserSelectContainer from '/imports/ui/components/modal/random-user/container';
-import OldWebcamContainer from '../webcam/container';
-import NewWebcamContainer from '/imports/ui/newui_components/webcam/container';
+import NewWebcamContainer from '../webcam/container';
 import PresentationAreaContainer from '../presentation/presentation-area/container';
-import MyPresentationAreaContainer from '../../newui_components/presentation/presentation-area/container';
-// import ScreenshareContainer from '../screenshare/container';
-import ScreenshareContainer from '/imports/ui/components/screenshare/container';
+import ScreenshareContainer from '../screenshare/container';
 import ExternalVideoContainer from '../external-video-player/container';
-
 import { styles } from './styles';
 import {
   LAYOUT_TYPE, DEVICE_TYPE, ACTIONS,
@@ -44,7 +41,6 @@ import SmartLayout from '../layout/layout-manager/smartLayout';
 import PresentationFocusLayout from '../layout/layout-manager/presentationFocusLayout';
 import VideoFocusLayout from '../layout/layout-manager/videoFocusLayout';
 import NavBarContainer from '../nav-bar/container';
-import MyNavBarContainer from '/imports/ui/newui_components/nav-bar/container';
 import SidebarNavigationContainer from '../sidebar-navigation/container';
 import SidebarContentContainer from '../sidebar-content/container';
 import { makeCall } from '/imports/ui/services/api';
@@ -53,13 +49,12 @@ import { NAVBAR_HEIGHT, LARGE_NAVBAR_HEIGHT } from '/imports/ui/components/layou
 import Settings from '/imports/ui/services/settings';
 import LayoutService from '/imports/ui/components/layout/service';
 import { registerTitleView } from '/imports/utils/dom-utils';
+
+//new components imports
+import UpdatedWebcamContainer from '/imports/ui/newui_components/webcam/container';
 import MySidebar from '../../newui_components/sidebar_navigation/sidebar';
 import Option_Flow from '../../newui_components/Options/options_Flow';
-
 import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/container';
-import AudioModalContainer from '/imports/ui/newui_components/audio/audio-modal/container'
-
-//New
 import NewNavBarContainer from '/imports/ui/newui_components/nav-bar-new/container';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
@@ -142,8 +137,8 @@ class App extends Component {
   static renderWebcamsContainer() {
     return <OldWebcamContainer />;
   }
-  static renderNewWebcamsContainer() {
-    return <NewWebcamContainer />;
+  static renderUpdatedWebcamsContainer() {
+    return <UpdatedWebcamContainer />;
   }
 
   constructor(props) {
@@ -154,8 +149,8 @@ class App extends Component {
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
     this.shouldAriaHide = this.shouldAriaHide.bind(this);
     this.renderWebcamsContainer = App.renderWebcamsContainer.bind(this);
-    this.renderNewWebcamsContainer = App.renderNewWebcamsContainer.bind(this);
-    this.renderNewUI = this.renderNewUI.bind(this);
+    this.renderUpdatedWebcamsContainer = App.renderUpdatedWebcamsContainer.bind(this);
+    // this.renderNewUI = this.renderNewUI.bind(this);
     this.renderOldUI = this.renderOldUI.bind(this);
     this.throttledDeviceType = throttle(() => this.setDeviceType(),
       50, { trailing: true, leading: true }).bind(this);
@@ -498,84 +493,6 @@ class App extends Component {
     );
   }
 
-  renderNewUI() {
-    const {
-      customStyle,
-      customStyleUrl,
-      audioAlertEnabled,
-      pushAlertEnabled,
-      shouldShowPresentation,
-      shouldShowScreenshare,
-      shouldShowExternalVideo,
-      isPresenter,
-      sidebarContentIsOpen,
-      layoutContext
-    } = this.props;
-    const { layoutContextState } = layoutContext;
-    const { input } = layoutContextState;
-    const { sidebarContent, sidebarNavigation } = input;
-
-    return (
-      <>
-        {this.renderLayoutManager()}
-        <div
-          id="layout"
-          className={styles.newLayout}
-          style={{
-            width: '100%',
-            height: '100%',
-          }}
-        >
-          {this.renderActivityCheck()}
-          {this.renderUserInformation()}
-          <BannerBarContainer />
-          {/* <NotificationsBarContainer /> */}
-          <MySidebar />
-          <Option_Flow />
-          <div className={`${sidebarContentIsOpen ? styles.mainrighthalf : styles.mainrightfull}`}>
-            <MyNavBarContainer main="new" />
-            {/* {sidebarContent.isOpen && this.renderWebcamsContainer()} */}
-            <div className={styles.mainMid} style={sidebarContent.isOpen ? { flexDirection: "column" } : { flexDirection: "row-reverse" }}>
-              {this.renderNewWebcamsContainer()}
-              {shouldShowPresentation ? <MyPresentationAreaContainer /> : null}
-              {shouldShowScreenshare ? <ScreenshareContainer /> : null}
-              {
-                shouldShowExternalVideo
-                  ? <ExternalVideoContainer isPresenter={isPresenter} />
-                  : null
-              }
-              {/* {!sidebarContent.isOpen && this.renderWebcamsContainer()} */}
-            </div>
-
-            {this.renderCaptions()}
-            <UploaderContainer />
-            <AudioContainer />
-
-            <BreakoutRoomInvitation />
-            <ToastContainer rtl />
-            {(audioAlertEnabled || pushAlertEnabled)
-              && (
-                <ChatAlertContainer
-                  audioAlertEnabled={audioAlertEnabled}
-                  pushAlertEnabled={pushAlertEnabled}
-                />
-              )}
-            <WaitingNotifierContainer />
-            <LockNotifier />
-            <StatusNotifier status="raiseHand" />
-            <ManyWebcamsNotifier />
-            <ModalContainer />
-            {/* <AudioModalContainer/> */}
-            {/* <PollingContainer /> */}
-            {this.renderNewActionsBar()}
-            {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
-            {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
-          </div>
-        </div>
-      </>
-    );
-  }
-
   renderOldUI() {
     const {
       customStyle,
@@ -639,7 +556,7 @@ class App extends Component {
       </>);
   }
 
-  renderUpdateUI() {
+  renderUpdatedUI() {
     const {
       customStyle,
       customStyleUrl,
@@ -673,7 +590,7 @@ class App extends Component {
           {/* <SidebarContentContainer /> */}
           <NewNavBarContainer main="new" />
           {/* <NavBarContainer main="new" /> */}
-          {this.renderWebcamsContainer()}
+          {this.renderUpdatedWebcamsContainer()}
           {shouldShowPresentation ? <PresentationAreaContainer /> : null}
           {shouldShowScreenshare ? <ScreenshareContainer /> : null}
           {
@@ -708,7 +625,7 @@ class App extends Component {
 
   render() {
     return (<>
-      {deviceInfo.isMobile ? this.renderOldUI() : this.renderUpdateUI()}
+      {deviceInfo.isMobile ? this.renderOldUI() : this.renderUpdatedUI()}
     </>
     );
   }

@@ -101,7 +101,7 @@ class SmartLayout extends Component {
         type: ACTIONS.SET_LAYOUT_INPUT,
         value: _.defaultsDeep({
           sidebarNavigation: {
-            isOpen: input.sidebarNavigation.isOpen || false,
+            isOpen: input.sidebarNavigation.isOpen || sidebarContentPanel !== PANELS.NONE || false,
           },
           sidebarContent: {
             isOpen: sidebarContentPanel !== PANELS.NONE,
@@ -119,6 +119,12 @@ class SmartLayout extends Component {
           },
           cameraDock: {
             numCameras: input.cameraDock.numCameras,
+          },
+          externalVideo: {
+            hasExternalVideo: input.externalVideo.hasExternalVideo,
+          },
+          screenShare: {
+            hasScreenShare: input.screenShare.hasScreenShare,
           },
         }, INITIAL_INPUT_STATE),
       });
@@ -178,31 +184,143 @@ class SmartLayout extends Component {
     };
   }
 
+  // calculatesSidebarNavWidth() {
+  //   const { layoutContextState } = this.props;
+  //   const { deviceType, input } = layoutContextState;
+  //   const {
+  //     sidebarNavMinWidth,
+  //     sidebarNavMaxWidth,
+  //   } = DEFAULT_VALUES;
+  //   let minWidth = 0;
+  //   let width = 0;
+  //   let maxWidth = 0;
+  //   if (input.sidebarNavigation.isOpen) {
+  //     if (deviceType === DEVICE_TYPE.MOBILE) {
+  //       minWidth = windowWidth();
+  //       width = windowWidth();
+  //       maxWidth = windowWidth();
+  //     } else {
+  //       if (input.sidebarNavigation.width === 0) {
+  //         width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
+  //       } else {
+  //         width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
+  //       }
+  //       minWidth = sidebarNavMinWidth;
+  //       maxWidth = sidebarNavMaxWidth;
+  //     }
+  //   }
+  //   return {
+  //     minWidth,
+  //     width,
+  //     maxWidth,
+  //   };
+  // }
+  // calculatesSidebarContentWidth() {
+  //   const { layoutContextState } = this.props;
+  //   const { deviceType, input } = layoutContextState;
+  //   const {
+  //     sidebarContentMinWidth,
+  //     sidebarContentMaxWidth,
+  //   } = DEFAULT_VALUES;
+  //   let minWidth = 0;
+  //   let width = 0;
+  //   let maxWidth = 0;
+  //   if (input.sidebarContent.isOpen) {
+  //     if (deviceType === DEVICE_TYPE.MOBILE) {
+  //       minWidth = windowWidth();
+  //       width = windowWidth();
+  //       maxWidth = windowWidth();
+  //     } else {
+  //       if (input.sidebarContent.width === 0) {
+  //         width = min(
+  //           max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
+  //         );
+  //       } else {
+  //         width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
+  //           sidebarContentMaxWidth);
+  //       }
+  //       minWidth = sidebarContentMinWidth;
+  //       maxWidth = sidebarContentMaxWidth;
+  //     }
+  //   }
+  //   return {
+  //     minWidth,
+  //     width,
+  //     maxWidth,
+  //   };
+  // }
+
   calculatesSidebarNavWidth() {
+    // const { layoutContextState } = this.props;
+    // const { deviceType, input } = layoutContextState;
+    // const {
+    //   sidebarNavMinWidth,
+    //   sidebarNavMaxWidth,
+    // } = DEFAULT_VALUES;
+    let minWidth = 75;
+    let width = 75;
+    let maxWidth = 75;
+    // if (input.sidebarNavigation.isOpen) {
+    //   if (deviceType === DEVICE_TYPE.MOBILE) {
+    //     minWidth = windowWidth();
+    //     width = windowWidth();
+    //     maxWidth = windowWidth();
+    //   } else {
+    //     if (input.sidebarNavigation.width === 0) {
+    //       width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
+    //     } else {
+    //       width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
+    //     }
+    //     minWidth = sidebarNavMinWidth;
+    //     maxWidth = sidebarNavMaxWidth;
+    //   }
+    // } else {
+    //   minWidth = 0;
+    //   width = 0;
+    //   maxWidth = 0;
+    // }
+    return {
+      minWidth,
+      width,
+      maxWidth,
+    };
+  }
+  calculatesSidebarContentWidth() {
     const { layoutContextState } = this.props;
     const { deviceType, input } = layoutContextState;
     const {
-      sidebarNavMinWidth,
-      sidebarNavMaxWidth,
+      sidebarContentMinWidth,
+      sidebarContentMaxWidth,
     } = DEFAULT_VALUES;
     let minWidth = 0;
     let width = 0;
     let maxWidth = 0;
-    if (input.sidebarNavigation.isOpen) {
-      if (deviceType === DEVICE_TYPE.MOBILE) {
-        minWidth = windowWidth();
-        width = windowWidth();
-        maxWidth = windowWidth();
-      } else {
-        if (input.sidebarNavigation.width === 0) {
-          width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
-        } else {
-          width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
-        }
-        minWidth = sidebarNavMinWidth;
-        maxWidth = sidebarNavMaxWidth;
-      }
+    if (input.sidebarContent.isOpen) {
+      // if (deviceType === DEVICE_TYPE.MOBILE) {
+      //   minWidth = windowWidth();
+      //   width = windowWidth();
+      //   maxWidth = windowWidth();
+      // } else {
+      //   if (input.sidebarContent.width === 0) {
+      //     width = min(
+      //       max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
+      //     );
+      //   } else {
+      //     width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
+      //       sidebarContentMaxWidth);
+      //   }
+      //   minWidth = sidebarContentMinWidth;
+      //   maxWidth = sidebarContentMaxWidth;
+      // }
+      minWidth = 350;
+      width = 350;
+      maxWidth = 350;
+    } else {
+      minWidth = 0;
+      width = 0;
+      maxWidth = 0;
     }
+
     return {
       minWidth,
       width,
@@ -239,41 +357,6 @@ class SmartLayout extends Component {
       left: !isRTL ? sidebarNavLeft : null,
       right: isRTL ? sidebarNavLeft : null,
       zIndex: deviceType === DEVICE_TYPE.MOBILE ? 11 : 2,
-    };
-  }
-
-  calculatesSidebarContentWidth() {
-    const { layoutContextState } = this.props;
-    const { deviceType, input } = layoutContextState;
-    const {
-      sidebarContentMinWidth,
-      sidebarContentMaxWidth,
-    } = DEFAULT_VALUES;
-    let minWidth = 0;
-    let width = 0;
-    let maxWidth = 0;
-    if (input.sidebarContent.isOpen) {
-      if (deviceType === DEVICE_TYPE.MOBILE) {
-        minWidth = windowWidth();
-        width = windowWidth();
-        maxWidth = windowWidth();
-      } else {
-        if (input.sidebarContent.width === 0) {
-          width = min(
-            max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
-          );
-        } else {
-          width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
-            sidebarContentMaxWidth);
-        }
-        minWidth = sidebarContentMinWidth;
-        maxWidth = sidebarContentMaxWidth;
-      }
-    }
-    return {
-      minWidth,
-      width,
-      maxWidth,
     };
   }
 
@@ -343,9 +426,13 @@ class SmartLayout extends Component {
     const {
       input, fullscreen, isRTL, deviceType,
     } = layoutContextState;
-    const { presentation } = input;
-    const { isOpen } = presentation;
+    const { presentation, externalVideo, screenShare } = input;
+    const { isOpen, currentSlide } = presentation;
     const { camerasMargin, presentationToolbarMinWidth } = DEFAULT_VALUES;
+
+    const { num: currentSlideNumber } = currentSlide;
+    const { hasExternalVideo } = externalVideo;
+    const { hasScreenShare } = screenShare;
 
     const cameraDockBounds = {};
     cameraDockBounds.isCameraHorizontal = false;
@@ -360,7 +447,7 @@ class SmartLayout extends Component {
       cameraDockBounds.right = isRTL ? sidebarSize : null;
       cameraDockBounds.zIndex = 1;
 
-      if (!isOpen) {
+      if (!isOpen || (currentSlideNumber === 0 && !hasExternalVideo && !hasScreenShare)) {
         cameraDockBounds.width = mediaAreaBounds.width;
         cameraDockBounds.maxWidth = mediaAreaBounds.width;
         cameraDockBounds.height = mediaAreaBounds.height;
@@ -446,12 +533,15 @@ class SmartLayout extends Component {
     const {
       input, fullscreen, isRTL, deviceType,
     } = layoutContextState;
-    const { presentation } = input;
-    const { isOpen } = presentation;
+    const { presentation, externalVideo, screenShare } = input;
+    const { isOpen, currentSlide } = presentation;
+    const { num: currentSlideNumber } = currentSlide;
+    const { hasExternalVideo } = externalVideo;
+    const { hasScreenShare } = screenShare;
     const mediaBounds = {};
     const { element: fullscreenElement } = fullscreen;
 
-    if (!isOpen) {
+    if (!isOpen || (currentSlideNumber === 0 && !hasExternalVideo && !hasScreenShare)) {
       mediaBounds.width = 0;
       mediaBounds.height = 0;
       mediaBounds.top = 0;
@@ -472,7 +562,7 @@ class SmartLayout extends Component {
     }
 
     if (input.cameraDock.numCameras > 0 && !input.cameraDock.isDragging) {
-      if (slideSize.width !== 0 && slideSize.height !== 0) {
+      if (slideSize.width !== 0 && slideSize.height !== 0 && !hasExternalVideo && !hasScreenShare) {
         if (slideSize.width < mediaAreaBounds.width && deviceType !== DEVICE_TYPE.MOBILE) {
           if (slideSize.width < (mediaAreaBounds.width * 0.8)) {
             mediaBounds.width = slideSize.width;
@@ -577,9 +667,9 @@ class SmartLayout extends Component {
     layoutContextDispatch({
       type: ACTIONS.SET_CAPTIONS_OUTPUT,
       value: {
-        left: !isRTL ? (mediaBounds.left + captionsMargin) : null,
-        right: isRTL ? (mediaBounds.right + captionsMargin) : null,
-        maxWidth: mediaBounds.width - (captionsMargin * 2),
+        left: !isRTL ? (sidebarSize + captionsMargin) : null,
+        right: isRTL ? (sidebarSize + captionsMargin) : null,
+        maxWidth: mediaAreaBounds.width - (captionsMargin * 2),
       },
     });
 

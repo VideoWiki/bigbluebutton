@@ -24,7 +24,7 @@ const DEFAULT_VALUES = {
 
   bannerHeight: 34,
 
-  //old navBarHeight: 85,
+  // navBarHeight: 85,
   navBarHeight: 100,
   navBarTop: 0,
   navBarTabOrder: 3,

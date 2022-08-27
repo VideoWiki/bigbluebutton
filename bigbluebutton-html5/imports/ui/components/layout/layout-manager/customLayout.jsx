@@ -115,14 +115,14 @@ class CustomLayout extends Component {
       zIndex: cameraDockBounds.zIndex,
     };
 
-    dropZones[CAMERADOCK_POSITION.SIDEBAR_CONTENT_BOTTOM] = {
-      top: windowHeight() - DROP_ZONE_DEFAUL_SIZE,
-      left: !isRTL ? sidebarNavWidth : null,
-      right: isRTL ? sidebarNavWidth : null,
-      width: sidebarContentWidth,
-      height: DROP_ZONE_DEFAUL_SIZE,
-      zIndex: cameraDockBounds.zIndex,
-    };
+    // dropZones[CAMERADOCK_POSITION.SIDEBAR_CONTENT_BOTTOM] = {
+    //   top: windowHeight() - DROP_ZONE_DEFAUL_SIZE,
+    //   left: !isRTL ? sidebarNavWidth : null,
+    //   right: isRTL ? sidebarNavWidth : null,
+    //   width: sidebarContentWidth,
+    //   height: DROP_ZONE_DEFAUL_SIZE,
+    //   zIndex: cameraDockBounds.zIndex,
+    // };
 
     return dropZones;
   }
@@ -276,77 +276,6 @@ class CustomLayout extends Component {
   //     maxWidth,
   //   };
   // }
-
-  calculatesSidebarNavWidth() {
-    // const { layoutContextState } = this.props;
-    // const { deviceType, input } = layoutContextState;
-    // const {
-    //   sidebarNavMinWidth,
-    //   sidebarNavMaxWidth,
-    // } = DEFAULT_VALUES;
-    let minWidth = 75;
-    let width = 75;
-    let maxWidth = 75;
-    // if (input.sidebarNavigation.isOpen) {
-    //   if (deviceType === DEVICE_TYPE.MOBILE) {
-    //     minWidth = windowWidth();
-    //     width = windowWidth();
-    //     maxWidth = windowWidth();
-    //   } else {
-    //     if (input.sidebarNavigation.width === 0) {
-    //       width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
-    //     } else {
-    //       width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
-    //     }
-    //     minWidth = sidebarNavMinWidth;
-    //     maxWidth = sidebarNavMaxWidth;
-    //   }
-    // } else {
-    //   minWidth = 0;
-    //   width = 0;
-    //   maxWidth = 0;
-    // }
-    return {
-      minWidth,
-      width,
-      maxWidth,
-    };
-  }
-
-  calculatesSidebarNavHeight() {
-    const { layoutContextState } = this.props;
-    const { deviceType, input } = layoutContextState;
-    let sidebarNavHeight = 0;
-    if (input.sidebarNavigation.isOpen) {
-      if (deviceType === DEVICE_TYPE.MOBILE) {
-        sidebarNavHeight = windowHeight() - DEFAULT_VALUES.navBarHeight;
-      } else {
-        sidebarNavHeight = windowHeight();
-      }
-      sidebarNavHeight -= this.bannerAreaHeight();
-    }
-    return sidebarNavHeight;
-  }
-
-  calculatesSidebarNavBounds() {
-    const { layoutContextState } = this.props;
-    const { deviceType, isRTL } = layoutContextState;
-    const { sidebarNavTop, navBarHeight, sidebarNavLeft } = DEFAULT_VALUES;
-
-    let top = sidebarNavTop + this.bannerAreaHeight();
-
-    if (deviceType === DEVICE_TYPE.MOBILE) {
-      top = navBarHeight + this.bannerAreaHeight();
-    }
-
-    return {
-      top,
-      left: !isRTL ? sidebarNavLeft : null,
-      right: isRTL ? sidebarNavLeft : null,
-      zIndex: deviceType === DEVICE_TYPE.MOBILE ? 10 : 2,
-    };
-  }
-
   // calculatesSidebarContentWidth() {
   //   const { layoutContextState } = this.props;
   //   const { deviceType, input } = layoutContextState;
@@ -387,6 +316,41 @@ class CustomLayout extends Component {
   //   };
   // }
 
+  calculatesSidebarNavWidth() {
+    // const { layoutContextState } = this.props;
+    // const { deviceType, input } = layoutContextState;
+    // const {
+    //   sidebarNavMinWidth,
+    //   sidebarNavMaxWidth,
+    // } = DEFAULT_VALUES;
+    let minWidth = 75;
+    let width = 75;
+    let maxWidth = 75;
+    // if (input.sidebarNavigation.isOpen) {
+    //   if (deviceType === DEVICE_TYPE.MOBILE) {
+    //     minWidth = windowWidth();
+    //     width = windowWidth();
+    //     maxWidth = windowWidth();
+    //   } else {
+    //     if (input.sidebarNavigation.width === 0) {
+    //       width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
+    //     } else {
+    //       width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
+    //     }
+    //     minWidth = sidebarNavMinWidth;
+    //     maxWidth = sidebarNavMaxWidth;
+    //   }
+    // } else {
+    //   minWidth = 0;
+    //   width = 0;
+    //   maxWidth = 0;
+    // }
+    return {
+      minWidth,
+      width,
+      maxWidth,
+    };
+  }
   calculatesSidebarContentWidth() {
     const { layoutContextState } = this.props;
     const { deviceType, input } = layoutContextState;
@@ -427,6 +391,40 @@ class CustomLayout extends Component {
       minWidth,
       width,
       maxWidth,
+    };
+  }
+
+  calculatesSidebarNavHeight() {
+    const { layoutContextState } = this.props;
+    const { deviceType, input } = layoutContextState;
+    let sidebarNavHeight = 0;
+    if (input.sidebarNavigation.isOpen) {
+      if (deviceType === DEVICE_TYPE.MOBILE) {
+        sidebarNavHeight = windowHeight() - DEFAULT_VALUES.navBarHeight;
+      } else {
+        sidebarNavHeight = windowHeight();
+      }
+      sidebarNavHeight -= this.bannerAreaHeight();
+    }
+    return sidebarNavHeight;
+  }
+
+  calculatesSidebarNavBounds() {
+    const { layoutContextState } = this.props;
+    const { deviceType, isRTL } = layoutContextState;
+    const { sidebarNavTop, navBarHeight, sidebarNavLeft } = DEFAULT_VALUES;
+
+    let top = sidebarNavTop + this.bannerAreaHeight();
+
+    if (deviceType === DEVICE_TYPE.MOBILE) {
+      top = navBarHeight + this.bannerAreaHeight();
+    }
+
+    return {
+      top,
+      left: !isRTL ? sidebarNavLeft : null,
+      right: isRTL ? sidebarNavLeft : null,
+      zIndex: deviceType === DEVICE_TYPE.MOBILE ? 10 : 2,
     };
   }
 

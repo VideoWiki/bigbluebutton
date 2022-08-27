@@ -24,8 +24,17 @@
 
 .layout {
   @extend %flex-row;
-  background-color: #06172A;
+  // background-color: #06172A;
   // background-color: white;
+  background-color: var(--color-primary);
+        background-image: var(--banner-bg);
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
 }
 .newLayout{
   @extend %flex-row;

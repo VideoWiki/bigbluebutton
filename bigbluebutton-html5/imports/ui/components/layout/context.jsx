@@ -585,6 +585,7 @@ const reducer = (state, action) => {
       };
     }
     case ACTIONS.SET_CAMERA_DOCK_IS_DRAGGING: {
+      console.log("drag", action.value);
       const { cameraDock } = state.input;
       if (cameraDock.isDragging === action.value) {
         return state;
