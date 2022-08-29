@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import Button from '/imports/ui/components/button/component';
+import Button from '/imports/ui/newui_components/button/component';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { styles } from './styles';

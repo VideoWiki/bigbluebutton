@@ -16,12 +16,12 @@ import toastStyles from '/imports/ui/components/toast/styles';
 import MediaService, { shouldEnableSwapLayout } from '/imports/ui/components/media/service';
 import PresentationCloseButton from './presentation-close-button/component';
 import DownloadPresentationButton from './download-presentation-button/component';
-import FullscreenService from '/imports/ui/components/fullscreen-button/service';
-import FullscreenButtonContainer from '/imports/ui/components/fullscreen-button/container';
-import Icon from '/imports/ui/components/icon/component';
+import FullscreenService from '../fullscreen-button/service';
+import FullscreenButtonContainer from '../fullscreen-button/container';
+import Icon from '/imports/ui/newui_components/icon/component';
 import PollingContainer from '/imports/ui/components/polling/container';
-import { ACTIONS, LAYOUT_TYPE } from '/imports/ui/components/layout/enums';
-import DEFAULT_VALUES from '/imports/ui/components/layout/defaultValues';
+import { ACTIONS, LAYOUT_TYPE } from '../../components/layout/enums';
+import DEFAULT_VALUES from '../../components/layout/defaultValues';
 import browserInfo from '/imports/utils/browserInfo';
 
 const intlMessages = defineMessages({
@@ -843,12 +843,12 @@ class Presentation extends PureComponent {
 
     if (!currentPresentation && this.refPresentationContainer) {
       return (
-        <PresentationPlaceholder
-          {
-          ...presentationBounds
-          }
-          setPresentationRef={this.setPresentationRef}
-        />
+          <PresentationPlaceholder
+            {
+            ...presentationBounds
+            }
+            setPresentationRef={this.setPresentationRef}
+          />
       );
     }
 
@@ -862,12 +862,12 @@ class Presentation extends PureComponent {
           left: presentationBounds.left,
           right: presentationBounds.right,
           width: presentationBounds.width,
-          height: presentationBounds.height,
+          // height: presentationBounds.height,
           zIndex: fullscreenContext ? presentationBounds.zIndex : undefined,
-          // backgroundColor: '#06172A4D',
+          // backgroundColor: '#06172A',
         }}
       >
-        {isFullscreen && <PollingContainer />}
+        {/* {isFullscreen && <PollingContainer />} */}
 
         <div
           ref={(ref) => { this.refPresentation = ref; }}
@@ -880,7 +880,7 @@ class Presentation extends PureComponent {
           <div
             className={styles.svgContainer}
             style={{
-              height: svgHeight + toolbarHeight,
+              height: svgHeight + toolbarHeight - 10,
             }}
           >
             {showSlide && svgWidth > 0 && svgHeight > 0

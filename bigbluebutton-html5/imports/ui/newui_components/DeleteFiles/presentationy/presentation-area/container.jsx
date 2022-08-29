@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import LayoutContext from '/imports/ui/components/layout/context';
+import LayoutContext from '../../../components/layout/context';
 import PresentationArea from './component';
 
 const PresentationAreaContainer = () => {
@@ -7,7 +7,7 @@ const PresentationAreaContainer = () => {
   const { layoutContextState } = layoutManager;
   const { output } = layoutContextState;
   const { presentation } = output;
-
+  
   return <PresentationArea {...{ ...presentation }} />;
 };
 

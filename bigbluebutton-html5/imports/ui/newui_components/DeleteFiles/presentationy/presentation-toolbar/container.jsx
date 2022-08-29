@@ -7,7 +7,7 @@ import Service from '/imports/ui/components/actions-bar/service';
 import PollService from '/imports/ui/components/poll/service';
 import { makeCall } from '/imports/ui/services/api';
 import PresentationToolbar from './component';
-import PresentationToolbarService from './service';
+import PresentationToolbarService from '/imports/ui/components/presentation/presentation-toolbar/service';
 
 const POLLING_ENABLED = Meteor.settings.public.poll.enabled;
 

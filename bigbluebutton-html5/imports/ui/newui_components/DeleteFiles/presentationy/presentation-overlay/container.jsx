@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import PresentationOverlay from './component';
-import WhiteboardToolbarService from '/imports/ui/components/whiteboard/whiteboard-toolbar/service';
+import WhiteboardToolbarService from '../../../components/whiteboard/whiteboard-toolbar/service';
 
 const PresentationOverlayContainer = ({ children, ...rest }) => (
   <PresentationOverlay {...rest}>

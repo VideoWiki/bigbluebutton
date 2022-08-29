@@ -427,15 +427,15 @@ class ScreenshareComponent extends React.Component {
       <div
         style={
           {
-            position: 'absolute',
+            // position: 'absolute',
             display,
             top,
             left,
             right,
-            height,
+            height: height-20,
             width,
             zIndex: fullscreenContext ? zIndex : undefined,
-            backgroundColor: '#06172A4D',
+            // backgroundColor: '#06172A',
           }
         }
       >

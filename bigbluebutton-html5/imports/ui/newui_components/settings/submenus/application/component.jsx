@@ -339,8 +339,8 @@ class ApplicationMenu extends BaseMenu {
       const pushLayouts = {
         CUSTOM_PUSH: 'customPush',
         SMART_PUSH: 'smartPush',
-        PRESENTATION_FOCUS_PUSH: 'presentationFocusPush',
-        VIDEO_FOCUS_PUSH: 'videoFocusPush',
+        // PRESENTATION_FOCUS_PUSH: 'presentationFocusPush',
+        // VIDEO_FOCUS_PUSH: 'videoFocusPush',
       };
       Object.assign(LAYOUT_TYPE, pushLayouts);
     }

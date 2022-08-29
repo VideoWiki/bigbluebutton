@@ -56,6 +56,8 @@ import MySidebar from '../../newui_components/sidebar_navigation/sidebar';
 import Option_Flow from '../../newui_components/Options/options_Flow';
 import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/container';
 import NewNavBarContainer from '/imports/ui/newui_components/nav-bar-new/container';
+import UpdatedScreenshareContainer from '/imports/ui/newui_components/screenshare/container';
+import UpdatedPresentationAreaContainer from '/imports/ui/newui_components/presentation/presentation-area/container';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -591,8 +593,8 @@ class App extends Component {
           <NewNavBarContainer main="new" />
           {/* <NavBarContainer main="new" /> */}
           {this.renderUpdatedWebcamsContainer()}
-          {shouldShowPresentation ? <PresentationAreaContainer /> : null}
-          {shouldShowScreenshare ? <ScreenshareContainer /> : null}
+          {shouldShowPresentation ? <UpdatedPresentationAreaContainer /> : null}
+          {shouldShowScreenshare ? <UpdatedScreenshareContainer /> : null}
           {
             shouldShowExternalVideo
               ? <ExternalVideoContainer isPresenter={isPresenter} />

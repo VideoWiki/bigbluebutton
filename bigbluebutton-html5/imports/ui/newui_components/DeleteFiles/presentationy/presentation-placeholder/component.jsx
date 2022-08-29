@@ -25,11 +25,11 @@ const PresentationPlaceholder = ({
     className={styles.presentationPlaceholder}
     data-test="presentationPlaceholder"
     style={{
-      top,
-      left,
-      right,
+      // top,
+      // left,
+      // right,
       width,
-      height,
+      height: height-20,
       zIndex: fullscreenContext ? zIndex : undefined,
       display: width ? 'flex' : 'none',
     }}
