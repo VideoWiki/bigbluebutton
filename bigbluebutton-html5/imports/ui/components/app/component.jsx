@@ -137,7 +137,7 @@ const isLayeredView = window.matchMedia(`(max-width: ${LAYERED_BREAKPOINT}px)`);
 
 class App extends Component {
   static renderWebcamsContainer() {
-    return <OldWebcamContainer />;
+    return <NewWebcamContainer />;
   }
   static renderUpdatedWebcamsContainer() {
     return <UpdatedWebcamContainer />;

@@ -101,7 +101,7 @@ class SmartLayout extends Component {
         type: ACTIONS.SET_LAYOUT_INPUT,
         value: _.defaultsDeep({
           sidebarNavigation: {
-            isOpen: input.sidebarNavigation.isOpen || sidebarContentPanel !== PANELS.NONE || false,
+            isOpen: input.sidebarNavigation.isOpen || false,
           },
           sidebarContent: {
             isOpen: sidebarContentPanel !== PANELS.NONE,
@@ -119,12 +119,6 @@ class SmartLayout extends Component {
           },
           cameraDock: {
             numCameras: input.cameraDock.numCameras,
-          },
-          externalVideo: {
-            hasExternalVideo: input.externalVideo.hasExternalVideo,
-          },
-          screenShare: {
-            hasScreenShare: input.screenShare.hasScreenShare,
           },
         }, INITIAL_INPUT_STATE),
       });
@@ -215,6 +209,7 @@ class SmartLayout extends Component {
   //     maxWidth,
   //   };
   // }
+
   // calculatesSidebarContentWidth() {
   //   const { layoutContextState } = this.props;
   //   const { deviceType, input } = layoutContextState;
@@ -320,7 +315,6 @@ class SmartLayout extends Component {
       width = 0;
       maxWidth = 0;
     }
-
     return {
       minWidth,
       width,
@@ -426,13 +420,9 @@ class SmartLayout extends Component {
     const {
       input, fullscreen, isRTL, deviceType,
     } = layoutContextState;
-    const { presentation, externalVideo, screenShare } = input;
-    const { isOpen, currentSlide } = presentation;
+    const { presentation } = input;
+    const { isOpen } = presentation;
     const { camerasMargin, presentationToolbarMinWidth } = DEFAULT_VALUES;
-
-    const { num: currentSlideNumber } = currentSlide;
-    const { hasExternalVideo } = externalVideo;
-    const { hasScreenShare } = screenShare;
 
     const cameraDockBounds = {};
     cameraDockBounds.isCameraHorizontal = false;
@@ -447,7 +437,7 @@ class SmartLayout extends Component {
       cameraDockBounds.right = isRTL ? sidebarSize : null;
       cameraDockBounds.zIndex = 1;
 
-      if (!isOpen || (currentSlideNumber === 0 && !hasExternalVideo && !hasScreenShare)) {
+      if (!isOpen) {
         cameraDockBounds.width = mediaAreaBounds.width;
         cameraDockBounds.maxWidth = mediaAreaBounds.width;
         cameraDockBounds.height = mediaAreaBounds.height;
@@ -533,15 +523,12 @@ class SmartLayout extends Component {
     const {
       input, fullscreen, isRTL, deviceType,
     } = layoutContextState;
-    const { presentation, externalVideo, screenShare } = input;
-    const { isOpen, currentSlide } = presentation;
-    const { num: currentSlideNumber } = currentSlide;
-    const { hasExternalVideo } = externalVideo;
-    const { hasScreenShare } = screenShare;
+    const { presentation } = input;
+    const { isOpen } = presentation;
     const mediaBounds = {};
     const { element: fullscreenElement } = fullscreen;
 
-    if (!isOpen || (currentSlideNumber === 0 && !hasExternalVideo && !hasScreenShare)) {
+    if (!isOpen) {
       mediaBounds.width = 0;
       mediaBounds.height = 0;
       mediaBounds.top = 0;
@@ -562,7 +549,7 @@ class SmartLayout extends Component {
     }
 
     if (input.cameraDock.numCameras > 0 && !input.cameraDock.isDragging) {
-      if (slideSize.width !== 0 && slideSize.height !== 0 && !hasExternalVideo && !hasScreenShare) {
+      if (slideSize.width !== 0 && slideSize.height !== 0) {
         if (slideSize.width < mediaAreaBounds.width && deviceType !== DEVICE_TYPE.MOBILE) {
           if (slideSize.width < (mediaAreaBounds.width * 0.8)) {
             mediaBounds.width = slideSize.width;
@@ -667,9 +654,9 @@ class SmartLayout extends Component {
     layoutContextDispatch({
       type: ACTIONS.SET_CAPTIONS_OUTPUT,
       value: {
-        left: !isRTL ? (sidebarSize + captionsMargin) : null,
-        right: isRTL ? (sidebarSize + captionsMargin) : null,
-        maxWidth: mediaAreaBounds.width - (captionsMargin * 2),
+        left: !isRTL ? (mediaBounds.left + captionsMargin) : null,
+        right: isRTL ? (mediaBounds.right + captionsMargin) : null,
+        maxWidth: mediaBounds.width - (captionsMargin * 2),
       },
     });
 
