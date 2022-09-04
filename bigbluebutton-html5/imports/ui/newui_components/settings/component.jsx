@@ -394,7 +394,7 @@ class Settings extends Component {
               />
             </div>
 
-            <div className={styles.settingCard} style={selectedTab == 4 ? { height: 'auto' } : { height: '70px' }}>
+            {isModerator && <div className={styles.settingCard} style={selectedTab == 4 ? { height: 'auto' } : { height: '70px' }}>
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(4) }}>
                 <div className={styles.settingHeadMain}>
                   <GuestIcon />
@@ -403,9 +403,9 @@ class Settings extends Component {
                 <ArrowDown />
               </div>
               <GuestPolicy />
-            </div>
+            </div>}
 
-            <div className={styles.settingCard} style={selectedTab == 5 ? { height: 'auto' } : { height: '70px' }}>
+            {isModerator && <div className={styles.settingCard} style={selectedTab == 5 ? { height: 'auto' } : { height: '70px' }}>
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(5) }}>
                 <div className={styles.settingHeadMain}>
                   <LockIcon />
@@ -414,7 +414,7 @@ class Settings extends Component {
                 <ArrowDown />
               </div>
               <LockViewers />
-            </div>
+            </div>}
           </div>
 
         </div>
