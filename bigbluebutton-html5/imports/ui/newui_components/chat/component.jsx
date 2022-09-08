@@ -108,6 +108,27 @@ const Chat = (props) => {
           {
             chatID !== PUBLIC_CHAT_ID
               ? (
+                <>
+                <button
+                  onClick={() => {
+                    layoutContextDispatch({
+                      type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
+                      value: true,
+                    });
+                    layoutContextDispatch({
+                      type: ACTIONS.SET_ID_CHAT_OPEN,
+                      value: PUBLIC_CHAT_ID,
+                    });
+                    layoutContextDispatch({
+                      type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
+                      value: PANELS.CHAT,
+                    });
+                  }}
+                  aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                  label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                  accessKey={CLOSE_CHAT_AK}
+                >-</button>
+
                 <button
                   onClick={() => {
                     actions.handleClosePrivateChat(chatID);
@@ -128,6 +149,7 @@ const Chat = (props) => {
                   label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
                   accessKey={CLOSE_CHAT_AK}
                 ><Cross /></button>
+                </>
               )
               : (
                 null

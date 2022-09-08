@@ -23,7 +23,7 @@ const checkUnreadMessages = ({
   const hasUnreadMessages = activeChats
     .filter((chat) => chat.userId !== idChatOpen)
     .some((chat) => chat.unreadCounter > 0);
-
+    
   return hasUnreadMessages;
 };
 

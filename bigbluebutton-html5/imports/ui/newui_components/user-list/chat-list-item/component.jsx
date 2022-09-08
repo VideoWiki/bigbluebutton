@@ -69,7 +69,7 @@ const ChatListItem = (props) => {
     sidebarContentPanel,
     layoutContextDispatch,
   } = props;
-
+  
   const chatPanelOpen = sidebarContentIsOpen && sidebarContentPanel === PANELS.CHAT;
 
   const isCurrentChat = chat.chatId === activeChatId && chatPanelOpen;
