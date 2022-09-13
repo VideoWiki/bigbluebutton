@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { LayoutContextFunc } from '/imports/ui/components/layout/context';
 import DEFAULT_VALUES from '/imports/ui/components/layout/defaultValues';
 import { INITIAL_INPUT_STATE } from '/imports/ui/components/layout/initState';
+import deviceInfo from '/imports/utils/deviceInfo';
 import {
   DEVICE_TYPE, ACTIONS, CAMERADOCK_POSITION, PANELS,
 } from '../enums';
@@ -317,76 +318,97 @@ class CustomLayout extends Component {
   // }
 
   calculatesSidebarNavWidth() {
-    // const { layoutContextState } = this.props;
-    // const { deviceType, input } = layoutContextState;
-    // const {
-    //   sidebarNavMinWidth,
-    //   sidebarNavMaxWidth,
-    // } = DEFAULT_VALUES;
-    let minWidth = 75;
-    let width = 75;
-    let maxWidth = 75;
-    // if (input.sidebarNavigation.isOpen) {
-    //   if (deviceType === DEVICE_TYPE.MOBILE) {
-    //     minWidth = windowWidth();
-    //     width = windowWidth();
-    //     maxWidth = windowWidth();
-    //   } else {
-    //     if (input.sidebarNavigation.width === 0) {
-    //       width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
-    //     } else {
-    //       width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
-    //     }
-    //     minWidth = sidebarNavMinWidth;
-    //     maxWidth = sidebarNavMaxWidth;
-    //   }
-    // } else {
-    //   minWidth = 0;
-    //   width = 0;
-    //   maxWidth = 0;
-    // }
+    let minWidth = 0;
+    let width = 0;
+    let maxWidth = 0;
+
+    if(deviceInfo.isMobile){
+      const { layoutContextState } = this.props;
+      const { deviceType, input } = layoutContextState;
+      const {
+        sidebarNavMinWidth,
+        sidebarNavMaxWidth,
+      } = DEFAULT_VALUES;
+      if (input.sidebarNavigation.isOpen) {
+        if (deviceType === DEVICE_TYPE.MOBILE) {
+          minWidth = windowWidth();
+          width = windowWidth();
+          maxWidth = windowWidth();
+        } else {
+          if (input.sidebarNavigation.width === 0) {
+            width = min(max((windowWidth() * 0.2), sidebarNavMinWidth), sidebarNavMaxWidth);
+          } else {
+            width = min(max(input.sidebarNavigation.width, sidebarNavMinWidth), sidebarNavMaxWidth);
+          }
+          minWidth = sidebarNavMinWidth;
+          maxWidth = sidebarNavMaxWidth;
+        }
+      } else {
+        minWidth = 0;
+        width = 0;
+        maxWidth = 0;
+      }
+    }else{
+      minWidth = 75;
+      width = 75;
+      maxWidth = 75;
+    }
     return {
       minWidth,
       width,
       maxWidth,
     };
   }
+
   calculatesSidebarContentWidth() {
-    const { layoutContextState } = this.props;
-    const { deviceType, input } = layoutContextState;
-    const {
-      sidebarContentMinWidth,
-      sidebarContentMaxWidth,
-    } = DEFAULT_VALUES;
+
     let minWidth = 0;
     let width = 0;
     let maxWidth = 0;
-    if (input.sidebarContent.isOpen) {
-      // if (deviceType === DEVICE_TYPE.MOBILE) {
-      //   minWidth = windowWidth();
-      //   width = windowWidth();
-      //   maxWidth = windowWidth();
-      // } else {
-      //   if (input.sidebarContent.width === 0) {
-      //     width = min(
-      //       max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
-      //     );
-      //   } else {
-      //     width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
-      //       sidebarContentMaxWidth);
-      //   }
-      //   minWidth = sidebarContentMinWidth;
-      //   maxWidth = sidebarContentMaxWidth;
-      // }
-      minWidth = 350;
-      width = 350;
-      maxWidth = 350;
-    } else {
-      minWidth = 0;
-      width = 0;
-      maxWidth = 0;
-    }
 
+    if(deviceInfo.isMobile){
+      const { layoutContextState } = this.props;
+      const { deviceType, input } = layoutContextState;
+      const {
+        sidebarContentMinWidth,
+        sidebarContentMaxWidth,
+      } = DEFAULT_VALUES;
+      if (input.sidebarContent.isOpen) {
+        if (deviceType === DEVICE_TYPE.MOBILE) {
+          minWidth = windowWidth();
+          width = windowWidth();
+          maxWidth = windowWidth();
+        } else {
+          if (input.sidebarContent.width === 0) {
+            width = min(
+              max((windowWidth() * 0.2), sidebarContentMinWidth), sidebarContentMaxWidth,
+            );
+          } else {
+            width = min(max(input.sidebarContent.width, sidebarContentMinWidth),
+              sidebarContentMaxWidth);
+          }
+          minWidth = sidebarContentMinWidth;
+          maxWidth = sidebarContentMaxWidth;
+        }
+      } else {
+        minWidth = 0;
+        width = 0;
+        maxWidth = 0;
+      }
+    }else{
+      const { layoutContextState } = this.props;
+      const { input } = layoutContextState;
+      if (input.sidebarContent.isOpen) {
+        minWidth = 350;
+        width = 350;
+        maxWidth = 350;
+      } else {
+        minWidth = 0;
+        width = 0;
+        maxWidth = 0;
+      }
+    }
+    
     return {
       minWidth,
       width,

@@ -48,14 +48,12 @@ class BreakoutRoomComponent extends PureComponent {
 
   componentDidMount(){
     const breakouts = ActionsBarService.getBreakouts();
-    console.log("breakoutNo", breakouts)
     if (breakouts.length > 0) {
       this.setState({ formFillLevel: 7 })
     }
   }
   componentDidUpdate() {
     const breakouts = ActionsBarService.getBreakouts();
-    console.log("breakoutNo", breakouts)
     if (breakouts.length > 0) {
       this.setState({ formFillLevel: 7 })
     }

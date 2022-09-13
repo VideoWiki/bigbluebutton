@@ -1,7 +1,6 @@
 import React from 'react';
 import {styles} from './styles.scss'
 export default function Tooltip(props) {
-    console.log("tips", props);
     return (
         <>
             <div className={styles.tooltipIcon}>

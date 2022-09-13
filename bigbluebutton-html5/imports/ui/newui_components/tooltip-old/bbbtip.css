@@ -1,0 +1,15 @@
+.tippy-tooltip.bbbtip-theme{
+    color:#fff;
+    background-color: #000000; 
+    padding: .25rem;
+    border-radius: 4px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.tippy-tooltip.bbbtip-theme>.tippy-svg-arrow{
+    fill: #000000;
+    background-color: transparent;
+}

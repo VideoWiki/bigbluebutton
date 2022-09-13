@@ -15,6 +15,7 @@ import { UserSentMessageCollection } from './service';
 import Auth from '/imports/ui/services/auth';
 import Share from "./Icons/share";
 import Cross from './Icons/Cross';
+import MinimizeIcon from './Icons/MinimizeIcon';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
@@ -127,7 +128,7 @@ const Chat = (props) => {
                   aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
                   label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
                   accessKey={CLOSE_CHAT_AK}
-                >-</button>
+                ><MinimizeIcon/></button>
 
                 <button
                   onClick={() => {

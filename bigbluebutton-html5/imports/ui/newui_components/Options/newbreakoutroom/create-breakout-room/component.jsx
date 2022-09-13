@@ -250,7 +250,6 @@ class BreakoutRoom extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevstate) {
-    console.log("userlist", this.props)
     if (this.listOfUsers) {
       for (let i = 0; i < this.listOfUsers.children.length; i += 1) {
         const roomWrapperChildren = this.listOfUsers.children[i].getElementsByTagName('div');
