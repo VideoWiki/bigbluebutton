@@ -5,6 +5,8 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { withModalMounter } from '/imports/ui/components/modal/service';
 import _ from 'lodash';
 import { Session } from 'meteor/session';
+import TrashIcon from '../icons/TrashIcon'
+import { alertScreenReader } from '/imports/utils/dom-utils';
 import cx from 'classnames';
 import Button from '/imports/ui/components/button/component';
 import Toggle from '/imports/ui/components/switch/component';
@@ -252,6 +254,17 @@ function CreatePoll(props) {
     setState({ ...state, optList: [...optList, { val: '' }] });
   }
 
+  const handleRemoveOption = (index) => {
+    const { intl } = props;
+    const { optList } = state;
+    const list = [...optList];
+    const removed = list[index];
+    list.splice(index, 1);
+    setState({ ...state, optList: list });
+    alertScreenReader(`${intl.formatMessage(intlMessages.removePollOpt,
+      { 0: removed.val || intl.formatMessage(intlMessages.emptyPollOpt) })}`);
+  }
+
   const handleCreatePoll = () => {
     const {
       type, secretPoll, optList, question, error,
@@ -266,8 +279,9 @@ function CreatePoll(props) {
       smallSidebar,
       setFormlevel
     } = props;
-    
+
     setState({ ...state, isPolling: state.isPolling })
+    console.log(optList)
     const verifiedPollType = checkPollType(
       type,
       optList,
@@ -294,7 +308,7 @@ function CreatePoll(props) {
   }
 
   const renderPollOptions = () => {
-    const {intl} = props;
+    const { intl } = props;
     return (
       < div className="createClass">
         <div className={styles.createClassWrapper}>
@@ -306,11 +320,12 @@ function CreatePoll(props) {
               state.optList.map((obj, pos) => {
                 return <div className={styles.addChoiceTab}>
                   <input className={styles.choiceInp} onChange={(e) => handleInputChange(e, pos)} type="text" placeholder={`${intl.formatMessage(intlMessages.choiceLabel)} ${pos + 1}`} value={obj.val} />
-                  {pos === state.optList.length - 1 &&
-                    <button disabled={state.optList.length == 4} className={styles.addButton} onClick={handleAddOption}>+</button>}
+                  {pos > 1 &&
+                    <button className={styles.removeButton} onClick={() => handleRemoveOption(pos)}><TrashIcon /></button>}
                 </div>
               })
             }
+            <button disabled={state.optList.length == 5} className={styles.addItemButton} onClick={handleAddOption}>+ Add Item</button>
             <button className={styles.createButton}
               onClick={handleCreatePoll}
             >{intl.formatMessage(intlMessages.createpollTitle)}</button>
@@ -320,7 +335,7 @@ function CreatePoll(props) {
     )
   }
 
-  const handleBackClick = ()=> {
+  const handleBackClick = () => {
     const { stopPoll } = props;
     setState({
       ...state,
@@ -332,7 +347,7 @@ function CreatePoll(props) {
     document.activeElement.blur();
   }
 
-  const renderActivePollOptions = ()=>{
+  const renderActivePollOptions = () => {
     const {
       intl,
       isMeteorConnected,
@@ -352,7 +367,7 @@ function CreatePoll(props) {
         usernames,
         isDefaultPoll,
       }}
-      handleBackClick={handleBackClick}
+        handleBackClick={handleBackClick}
       />
     )
   }

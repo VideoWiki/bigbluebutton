@@ -8,10 +8,12 @@ import { List, AutoSizer,CellMeasurer, CellMeasurerCache } from 'react-virtualiz
 import { styles } from './styles';
 import ChatLogger from '/imports/ui/newui_components/chat/chat-logger/ChatLogger';
 import TimeWindowChatItem from './time-window-chat-item/container';
+import PollResultList from './pollResultList/PollResultList';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const SYSTEM_CHAT_TYPE = CHAT_CONFIG.type_system;
 const CHAT_CLEAR_MESSAGE = CHAT_CONFIG.system_messages_keys.chat_clear;
+const CHAT_POLL_RESULTS_MESSAGE = CHAT_CONFIG.system_messages_keys.chat_poll_result;
 
 const propTypes = {
   scrollPosition: PropTypes.number,
@@ -148,15 +150,16 @@ class TimeWindowList extends PureComponent {
     // this condition exist to the case where the chat has a single message and the chat is cleared
     // The component List from react-virtualized doesn't have a reference to the list of messages
     // so I need force the update to fix it
-    if (
-      (lastTimeWindow?.id === `${SYSTEM_CHAT_TYPE}-${CHAT_CLEAR_MESSAGE}`)
-      || (prevSyncing && !syncing)
-      || (syncedPercent !== prevSyncedPercent)
-      || (chatId !== prevChatId)
-      || (lastTimeWindowValuesBuild !== prevProps.lastTimeWindowValuesBuild)
-    ) {
-      this.listRef.forceUpdateGrid();
-    }
+
+    // if (
+    //   (lastTimeWindow?.id === `${SYSTEM_CHAT_TYPE}-${CHAT_CLEAR_MESSAGE}`)
+    //   || (prevSyncing && !syncing)
+    //   || (syncedPercent !== prevSyncedPercent)
+    //   || (chatId !== prevChatId)
+    //   || (lastTimeWindowValuesBuild !== prevProps.lastTimeWindowValuesBuild)
+    // ) {
+    //   this.listRef.forceUpdateGrid();
+    // }
   }
 
   handleScrollUpdate(position, target) {
@@ -275,75 +278,82 @@ class TimeWindowList extends PureComponent {
       && timeWindowsValues.length >= scrollPosition
       && !userScrolledBack
     );
-
+    const newTimeWindowsValues = timeWindowsValues.filter(obj => obj.id.includes(CHAT_POLL_RESULTS_MESSAGE));
+    console.log("polling", newTimeWindowsValues)
+    if(newTimeWindowsValues.length==0){
+      return <div className={styles.pollContainerError}><h3>No poll result yet</h3></div>
+    }
     return (
-      [
-        <div
-          onMouseDown={() => {
-            this.setState({
-              userScrolledBack: true,
-            });
-          }}
-          onWheel={(e) => {
-            if (e.deltaY < 0) {
-              this.setState({
-                userScrolledBack: true,
-              });
-              this.userScrolledBack = true
-            }
-          }}
-          className={styles.messageListWrapper}
-          key="chat-list"
-          data-test="chatMessages"
-          aria-live="polite"
-          ref={node => this.messageListWrapper = node}
-        >
-          <AutoSizer>
-            {({ height, width }) => {
-              if (width !== this.lastWidth) {
-                this.lastWidth = width;
-                this.cache.clearAll();
-              }
-              return (
-                <List
-                  ref={(ref) => {
-                    if (ref !== null) {
-                      this.listRef = ref;
+      <PollResultList newTimeWindowsValues={newTimeWindowsValues}/>
+    )
+    // return (
+    //   [
+    //     <div
+    //       onMouseDown={() => {
+    //         this.setState({
+    //           userScrolledBack: true,
+    //         });
+    //       }}
+    //       onWheel={(e) => {
+    //         if (e.deltaY < 0) {
+    //           this.setState({
+    //             userScrolledBack: true,
+    //           });
+    //           this.userScrolledBack = true
+    //         }
+    //       }}
+    //       className={styles.messageListWrapper}
+    //       key="chat-list"
+    //       data-test="chatMessages"
+    //       aria-live="polite"
+    //       ref={node => this.messageListWrapper = node}
+    //     >
+    //       <AutoSizer>
+    //         {({ height, width }) => {
+    //           if (width !== this.lastWidth) {
+    //             this.lastWidth = width;
+    //             this.cache.clearAll();
+    //           }
+    //           return (
+    //             <List
+    //               ref={(ref) => {
+    //                 if (ref !== null) {
+    //                   this.listRef = ref;
 
-                      if (!scrollArea) {
-                        this.setState({ scrollArea: findDOMNode(this.listRef) });
-                      }
-                    }
-                  }}
-                  isScrolling
-                  rowHeight={this.cache.rowHeight}
-                  className={styles.messageList}
-                  rowRenderer={this.rowRender}
-                  rowCount={timeWindowsValues.length}
-                  height={height}
-                  width={width-3}
-                  overscanRowCount={0}
-                  deferredMeasurementCache={this.cache}
-                  scrollToIndex={shouldAutoScroll ? scrollPosition : undefined}
-                  onRowsRendered={({ stopIndex }) => {
-                    this.handleScrollUpdate(stopIndex);
-                  }}
-                  onScroll={({ clientHeight, scrollHeight, scrollTop }) => {
-                    const scrollSize = scrollTop + clientHeight;
-                    if (scrollSize >= scrollHeight) {
-                      this.setState({
-                        userScrolledBack: false,
-                      });
-                    }
-                  }}
-                />
-              );
-            }}
-          </AutoSizer>
-        </div>,
-        this.renderUnreadNotification(),
-      ]
-    );
+    //                   if (!scrollArea) {
+    //                     this.setState({ scrollArea: findDOMNode(this.listRef) });
+    //                   }
+    //                 }
+    //               }}
+    //               isScrolling
+    //               rowHeight={this.cache.rowHeight}
+    //               className={styles.messageList}
+    //               rowRenderer={this.rowRender}
+    //               rowCount={timeWindowsValues.length}
+    //               height={height}
+    //               width={width-3}
+    //               overscanRowCount={0}
+    //               deferredMeasurementCache={this.cache}
+    //               scrollToIndex={shouldAutoScroll ? scrollPosition : undefined}
+    //               onRowsRendered={({ stopIndex }) => {
+    //                 this.handleScrollUpdate(stopIndex);
+    //               }}
+    //               onScroll={({ clientHeight, scrollHeight, scrollTop }) => {
+    //                 const scrollSize = scrollTop + clientHeight;
+    //                 if (scrollSize >= scrollHeight) {
+    //                   this.setState({
+    //                     userScrolledBack: false,
+    //                   });
+    //                 }
+    //               }}
+    //             />
+    //           );
+    //         }}
+    //       </AutoSizer>
+    //     </div>,
+    //     this.renderUnreadNotification(),
+    //   ]
+    // );
   }
 }
 

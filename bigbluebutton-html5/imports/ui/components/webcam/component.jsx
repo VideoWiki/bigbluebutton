@@ -90,7 +90,7 @@ const WebcamComponent = ({
           type: ACTIONS.SET_CAMERA_DOCK_SIZE,
           value: {
             width: newCameraMaxWidth,
-            height: cameraDock.height-20,
+            height: cameraDock.height,
             browserWidth: window.innerWidth,
             browserHeight: window.innerHeight,
           },

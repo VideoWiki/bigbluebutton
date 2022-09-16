@@ -54,7 +54,6 @@ const endMeeting = (code) => {
 
 const AppContainer = (props) => {
   const layoutContext = useContext(LayoutContext);
-  console.log("context",layoutContext);
   const { layoutContextState, layoutContextDispatch } = layoutContext;
 
   function usePrevious(value) {

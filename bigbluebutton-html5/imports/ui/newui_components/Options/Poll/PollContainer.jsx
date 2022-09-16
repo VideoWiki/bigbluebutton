@@ -40,7 +40,10 @@ function PollContainer(props) {
           {formlevel === 1 && Service.amIPresenter() && <CreatePoll  {...{ layoutContextDispatch, ...props }} setFormlevel={setFormlevel} usernames={usernames} />}
           <PollingComponent />
           {!props.amIPresenter && <PollResult />}
-        </> : <div className={styles.pollContainerError}><h3>Please select the presentation</h3></div>
+        </> : 
+        Service.amIPresenter() ? 
+        <div className={styles.pollContainerError}><h3>Please select the presentation</h3></div> :
+        <div className={styles.pollContainerError}><h3>No presentation is selected</h3></div>
       }
     </div>
   )

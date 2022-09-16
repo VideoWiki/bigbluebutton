@@ -131,14 +131,15 @@
   line-height: 20px;   
   display:flex;
   align-items: center;
+  height: 35px;
 }
 .ChatHeadingOuter{
   padding: 1rem;
   padding-left: 1.5rem;
-  position: fixed;
+  // position: fixed;
   width: 350px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(35px);
+  // background: rgba(255, 255, 255, 0.2);
+  // backdrop-filter: blur(35px);
   z-index:999;
 }
 .CustomInline{

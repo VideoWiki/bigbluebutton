@@ -10,6 +10,7 @@ import Screenshareon from '../icon/Screenshareon';
 import Videoon from '../icon/Videoon';
 import Presenton from '../icon/Presenton'
 import Screenshareoff from '../icon/Screenshareoff';
+import MinimizeIcon from '../icon/MinimizeIcon';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -58,10 +59,10 @@ const PresentationOptionsContainer = ({
   const renderTypeIcon = (isLayoutSwapped, buttonType) => {
     return (
       <>
-      {isLayoutSwapped && <Screenshareoff/>}
-      {buttonType === "presentation" && !isLayoutSwapped && <Presenton/>}
-      {buttonType === "external-video" && !isLayoutSwapped && <Videoon/>}
-      {buttonType === "desktop" && !isLayoutSwapped && <Screenshareon/>}
+      {isLayoutSwapped && <Presenton/>}
+      {buttonType === "presentation" && !isLayoutSwapped && <MinimizeIcon/>}
+      {buttonType === "external-video" && !isLayoutSwapped && <MinimizeIcon/>}
+      {buttonType === "desktop" && !isLayoutSwapped && <MinimizeIcon/>}
       </>
     )
   }

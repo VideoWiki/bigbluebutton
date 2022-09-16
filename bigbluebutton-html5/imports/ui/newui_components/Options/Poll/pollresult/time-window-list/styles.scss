@@ -66,3 +66,13 @@
   z-index: 3;
   @extend %text-elipsis;
 }
+
+.pollContainerError{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 110px;
+}
+.pollContainerError h3{
+  color: #888888;
+}

@@ -81,7 +81,6 @@ class TimeWindowChatItem extends PureComponent {
       messageKey,
       intl,
     } = this.props;
-
     if (messages && messages[0].id.includes(CHAT_POLL_RESULTS_MESSAGE)) {
       return this.renderPollItem();
     }

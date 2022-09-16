@@ -547,11 +547,11 @@ class VideoPlayer extends Component {
     return (
       <span
         style={{
-          // position: 'absolute',
+          position: 'absolute',
           top,
           left,
           right,
-          height: height-20,
+          height: height,
           width,
           pointerEvents: isResizing ? 'none' : 'inherit',
           display: isMinimized && 'none',

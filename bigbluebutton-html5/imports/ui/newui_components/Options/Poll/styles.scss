@@ -1,8 +1,11 @@
 @import "/imports/ui/newui_components/css/variables.scss";
+@import "/imports/ui/stylesheets/mixins/_scrollable";
 
 .pollContainer{
     width: 350px;
     font-family: 'Montserrat';
+    height: 100vh;
+    @include scrollbox-vertical(var(--user-list-bg));
 }
 
 .createClassWrapper{
@@ -45,7 +48,7 @@
     display: flex;
 }
 
-.addButton {
+.removeButton {
     background-color: #F4F6F8;
     border-radius: 6px;
     margin: 0px 0px 10px 10px;
@@ -55,10 +58,6 @@
     cursor: pointer;
     width: 45px;
     transition: 0.2s ease;
-}
-.addButton:hover{
-    background-color: $buttonBgDark;
-    color: $buttonBgLight;
 }
 
 .createButton{
@@ -80,6 +79,24 @@
 .createButton:hover{
     background-color: $buttonBgDark;
     color: $buttonBgLight;
+}
+
+.addItemButton {
+    background-color: #F4F6F8;
+    border-radius: 6px;
+    padding: 10px;
+    border: 0px;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    transition: 0.2s ease;
+    margin-bottom: 10px;
 }
 
 .createClass h1{

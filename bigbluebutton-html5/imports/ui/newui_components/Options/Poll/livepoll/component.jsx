@@ -67,7 +67,7 @@ class LiveResult extends PureComponent {
       currentPoll, intl, pollAnswerIds, usernames, isDefaultPoll,
     } = nextProps;
 
-    const keys = [{ option: "A", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "B", color: "#44CC88", bgColor: "#44cc881a" }, { option: "C", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "D", color: "#44CC88", bgColor: "#44cc881a" }, { option: "", color: "", bgColor: "" }]
+    const keys = [{ option: "A", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "B", color: "#44CC88", bgColor: "#44cc881a" }, { option: "C", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "D", color: "#44CC88", bgColor: "#44cc881a" }, { option: "E", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "", color: "", bgColor: "" }]
     if (!currentPoll) return null;
 
     const {
@@ -84,7 +84,7 @@ class LiveResult extends PureComponent {
     userAnswers = userAnswers.map(id => usernames[id])
       .map((user) => {
         let answer = '';
-        let opt = 4;
+        let opt = 5;
         if (responses) {
           const response = responses.find(r => r.userId === user.userId);
           if (response) {
@@ -152,7 +152,6 @@ class LiveResult extends PureComponent {
         width: pctFotmatted,
         backgroundColor: (obj.key === maxKey ? "#44CC881A" : "#7966fa1a")
       };
-      console.log(obj.id, maxKey)
       const boxStyle = {
         border: `1px solid ${(obj.key === maxKey ? '#44CC88' : '#7966FA')}`
       };
