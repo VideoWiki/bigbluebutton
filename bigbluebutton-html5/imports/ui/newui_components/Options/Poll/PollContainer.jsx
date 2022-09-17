@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import CreatePoll from './createpoll/CreatePoll';
+import { defineMessages, injectIntl } from 'react-intl';
 
 import { makeCall } from '/imports/ui/services/api';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -12,21 +13,30 @@ import { UsersContext } from '/imports/ui/components/components-data/users-conte
 import LayoutContext from '/imports/ui/components/layout/context';
 import PollingComponent from './polling/container'
 import PollResult from './pollresult/container.jsx'
+import { styles } from './styles.scss'
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_KEY = CHAT_CONFIG.public_id;
 
-import { styles } from './styles.scss'
+const intlMessages = defineMessages({
+  selectPresentationLabel: {
+    id: 'app.poll.selectPresentationLabel',
+    description: 'aria-label for selecting presentation',
+  },
+  noPresentationLabel: {
+    id: 'app.poll.noPresentationLabel',
+    description: 'aria-label for no presentation',
+  }
+});
 
 function PollContainer(props) {
 
   const [formlevel, setFormlevel] = useState(1);
-
   const layoutContext = useContext(LayoutContext);
   const { layoutContextDispatch } = layoutContext;
   const usingUsersContext = useContext(UsersContext);
   const { users } = usingUsersContext;
-
+  const { intl } = props
   const usernames = {};
 
   Object.values(users[Auth.meetingID]).forEach((user) => {
@@ -40,16 +50,16 @@ function PollContainer(props) {
           {formlevel === 1 && Service.amIPresenter() && <CreatePoll  {...{ layoutContextDispatch, ...props }} setFormlevel={setFormlevel} usernames={usernames} />}
           <PollingComponent />
           {!props.amIPresenter && <PollResult />}
-        </> : 
-        Service.amIPresenter() ? 
-        <div className={styles.pollContainerError}><h3>Please select the presentation</h3></div> :
-        <div className={styles.pollContainerError}><h3>No presentation is selected</h3></div>
+        </> :
+          Service.amIPresenter() ?
+            <div className={styles.pollContainerError}><h3>{intl.formatMessage(intlMessages.selectPresentationLabel)}</h3></div> :
+            <div className={styles.pollContainerError}><h3>{intl.formatMessage(intlMessages.noPresentationLabel)}</h3></div>
       }
     </div>
   )
 }
 
-export default withTracker(() => {
+export default injectIntl(withTracker(({ intl }) => {
   const isPollSecret = Session.get('secretPoll') || false;
   Meteor.subscribe('current-poll', isPollSecret);
 
@@ -76,6 +86,7 @@ export default withTracker(() => {
     startPoll,
     startCustomPoll,
     stopPoll,
+    intl,
     publishPoll: Service.publishPoll,
     currentPoll: Service.currentPoll(),
     isDefaultPoll: Service.isDefaultPoll,
@@ -84,4 +95,4 @@ export default withTracker(() => {
     pollAnswerIds: Service.pollAnswerIds,
     isMeteorConnected: Meteor.status().connected,
   };
-})(PollContainer);
+})(PollContainer));

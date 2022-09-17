@@ -977,6 +977,9 @@
     "app.poll.choiceLabel": "Choice",
     "app.poll.pollingTitleLabel": "Poll",
     "app.poll.pollrestartLabel": "Restart Poll",
+    "app.poll.selectPresentationLabel": "Please select the presentation",
+    "app.poll.noPresentationLabel": "No presentation selected",
+    "app.poll.noPollResultLabel": "No poll result yet",
 
     "app.tooltip.copyLinkLabel": "Copy Link",
     "app.tooltip.copiedLabel": "Link Copied!",

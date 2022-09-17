@@ -5,6 +5,7 @@
     width: 350px;
     font-family: 'Montserrat';
     height: 100vh;
+    overflow-x: hidden;
     @include scrollbox-vertical(var(--user-list-bg));
 }
 

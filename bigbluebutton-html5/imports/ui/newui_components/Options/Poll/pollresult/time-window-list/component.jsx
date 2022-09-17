@@ -38,6 +38,10 @@ const intlMessages = defineMessages({
     id: 'app.chat.emptyLogLabel',
     description: 'aria-label used when chat log is empty',
   },
+  noPollResultLabel: {
+    id: 'app.poll.noPollResultLabel',
+    description: 'aria-label when there is no poll result',
+  },
 });
 class TimeWindowList extends PureComponent {
   constructor(props) {
@@ -263,7 +267,7 @@ class TimeWindowList extends PureComponent {
 
   render() {
     const {
-      timeWindowsValues,
+      timeWindowsValues, intl
     } = this.props;
 
     const {
@@ -279,9 +283,8 @@ class TimeWindowList extends PureComponent {
       && !userScrolledBack
     );
     const newTimeWindowsValues = timeWindowsValues.filter(obj => obj.id.includes(CHAT_POLL_RESULTS_MESSAGE));
-    console.log("polling", newTimeWindowsValues)
     if(newTimeWindowsValues.length==0){
-      return <div className={styles.pollContainerError}><h3>No poll result yet</h3></div>
+      return <div className={styles.pollContainerError}><h3>{intl.formatMessage(intlMessages.noPollResultLabel)}</h3></div>
     }
     return (
       <PollResultList newTimeWindowsValues={newTimeWindowsValues}/>
