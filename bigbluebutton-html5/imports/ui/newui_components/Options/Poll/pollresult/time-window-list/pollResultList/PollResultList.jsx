@@ -5,7 +5,7 @@ import { styles } from './styles';
 export default function PollResultList(props) {
 
     function showBar(extra) {
-        const keys = [{ option: "A", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "B", color: "#44CC88", bgColor: "#44cc881a" }, { option: "C", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "D", color: "#44CC88", bgColor: "#44cc881a" }, { option: "E", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "", color: "", bgColor: "" }]
+        const keys = [{ option: "A", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "B", color: "#44CC88", bgColor: "#44cc881a" }, { option: "C", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "D", color: "#44CC88", bgColor: "#44cc881a" }, { option: "E", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "F", color: "#44CC88", bgColor: "#44cc881a" }, { option: "G", color: "#7966FA", bgColor: "#7966fa1a" }, { option: "H", color: "#44CC88", bgColor: "#44cc881a" }, { option: "", color: "", bgColor: "" }]
         const numResponders = extra.pollResultData.numResponders;
         let maxKey = 0;
         let max = 0;
@@ -65,7 +65,7 @@ export default function PollResultList(props) {
             })
         )
     }
-    console.log("pollres", props)
+
     return (
         <>
             {

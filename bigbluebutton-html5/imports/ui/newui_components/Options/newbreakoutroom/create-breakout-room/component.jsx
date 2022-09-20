@@ -192,7 +192,7 @@ class BreakoutRoom extends PureComponent {
     this.onInviteBreakout = this.onInviteBreakout.bind(this);
     this.renderUserItemByRoom = this.renderUserItemByRoom.bind(this);
     this.renderRoomsGrid = this.renderRoomsGrid.bind(this);
-    this.renderBreakoutForm = this.renderBreakoutForm.bind(this);
+    // this.renderBreakoutForm = this.renderBreakoutForm.bind(this);
     this.renderCheckboxes = this.renderCheckboxes.bind(this);
     this.renderRoomSortList = this.renderRoomSortList.bind(this);
     this.renderDesktop = this.renderDesktop.bind(this);
@@ -708,127 +708,127 @@ class BreakoutRoom extends PureComponent {
     );
   }
 
-  renderBreakoutForm() {
-    const {
-      intl,
-      isInvitation,
-    } = this.props;
-    const {
-      numberOfRooms,
-      durationTime,
-      numberOfRoomsIsValid,
-      durationIsValid,
-    } = this.state;
-    if (isInvitation) return null;
+  // renderBreakoutForm() {
+  //   const {
+  //     intl,
+  //     isInvitation,
+  //   } = this.props;
+  //   const {
+  //     numberOfRooms,
+  //     durationTime,
+  //     numberOfRoomsIsValid,
+  //     durationIsValid,
+  //   } = this.state;
+  //   if (isInvitation) return null;
 
-    return (
-      <React.Fragment key="breakout-form">
-        <div className={styles.breakoutSettings}>
-          <div>
-            <p
-              className={cx(styles.labelText, !numberOfRoomsIsValid
-                && styles.withError)}
-              aria-hidden
-            >
-              {intl.formatMessage(intlMessages.numberOfRooms)}
-            </p>
-            <select
-              id="numberOfRooms"
-              name="numberOfRooms"
-              className={cx(styles.inputRooms, !numberOfRoomsIsValid
-                && styles.errorBorder)}
-              value={numberOfRooms}
-              onChange={this.changeNumberOfRooms}
-              aria-label={intl.formatMessage(intlMessages.numberOfRooms)}
-            >
-              {
-                _.range(MIN_BREAKOUT_ROOMS, MAX_BREAKOUT_ROOMS + 1).map((item) => (<option key={_.uniqueId('value-')}>{item}</option>))
-              }
-            </select>
-          </div>
-          <label htmlFor="breakoutRoomTime" className={!durationIsValid ? styles.changeToWarn : null}>
-            <p className={styles.labelText} aria-hidden>
-              {intl.formatMessage(intlMessages.duration)}
-            </p>
-            <div className={styles.durationArea}>
-              <input
-                type="number"
-                className={styles.duration}
-                min="1"
-                value={durationTime}
-                onChange={this.changeDurationTime}
-                onBlur={this.blurDurationTime}
-                aria-label={intl.formatMessage(intlMessages.duration)}
-              />
-              <HoldButton
-                key="decrease-breakout-time"
-                exec={this.decreaseDurationTime}
-                minBound={MIN_BREAKOUT_ROOMS}
-                value={durationTime}
-                className={styles.btnStyle}
-              >
-                <Button
-                  label={intl.formatMessage(intlMessages.minusRoomTime)}
-                  aria-label={
-                    `${intl.formatMessage(intlMessages.minusRoomTime)} ${intl.formatMessage(intlMessages.roomTime, { 0: durationTime - 1 })}`
-                  }
-                  icon="substract"
-                  onClick={() => { }}
-                  hideLabel
-                  circle
-                  size="sm"
-                />
-              </HoldButton>
-              <HoldButton
-                key="increase-breakout-time"
-                exec={this.increaseDurationTime}
-                className={styles.btnStyle}
-              >
-                <Button
-                  label={intl.formatMessage(intlMessages.addRoomTime)}
-                  aria-label={
-                    `${intl.formatMessage(intlMessages.addRoomTime)} ${intl.formatMessage(intlMessages.roomTime, { 0: durationTime + 1 })}`
-                  }
-                  icon="add"
-                  onClick={() => { }}
-                  hideLabel
-                  circle
-                  size="sm"
-                />
-              </HoldButton>
-            </div>
-            <span className={durationIsValid ? styles.dontShow : styles.leastOneWarn}>
-              {
-                intl.formatMessage(
-                  intlMessages.minimumDurationWarnBreakout,
-                  { 0: MIN_BREAKOUT_TIME },
-                )
-              }
-            </span>
+  //   return (
+  //     <React.Fragment key="breakout-form">
+  //       <div className={styles.breakoutSettings}>
+  //         <div>
+  //           <p
+  //             className={cx(styles.labelText, !numberOfRoomsIsValid
+  //               && styles.withError)}
+  //             aria-hidden
+  //           >
+  //             {intl.formatMessage(intlMessages.numberOfRooms)}
+  //           </p>
+  //           <select
+  //             id="numberOfRooms"
+  //             name="numberOfRooms"
+  //             className={cx(styles.inputRooms, !numberOfRoomsIsValid
+  //               && styles.errorBorder)}
+  //             value={numberOfRooms}
+  //             onChange={this.changeNumberOfRooms}
+  //             aria-label={intl.formatMessage(intlMessages.numberOfRooms)}
+  //           >
+  //             {
+  //               _.range(MIN_BREAKOUT_ROOMS, MAX_BREAKOUT_ROOMS + 1).map((item) => (<option key={_.uniqueId('value-')}>{item}</option>))
+  //             }
+  //           </select>
+  //         </div>
+  //         <label htmlFor="breakoutRoomTime" className={!durationIsValid ? styles.changeToWarn : null}>
+  //           <p className={styles.labelText} aria-hidden>
+  //             {intl.formatMessage(intlMessages.duration)}
+  //           </p>
+  //           <div className={styles.durationArea}>
+  //             <input
+  //               type="number"
+  //               className={styles.duration}
+  //               min="1"
+  //               value={durationTime}
+  //               onChange={this.changeDurationTime}
+  //               onBlur={this.blurDurationTime}
+  //               aria-label={intl.formatMessage(intlMessages.duration)}
+  //             />
+  //             <HoldButton
+  //               key="decrease-breakout-time"
+  //               exec={this.decreaseDurationTime}
+  //               minBound={MIN_BREAKOUT_ROOMS}
+  //               value={durationTime}
+  //               className={styles.btnStyle}
+  //             >
+  //               <Button
+  //                 label={intl.formatMessage(intlMessages.minusRoomTime)}
+  //                 aria-label={
+  //                   `${intl.formatMessage(intlMessages.minusRoomTime)} ${intl.formatMessage(intlMessages.roomTime, { 0: durationTime - 1 })}`
+  //                 }
+  //                 icon="substract"
+  //                 onClick={() => { }}
+  //                 hideLabel
+  //                 circle
+  //                 size="sm"
+  //               />
+  //             </HoldButton>
+  //             <HoldButton
+  //               key="increase-breakout-time"
+  //               exec={this.increaseDurationTime}
+  //               className={styles.btnStyle}
+  //             >
+  //               <Button
+  //                 label={intl.formatMessage(intlMessages.addRoomTime)}
+  //                 aria-label={
+  //                   `${intl.formatMessage(intlMessages.addRoomTime)} ${intl.formatMessage(intlMessages.roomTime, { 0: durationTime + 1 })}`
+  //                 }
+  //                 icon="add"
+  //                 onClick={() => { }}
+  //                 hideLabel
+  //                 circle
+  //                 size="sm"
+  //               />
+  //             </HoldButton>
+  //           </div>
+  //           <span className={durationIsValid ? styles.dontShow : styles.leastOneWarn}>
+  //             {
+  //               intl.formatMessage(
+  //                 intlMessages.minimumDurationWarnBreakout,
+  //                 { 0: MIN_BREAKOUT_TIME },
+  //               )
+  //             }
+  //           </span>
 
-          </label>
-          <Button
-            data-test="randomlyAssign"
-            label={intl.formatMessage(intlMessages.randomlyAssign)}
-            aria-describedby="randomlyAssignDesc"
-            className={styles.randomlyAssignBtn}
-            onClick={this.onAssignRandomly}
-            size="sm"
-            color="default"
-            disabled={!numberOfRoomsIsValid}
-          />
-        </div>
-        <span className={!numberOfRoomsIsValid
-          ? styles.withError : styles.dontShow}
-        >
-          {intl.formatMessage(intlMessages.numberOfRoomsIsValid)}
-        </span>
-        <span aria-hidden id="randomlyAssignDesc" className="sr-only">
-          {intl.formatMessage(intlMessages.randomlyAssignDesc)}
-        </span>
-      </React.Fragment>
-    );
-  }
+  //         </label>
+  //         <Button
+  //           data-test="randomlyAssign"
+  //           label={intl.formatMessage(intlMessages.randomlyAssign)}
+  //           aria-describedby="randomlyAssignDesc"
+  //           className={styles.randomlyAssignBtn}
+  //           onClick={this.onAssignRandomly}
+  //           size="sm"
+  //           color="default"
+  //           disabled={!numberOfRoomsIsValid}
+  //         />
+  //       </div>
+  //       <span className={!numberOfRoomsIsValid
+  //         ? styles.withError : styles.dontShow}
+  //       >
+  //         {intl.formatMessage(intlMessages.numberOfRoomsIsValid)}
+  //       </span>
+  //       <span aria-hidden id="randomlyAssignDesc" className="sr-only">
+  //         {intl.formatMessage(intlMessages.randomlyAssignDesc)}
+  //       </span>
+  //     </React.Fragment>
+  //   );
+  // }
 
   renderSelectUserScreen() {
     const {
@@ -992,32 +992,39 @@ class BreakoutRoom extends PureComponent {
       numberOfRoomsIsValid,
       roomNameDuplicatedIsValid,
       roomNameEmptyIsValid,
+      durationIsValid
     } = this.state;
     return (
       <>
         {!leastOneUserIsValid
           && (
-            <span className={styles.withError}>
+            <p className={styles.withError}>
               {intl.formatMessage(intlMessages.leastOneWarnBreakout)}
-            </span>
+            </p>
           )}
         {!numberOfRoomsIsValid
           && (
-            <span className={styles.withError}>
+            <p className={styles.withError}>
               {intl.formatMessage(intlMessages.numberOfRoomsIsValid)}
-            </span>
+            </p>
           )}
         {!roomNameDuplicatedIsValid
           && (
-            <span className={styles.withError}>
+            <p className={styles.withError}>
               {intl.formatMessage(intlMessages.roomNameDuplicatedIsValid)}
-            </span>
+            </p>
           )}
         {!roomNameEmptyIsValid
           && (
-            <span className={styles.withError}>
+            <p className={styles.withError}>
               {intl.formatMessage(intlMessages.roomNameEmptyIsValid)}
-            </span>
+            </p>
+          )}
+        {!durationIsValid
+          && (
+            <p className={styles.withError}>
+              {intl.formatMessage(intlMessages.minimumDurationWarnBreakout,{ 0: MIN_BREAKOUT_TIME },)}
+            </p>
           )}
       </>
     );
@@ -1219,6 +1226,7 @@ class BreakoutRoom extends PureComponent {
                     onClick={this.onCreateBreakouts}
                   >{intl.formatMessage(intlMessages.createRoomLabel)}</div>
                 </div>
+                {this.renderErrorMessages()}
               </div>
             </div>
             <RoomGroup {...this.state} intl={intl} updateState={this.updateState} changeFormLevel={this.props.changeFormLevel} /></>

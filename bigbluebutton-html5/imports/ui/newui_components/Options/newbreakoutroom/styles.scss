@@ -354,6 +354,9 @@
 
   .withError {
     color: var(--color-danger);
+    margin: 0px;
+    padding-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .endButton {

@@ -325,7 +325,7 @@ function CreatePoll(props) {
                 </div>
               })
             }
-            <button disabled={state.optList.length == 5} className={styles.addItemButton} onClick={handleAddOption}>+ Add Item</button>
+            <button disabled={state.optList.length == MAX_CUSTOM_FIELDS} className={styles.addItemButton} onClick={handleAddOption}>+ Add Item</button>
             <button className={styles.createButton}
               onClick={handleCreatePoll}
             >{intl.formatMessage(intlMessages.createpollTitle)}</button>
