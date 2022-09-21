@@ -959,6 +959,7 @@
 
     "app.createBreakoutRoom.roomLabels": "Rooms",
     "app.createBreakoutRoom.createRoom": "Create Room",
+    "app.createBreakoutRoom.selectRandParticipantLabel": "Select random participant",
 
     "app.settings.titleLabel": "Settings", 
     "app.settings.notificationTab.label": "Notification",
@@ -980,6 +981,7 @@
     "app.poll.selectPresentationLabel": "Please select the presentation",
     "app.poll.noPresentationLabel": "No presentation selected",
     "app.poll.noPollResultLabel": "No poll result yet",
+    "app.poll.pollFieldIsEmpty": "Please fill all the fields",
 
     "app.tooltip.copyLinkLabel": "Copy Link",
     "app.tooltip.copiedLabel": "Link Copied!",

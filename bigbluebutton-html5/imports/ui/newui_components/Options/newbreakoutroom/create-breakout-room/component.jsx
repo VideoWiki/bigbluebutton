@@ -149,8 +149,8 @@ const intlMessages = defineMessages({
     description: 'Create Room',
   },
 
-  selectRandUserLabel: {
-    id: 'app.actionsBar.actionsDropdown.selectRandUserLabel',
+  selectRandParticipantLabel: {
+    id: 'app.createBreakoutRoom.selectRandParticipantLabel',
     description: 'Label for selecting a random user',
   },
 });
@@ -1219,7 +1219,7 @@ class BreakoutRoom extends PureComponent {
                     <Random />
                     <div className={styles.sideTooltipWrapper}>
                       <div className={styles.sidebarTipArrow}></div>
-                      <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.selectRandUserLabel)}</span></div>
+                      <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.selectRandParticipantLabel)}</span></div>
                     </div>
                   </div>
                   <div className={styles.create}

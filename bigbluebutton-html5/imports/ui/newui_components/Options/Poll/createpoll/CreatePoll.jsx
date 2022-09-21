@@ -205,6 +205,10 @@ const intlMessages = defineMessages({
     id: 'app.poll.choiceLabel',
     description: 'Choice Label',
   },
+  pollFieldIsEmpty: {
+    id: 'app.poll.pollFieldIsEmpty',
+    description: 'Invalid Fields Label',
+  }
 });
 
 function CreatePoll(props) {
@@ -222,7 +226,8 @@ function CreatePoll(props) {
     optList: [{ val: "" }, { val: "" }],
     error: null,
     secretPoll: false,
-    type: "A-"
+    type: "A-",
+    hasFieldError: false
   })
 
   const validateInput = (i) => {
@@ -265,6 +270,29 @@ function CreatePoll(props) {
       { 0: removed.val || intl.formatMessage(intlMessages.emptyPollOpt) })}`);
   }
 
+  const fieldsIsValid = () => {
+    const {
+      type, secretPoll, optList, question, error
+    } = state;
+
+    if (question.length == 0) {
+      setState({ ...state, hasFieldError: true })
+      return false;
+    }else{
+      setState({ ...state, hasFieldError: false })
+    }
+
+    for (let i = 0; i < optList.length; i++) {
+      if (optList[i].val.length == 0) {
+        setState({ ...state, hasFieldError: true })
+        return false;
+      }else{
+        setState({ ...state, hasFieldError: false })
+      }
+    }
+    return true;
+  }
+
   const handleCreatePoll = () => {
     const {
       type, secretPoll, optList, question, error,
@@ -280,44 +308,49 @@ function CreatePoll(props) {
       setFormlevel
     } = props;
 
-    setState({ ...state, isPolling: state.isPolling })
-    console.log(optList)
-    const verifiedPollType = checkPollType(
-      type,
-      optList,
-      intl.formatMessage(intlMessages.yes),
-      intl.formatMessage(intlMessages.no),
-      intl.formatMessage(intlMessages.abstention),
-      intl.formatMessage(intlMessages.true),
-      intl.formatMessage(intlMessages.false),
-    );
-    const verifiedOptions = optList.map((o) => {
-      if (o.val.length > 0) return o.val;
-      return null;
-    });
-    if (verifiedPollType === pollTypes.Custom) {
-      startCustomPoll(
-        verifiedPollType,
-        secretPoll,
-        question,
-        _.compact(verifiedOptions),
+    if (fieldsIsValid()) {
+      setState({ ...state, isPolling: state.isPolling })
+      setState({ ...state, hasFieldError: !state.hasFieldError })
+
+      const verifiedPollType = checkPollType(
+        type,
+        optList,
+        intl.formatMessage(intlMessages.yes),
+        intl.formatMessage(intlMessages.no),
+        intl.formatMessage(intlMessages.abstention),
+        intl.formatMessage(intlMessages.true),
+        intl.formatMessage(intlMessages.false),
       );
-    } else {
-      startPoll(verifiedPollType, secretPoll, question);
+      const verifiedOptions = optList.map((o) => {
+        if (o.val.length > 0) return o.val;
+        return null;
+      });
+      if (verifiedPollType === pollTypes.Custom) {
+        startCustomPoll(
+          verifiedPollType,
+          secretPoll,
+          question,
+          _.compact(verifiedOptions),
+        );
+      } else {
+        startPoll(verifiedPollType, secretPoll, question);
+      }
     }
   }
 
   const renderPollOptions = () => {
     const { intl } = props;
+    const { isQuesValid, isOptionsValid, optList, question} = state;
+
     return (
-      < div className="createClass">
+      <div className="createClass">
         <div className={styles.createClassWrapper}>
           <h1>{intl.formatMessage(intlMessages.createpollTitle)}</h1>
           <div className={styles.createBox}>
             <h3>{intl.formatMessage(intlMessages.askquesLabel)}</h3>
-            <input className={styles.quesInput} onChange={handleTextareaChange} type="text" placeholder={intl.formatMessage(intlMessages.quesplaceholderLabel)} />
+            <input className={styles.quesInput} onChange={handleTextareaChange} type="text" placeholder={intl.formatMessage(intlMessages.quesplaceholderLabel)} value={question} />
             {
-              state.optList.map((obj, pos) => {
+              optList.map((obj, pos) => {
                 return <div className={styles.addChoiceTab}>
                   <input className={styles.choiceInp} onChange={(e) => handleInputChange(e, pos)} type="text" placeholder={`${intl.formatMessage(intlMessages.choiceLabel)} ${pos + 1}`} value={obj.val} />
                   {pos > 1 &&
@@ -325,10 +358,16 @@ function CreatePoll(props) {
                 </div>
               })
             }
-            <button disabled={state.optList.length == MAX_CUSTOM_FIELDS} className={styles.addItemButton} onClick={handleAddOption}>+ Add Item</button>
+            <button disabled={optList.length == MAX_CUSTOM_FIELDS} className={styles.addItemButton} onClick={handleAddOption}>+ Add Item</button>
             <button className={styles.createButton}
               onClick={handleCreatePoll}
             >{intl.formatMessage(intlMessages.createpollTitle)}</button>
+            {state.hasFieldError
+              && (
+                <p className={styles.withError}>
+                  {intl.formatMessage(intlMessages.pollFieldIsEmpty)}
+                </p>
+              )}
           </div>
         </div>
       </div>

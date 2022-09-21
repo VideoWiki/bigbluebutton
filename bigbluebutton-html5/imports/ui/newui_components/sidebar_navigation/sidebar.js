@@ -24,8 +24,6 @@ const MySidebar = (props) => {
     const CustomLogoUrl = Service.getCustomLogoUrl();
     const meetingIsBreakout = BreakoutService.meetingIsBreakout();
 
-    const hasBreakoutRoom = Service.hasBreakoutRoom()
-
     const amIPresenter = PresenterService.amIPresenter()
     const amIModerator = PresenterService.amIModerator()
 
@@ -49,20 +47,20 @@ const MySidebar = (props) => {
             {iconTypes.map((item, id) => {
                 if(item=="newbreakoutroom"){
                     if(!meetingIsBreakout){
-                        if(amIModerator){
-                            return (
-                                <IconBox key={id} intl={intl} icon={item} {...input} 
-                                contextDispatch={layoutContextDispatch} 
-                                />
-                            )
-                        }else if(hasBreakoutRoom){
+                        if(amIModerator || props.hasBreakoutRoom){
                             return (
                                 <IconBox key={id} intl={intl} icon={item} {...input} 
                                 contextDispatch={layoutContextDispatch} 
                                 />
                             )
                         }
-                        
+                        // else if(hasBreakoutRoom){
+                        //     return (
+                        //         <IconBox key={id} intl={intl} icon={item} {...input} 
+                        //         contextDispatch={layoutContextDispatch} 
+                        //         />
+                        //     )
+                        // }
                     }
                 }else if(item=="video" || item=="presentation"){
                     // item=="poll" || 
@@ -74,15 +72,6 @@ const MySidebar = (props) => {
                         )
                     }
                 }
-                // else if(item=="poll"){
-                //     if(amIPresenter || pollExists || ){
-                //         return (
-                //             <IconBox key={id} intl={intl} icon={item} {...input} 
-                //             contextDispatch={layoutContextDispatch} 
-                //             />
-                //         )
-                //     }
-                // }
                 else{
                     return (
                         <IconBox key={id} intl={intl} icon={item} {...input} 
@@ -105,10 +94,13 @@ export default withTracker(() => {
       const isResponse = poll.pollType === pollTypes.Response;
       Meteor.subscribe('polls', isResponse);
     }
+
+    const hasBreakoutRoom = Service.hasBreakoutRoom()
   
     return ({
       pollExists,
       handleVote,
+      hasBreakoutRoom,
       handleTypedVote,
       poll,
       pollAnswerIds: PollService.pollAnswerIds,

@@ -296,3 +296,10 @@
 .pollContainerError h3{
     color: #888888;
 }
+
+.withError {
+    color: var(--color-danger);
+    margin: 0px;
+    padding-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
