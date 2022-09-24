@@ -200,6 +200,7 @@ class TimeWindowList extends PureComponent {
     const { scrollArea } = this.state;
     const message = timeWindowsValues[index];
     ChatLogger.debug('TimeWindowList::rowRender', this.props);
+    //remove welcome message
     if(message.id=="SYSTEM_MESSAGE-welcome-msg"){
       return null;
     }

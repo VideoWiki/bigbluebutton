@@ -3,7 +3,7 @@ import ChatContainer from '/imports/ui/newui_components/chat/container';
 // import ChatContainer from '/imports/ui/components/chat/container';
 // import ChatContainer from '/imports/ui/newui_components/chat-new/container';
 import { LayoutContextFunc } from "../../components/layout/context";
-import BreakoutRoom from '/imports/ui/newui_components/actions-bar/create-breakout-room/container';
+// import BreakoutRoom from '/imports/ui/newui_components/actions-bar/create-breakout-room/container';
 import NewBreakoutRoom from './newbreakoutroom/container.jsx';
 import { styles } from "./styles.scss";
 // import UsersContainer from "./Users/container"
@@ -25,7 +25,7 @@ const Option_flow = (props) => {
 
     return (<div className={sidebarContentPanel != "none" ? styles.optionOuter : ""}>
         {sidebarContentPanel === "chat" && <ChatContainer />}
-        {sidebarContentPanel === "breakoutroom" && <BreakoutRoom/>}
+        {/* {sidebarContentPanel === "breakoutroom" && <BreakoutRoom/>} */}
         {sidebarContentPanel === "newbreakoutroom" && <NewBreakoutRoom/>}
         {sidebarContentPanel === "document" && <NoteContainer/>}
         {sidebarContentPanel === "user" && <UsersContainer />}
