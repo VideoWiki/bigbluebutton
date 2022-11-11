@@ -11,13 +11,13 @@ public:
     listenOnlyMode: true
     forceListenOnly: false
     # Skips the echo test when connecting with microphone.
-    skipCheck: false
+    skipCheck: true
     # Skips the echo test when connecting with microphone right after user
     # joins the room the first time. Subsequent joins to microphone won't
     # have echo test skipped, for example if user leaves and joins the mic
     # again or reloading page and joining mic again.
     # This setting won't have effect if skipCheck = true
-    skipCheckOnJoin: false
+    skipCheckOnJoin: true
     #
     # Allow users to change microphone/speaker dynamically
     # The device is changed immediately, without the need to rejoin
@@ -205,7 +205,7 @@ public:
   externalVideoPlayer:
     enabled: true
   kurento:
-    wsUrl: wss://beta.class.video.wiki/bbb-webrtc-sfu
+    wsUrl: wss://dev.beta.room.video.wiki/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -477,7 +477,7 @@ public:
     moderatorChatEmphasized: true
   note:
     enabled: true
-    url: https://beta.class.video.wiki/pad
+    url: https://dev.beta.class.video.wiki/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false
@@ -763,7 +763,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: JL3KG3qBwyvyRfKlrGeDG5L2IifryRVNtZJ5ctaVPyFDGDP9XEQflLSXgODdky
+    apikey: fe51f777965ba59153d0a79769cc65117ae72a6d4c0c6a1570bc5089cb61e2cc
     version: 1.2.13
     host: 127.0.0.1
     port: 9001
