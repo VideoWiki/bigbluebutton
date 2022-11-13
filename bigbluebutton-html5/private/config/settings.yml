@@ -477,7 +477,7 @@ public:
     moderatorChatEmphasized: true
   note:
     enabled: true
-    url: https://dev.beta.class.video.wiki/pad
+    url: https://dev.beta.room.video.wiki/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false

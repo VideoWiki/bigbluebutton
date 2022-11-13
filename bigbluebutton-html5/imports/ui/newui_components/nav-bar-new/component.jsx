@@ -163,13 +163,13 @@ class NavBar extends Component {
       sidebarContent,
     } = this.props;
 
-    const hasNotification = hasUnreadMessages || hasUnreadNotes;
+    // const hasNotification = hasUnreadMessages || hasUnreadNotes;
     const toggleBtnClasses = {};
     toggleBtnClasses[styles.btn] = true;
-    toggleBtnClasses[styles.btnWithNotificationDot] = hasNotification;
+    // toggleBtnClasses[styles.btnWithNotificationDot] = hasNotification;
 
-    let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
-    ariaLabel += hasNotification ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
+    // let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
+    // ariaLabel += hasNotification ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
 
     const isExpanded = sidebarContent.isOpen;
 
@@ -197,10 +197,10 @@ class NavBar extends Component {
           <button
               hideLabel
               onClick={this.handleToggleUserList}
-              data-test={hasNotification ? 'hasUnreadMessages' : null}
+              // data-test={hasNotification ? 'hasUnreadMessages' : null}
               label={intl.formatMessage(intlMessages.toggleUserListLabel)}
               tooltipLabel={intl.formatMessage(intlMessages.toggleUserListLabel)}
-              aria-label={ariaLabel}
+              // aria-label={ariaLabel}
               className={cx(toggleBtnClasses, styles.NavToggle)}
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}

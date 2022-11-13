@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Poll from "./Icons/poll";
 import BreakoutRoom from "./Icons/breakout_room";
 import Document from "./Icons/document";
@@ -17,6 +17,11 @@ import UserListService from '/imports/ui/newui_components/user-list/service';
 import GuestUsers from '/imports/api/guest-users/';
 import Auth from '/imports/ui/services/auth';
 import Waitinguser from "./Icons/waitinguser";
+import userListService from '/imports/ui/components/user-list/service';
+import NoteService from '/imports/ui/components/note/service';
+import { ChatContext } from '/imports/ui/components/components-data/chat-context/context';
+import { GroupChatContext } from '/imports/ui/components/components-data/group-chat-context/context';
+import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
 // import WaitingUserService from '/imports/ui/components/waiting-users/service';
 
 const intlMessages = defineMessages({
@@ -66,7 +71,7 @@ const propTypes = {
 
 function IconBox(props) {
 
-    const { sidebarContent, icon, contextDispatch, intl, meetingIsBreakout} = props;
+    const { sidebarContent, icon, contextDispatch, intl, meetingIsBreakout } = props;
     const { sidebarContentPanel } = sidebarContent;
     // const users = UserListService.getUsers();
     // const [userCount, setUserCount] = useState(UserListService.getUsers().length);
@@ -100,6 +105,29 @@ function IconBox(props) {
         };
     }
 
+    const usingChatContext = useContext(ChatContext);
+    const usingUsersContext = useContext(UsersContext);
+    const usingGroupChatContext = useContext(GroupChatContext);
+    const { chats: groupChatsMessages } = usingChatContext;
+    const { users } = usingUsersContext;
+    const { groupChat: groupChats } = usingGroupChatContext;
+
+    const checkUnreadMessages = ({
+        groupChatsMessages, groupChats, users, idChatOpen,
+    }) => {
+        const activeChats = userListService.getActiveChats({ groupChatsMessages, groupChats, users });
+        const hasUnreadMessages = activeChats
+            .filter((chat) => chat.userId !== idChatOpen)
+            .some((chat) => chat.unreadCounter > 0);
+
+        return hasUnreadMessages;
+    };
+
+    const hasUnreadNotes = NoteService.hasUnreadNotes(sidebarContentPanel);
+    const hasUnreadMessages = checkUnreadMessages(
+        { groupChatsMessages, groupChats, users: users[Auth.meetingID] },
+    );
+
     return (<div className={`${styles.IconBox} ${sidebarContentPanel === icon ? styles.IconFill : styles.IconUnfill}`}
         onClick={() => updateSelectedFeature()}
     >
@@ -114,27 +142,32 @@ function IconBox(props) {
                 </div>
             }
             {icon === "user" &&
-                <div className={styles.sidebarIcon}> <User
-                    sidebarContentPanel={sidebarContentPanel}
-                />
-                    <div className={styles.sidebarBadge}>
-                        <div className={styles.userIconBadge}>
-                            <span>{props.users.length}</span>
+                <div className={hasUnreadMessages ? styles.btnWithNotificationDot : null}>
+                    <div className={styles.sidebarIcon}> <User
+                        sidebarContentPanel={sidebarContentPanel}
+                    />
+                        <div className={styles.sidebarBadge}>
+                            <div className={styles.userIconBadge}>
+                                <span>{props.users.length}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.sideTooltipWrapper}>
-                        <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.usersTitle)}</span></div>
+
+                        <div className={styles.sideTooltipWrapper}>
+                            <div className={styles.sidebarTipArrow}></div>
+                            <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.usersTitle)}</span></div>
+                        </div>
                     </div>
                 </div>}
             {icon === "document" &&
-                <div className={styles.sidebarIcon}>
-                    <Document
-                        sidebarContentPanel={sidebarContentPanel}
-                    />
-                    <div className={styles.sideTooltipWrapper}>
-                        <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.notesTitle)}</span></div>
+                <div className={hasUnreadNotes ? styles.btnWithNotificationDot : null}>
+                    <div className={styles.sidebarIcon}>
+                        <Document
+                            sidebarContentPanel={sidebarContentPanel}
+                        />
+                        <div className={styles.sideTooltipWrapper}>
+                            <div className={styles.sidebarTipArrow}></div>
+                            <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.notesTitle)}</span></div>
+                        </div>
                     </div>
                 </div>}
             {icon === "newbreakoutroom" &&
