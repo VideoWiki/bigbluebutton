@@ -27,11 +27,11 @@ public:
     # enableDynamicAudioDeviceSelection: true
     #
     clientTitle: VideoWiki
-    appName: BigBlueButton HTML5 Client
+    appName: VideoWiki HTML5 Client
     bbbServerVersion: 2.4
-    copyright: '©2022 BigBlueButton Inc.'
+    copyright: '©2022 VideoWiki Inc.'
     html5ClientBuild: 2473
-    helpLink: https://bigbluebutton.org/html5/
+    helpLink: https://video.wiki/contact-us
     lockOnJoin: true
     cdn: ''
     basename: '/html5client'

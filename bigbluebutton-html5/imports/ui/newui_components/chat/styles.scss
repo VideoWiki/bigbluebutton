@@ -222,3 +222,55 @@
   background: none;
   cursor: pointer;
 }
+
+.chatHeader {
+  height: auto;
+  padding: 8px;
+}
+.chatHeaderWrapper{
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 7px;
+  display: flex;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: -0.24px;
+  cursor: pointer;
+  
+  .chTab {
+    border-radius: 8px;
+    padding: 7px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h3{
+      margin: 0;
+      padding: 0;
+    }
+    span{
+      width: 22px;
+      text-align: center;
+      margin-left: 5px;
+      color: #FFFFFF;
+      border-radius: 50%;
+      background-color: #E64980;
+    }
+  }
+  .chTabOn{
+    color: #FFFFFF;
+    background-color: $sidebarIconDark;
+  }
+
+  .chTabOff{
+    color: #000000;
+  }
+}
+
+.messageList {
+  // height: calc(100vh - 168.72px);
+  height: auto;
+}

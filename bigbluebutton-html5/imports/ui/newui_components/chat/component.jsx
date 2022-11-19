@@ -16,6 +16,8 @@ import Auth from '/imports/ui/services/auth';
 import Share from "./Icons/share";
 import Cross from './Icons/Cross';
 import MinimizeIcon from './Icons/MinimizeIcon';
+import { useState } from 'react';
+import PrivateMessageContainer from './private-window-list/container';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
@@ -67,6 +69,11 @@ const Chat = (props) => {
     syncing,
     syncedPercent,
     lastTimeWindowValuesBuild,
+
+    currentClosedChats,
+    startedChats,
+    compact,
+
   } = props;
 
   const userSentMessage = UserSentMessageCollection.findOne({ userId: Auth.userID, sent: true });
@@ -74,9 +81,19 @@ const Chat = (props) => {
   const CLOSE_CHAT_AK = shortcuts.closeprivatechat;
   ChatLogger.debug('ChatComponent::render', props);
 
+  const [publicChatActive, setPublicChatActive] = useState(true);
+
+  const changeChatTab = (tab) => {
+    if (tab == "public") {
+      setPublicChatActive(true);
+    } else {
+      setPublicChatActive(false);
+    }
+  }
+
   const copyLink = () => {
     let joinUrl = Auth._logoutURL;
-    navigator.clipboard.writeText(joinUrl.substring(0, joinUrl.length-6));
+    navigator.clipboard.writeText(joinUrl.substring(0, joinUrl.length - 6));
     const p = document.getElementById("shareUrlIcon");
     p.innerText = intl.formatMessage(intlMessages.copiedLabel);
   }
@@ -86,7 +103,22 @@ const Chat = (props) => {
       data-test={chatID !== PUBLIC_CHAT_ID ? 'privateChat' : 'publicChat'}
       className={styles.chatWidth}
     >
-      <div className={styles.ChatHeadingOuter}>
+      {/* height: 62.72px */}
+      <div className={styles.chatHeader}>
+        <div className={styles.chatHeaderWrapper}>
+          <div className={`${styles.chTab} ${publicChatActive ? styles.chTabOn : styles.chTabOff}`}
+            onClick={() => changeChatTab("public")}>
+            <h3>Public Chat</h3>
+          </div>
+          <div className={`${styles.chTab} ${publicChatActive ? styles.chTabOff : styles.chTabOn}`}
+            onClick={() => changeChatTab("private")}>
+            <h3>Private Chat</h3>
+            <span>23</span>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className={styles.ChatHeadingOuter}>
         <div className={styles.CustomInline}>
           <div
             data-test="chatTitle"
@@ -96,7 +128,7 @@ const Chat = (props) => {
             }
           </div>
           {
-            chatID == PUBLIC_CHAT_ID && !meetingIsBreakout &&  
+            chatID == PUBLIC_CHAT_ID && !meetingIsBreakout &&
             <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
               <div className={styles.sideTooltipWrapper}>
                 <div className={styles.sidebarTipArrow}></div>
@@ -110,46 +142,46 @@ const Chat = (props) => {
             chatID !== PUBLIC_CHAT_ID
               ? (
                 <>
-                <button
-                  onClick={() => {
-                    layoutContextDispatch({
-                      type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
-                      value: true,
-                    });
-                    layoutContextDispatch({
-                      type: ACTIONS.SET_ID_CHAT_OPEN,
-                      value: PUBLIC_CHAT_ID,
-                    });
-                    layoutContextDispatch({
-                      type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
-                      value: PANELS.CHAT,
-                    });
-                  }}
-                  aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                  label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                  accessKey={CLOSE_CHAT_AK}
-                ><MinimizeIcon/></button>
+                  <button
+                    onClick={() => {
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
+                        value: true,
+                      });
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_ID_CHAT_OPEN,
+                        value: PUBLIC_CHAT_ID,
+                      });
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
+                        value: PANELS.CHAT,
+                      });
+                    }}
+                    aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                    label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                    accessKey={CLOSE_CHAT_AK}
+                  ><MinimizeIcon /></button>
 
-                <button
-                  onClick={() => {
-                    actions.handleClosePrivateChat(chatID);
-                    layoutContextDispatch({
-                      type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
-                      value: true,
-                    });
-                    layoutContextDispatch({
-                      type: ACTIONS.SET_ID_CHAT_OPEN,
-                      value: PUBLIC_CHAT_ID,
-                    });
-                    layoutContextDispatch({
-                      type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
-                      value: PANELS.CHAT,
-                    });
-                  }}
-                  aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                  label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                  accessKey={CLOSE_CHAT_AK}
-                ><Cross /></button>
+                  <button
+                    onClick={() => {
+                      actions.handleClosePrivateChat(chatID);
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
+                        value: true,
+                      });
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_ID_CHAT_OPEN,
+                        value: PUBLIC_CHAT_ID,
+                      });
+                      layoutContextDispatch({
+                        type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
+                        value: PANELS.CHAT,
+                      });
+                    }}
+                    aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                    label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
+                    accessKey={CLOSE_CHAT_AK}
+                  ><Cross /></button>
                 </>
               )
               : (
@@ -157,41 +189,57 @@ const Chat = (props) => {
               )
           }
         </div>
+      </div> */}
+      <div className={styles.messageList}>
+        {
+          publicChatActive ?
+            <>
+              <TimeWindowList
+                id={ELEMENT_ID}
+                chatId={chatID}
+                handleScrollUpdate={actions.handleScrollUpdate}
+                {...{
+                  partnerIsLoggedOut,
+                  lastReadMessageTime,
+                  hasUnreadMessages,
+                  scrollPosition,
+                  messages,
+                  currentUserIsModerator: amIModerator,
+                  timeWindowsValues,
+                  dispatch,
+                  count,
+                  syncing,
+                  syncedPercent,
+                  lastTimeWindowValuesBuild,
+                  userSentMessage,
+                }}
+              />
+              {/* height: 106px */}
+              <MessageFormContainer
+                {...{
+                  title,
+                }}
+                chatId={chatID}
+                chatTitle={title}
+                chatAreaId={ELEMENT_ID}
+                disabled={isChatLocked || !isMeteorConnected}
+                connected={isMeteorConnected}
+                locked={isChatLocked}
+                partnerIsLoggedOut={partnerIsLoggedOut}
+              />
+            </>
+            :
+            <PrivateMessageContainer
+              {...{
+                compact,
+                intl,
+                roving,
+                currentClosedChats,
+                startedChats,
+              }}
+            />
+        }
       </div>
-      <div>
-        <TimeWindowList
-          id={ELEMENT_ID}
-          chatId={chatID}
-          handleScrollUpdate={actions.handleScrollUpdate}
-          {...{
-            partnerIsLoggedOut,
-            lastReadMessageTime,
-            hasUnreadMessages,
-            scrollPosition,
-            messages,
-            currentUserIsModerator: amIModerator,
-            timeWindowsValues,
-            dispatch,
-            count,
-            syncing,
-            syncedPercent,
-            lastTimeWindowValuesBuild,
-            userSentMessage,
-          }}
-        />
-      </div>
-      <MessageFormContainer
-        {...{
-          title,
-        }}
-        chatId={chatID}
-        chatTitle={title}
-        chatAreaId={ELEMENT_ID}
-        disabled={isChatLocked || !isMeteorConnected}
-        connected={isMeteorConnected}
-        locked={isChatLocked}
-        partnerIsLoggedOut={partnerIsLoggedOut}
-      />
     </div>
   );
 };

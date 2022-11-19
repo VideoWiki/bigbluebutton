@@ -13,6 +13,8 @@ import lockContextContainer from '/imports/ui/components/lock-viewers/context/co
 import Chat from '/imports/ui/newui_components/chat/component';
 import ChatService from '/imports/ui/components/chat/service';
 import { LayoutContextFunc } from '../../components/layout/context';
+import { Session } from 'meteor/session';
+import Service from '/imports/ui/components/user-list/service';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_KEY = CHAT_CONFIG.public_id;
@@ -21,6 +23,9 @@ const CHAT_CLEAR = CHAT_CONFIG.system_messages_keys.chat_clear;
 const SYSTEM_CHAT_TYPE = CHAT_CONFIG.type_system;
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 const DEBOUNCE_TIME = 1000;
+
+const CLOSED_CHAT_LIST_KEY = 'closedChatList';
+const STARTED_CHAT_LIST_KEY = 'startedChatList';
 
 const sysMessagesIds = {
   welcomeId: `${SYSTEM_CHAT_TYPE}-welcome-msg`,
@@ -247,11 +252,15 @@ const ChatContainer = (props) => {
   );
 };
 
-export default lockContextContainer(injectIntl(withTracker(({ intl, userLocks }) => {
+export default lockContextContainer(injectIntl(withTracker(({ intl, userLocks, compact }) => {
   const isChatLockedPublic = userLocks.userPublicChat;
   const isChatLockedPrivate = userLocks.userPrivateChat;
 
   const { connected: isMeteorConnected } = Meteor.status();
+
+  currentClosedChats = Storage.getItem(CLOSED_CHAT_LIST_KEY) || [];
+  startedChats = Session.get(STARTED_CHAT_LIST_KEY) || [];
+  roving = Service.roving;
 
   return {
     intl,
@@ -260,6 +269,12 @@ export default lockContextContainer(injectIntl(withTracker(({ intl, userLocks })
     isMeteorConnected,
     meetingIsBreakout: meetingIsBreakout(),
     loginTime: getLoginTime(),
+
+    currentClosedChats,
+    startedChats,
+    roving,
+    compact,
+
     actions: {
       handleClosePrivateChat: ChatService.closePrivateChat,
     },

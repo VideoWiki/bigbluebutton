@@ -185,6 +185,8 @@
   @extend .lists;
   overflow: hidden;
   flex-shrink: 1;
+  margin: 0px 8px;
+  border-radius: 6px;
 }
 
 .scrollStyle {

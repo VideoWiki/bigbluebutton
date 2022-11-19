@@ -89,7 +89,7 @@ class UserContent extends PureComponent {
             requestUserInformation,
           }}
         />
-      <div className={styles.mbSep}>
+      {/* <div className={styles.mbSep}>
           {CHAT_ENABLED
               ? (
                   <UserMessages
@@ -103,7 +103,7 @@ class UserContent extends PureComponent {
                       }}
                   />
               ) : null}
-      </div>
+      </div> */}
       </div>
     );
   }

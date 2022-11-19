@@ -42,7 +42,6 @@ class TalkingIndicator extends PureComponent {
   }
 
   render() {
-    console.log("talkers", this.props);
     const {
       intl,
       talkers,
@@ -80,7 +79,16 @@ class TalkingIndicator extends PureComponent {
 
       return (
         <button
-          className={styles.talkingIndicator}
+          // className={styles.talkingIndicator}
+          className={talking ? styles.talkingIndicator : styles.talkingIndicatorOff}
+          onClick={() => this.handleMuteUser(id)}
+          label={callerName}
+          tooltipLabel={!muted && amIModerator
+            ? `${intl.formatMessage(intlMessages.muteLabel)} ${callerName}`
+            : null}
+          data-test={talking ? 'isTalking' : 'wasTalking'}
+          aria-label={ariaLabel}
+          aria-describedby={talking ? 'description' : null}
         >
           {talking ?
             <div className={styles.talkingCircle}>

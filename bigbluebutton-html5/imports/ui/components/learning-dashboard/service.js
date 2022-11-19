@@ -50,11 +50,20 @@ const setLearningDashboardCookie = () => {
 const openLearningDashboardUrl = (lang) => {
   const APP = Meteor.settings.public.app;
   if (getLearningDashboardAccessToken() && setLearningDashboardCookie()) {
-    window.open(`${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&lang=${lang}`, '_blank');
+    window.open(`https://room.video.wiki/${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&lang=${lang}`, '_blank');
   } else {
-    window.open(`${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&sessionToken=${Auth.sessionToken}&lang=${lang}`, '_blank');
+    window.open(`https://room.video.wiki/${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&sessionToken=${Auth.sessionToken}&lang=${lang}`, '_blank');
   }
 };
+
+const getLearningDashboardUrl = (lang) => {
+  const APP = Meteor.settings.public.app;
+  if (getLearningDashboardAccessToken() && setLearningDashboardCookie()) {
+    return `${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&lang=${lang}`;
+  } else {
+    return `${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&sessionToken=${Auth.sessionToken}&lang=${lang}`;
+  }
+}
 
 export default {
   isModerator,
@@ -62,4 +71,5 @@ export default {
   getLearningDashboardAccessToken,
   setLearningDashboardCookie,
   openLearningDashboardUrl,
+  getLearningDashboardUrl,
 };

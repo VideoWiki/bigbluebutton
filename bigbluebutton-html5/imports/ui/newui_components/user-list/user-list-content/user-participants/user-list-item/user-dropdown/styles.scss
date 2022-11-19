@@ -218,7 +218,8 @@
 .userListName {
   display: flex;
   flex-direction: column;
-  padding: 0px 10px;
+  padding-left: 10px;
+  width: 200px;
   justify-content: center;
 }
 .userName{
@@ -229,6 +230,9 @@
   line-height: 20px;
   text-transform: capitalize;
   color: #333333;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .userPos{
   font-family: 'Montserrat';

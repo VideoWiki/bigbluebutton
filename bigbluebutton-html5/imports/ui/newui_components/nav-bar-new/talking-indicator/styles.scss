@@ -152,9 +152,33 @@
   padding: 6px 8px;
   padding-left: 14px;
   margin-right: 6px;
+  cursor: pointer;
 }
 
 .talkingIndicator span{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.talkingIndicatorOff{
+  background: $talkingIndicatorBg;
+  backdrop-filter: blur(35px);
+  border-radius: 100px;
+  outline: none;
+  border: none;
+  color: $colorWhite;
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  padding-left: 14px;
+  margin-right: 6px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.talkingIndicatorOff span{
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 600;
