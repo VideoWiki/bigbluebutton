@@ -12,6 +12,7 @@ import TimeWindowChatItem from './time-window-chat-item/container';
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const SYSTEM_CHAT_TYPE = CHAT_CONFIG.type_system;
 const CHAT_CLEAR_MESSAGE = CHAT_CONFIG.system_messages_keys.chat_clear;
+const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
 
 const propTypes = {
   scrollPosition: PropTypes.number,
@@ -195,8 +196,7 @@ class TimeWindowList extends PureComponent {
       dispatch,
       chatId,
     } = this.props;
-    console.log("sysmsg",this.props)
-    console.log("index", index)
+    
     const { scrollArea } = this.state;
     const message = timeWindowsValues[index];
     ChatLogger.debug('TimeWindowList::rowRender', this.props);
@@ -266,6 +266,7 @@ class TimeWindowList extends PureComponent {
   render() {
     const {
       timeWindowsValues,
+      chatId,
     } = this.props;
 
     const {
@@ -297,7 +298,7 @@ class TimeWindowList extends PureComponent {
               this.userScrolledBack = true
             }
           }}
-          className={styles.messageListWrapper}
+          className={chatId==PUBLIC_CHAT_ID ? styles.messageListWrapper : styles.privateMessageListWrapper}
           key="chat-list"
           data-test="chatMessages"
           aria-live="polite"

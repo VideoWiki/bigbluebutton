@@ -227,6 +227,10 @@ const ChatContainer = (props) => {
     'role',
   );
 
+  const { chats: groupChatsMessages } = usingChatContext;
+  const { groupChat: groupChats } = usingGroupChatContext;
+  const activeChatsCount = Service.getActiveChats({ groupChatsMessages, groupChats, users:users[Auth.meetingID] }).length;
+
   return (
     <Chat {...{
       idChatOpen,
@@ -245,6 +249,7 @@ const ChatContainer = (props) => {
       layoutContextDispatch,
       lastTimeWindowValuesBuild,
       partnerIsLoggedOut,
+      activeChatsCount,
     }}
     >
       {children}

@@ -46,8 +46,6 @@ class TypingIndicator extends PureComponent {
     const isCoupleTyper = length === 2;
     const isMuiltiTypers = length > 2;
 
-    console.log("typingUser", typingUsers)
-
     let element = null;
 
     if (isSingleTyper) {
@@ -106,12 +104,12 @@ class TypingIndicator extends PureComponent {
 
     if (!indicatorEnabled || !typingUsers) return null;
 
+    console.log("typingUsers",typingUsers)
+
     const { length } = typingUsers;
     const isSingleTyper = length === 1;
     const isCoupleTyper = length === 2;
     const isMuiltiTypers = length > 2;
-
-    console.log("typingUser", typingUsers)
 
     let element = null;
 

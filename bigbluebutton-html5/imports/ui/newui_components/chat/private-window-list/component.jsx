@@ -75,10 +75,10 @@ class PrivateMessageList extends PureComponent {
       activeChats,
       compact,
       isPublicChat,
+      togglePrivateMessageForm,
     } = this.props;
 
     let index = -1;
-    console.log("activechats", activeChats);
     return activeChats.map(chat => (
       chat.chatId != "public" ?
         <CSSTransition
@@ -97,6 +97,7 @@ class PrivateMessageList extends PureComponent {
               compact={compact}
               chat={chat}
               tabIndex={-1}
+              togglePrivateMessageForm={togglePrivateMessageForm}
             />
           </div>
         </CSSTransition> : null
