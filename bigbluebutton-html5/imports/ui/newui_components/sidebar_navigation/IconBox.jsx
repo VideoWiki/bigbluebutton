@@ -136,10 +136,9 @@ function IconBox(props) {
                 <div className={hasUnreadMessages ? styles.btnWithNotificationDot : null}>
                     <div className={styles.sidebarIcon}>
                         <Chat sidebarContentPanel={sidebarContentPanel} />
-                        <div className={styles.sidebarBadge}>
-                            <div className={styles.userIconBadge}>
-                                <span>{props.users.length}</span>
-                            </div>
+                        <div className={styles.sideTooltipWrapper}>
+                            <div className={styles.sidebarTipArrow}></div>
+                            <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.chatLabel)}</span></div>
                         </div>
                     </div>
                 </div>
@@ -147,10 +146,11 @@ function IconBox(props) {
             {icon === "user" &&
                 <div className={styles.sidebarIcon}>
                     <User sidebarContentPanel={sidebarContentPanel} />
-                    <div className={styles.sideTooltipWrapper}>
-                        <div className={styles.sidebarTipArrow}></div>
-                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.chatLabel)}</span></div>
-                    </div>
+                    <div className={styles.sidebarBadge}>
+                            <div className={styles.userIconBadge}>
+                                <span>{props.users.length}</span>
+                            </div>
+                        </div>
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
                         <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.usersTitle)}</span></div>
