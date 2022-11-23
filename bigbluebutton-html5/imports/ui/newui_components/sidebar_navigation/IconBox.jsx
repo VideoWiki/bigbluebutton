@@ -141,16 +141,16 @@ function IconBox(props) {
                                 <span>{props.users.length}</span>
                             </div>
                         </div>
-                        <div className={styles.sideTooltipWrapper}>
-                            <div className={styles.sidebarTipArrow}></div>
-                            <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.chatLabel)}</span></div>
-                        </div>
                     </div>
                 </div>
             }
             {icon === "user" &&
                 <div className={styles.sidebarIcon}>
                     <User sidebarContentPanel={sidebarContentPanel} />
+                    <div className={styles.sideTooltipWrapper}>
+                        <div className={styles.sidebarTipArrow}></div>
+                        <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.chatLabel)}</span></div>
+                    </div>
                     <div className={styles.sideTooltipWrapper}>
                         <div className={styles.sidebarTipArrow}></div>
                         <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.usersTitle)}</span></div>
