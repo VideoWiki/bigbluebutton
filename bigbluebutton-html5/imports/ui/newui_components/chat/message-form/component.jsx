@@ -73,6 +73,7 @@ const messages = defineMessages({
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const CHAT_ENABLED = CHAT_CONFIG.enabled;
+const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
 
 class MessageForm extends PureComponent {
   constructor(props) {
@@ -268,6 +269,7 @@ class MessageForm extends PureComponent {
       className,
       idChatOpen,
       partnerIsLoggedOut,
+      chatId,
     } = this.props;
 
     const { hasErrors, error, message } = this.state;
@@ -278,7 +280,7 @@ class MessageForm extends PureComponent {
         className={cx(className, styles.form)}
         onSubmit={this.handleSubmit}
       >
-        <TypingIndicatorContainer {...{ idChatOpen, error }} />
+        {chatId == PUBLIC_CHAT_ID ? <TypingIndicatorContainer {...{ idChatOpen, error }} /> : null}
         <div className={styles.msgFormWrapper}>
           <textarea
             className={styles.MessageInputBox}
