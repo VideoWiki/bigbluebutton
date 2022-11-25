@@ -432,11 +432,11 @@ class PresentationUploader extends Component {
 
       const updatedCurrent = update(updatedPresentations, commands);
       this.setState({ presentations: updatedCurrent });
+      this.handleConfirm(false)
     });
   }
 
   handleCurrentChange(id) {
-    console.log("item", id)
     const { presentations, disableActions } = this.state;
 
     if (disableActions) return;
@@ -579,6 +579,7 @@ class PresentationUploader extends Component {
     this.setState({
       presentations: presentationsUpdated,
     });
+    this.handleConfirm(false)
   }
 
   updateFileKey(id, key, value, operation = '$set') {
@@ -755,13 +756,12 @@ class PresentationUploader extends Component {
     );
   }
 
-  handleChange(id){
+  handleChange(id) {
     this.handleCurrentChange(id);
     this.handleConfirm(false);
   }
 
   renderPresentationItem(item) {
-    console.log("items",item)
     const { disableActions } = this.state;
     const {
       intl,
@@ -831,7 +831,7 @@ class PresentationUploader extends Component {
               onClick={()=> this.handleChange(item.id)}
               disabled={disableActions}
             />} */}
-            {item.upload.done && <input className={styles.inpRadio} type="radio" checked={item.isCurrent} onClick={()=> this.handleChange(item.id)} name={item.id}></input>}
+            {item.upload.done && <input className={styles.inpRadio} type="radio" checked={item.isCurrent} onClick={() => this.handleChange(item.id)} name={item.id}></input>}
             {/* {item.upload.done && <button onClick={()=> this.handleChange(item.id)}>change</button>} */}
             <Button
               disabled={disableActions}
@@ -1076,7 +1076,7 @@ class PresentationUploader extends Component {
     const { presentations, disableActions } = this.state;
 
     let hasNewUpload = false;
-
+    console.log("hasNewUpload", hasNewUpload)
     presentations.map((item) => {
       if (item.id.indexOf(item.filename) !== -1 && item.upload.progress === 0) hasNewUpload = true;
     });
@@ -1087,9 +1087,6 @@ class PresentationUploader extends Component {
           <h3>{intl.formatMessage(intlMessages.title)}</h3>
 
           <div className={styles.presentationWrapper}>
-
-
-
             <div className={styles.content}>
               <div className={styles.videoUrl}>
                 <h4>{intl.formatMessage(intlMessages.uploadfileLabel)}</h4>
@@ -1111,13 +1108,16 @@ class PresentationUploader extends Component {
                     data-test="confirmManagePresentation"
                     color="primary"
                     onClick={() => this.handleConfirm(hasNewUpload)}
-                    disabled={disableActions}
+                    disabled={disableActions || !hasNewUpload}
                     label={hasNewUpload
                       ? intl.formatMessage(intlMessages.uploadLabel)
                       : intl.formatMessage(intlMessages.confirmLabel)}
-                  >{hasNewUpload
-                    ? intl.formatMessage(intlMessages.uploadLabel)
-                    : intl.formatMessage(intlMessages.confirmLabel)}</button>
+                  >
+                    {/* {hasNewUpload
+                      ? intl.formatMessage(intlMessages.uploadLabel)
+                      : intl.formatMessage(intlMessages.confirmLabel)} */}
+                    {intl.formatMessage(intlMessages.uploadLabel)}
+                  </button>
                 </div>
                 <div className={styles.modalHint}>
                   {`${intl.formatMessage(intlMessages.message)}`}
