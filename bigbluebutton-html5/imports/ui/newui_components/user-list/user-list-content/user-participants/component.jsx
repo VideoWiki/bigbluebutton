@@ -13,6 +13,8 @@ import {
 import UserListItemContainer from './user-list-item/container';
 import UserOptionsContainer from './user-options/container';
 import Settings from '/imports/ui/services/settings';
+import Share from '../../../chat/Icons/share';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   compact: PropTypes.bool,
@@ -35,6 +37,14 @@ const intlMessages = defineMessages({
   usersTitle: {
     id: 'app.userList.usersTitle',
     description: 'Title for the Header',
+  },
+  copyLinkLabel: {
+    id: 'app.tooltip.copyLinkLabel',
+    description: 'Copy Link Label',
+  },
+  copiedLabel: {
+    id: 'app.tooltip.copiedLabel',
+    description: 'Link Copied Label',
   },
 });
 
@@ -63,6 +73,7 @@ class UserParticipants extends Component {
     this.rowRenderer = this.rowRenderer.bind(this);
     this.handleClickSelectedUser = this.handleClickSelectedUser.bind(this);
     this.selectEl = this.selectEl.bind(this);
+    this.copyLink = this.copyLink.bind(this);
   }
 
   componentDidMount() {
@@ -163,6 +174,14 @@ class UserParticipants extends Component {
     );
   }
 
+  copyLink() {
+    const { intl } = this.props;
+    let joinUrl = Auth._logoutURL;
+    navigator.clipboard.writeText(joinUrl.substring(0, joinUrl.length - 6));
+    const p = document.getElementById("shareUrlIcon");
+    p.innerText = intl.formatMessage(intlMessages.copiedLabel);
+  }
+
   handleClickSelectedUser(event) {
     let selectedUser = null;
     if (event.path) {
@@ -191,6 +210,7 @@ class UserParticipants extends Component {
       currentUser,
       meetingIsBreakout,
     } = this.props;
+
     const { isOpen, scrollArea } = this.state;
 
     return (
@@ -222,7 +242,17 @@ class UserParticipants extends Component {
         } */}
         <div className={styles.userListHeader}>
           <h3>{intl.formatMessage(intlMessages.usersTitle)} ({users.length})</h3>
+          {
+            !meetingIsBreakout &&
+            <div className={styles.shareUrlIcon} onClick={this.copyLink}><Share />
+              <div className={styles.sideTooltipWrapper}>
+                <div className={styles.sidebarTipArrow}></div>
+                <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
+              </div>
+            </div>
+          }
         </div>
+
         <div
           id={'user-list-virtualized-scroll'}
           aria-label="Users list"

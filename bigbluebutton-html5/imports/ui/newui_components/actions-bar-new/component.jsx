@@ -70,7 +70,7 @@ class ActionsBar extends PureComponent {
         }
       >
         <div className={styles.left}>
-          <ActionsDropdown {...{
+          {/* <ActionsDropdown {...{
             amIPresenter,
             amIModerator,
             isPollingEnabled,
@@ -81,8 +81,7 @@ class ActionsBar extends PureComponent {
             isSharingVideo,
             stopExternalVideoShare,
             isMeteorConnected,
-          }}
-          />
+          }}/> */}
           {isCaptionsAvailable
             ? (
               <CaptionsButtonContainer {...{ intl }} />

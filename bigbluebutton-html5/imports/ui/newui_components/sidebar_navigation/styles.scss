@@ -24,6 +24,9 @@
   align-items: center;
   justify-content: center;
 }
+.sidebar{
+  width: 100%;
+}
 .IconBox{
   margin-left: 0.63rem;
   margin-bottom: 0.63rem;
@@ -31,19 +34,23 @@
   display: flex;
   width: 100%;
   align-items: center;
-  margin: 10px 0px;
+  margin: 7px 0px;
   justify-content: center;
   // border-right: solid 4px #7966FA;
   // border-left: solid 4px #ffffff;
 }
-.IconFill {
-  border-right: solid 4px $sidebarIconDark;
-  border-left: solid 4px $colorWhite;
-}
+
 .IconUnfill{
   border-right: solid 4px $colorWhite;
   border-left: solid 4px $colorWhite;
+  transition: border-right 0.2s ease;
 }
+.IconFill {
+  border-right: solid 4px $sidebarIconDark;
+  border-left: solid 4px $colorWhite;
+  transition: border-right 0.4s ease;
+}
+
 // .IconBox:hover{
 //   border-right: solid 4px #7816F7;
 //   border-radius: 5px;
@@ -65,25 +72,28 @@
   right: 0;
 }
 .IconShadow{
-  padding: 0.44rem;
+  padding: 10px;
   width: fit-content;
   border-radius: 6px;
   cursor: pointer;
   background-color: transparent;
 }
 .selectedBox{
-  padding: 0.7rem;
+  padding: 10px;
   width: fit-content;
   border-radius: 6px;
   cursor: pointer;
   background-color: $sidebarIconShadow;
+  transition: background-color 0.2s ease;
 }
 
 .sidebarIcon{
   display: flex;
 }
 .sideTooltipWrapper{
-  position: relative;
+  // position: relative;
+  position: absolute;
+  left: 50px;
   pointer-events: none;
 }
 .sidebarTooltip{
@@ -92,7 +102,7 @@
   background-color: $tooltipBgColor;
   color: $tooltipColor;
   top: 0;
-  left: 7px;
+  left: 15px;
   border-radius: 100px;
   padding: 5px 8px;
   display: flex;
@@ -106,7 +116,7 @@
   background-color: $tooltipBgColor;
   border-radius: 100%;
   position: absolute;
-  left: 2px;
+  left: 10px;
   top: 7px;
 }
 .sidebarTooltip span {
@@ -129,6 +139,15 @@
   opacity: 1;
 }
 
+.sidebarIconGroup {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 7px 0px;
+  justify-content: center;
+}
+
 .sidebarBadge {
   position: relative;
 }
@@ -136,8 +155,8 @@
   position: absolute;
   padding: 2px 5px;
     height: 19px;
-    left: -9px;
-    top: -5px;
+    left: -7px;
+    top: -10px;
     background: $primaryColor;
     border: 1px solid $colorWhite;
     border-radius: 100px;
@@ -166,12 +185,46 @@
     content: '';
     position: absolute;
     border-radius: 50%;
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
     // bottom: var(--border-size);
-    right: -7px;
-    top: -4px;
+    right: 0px;
+    top: 0px;
     background-color: var(--color-danger);
     // border: var(--border-size) solid var(--color-gray-dark);
   }
+}
+
+
+.iconWrapper {
+  border: 1px solid #d7dbe4;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 3px;
+  height: 58px;
+  overflow: hidden;
+  transition: height 0.4s ease-in-out;
+}
+
+#iconGroup{
+  height: 58px;
+}
+
+.singleIcon{
+  padding: 10px;
+  width: fit-content;
+}
+
+.pIcon {
+  margin-left: 0.63rem;
+  margin-bottom: 0.63rem;
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 7px 0px;
+  justify-content: center;
 }

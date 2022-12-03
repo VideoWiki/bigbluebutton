@@ -309,7 +309,6 @@ class TimeWindowList extends PureComponent {
               if (width !== this.lastWidth) {
                 this.lastWidth = width;
                 this.cache.clearAll();
-                console.log("styledesign", height)
               }
               return (
                 <List

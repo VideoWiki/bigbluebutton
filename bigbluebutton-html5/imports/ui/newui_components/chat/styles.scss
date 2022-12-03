@@ -153,14 +153,14 @@
   width: 350px;
 }
 .shareUrlIcon{
-  height: 35px;
-  width: 35px;
+  height: 42px;
+  width: 42px;
   background: #FFFFFF;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 15px;
+  margin-left: 8px;
   cursor: pointer;
   position: relative;
 }
@@ -170,8 +170,8 @@
   position: absolute;
   background-color: $tooltipBgColor;
   color: $tooltipColor;
-  top: 5px;
-  left: 40px;
+  top: 8px;
+  left: 45px;
   border-radius: 100px;
   padding: 5px 8px;
   display: flex;
@@ -186,8 +186,8 @@
   background-color: $tooltipBgColor;
   border-radius: 100%;
   position: absolute;
-  left: 35px;
-  top: 12px;
+  left: 40px;
+  top: 15px;
   z-index: 999;
 }
 .sidebarTooltip p {
@@ -234,11 +234,14 @@
 .chatHeader {
   height: auto;
   padding: 8px;
+  display: flex;
+  align-items: center;
 }
 .chatHeaderWrapper{
+  width: calc(350px - 68px);
   background-color: #FFFFFF;
-  border-radius: 8px;
-  padding: 7px;
+  border-radius: 6px;
+  padding: 5px;
   display: flex;
   font-family: 'Montserrat';
   font-style: normal;
@@ -249,8 +252,8 @@
   cursor: pointer;
   
   .chTab {
-    border-radius: 8px;
-    padding: 7px;
+    border-radius: 6px;
+    padding: 6px;
     flex: 1;
     display: flex;
     align-items: center;
@@ -260,7 +263,8 @@
       padding: 0;
     }
     span{
-      width: 22px;
+      width: 20px;
+      height: 20px;
       text-align: center;
       margin-left: 5px;
       color: #FFFFFF;

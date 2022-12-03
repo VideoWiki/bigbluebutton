@@ -388,6 +388,7 @@ class PresentationUploader extends Component {
       // make the first of the new presentations current
       if (presentationsToUpload && presentationsToUpload.length) {
         this.handleCurrentChange(presentationsToUpload[0].id);
+        this.handleConfirm(true);
       }
     });
 
@@ -1075,11 +1076,12 @@ class PresentationUploader extends Component {
     if (!isPresenter) return null;
     const { presentations, disableActions } = this.state;
 
-    let hasNewUpload = false;
-    console.log("hasNewUpload", hasNewUpload)
-    presentations.map((item) => {
-      if (item.id.indexOf(item.filename) !== -1 && item.upload.progress === 0) hasNewUpload = true;
-    });
+    // let hasNewUpload = false;
+    // presentations.map((item) => {
+    //   if (item.id.indexOf(item.filename) !== -1 && item.upload.progress === 0) hasNewUpload = true;
+    // });
+
+    // console.log("hasNewUpload", hasNewUpload)
 
     return (
       <>
@@ -1095,7 +1097,7 @@ class PresentationUploader extends Component {
                 {isMobile ? this.renderPicDropzone() : null}
                 {this.renderDropzone()}
 
-                <div className={styles.actionWrapper}>
+                {/* <div className={styles.actionWrapper}>
                   <button
                     className={styles.startBtn}
                     color="default"
@@ -1113,12 +1115,12 @@ class PresentationUploader extends Component {
                       ? intl.formatMessage(intlMessages.uploadLabel)
                       : intl.formatMessage(intlMessages.confirmLabel)}
                   >
-                    {/* {hasNewUpload
+                    {hasNewUpload
                       ? intl.formatMessage(intlMessages.uploadLabel)
-                      : intl.formatMessage(intlMessages.confirmLabel)} */}
+                      : intl.formatMessage(intlMessages.confirmLabel)}
                     {intl.formatMessage(intlMessages.uploadLabel)}
                   </button>
-                </div>
+                </div> */}
                 <div className={styles.modalHint}>
                   {`${intl.formatMessage(intlMessages.message)}`}
                 </div>

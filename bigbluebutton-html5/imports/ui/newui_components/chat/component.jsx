@@ -131,7 +131,7 @@ const Chat = (props) => {
       data-test={chatID !== PUBLIC_CHAT_ID ? 'privateChat' : 'publicChat'}
       className={styles.chatWidth}
     >
-      {/* height: 62.72px */}
+      {/* height: 62.72px -- 56.72px */}
       <div className={styles.chatHeader}>
         <div className={styles.chatHeaderWrapper}>
           <div className={`${styles.chTab} ${publicChatActive ? styles.chTabOn : styles.chTabOff}`}
@@ -144,6 +144,15 @@ const Chat = (props) => {
             <span>{activeChatsCount - 1}</span>
           </div>
         </div>
+        {
+          !meetingIsBreakout &&
+          <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
+            <div className={styles.sideTooltipWrapper}>
+              <div className={styles.sidebarTipArrow}></div>
+              <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
+            </div>
+          </div>
+        }
       </div>
 
       {/* <div className={styles.ChatHeadingOuter}>
