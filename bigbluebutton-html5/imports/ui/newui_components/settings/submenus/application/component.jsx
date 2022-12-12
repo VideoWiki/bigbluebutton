@@ -516,7 +516,7 @@ class ApplicationMenu extends BaseMenu {
               </div>
             </div>
           </div>
-          {this.renderChangeLayout()}
+          {/* {this.renderChangeLayout()} */}
           <button className={styles.saveSettingButton} onClick={this.saveSetting}>{intl.formatMessage(intlMessages.savebuttonLabel)}</button>
         </div>
       </div>

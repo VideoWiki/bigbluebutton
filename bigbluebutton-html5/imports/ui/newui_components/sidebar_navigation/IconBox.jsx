@@ -252,7 +252,7 @@ function IconBox(props) {
             }
             {icon === "waitingusers" && (props.authenticatedUsers.length != 0 || props.guestUsers.length) != 0 &&
                 <div className={`${styles.IconBox} ${sidebarContentPanel === icon ? styles.IconFill : styles.IconUnfill}`}>
-                    <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}}`}>
+                    <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}`}>
                         <Waitinguser
                             sidebarContentPanel={sidebarContentPanel}
                         />

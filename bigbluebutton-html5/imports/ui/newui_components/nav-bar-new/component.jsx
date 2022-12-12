@@ -16,6 +16,8 @@ import SettingsDropdownContainer from './settings-dropdown/container';
 import browserInfo from '/imports/utils/browserInfo';
 import deviceInfo from '/imports/utils/deviceInfo';
 import { PANELS, ACTIONS } from '/imports/ui/components/layout/enums';
+import LayoutPopupContainer from './layout-popup/container';
+import LayoutButton from './layout-button/LayoutButton';
 
 const intlMessages = defineMessages({
   toggleUserListLabel: {
@@ -194,7 +196,7 @@ class NavBar extends Component {
       >
         <div className={styles.top}>
           <div className={styles.left}>
-          <button
+            <button
               hideLabel
               onClick={this.handleToggleUserList}
               // data-test={hasNotification ? 'hasUnreadMessages' : null}
@@ -219,6 +221,7 @@ class NavBar extends Component {
             />
           </div>
           <div className={styles.right}>
+            <LayoutButton/>
             {ConnectionStatusService.isEnabled() ? <ConnectionStatusButton /> : null}
             <SettingsDropdownContainer amIModerator={amIModerator} />
           </div>
