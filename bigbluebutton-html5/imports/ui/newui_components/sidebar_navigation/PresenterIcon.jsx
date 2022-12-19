@@ -150,7 +150,7 @@ function PresenterIcon(props) {
     return (
         <div className={styles.sidebar}>
             {/* Icon height 58px */}
-            {icon === "takepresenter" &&
+            {icon === "takepresenter" && !amIPresenter &&
                 <div className={`${styles.pIcon}`} onClick={takePresenter}>
                     <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}`}>
                         <TakePresenter
@@ -185,6 +185,19 @@ function PresenterIcon(props) {
                         <div className={styles.sideTooltipWrapper}>
                             <div className={styles.sidebarTipArrow}></div>
                             <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.presentationTitleLabel)}</span></div>
+                        </div>
+                    </div>
+                </div>
+            }
+            {icon === "poll" &&
+                <div className={`${styles.pIcon}`} onClick={() => updateSelectedFeature()} >
+                    <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}`}>
+                        <Poll
+                            sidebarContentPanel={sidebarContentPanel}
+                        />
+                        <div className={styles.sideTooltipWrapper}>
+                            <div className={styles.sidebarTipArrow}></div>
+                            <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.pollingTitleLabel)}</span></div>
                         </div>
                     </div>
                 </div>

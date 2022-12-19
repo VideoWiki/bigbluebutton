@@ -20,7 +20,7 @@ import PresenterIcon from "./PresenterIcon";
 const MySidebar = (props) => {
 
     const upperIcons = ["chat", "user", "document", "newbreakoutroom", "poll"];
-    const presenterIcon = ["takepresenter", "video", "presentation"];
+    const presenterIcon = ["takepresenter", "poll", "video", "presentation"];
     const bottomIcons = ["settings", "waitingusers"];
     const layoutContext = useContext(LayoutContext);
     const { layoutContextState, layoutContextDispatch, intl } = layoutContext;
@@ -61,12 +61,18 @@ const MySidebar = (props) => {
                     // item=="poll" || 
                     if (amIPresenter) {
                         return (
-                            // <div className={styles.sidebarIconGroup}>
-                            //     <div className={`${styles.sidebarIcon} ${styles.iconWrapper}`}>
                             <IconBox key={id} intl={intl} icon={item} {...input}
                                 contextDispatch={layoutContextDispatch}
                             />
-                            // </div></div>
+                        )
+                    }
+                }
+                else if (item == "poll") {
+                    if (!amIPresenter) {
+                        return (
+                            <IconBox key={id} intl={intl} icon={item} {...input}
+                                contextDispatch={layoutContextDispatch}
+                            />
                         )
                     }
                 }
@@ -82,7 +88,7 @@ const MySidebar = (props) => {
                 <div className={`${styles.iconWrapper}`} id="iconGroup">
                     {
                         presenterIcon.map((item, id) => {
-                            if (item == "video" || item == "presentation") {
+                            if (item == "video" || item == "presentation" || item == "poll") {
                                 if (amIPresenter) {
                                     return (
                                         <PresenterIcon key={id} intl={intl} icon={item} {...input}

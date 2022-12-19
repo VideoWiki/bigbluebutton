@@ -989,5 +989,7 @@
     "app.userList.coHost" : "Co-Host",
     "app.userList.participant" : "Participant",
 
-    "app.breakoutTimeRemainingNavbarNewMessage": "Time remaining: {0}"
+    "app.breakoutTimeRemainingNavbarNewMessage": "Time remaining: {0}",
+
+    "app.guest.windowTitleWiki": "VideoWiki - Guest Lobby"
 }
