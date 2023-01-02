@@ -991,5 +991,8 @@
 
     "app.breakoutTimeRemainingNavbarNewMessage": "Time remaining: {0}",
 
-    "app.guest.windowTitleWiki": "VideoWiki - Guest Lobby"
+    "app.guest.windowTitleWiki": "VideoWiki - Guest Lobby",
+
+    "app.leaveMeeting.title": "Leave {0}",
+    "app.leaveMeeting.description": "Are you sure you want to leave this session?"
 }

@@ -5,7 +5,6 @@ import ExternalVideoModal from './component';
 import { startWatching, getVideoUrl } from '/imports/ui/components/external-video-player/service';
 
 const ExternalVideoModalContainer = props => <ExternalVideoModal {...props} />;
-console.log("modal called")
 export default withTracker(() => {
   return {
     startWatching,

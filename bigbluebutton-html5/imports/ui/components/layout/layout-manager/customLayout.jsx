@@ -842,7 +842,6 @@ class CustomLayout extends Component {
     const mediaAreaBounds = this
       .calculatesMediaAreaBounds(sidebarNavWidth.width, sidebarContentWidth.width);
     const navbarBounds = this.calculatesNavbarBounds(mediaAreaBounds);
-    console.log("dim",sidebarNavWidth.width, sidebarContentWidth.width, mediaAreaBounds, navbarBounds);
     const actionbarBounds = this.calculatesActionbarBounds(mediaAreaBounds);
     const cameraDockBounds = this.calculatesCameraDockBounds(
       sidebarNavWidth.width, sidebarContentWidth.width, mediaAreaBounds,

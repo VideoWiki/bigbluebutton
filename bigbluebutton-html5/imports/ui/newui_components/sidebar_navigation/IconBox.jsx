@@ -81,7 +81,6 @@ function IconBox(props) {
     //     setUserCount(UserListService.getUsers().length);
     //     console.log("updateUser", UserListService.getUsers().length)
     // },[UserListService.getUsers])
-    console.log("sidebar", props)
 
     function updateSelectedFeature() {
         if (sidebarContentPanel === icon) {
