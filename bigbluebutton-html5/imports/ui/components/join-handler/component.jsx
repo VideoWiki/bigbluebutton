@@ -9,6 +9,8 @@ import logger from '/imports/startup/client/logger';
 import LoadingScreen from '/imports/ui/components/loading-screen/component';
 import Users from '/imports/api/users';
 
+import LearningDashboardService from '/imports/ui/components/learning-dashboard/service';
+
 const propTypes = {
   children: PropTypes.element.isRequired,
 };
@@ -175,7 +177,6 @@ class JoinHandler extends Component {
     };
     //new
     const setThemeColors = (resp) => {
-      console.log(resp);
       const pc = resp.metadata[0]['primary-color']; // pc = primary color
       const sc = resp.metadata[3]['secondary-color']; // sc = secondary color
       const bi = resp.metadata[4]['back-image']; // bi = background image
@@ -193,6 +194,28 @@ class JoinHandler extends Component {
     };
     //new
 
+    //New Added
+    const setLearningDashboard = async (resp) => {
+      const apiUrl = `https://api.cast.video.wiki/api/update/learning/analytics/data/`;
+      var FormData = require('form-data');
+      var axios = require('axios');
+      var data = new FormData();
+
+      data.append('room_name', resp.confname);
+      data.append('room_owner_name', resp.fullname);
+      data.append('learning_analytics_url', `https://room.video.wiki${LearningDashboardService.getLearningDashboardUrl("en")}`);
+      var config = {
+        method: 'post',
+        url: apiUrl,
+        data: data
+      }
+      axios(config).then(function (res) {
+        console.log("Success");
+      }).catch(function (error) {
+        console.log("Error");
+      })
+    }
+
     // use enter api to get params for the client
     const url = `${APP.bbbWebBase}/api/enter?sessionToken=${sessionToken}`;
     const fetchContent = await fetch(url, { credentials: 'include' });
@@ -209,6 +232,7 @@ class JoinHandler extends Component {
       setLogoURL(response);
       setModOnlyMessage(response);
       setThemeColors(response);
+      // setLearningDashboard(response);
       
       Tracker.autorun(async (cd) => {
         const user = Users.findOne({ userId: Auth.userID, approved: true }, { fields: { _id: 1 } });

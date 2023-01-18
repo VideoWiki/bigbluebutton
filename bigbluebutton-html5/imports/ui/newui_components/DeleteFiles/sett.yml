@@ -13,13 +13,13 @@ public:
     # Skips the echo test when connecting with microphone.
     skipCheck: True
     # Skips the echo test when connecting with microphone right after user
-    # joins the room the first time. Subsequent joins to microphone won't
-    # have echo test skipped, for example if user leaves and joins the mic
-    # again or reloading page and joining mic again.
+    # joins the room the first time. Subsequents joins  to microphone won't
+    # have echo test skipped, for example if user leave and join mic again
+    # or reloading page and joining mic again.
     # This setting won't have effect if skipCheck = true
     skipCheckOnJoin: true
     #
-    # Allow users to change microphone/speaker dynamically
+    # Allow users to change microphone/speaker dinamically
     # The device is changed immediately, without the need to rejoin
     # audio. Default value is true
     # Firefox users: if no output devices is shown, you may set the flag
@@ -28,25 +28,13 @@ public:
     #
     clientTitle: VideoWiki
     appName: BigBlueButton HTML5 Client
-    bbbServerVersion: 2.4
-    copyright: '©2022 VideoWiki Inc.'
-    html5ClientBuild: 2473
+    bbbServerVersion: 2.3
+    copyright: '©2021 VideoWiki Inc.'
+    html5ClientBuild: HTML5_CLIENT_VERSION
     helpLink: https://video.wiki/contact-us/
     lockOnJoin: true
     cdn: ''
     basename: '/html5client'
-    # the base location of the BBB API. If you use a cluster setup with a load
-    # balancer which hides the individual nodes, then this should be
-    # https://bbb-host/bigbluebutton
-    # If you run a traditional setup of multiple nodes behind scalelite and the
-    # users see the hostnames of the individual nodes, you can leave this at the
-    # default setting
-    bbbWebBase: '/bigbluebutton'
-    # If you run a cluster setup with a load balancer which hides the individual
-    # nodes, then this should be set to https://bbb-host/learning-analytics-dashboard
-    learningDashboardBase: '/learning-analytics-dashboard'
-    # Use https URL of CSS file. Example: https://docs.bigbluebutton.org/admin/customize.html#examples
-    customStyleUrl: null
     askForFeedbackOnLogout: false
     # the default logoutUrl matches window.location.origin i.e. bigbluebutton.org for demo.bigbluebutton.org
     # in some cases we want only custom logoutUrl to be used when provided on meeting create. Default value: true
@@ -54,12 +42,9 @@ public:
     allowUserLookup: false
     dynamicGuestPolicy: true
     enableGuestLobbyMessage: true
+    enableNetworkInformation: false
     enableLimitOfViewersInWebcam: false
     enableMultipleCameras: true
-    # Allow users to open webcam video modal/preview when video is already
-    # active. This also allows to change virtual backgrounds without
-    # restarting webcam.
-    enableWebcamSelectorButton: true
     enableTalkingIndicator: true
     mirrorOwnWebcam: false
     viewersInWebcam: 8
@@ -103,12 +88,6 @@ public:
     # https://developer.mozilla.org/en-US/docs/Web/API/RTCDtlsTransport/iceTransport
     # This is an EXPERIMENTAL setting and the default value is false
     # experimentalUseKmsTrickleIceForMicrophone: false
-    #
-    # Shows stats about download and upload rates, audio jitter, lost packets
-    # and turn information
-    enableNetworkStats: true
-    # Enable the button to allow users to copy network stats to clipboard
-    enableCopyNetworkStatsButton: true
     defaultSettings:
       application:
         animations: true
@@ -116,14 +95,11 @@ public:
         chatPushAlerts: false
         userJoinAudioAlerts: false
         userJoinPushAlerts: false
-        userLeaveAudioAlerts: false
-        userLeavePushAlerts: false
         raiseHandAudioAlerts: true
         raiseHandPushAlerts: true
         guestWaitingAudioAlerts: true
         guestWaitingPushAlerts: true
         paginationEnabled: true
-        pushLayoutToEveryone: false
         # fallbackLocale: if the locale the client is loaded in does not have a
         # translation a string, it will use the translation from the locale
         # specified in fallbackLocale. Note that fallbackLocale should be a
@@ -204,18 +180,16 @@ public:
       - warning
   externalVideoPlayer:
     enabled: true
+  networkMonitoring:
+    enableNetworkMonitoring: false
+    packetLostThreshold: 10
   kurento:
-    wsUrl: wss://room.video.wiki/bbb-webrtc-sfu
+    wsUrl: wss://class.video.wiki/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
     # Time in milis to wait for the browser to return a gUM call (used in video-preview)
     gUMTimeout: 20000
-    # Experiment(al). Controls whether ICE candidates should be signaled.
-    # Applies to webcams, listen only and screen sharing. True is "stable behavior".
-    signalCandidates: true
-    # Forces relay usage only on Firefox. Applies to listen only, webcams and screenshare.
-    forceRelayOnFirefox: false
     cameraTimeouts:
       # Base camera timeout: used as the camera *sharing* timeout and
       # as the minimum camera subscribe reconnection timeout
@@ -224,16 +198,6 @@ public:
       # subscribe reattempt increases the reconnection timer up to this
       maxTimeout: 60000
     screenshare:
-      # Whether volume control should be allowed if screen sharing has audio
-      enableVolumeControl: false
-      # Experimental. True is the canonical behavior. Flip to false to reverse
-      # the negotiation flow for subscribers.
-      subscriberOffering: false
-      # Experimental. Server wide configuration to choose which bbb-webrtc-sfu
-      # media server adapter should be used for screen sharing.
-      # Default is undefined, which means the default setting in bbb-webrtc-sfu
-      # prevails (screenshareMediaServer).
-      #mediaServer: Kurento
       bitrate: 1500
       mediaTimeouts:
         maxConnectionAttempts: 2
@@ -332,18 +296,7 @@ public:
     enableScreensharing: true
     enableVideo: true
     enableVideoMenu: true
-    enableVideoPin: false
     enableListenOnly: true
-    # Experimental. Server wide configuration to choose which bbb-webrtc-sfu
-    # media server adapter should be used for listen only.
-    # Default is undefined, which means the default setting in bbb-webrtc-sfu
-    # prevails (listenOnlyMediaServer).
-    #listenOnlyMediaServer: Kurento
-    # Experimental. Server wide configuration to choose which bbb-webrtc-sfu
-    # media server adapter should be used for webcams.
-    # Default is undefined, which means the default setting in bbb-webrtc-sfu
-    # prevails (videoMediaServer).
-    #videoMediaServer: Kurento
     autoShareWebcam: false
     skipVideoPreview: false
     skipVideoPreviewOnFirstJoin: false
@@ -435,10 +388,9 @@ public:
     toggleSelfVoice: false
   poll:
     enabled: true
-    maxCustom: 8
+    maxCustom: 5
     allowDragAndDropFile: false
     maxTypedAnswerLength: 45
-    chatMessage: true
   captions:
     enabled: true
     enableDictation: false
@@ -474,87 +426,30 @@ public:
       chat_poll_result: PUBLIC_CHAT_POLL_RESULT
     typingIndicator:
       enabled: true
-    moderatorChatEmphasized: true
   note:
     enabled: true
-    url: https://room.video.wiki/pad
+    url: https://class.video.wiki/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false
     showParticipantsOnLogin: true
   media:
-    audio:
-      #
-      #
-      # Default bridge to be used by full audio mechanism.
-      # This is the bridge's name as contained in 'bridges' array
-      defaultFullAudioBridge: sipjs
-      #
-      #
-      # Server wide configuration to choose which bbb-webrtc-sfu
-      # media server adapter should be used for fullaudio.
-      # Default is undefined, which means the default setting in bbb-webrtc-sfu
-      # prevails (fullAudioMediaServer).
-      # fullAudioMediaServer: Kurento
-      #
-      #
-      # Default bridge to be used by listen only mechanism.
-      defaultListenOnlyBridge: kurento
-      #
-      #
-      # Bridge array, here's where we list our bridges.
-      # To add new bridges, simply add the corresponding .js file in
-      # /imports/api/audio/client/bridge/ and add it to this list.
-      #
-      # Each bridge in this list, must have a name and path attribute.
-      # The name is the desired name/string you can set for your bridge, while
-      # the path specifies the file path, relative to
-      # '/imports/api/audio/client' dir.
-      #
-      bridges:
-        #
-        # The name of the bridge
-        - name: sipjs
-          #
-          # The bridge file path , relative to /imports/api/audio/client
-          path: 'bridge/sip'
-        - name: kurento
-          path: 'bridge/kurento'
-        - name: fullaudio
-          path: 'bridge/FullAudioBridge'
     stunTurnServersFetchAddress: '/bigbluebutton/api/stuns'
     cacheStunTurnServers: true
     fallbackStunServer: ''
-    # Forces relay usage on all browsers, environments and media modules.
-    # If true, supersedes public.kurento.forceRelayOnFirefox
-    forceRelay: false
     mediaTag: '#remote-media'
     callTransferTimeout: 5000
     callHangupTimeout: 2000
     callHangupMaximumRetries: 10
     echoTestNumber: 'echo'
+    relayOnlyOnReconnect: false
     listenOnlyCallTimeout: 25000
-    # Experimental. True is the canonical behavior. Flip to false to reverse
-    # the negotiation flow for LO subscribers.
-    listenOnlyOffering: false
     #Timeout (ms) for gathering ICE candidates. When this timeout expires
     #the SDP is sent to the server with the candidates the browser gathered
     #so far. Increasing this value might help avoiding 1004 error when
     #user activates microphone.
     iceGatheringTimeout: 5000
-    # Timeout (ms) for connecting to the audio's signaling websocket.
-    audioConnectionTimeout: 5000
-    # Delay (ms) between each reconnection attempt of the audio's signaling
-    # websocket.
-    audioReconnectionDelay: 5000
-    # Number of reconnection attempts of the signaling websocket, before
-    # showing to the user there's an audio error.
-    audioReconnectionAttempts: 3
     sipjsHackViaWs: true
-    # the fqdn of this host.
-    # If you run a traditional setup of multiple nodes behind scalelite and the users see the hostnames of the
-    # individual nodes, you can leave this at the default setting
-    sip_ws_host: ''
     # Mute/umute toggle throttle time
     toggleMuteThrottleTime: 300
     #Websocket keepAlive interval (seconds). You may set this to prevent
@@ -596,9 +491,9 @@ public:
     help: STATS_HELP_URL
   presentation:
     allowDownloadable: true
+    defaultPresentationFile: default.pdf
     panZoomThrottle: 32
     restoreOnUpdate: false
-    oldMinimizeButton: false
     uploadEndpoint: '/bigbluebutton/presentation/upload'
     uploadValidMimeTypes:
       - extension: .pdf
@@ -647,7 +542,6 @@ public:
       moderator: false
       mobile: true
       guest: true
-      sharingWebcam: true
   whiteboard:
     annotationsQueueProcessInterval: 60
     cursorInterval: 150
@@ -744,16 +638,6 @@ public:
       throttleInterval: 400
       flushOnClose: true
       logTag: ''
-  virtualBackgrounds:
-    enabled: true
-    storedOnBBB: true
-    showThumbnails: true
-    imagesPath: /resources/images/virtual-backgrounds/
-    thumbnailsPath: /resources/images/virtual-backgrounds/thumbnails/
-    fileNames:
-      - home.jpg
-      - coffeeshop.jpg
-      - board.jpg
 private:
   analytics:
     includeChat: true
@@ -763,7 +647,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: 092x8Z3e2xe8kJNVLzNKN6lpJ8j4zict2WlHDMmST12eLiNJJIOVTtgaLRfoww
+    apikey: kwq125H42KDgN31q1Ljy4xVCZbKCfxRiYAJG7MfzICtdUYDh3ykPFBh1CbQs41Y
     version: 1.2.13
     host: 127.0.0.1
     port: 9001
@@ -819,11 +703,3 @@ private:
       version: 10
     - browser: YandexBrowser
       version: 19
-  # Direct Prometheus instrumentation.
-  # EXPERIMENTAL, so disabled by default.
-  prometheus:
-    enabled: false
-    # Metrics endpoint path
-    path: '/metrics'
-    # Whether default metrics for Node.js processes should be exported
-    collectDefaultMetrics: false

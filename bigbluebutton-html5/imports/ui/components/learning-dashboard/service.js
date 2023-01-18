@@ -56,10 +56,21 @@ const openLearningDashboardUrl = (lang) => {
   }
 };
 
+// New Added
+const getLearningDashboardUrl = (lang) => {
+  const APP = Meteor.settings.public.app;
+  if (getLearningDashboardAccessToken() && setLearningDashboardCookie()) {
+    return `${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&lang=${lang}`;
+  } else {
+    return `${APP.learningDashboardBase}/?meeting=${Auth.meetingID}&sessionToken=${Auth.sessionToken}&lang=${lang}`;
+  }
+}
+
 export default {
   isModerator,
   isLearningDashboardEnabled,
   getLearningDashboardAccessToken,
   setLearningDashboardCookie,
   openLearningDashboardUrl,
+  getLearningDashboardUrl,
 };
