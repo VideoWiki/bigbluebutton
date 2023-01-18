@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { withModalMounter } from '/imports/ui/components/modal/service';
-import EndMeetingConfirmationContainer from '/imports/ui/components/end-meeting-confirmation/container';
+import EndMeetingConfirmationContainer from '/imports/ui/newui_components/end-meeting-confirmation/container';
 import { makeCall } from '/imports/ui/services/api';
 import AboutContainer from '/imports/ui/components/about/container';
 import SettingsMenuContainer from '/imports/ui/components/settings/container';
@@ -242,21 +242,21 @@ class SettingsDropdown extends PureComponent {
         label: intl.formatMessage(intlMessages.hotkeysLabel),
         // description: intl.formatMessage(intlMessages.hotkeysDesc),
         onClick: () => mountModal(<ShortcutHelpComponent />),
-        divider: true,
+        // divider: true,
       },
     );
 
-    if (allowedToEndMeeting && isMeteorConnected) {
-      this.menuItems.push(
-        {
-          key: 'list-item-end-meeting',
-          icon: 'application',
-          label: intl.formatMessage(intlMessages.endMeetingLabel),
-          // description: intl.formatMessage(intlMessages.endMeetingDesc),
-          onClick: () => mountModal(<EndMeetingConfirmationContainer />),
-        },
-      );
-    }
+    // if (allowedToEndMeeting && isMeteorConnected) {
+    //   this.menuItems.push(
+    //     {
+    //       key: 'list-item-end-meeting',
+    //       icon: 'application',
+    //       label: intl.formatMessage(intlMessages.endMeetingLabel),
+    //       // description: intl.formatMessage(intlMessages.endMeetingDesc),
+    //       onClick: () => mountModal(<EndMeetingConfirmationContainer />),
+    //     },
+    //   );
+    // }
 
     // if (allowLogoutSetting && isMeteorConnected) {
     //   this.menuItems.push(

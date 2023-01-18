@@ -79,7 +79,8 @@
 }
 
 .messages {
-  max-height: 30vh;
+  // max-height: 30vh;
+  height: calc(100vh - 62.72px);
 }
 
 .participants {

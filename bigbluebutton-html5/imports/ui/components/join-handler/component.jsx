@@ -118,7 +118,7 @@ class JoinHandler extends Component {
         logCode: 'joinhandler_component_clientinfo',
         extraInfo: { clientInfo },
       },
-      'Log information about the client');
+        'Log information about the client');
     };
 
     const setAuth = (resp) => {
@@ -194,7 +194,6 @@ class JoinHandler extends Component {
     };
     //new
 
-    //New Added
     const setLearningDashboard = async (resp) => {
       const apiUrl = `https://api.cast.video.wiki/api/update/learning/analytics/data/`;
       var FormData = require('form-data');
@@ -210,9 +209,9 @@ class JoinHandler extends Component {
         data: data
       }
       axios(config).then(function (res) {
-        console.log("Success");
+        console.log("infoData1",JSON.stringify(res.data));
       }).catch(function (error) {
-        console.log("Error");
+        console.log("infoData1",error);
       })
     }
 
@@ -233,7 +232,6 @@ class JoinHandler extends Component {
       setModOnlyMessage(response);
       setThemeColors(response);
       // setLearningDashboard(response);
-      
       Tracker.autorun(async (cd) => {
         const user = Users.findOne({ userId: Auth.userID, approved: true }, { fields: { _id: 1 } });
 

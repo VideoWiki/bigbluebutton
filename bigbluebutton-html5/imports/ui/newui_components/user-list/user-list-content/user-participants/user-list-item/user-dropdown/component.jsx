@@ -369,10 +369,10 @@ class UserDropdown extends PureComponent {
             type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
             value: true,
           });
-          // layoutContextDispatch({
-          //   type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
-          //   value: PANELS.CHAT,
-          // });
+          layoutContextDispatch({
+            type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
+            value: PANELS.CHAT,
+          });
           layoutContextDispatch({
             type: ACTIONS.SET_ID_CHAT_OPEN,
             value: user.userId,
@@ -687,7 +687,6 @@ class UserDropdown extends PureComponent {
     );
 
     if (!actions.length) return contents;
-    console.log("actions",actions);
     return (
       <DropMenu
           trigger={

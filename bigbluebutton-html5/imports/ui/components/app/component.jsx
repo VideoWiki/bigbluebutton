@@ -58,6 +58,7 @@ import ActionsBarContainer from '/imports/ui/newui_components/actions-bar-new/co
 import NewNavBarContainer from '/imports/ui/newui_components/nav-bar-new/container';
 import UpdatedScreenshareContainer from '/imports/ui/newui_components/screenshare/container';
 import UpdatedPresentationAreaContainer from '/imports/ui/newui_components/presentation/presentation-area/container';
+import UppdatedPollingContainer from "/imports/ui/newui_components/polling/container"
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -616,7 +617,7 @@ class App extends Component {
           <LockNotifier />
           <StatusNotifier status="raiseHand" />
           <ManyWebcamsNotifier />
-          <PollingContainer />
+          <UppdatedPollingContainer />
           <ModalContainer />
           {this.renderNewActionsBar()}
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}

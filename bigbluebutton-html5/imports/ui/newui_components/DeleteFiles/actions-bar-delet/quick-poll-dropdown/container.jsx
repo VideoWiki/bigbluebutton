@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { injectIntl } from 'react-intl';
 import QuickPollDropdown from './component';
-import LayoutContext from '../../layout/context';
+import LayoutContext from '../../../layout/context';
 import PollService from '/imports/ui/components/poll/service';
 
 const QuickPollDropdownContainer = (props) => {

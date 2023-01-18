@@ -65,10 +65,15 @@ const messages = defineMessages({
     id: 'app.chat.severalPeople',
     description: 'displayed when 4 or more users are typing',
   },
+  partnerDisconnected: {
+    id: 'app.chat.partnerDisconnected',
+    description: 'displayed when partner is disconnected',
+  }
 });
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const CHAT_ENABLED = CHAT_CONFIG.enabled;
+const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
 
 class MessageForm extends PureComponent {
   constructor(props) {
@@ -264,6 +269,7 @@ class MessageForm extends PureComponent {
       className,
       idChatOpen,
       partnerIsLoggedOut,
+      chatId,
     } = this.props;
 
     const { hasErrors, error, message } = this.state;
@@ -274,12 +280,13 @@ class MessageForm extends PureComponent {
         className={cx(className, styles.form)}
         onSubmit={this.handleSubmit}
       >
-        <div className={styles.wrapper}>
+        {chatId == PUBLIC_CHAT_ID ? <TypingIndicatorContainer {...{ idChatOpen, error }} /> : null}
+        <div className={styles.msgFormWrapper}>
           <textarea
-            className={styles.MessageInput}
+            className={styles.MessageInputBox}
             id="message-input"
             innerRef={(ref) => { this.textarea = ref; return this.textarea; }}
-            placeholder={intl.formatMessage(messages.inputPlaceholder, { 0: title })}
+            placeholder={partnerIsLoggedOut ? intl.formatMessage(messages.partnerDisconnected, { 0: title }) : intl.formatMessage(messages.inputPlaceholder, { 0: title })}
             aria-label={intl.formatMessage(messages.inputLabel, { 0: chatTitle })}
             aria-invalid={hasErrors ? 'true' : 'false'}
             autoCorrect="off"
@@ -301,7 +308,6 @@ class MessageForm extends PureComponent {
             <Send />
           </button>
         </div>
-        <TypingIndicatorContainer {...{ idChatOpen, error }} />
       </form>
     ) : null;
   }

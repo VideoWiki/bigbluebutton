@@ -5,11 +5,14 @@ import CaptionsButtonContainer from '/imports/ui/components/actions-bar/captions
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { styles } from './styles.scss';
 
+import { withModalMounter } from '/imports/ui/components/modal/service';
 import ActionsDropdown from './actions-dropdown/container';
 import ScreenshareButtonContainer from '/imports/ui/newui_components/actions-bar-new/screenshare/container';
 import AudioControlsContainer from '/imports/ui/newui_components/audio-new/audio-controls/container';
 import JoinVideoOptionsContainer from '/imports/ui/newui_components/video-provider-new/video-button/container';
 import PresentationOptionsContainer from './presentation-options/component';
+import LeaveMeetingContainer from './modal/container'
+import LeaveButton from "./leave-button/component"
 
 import Handraise from './icon/Handraise';
 import Leavecall from './icon/Leavecall';
@@ -53,6 +56,7 @@ class ActionsBar extends PureComponent {
       isThereCurrentPresentation,
       allowExternalVideo,
       setEmojiStatus,
+      mountModal,
       currentUser,
       shortcuts,
       layoutContextDispatch,
@@ -70,7 +74,7 @@ class ActionsBar extends PureComponent {
         }
       >
         <div className={styles.left}>
-          <ActionsDropdown {...{
+          {/* <ActionsDropdown {...{
             amIPresenter,
             amIModerator,
             isPollingEnabled,
@@ -81,8 +85,7 @@ class ActionsBar extends PureComponent {
             isSharingVideo,
             stopExternalVideoShare,
             isMeteorConnected,
-          }}
-          />
+          }}/> */}
           {isCaptionsAvailable
             ? (
               <CaptionsButtonContainer {...{ intl }} />
@@ -96,28 +99,7 @@ class ActionsBar extends PureComponent {
               <JoinVideoOptionsContainer />
             )
             : null}
-          {/* <button
-            className={styles.iconBg}
-            onClick={() => this.leaveSession()}
-          > */}
-            <Button
-                // icon="hand"
-                customIcon={<Leavecall />}
-                className={styles.iconBg}
-                label={intl.formatMessage({
-                  id: 'app.navBar.settingsDropdown.leaveSessionLabel',
-                })}
-                // accessKey={shortcuts.raisehand}
-                color={'primary'}
-                // data-test={currentUser.emoji === 'raiseHand' ? 'lowerHandLabel' : 'raiseHandLabel'}
-                // ghost={currentUser.emoji !== 'raiseHand'}
-                // className={cx(currentUser.emoji === 'raiseHand' || styles.btn)}
-                hideLabel
-                circle
-                size="lg"
-                onClick={() => this.leaveSession()}
-              />
-          {/* </button> */}
+          <LeaveButton/>
           <ScreenshareButtonContainer {...{
             amIPresenter,
             isMeteorConnected,
@@ -172,4 +154,4 @@ class ActionsBar extends PureComponent {
   }
 }
 
-export default withShortcutHelper(ActionsBar, ['raiseHand']);
+export default withShortcutHelper(withModalMounter(ActionsBar), ['raiseHand']);

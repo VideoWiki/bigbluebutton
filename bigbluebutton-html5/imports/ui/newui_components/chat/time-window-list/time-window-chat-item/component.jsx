@@ -85,7 +85,6 @@ class TimeWindowChatItem extends PureComponent {
     if (messages && messages[0].id.includes(CHAT_POLL_RESULTS_MESSAGE)) {
       return this.renderPollItem();
     }
-    console.log("messages", messages)
     return (
       <div className={styles.systemitem} key={`time-window-chat-item-${messageKey}`}>
         <div className={styles.messages}>

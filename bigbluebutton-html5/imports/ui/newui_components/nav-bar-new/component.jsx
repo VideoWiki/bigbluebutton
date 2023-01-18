@@ -16,6 +16,8 @@ import SettingsDropdownContainer from './settings-dropdown/container';
 import browserInfo from '/imports/utils/browserInfo';
 import deviceInfo from '/imports/utils/deviceInfo';
 import { PANELS, ACTIONS } from '/imports/ui/components/layout/enums';
+import LayoutPopupContainer from './layout-popup/container';
+import LayoutButton from './layout-button/LayoutButton';
 
 const intlMessages = defineMessages({
   toggleUserListLabel: {
@@ -163,13 +165,13 @@ class NavBar extends Component {
       sidebarContent,
     } = this.props;
 
-    const hasNotification = hasUnreadMessages || hasUnreadNotes;
+    // const hasNotification = hasUnreadMessages || hasUnreadNotes;
     const toggleBtnClasses = {};
     toggleBtnClasses[styles.btn] = true;
-    toggleBtnClasses[styles.btnWithNotificationDot] = hasNotification;
+    // toggleBtnClasses[styles.btnWithNotificationDot] = hasNotification;
 
-    let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
-    ariaLabel += hasNotification ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
+    // let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
+    // ariaLabel += hasNotification ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
 
     const isExpanded = sidebarContent.isOpen;
 
@@ -194,13 +196,13 @@ class NavBar extends Component {
       >
         <div className={styles.top}>
           <div className={styles.left}>
-          <button
+            <button
               hideLabel
               onClick={this.handleToggleUserList}
-              data-test={hasNotification ? 'hasUnreadMessages' : null}
+              // data-test={hasNotification ? 'hasUnreadMessages' : null}
               label={intl.formatMessage(intlMessages.toggleUserListLabel)}
               tooltipLabel={intl.formatMessage(intlMessages.toggleUserListLabel)}
-              aria-label={ariaLabel}
+              // aria-label={ariaLabel}
               className={cx(toggleBtnClasses, styles.NavToggle)}
               aria-expanded={isExpanded}
               accessKey={TOGGLE_USERLIST_AK}
@@ -219,6 +221,7 @@ class NavBar extends Component {
             />
           </div>
           <div className={styles.right}>
+            <LayoutButton/>
             {ConnectionStatusService.isEnabled() ? <ConnectionStatusButton /> : null}
             <SettingsDropdownContainer amIModerator={amIModerator} />
           </div>

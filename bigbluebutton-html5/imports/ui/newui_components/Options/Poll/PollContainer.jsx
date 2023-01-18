@@ -48,7 +48,7 @@ function PollContainer(props) {
       {
         props.currentSlide ? <>
           {formlevel === 1 && Service.amIPresenter() && <CreatePoll  {...{ layoutContextDispatch, ...props }} setFormlevel={setFormlevel} usernames={usernames} />}
-          <PollingComponent />
+          {/* <PollingComponent /> */}
           {!props.amIPresenter && <PollResult />}
         </> :
           Service.amIPresenter() ?

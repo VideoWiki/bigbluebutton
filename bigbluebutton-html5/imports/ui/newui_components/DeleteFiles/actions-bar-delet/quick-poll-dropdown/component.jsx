@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Button from '/imports/ui/components/button/component';
 import Dropdown from '/imports/ui/components/dropdown/component';
 import { styles } from '../styles';
-import { PANELS, ACTIONS } from '../../layout/enums';
+import { PANELS, ACTIONS } from '../../../layout/enums';
 
 const POLL_SETTINGS = Meteor.settings.public.poll;
 const MAX_CUSTOM_FIELDS = POLL_SETTINGS.maxCustom;
