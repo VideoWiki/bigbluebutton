@@ -59,12 +59,16 @@ import NewNavBarContainer from '/imports/ui/newui_components/nav-bar-new/contain
 import UpdatedScreenshareContainer from '/imports/ui/newui_components/screenshare/container';
 import UpdatedPresentationAreaContainer from '/imports/ui/newui_components/presentation/presentation-area/container';
 import UppdatedPollingContainer from "/imports/ui/newui_components/polling/container"
+import ActionsBarService from '/imports/ui/components/actions-bar/service';
+import UserListService from '/imports/ui/components/user-list/service';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
 const DESKTOP_FONT_SIZE = APP_CONFIG.desktopFontSize;
 const MOBILE_FONT_SIZE = APP_CONFIG.mobileFontSize;
 const OVERRIDE_LOCALE = APP_CONFIG.defaultSettings.application.overrideLocale;
+const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
+const ROLE_VIEWER = Meteor.settings.public.user.role_viewer;
 
 const intlMessages = defineMessages({
   userListLabel: {
@@ -137,6 +141,7 @@ const LAYERED_BREAKPOINT = 640;
 const isLayeredView = window.matchMedia(`(max-width: ${LAYERED_BREAKPOINT}px)`);
 
 class App extends Component {
+
   static renderWebcamsContainer() {
     return <NewWebcamContainer />;
   }
@@ -157,6 +162,32 @@ class App extends Component {
     this.renderOldUI = this.renderOldUI.bind(this);
     this.throttledDeviceType = throttle(() => this.setDeviceType(),
       50, { trailing: true, leading: true }).bind(this);
+
+    const leaveCall = () => {
+      makeCall('userLeftMeeting');
+      Session.set('codeError', LOGOUT_CODE);
+    }
+
+    const assignNewHost = async () => {
+      const { currentUser } = props
+      const amIModerator = currentUser.role === ROLE_MODERATOR;
+
+      if (amIModerator) {
+        const usersList = ActionsBarService.users()
+        const viewer = usersList.filter((user) => user.role == ROLE_VIEWER)
+        if (viewer.length == usersList.length - 1) {
+          UserListService.changeRole(viewer[0].userId, 'MODERATOR')
+        } else {
+          leaveCall()
+        }
+      } else {
+        leaveCall()
+      }
+    }
+
+    window.addEventListener("beforeunload", async () => {
+      return await assignNewHost()
+    });
   }
 
   componentDidMount() {
