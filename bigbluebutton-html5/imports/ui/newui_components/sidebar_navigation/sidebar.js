@@ -16,6 +16,7 @@ import ActionbarService from '/imports/ui/components/actions-bar/service';
 import { styles } from "./styles";
 import "./styles";
 import PresenterIcon from "./PresenterIcon";
+import LeavePopupContainer from "./leave-button/component"
 
 const MySidebar = (props) => {
 
@@ -37,19 +38,32 @@ const MySidebar = (props) => {
     // console.log("polling",pollExists, poll)
 
     return (<div className={styles.OuterSideBox}>
-        {
-            showBranding
-                && CustomLogoUrl
-                ? <CustomLogo CustomLogoUrl={CustomLogoUrl} /> : null
-        }
-        {/* <div className={styles.LogoBox}>
-            <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/logo.svg" />
-        </div> */}
-        <div className={styles.IconOuter}>
-            {upperIcons.map((item, id) => {
-                if (item == "newbreakoutroom") {
-                    if (!meetingIsBreakout) {
-                        if (amIModerator || props.hasBreakoutRoom) {
+        <div className={styles.sidebarTop}>
+            {
+                showBranding
+                    && CustomLogoUrl
+                    ? <CustomLogo CustomLogoUrl={CustomLogoUrl} /> : null
+            }
+            {/* <div className={styles.LogoBox}>
+                <img src="https://s3.us-east-2.amazonaws.com/video.wiki/class-assets/logo.svg" />
+            </div> */}
+        </div>
+        <div className={styles.sidebarMid}>
+            <div className={styles.IconOuter}>
+                {upperIcons.map((item, id) => {
+                    if (item == "newbreakoutroom") {
+                        if (!meetingIsBreakout) {
+                            if (amIModerator || props.hasBreakoutRoom) {
+                                return (
+                                    <IconBox key={id} intl={intl} icon={item} {...input}
+                                        contextDispatch={layoutContextDispatch}
+                                    />
+                                )
+                            }
+                        }
+                    } else if (item == "video" || item == "presentation") {
+                        // item=="poll" || 
+                        if (amIPresenter) {
                             return (
                                 <IconBox key={id} intl={intl} icon={item} {...input}
                                     contextDispatch={layoutContextDispatch}
@@ -57,64 +71,58 @@ const MySidebar = (props) => {
                             )
                         }
                     }
-                } else if (item == "video" || item == "presentation") {
-                    // item=="poll" || 
-                    if (amIPresenter) {
+                    else if (item == "poll") {
+                        if (!amIPresenter) {
+                            return (
+                                <IconBox key={id} intl={intl} icon={item} {...input}
+                                    contextDispatch={layoutContextDispatch}
+                                />
+                            )
+                        }
+                    }
+                    else {
                         return (
                             <IconBox key={id} intl={intl} icon={item} {...input}
                                 contextDispatch={layoutContextDispatch}
                             />
                         )
                     }
-                }
-                else if (item == "poll") {
-                    if (!amIPresenter) {
-                        return (
-                            <IconBox key={id} intl={intl} icon={item} {...input}
-                                contextDispatch={layoutContextDispatch}
-                            />
-                        )
-                    }
-                }
-                else {
+                })}
+                {(amIModerator || amIPresenter) ?
+                    <div className={`${styles.iconWrapper}`} id="iconGroup">
+                        {
+                            presenterIcon.map((item, id) => {
+                                if (item == "video" || item == "presentation" || item == "poll") {
+                                    if (amIPresenter) {
+                                        return (
+                                            <PresenterIcon key={id} intl={intl} icon={item} {...input}
+                                                contextDispatch={layoutContextDispatch}
+                                            />
+                                        )
+                                    }
+                                } else {
+                                    return (
+                                        <PresenterIcon handleTakePresenter={handleTakePresenter} key={id} intl={intl} icon={item} {...input}
+                                            contextDispatch={layoutContextDispatch}
+                                        />
+                                    )
+                                }
+                            })
+                        }
+                    </div>
+                    : null}
+
+                {bottomIcons.map((item, id) => {
                     return (
                         <IconBox key={id} intl={intl} icon={item} {...input}
                             contextDispatch={layoutContextDispatch}
                         />
                     )
-                }
-            })}
-            {(amIModerator || amIPresenter) ?
-                <div className={`${styles.iconWrapper}`} id="iconGroup">
-                    {
-                        presenterIcon.map((item, id) => {
-                            if (item == "video" || item == "presentation" || item == "poll") {
-                                if (amIPresenter) {
-                                    return (
-                                        <PresenterIcon key={id} intl={intl} icon={item} {...input}
-                                            contextDispatch={layoutContextDispatch}
-                                        />
-                                    )
-                                }
-                            } else {
-                                return (
-                                    <PresenterIcon handleTakePresenter={handleTakePresenter} key={id} intl={intl} icon={item} {...input}
-                                        contextDispatch={layoutContextDispatch}
-                                    />
-                                )
-                            }
-                        })
-                    }
-                </div>
-                : null}
-
-            {bottomIcons.map((item, id) => {
-                return (
-                    <IconBox key={id} intl={intl} icon={item} {...input}
-                        contextDispatch={layoutContextDispatch}
-                    />
-                )
-            })}
+                })}
+            </div>
+        </div>
+        <div className={styles.sidebarBottom}>
+            <LeavePopupContainer />
         </div>
     </div >);
 }

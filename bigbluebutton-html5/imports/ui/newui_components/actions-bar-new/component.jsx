@@ -99,7 +99,7 @@ class ActionsBar extends PureComponent {
               <JoinVideoOptionsContainer />
             )
             : null}
-          <LeaveButton/>
+          {/* <LeaveButton/> */}
           <ScreenshareButtonContainer {...{
             amIPresenter,
             isMeteorConnected,
