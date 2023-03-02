@@ -129,7 +129,7 @@ function PresenterIcon(props) {
     //     { groupChatsMessages, groupChats, users: users[Auth.meetingID] },
     // );
 
-    const takePresenter = ()=> {
+    const takePresenter = () => {
         if (!amIPresenter) {
             handleTakePresenter()
             const rectangle = document.getElementById('iconGroup');
@@ -137,28 +137,35 @@ function PresenterIcon(props) {
         }
     }
 
-    useEffect(()=>{
-        if(amIPresenter){
+    useEffect(() => {
+        if (amIPresenter) {
             const rectangle = document.getElementById('iconGroup');
             rectangle.style.height = '174px'
-        }else{
+        } else {
             const rectangle = document.getElementById('iconGroup');
             rectangle.style.height = '58px'
         }
-    },[amIPresenter])
+    }, [amIPresenter])
 
     return (
         <div className={styles.sidebar}>
             {/* Icon height 58px */}
             {icon === "takepresenter" && !amIPresenter &&
-                <div className={`${styles.pIcon}`} onClick={takePresenter}>
+                <div className={`${styles.pIcon}`}>
                     <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}`}>
                         <TakePresenter
                             sidebarContentPanel={sidebarContentPanel}
                         />
-                        <div className={styles.sideTooltipWrapper}>
-                            <div className={styles.sidebarTipArrow}></div>
-                            <div className={styles.sidebarTooltip}><span>Take Presenter</span></div>
+                    </div>
+                    <div className={styles.sideHelperWrapper}>
+                        <div className={styles.hWrap}>
+                            <div className={styles.sidebarHelper}>
+                                <div className={styles.sidebarHelperBox}>
+                                    <span>Want to present something?</span>
+                                    <button onClick={takePresenter}>Take Presenter</button>
+                                </div>
+                            </div>
+                            <div className={styles.sidebarHelperArrow}></div>
                         </div>
                     </div>
                 </div>

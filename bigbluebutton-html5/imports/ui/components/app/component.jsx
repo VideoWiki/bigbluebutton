@@ -167,7 +167,7 @@ class App extends Component {
       makeCall('userLeftMeeting');
       Session.set('codeError', LOGOUT_CODE);
     }
-
+    console.log("currentUser", props.currentUser)
     const assignNewHost = async () => {
       const { currentUser } = props
       const amIModerator = currentUser.role === ROLE_MODERATOR;

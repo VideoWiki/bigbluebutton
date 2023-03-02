@@ -220,6 +220,7 @@ export default injectIntl(withModalMounter(withTracker(({ intl, baseControls }) 
     randomlySelectedUser,
     currentUserId: currentUser?.userId,
     isPresenter: currentUser?.presenter,
+    currentUser: Users.findOne({ userId: Auth.userID }),
     meetingLayout: layout,
     selectedLayout,
     settingsLayout: selectedLayout?.replace('Push', ''),

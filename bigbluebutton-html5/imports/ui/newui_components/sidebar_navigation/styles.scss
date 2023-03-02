@@ -2,7 +2,7 @@
 @import '/imports/ui/stylesheets/mixins/_indicators';
 @import "/imports/ui/newui_components/css/variables.scss";
 
-.OuterSideBox{
+.OuterSideBox {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   // width: 56px; 
   // height: 100%;
@@ -14,12 +14,13 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.LogoBox{
+
+.LogoBox {
   // padding: 1rem;
   // padding-left: 0.8rem;
   // margin-bottom: 5rem;
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   right: 0;
   height: 90px;
@@ -27,10 +28,12 @@
   align-items: center;
   justify-content: center;
 }
-.sidebar{
+
+.sidebar {
   width: 100%;
 }
-.IconBox{
+
+.IconBox {
   margin-left: 0.63rem;
   margin-bottom: 0.63rem;
   cursor: pointer;
@@ -43,11 +46,12 @@
   // border-left: solid 4px #ffffff;
 }
 
-.IconUnfill{
+.IconUnfill {
   border-right: solid 4px $colorWhite;
   border-left: solid 4px $colorWhite;
   transition: border-right 0.2s ease;
 }
+
 .IconFill {
   border-right: solid 4px $sidebarIconDark;
   border-left: solid 4px $colorWhite;
@@ -63,7 +67,7 @@
 //   fill: #7816F7;
 //   transition-duration: 0.2s;
 // }
-.IconOuter{
+.IconOuter {
   // top:6.25rem;
   // height: 100vh;
   // position: absolute;
@@ -74,14 +78,16 @@
   left: 0;
   right: 0;
 }
-.IconShadow{
+
+.IconShadow {
   padding: 10px;
   width: fit-content;
   border-radius: 6px;
   cursor: pointer;
   background-color: transparent;
 }
-.selectedBox{
+
+.selectedBox {
   padding: 10px;
   width: fit-content;
   border-radius: 6px;
@@ -90,21 +96,23 @@
   transition: background-color 0.2s ease;
 }
 
-.sidebarIcon{
+.sidebarIcon {
   display: flex;
 }
-.sideTooltipWrapper{
-  // position: relative;
-  position: absolute;
-  left: 50px;
+
+.sideTooltipWrapper {
+  position: relative;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  left: 3px;
 }
-.sidebarTooltip{
+
+.sidebarTooltip {
   height: 23px;
   position: absolute;
   background-color: $tooltipBgColor;
   color: $tooltipColor;
-  top: 0;
   left: 15px;
   border-radius: 100px;
   padding: 5px 8px;
@@ -113,15 +121,16 @@
   justify-content: center;
   transition: all 0.2s ease;
 }
-.sidebarTipArrow{
+
+.sidebarTipArrow {
   height: 8px;
   width: 20px;
   background-color: $tooltipBgColor;
   border-radius: 100%;
   position: absolute;
   left: 10px;
-  top: 7px;
 }
+
 .sidebarTooltip span {
   font-family: 'Montserrat';
   font-style: normal;
@@ -142,6 +151,87 @@
   opacity: 1;
 }
 
+.sideHelperWrapper {
+  height: 44px;
+  position: relative;
+  z-index: 999;
+  transition: 0.3s all ease-in-out;
+
+  .hWrap {
+    display: none;
+    position: absolute;
+    width: 60px;
+    height: 44px;
+    left: -5px;
+
+    .sidebarHelper {
+      position: absolute;
+      background-color: $colorWhite;
+      color: $tooltipColor;
+      left: 23px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+      -webkit-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+      -moz-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+
+      .sidebarHelperBox {
+        background-color: $colorWhite;
+        color: $tooltipColor;
+        border-radius: 10px;
+        padding: 5px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+
+        button {
+          border: none;
+          outline: none;
+          background-color: $sidebarIconDark;
+          border-radius: 5px;
+          color: $colorWhite;
+          margin: 5px;
+          padding: 4px 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .sidebarHelperArrow {
+    height: 20px;
+    width: 20px;
+    transform: rotate(45deg);
+    background-color: $colorWhite;
+    position: absolute;
+    left: 13px;
+    box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    -webkit-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    -moz-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+  }
+}
+
+.pIcon:hover .hWrap{
+  display: flex;
+  align-items: center;
+}
+
+.sidebarHelper span {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  color: $colorBlack;
+  white-space: nowrap;
+}
+
 .sidebarIconGroup {
   cursor: pointer;
   display: flex;
@@ -154,15 +244,16 @@
 .sidebarBadge {
   position: relative;
 }
-.userIconBadge{
+
+.userIconBadge {
   position: absolute;
   padding: 2px 5px;
-    height: 19px;
-    left: -7px;
-    top: -10px;
-    background: $primaryColor;
-    border: 1px solid $colorWhite;
-    border-radius: 100px;
+  height: 19px;
+  left: -7px;
+  top: -10px;
+  background: $primaryColor;
+  border: 1px solid $colorWhite;
+  border-radius: 100px;
 }
 
 .userIconBadge span {
@@ -208,15 +299,15 @@
   flex-direction: column;
   padding: 0px 3px;
   height: 58px;
-  overflow: hidden;
+  // overflow: hidden;
   transition: height 0.4s ease-in-out;
 }
 
-#iconGroup{
+#iconGroup {
   height: 58px;
 }
 
-.singleIcon{
+.singleIcon {
   padding: 10px;
   width: fit-content;
 }
