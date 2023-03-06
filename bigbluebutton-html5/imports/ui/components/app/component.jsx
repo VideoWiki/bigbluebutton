@@ -61,6 +61,7 @@ import UpdatedPresentationAreaContainer from '/imports/ui/newui_components/prese
 import UppdatedPollingContainer from "/imports/ui/newui_components/polling/container"
 import ActionsBarService from '/imports/ui/components/actions-bar/service';
 import UserListService from '/imports/ui/components/user-list/service';
+import AudioContainerNew from '/imports/ui/newui_components/audio-new/container';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -635,7 +636,7 @@ class App extends Component {
           {this.renderCaptions()}
           <UploaderContainer />
           <BreakoutRoomInvitation />
-          <AudioContainer />
+          <AudioContainerNew />
           <ToastContainer rtl />
           {(audioAlertEnabled || pushAlertEnabled)
             && (

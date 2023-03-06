@@ -3,7 +3,7 @@ import { withModalMounter } from '/imports/ui/components/modal/service';
 import { withTracker } from 'meteor/react-meteor-data';
 import Service from './service';
 import VideoPreview from './component';
-import VideoService from '../video-provider/service';
+import VideoService from '/imports/ui/components/video-provider/service';
 
 const VideoPreviewContainer = (props) => <VideoPreview {...props} />;
 

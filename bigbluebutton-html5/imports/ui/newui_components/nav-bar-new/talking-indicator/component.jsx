@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import cx from 'classnames';
 import _ from 'lodash';
 import { defineMessages, injectIntl } from 'react-intl';
-import Button from '/imports/ui/newui_components/button/component';
+import Button from '/imports/ui/components/button/component';
+import TooltipContainer from '/imports/ui/components/tooltip/container';
 import { styles } from './styles';
 import Service from './service';
 
@@ -78,26 +79,33 @@ class TalkingIndicator extends PureComponent {
       icon = muted ? 'mute' : icon;
 
       return (
-        <button
-          // className={styles.talkingIndicator}
-          className={talking ? styles.talkingIndicator : styles.talkingIndicatorOff}
-          onClick={() => this.handleMuteUser(id)}
-          label={callerName}
-          tooltipLabel={!muted && amIModerator
+        <TooltipContainer
+          title={!muted && amIModerator
             ? `${intl.formatMessage(intlMessages.muteLabel)} ${callerName}`
             : null}
-          data-test={talking ? 'isTalking' : 'wasTalking'}
-          aria-label={ariaLabel}
-          aria-describedby={talking ? 'description' : null}
         >
-          {talking ?
-            <div className={styles.talkingCircle}>
-              <div className={styles.pulsatingCircle}></div>
-            </div> 
-            : null
-          }
-          <span>{callerName}</span>
-        </button>
+          <button
+            // className={styles.talkingIndicator}
+            className={talking ? styles.talkingIndicator : styles.talkingIndicatorOff}
+            onClick={() => this.handleMuteUser(id)}
+            label={callerName}
+            tooltipLabel={!muted && amIModerator
+              ? `${intl.formatMessage(intlMessages.muteLabel)} ${callerName}`
+              : null}
+            data-test={talking ? 'isTalking' : 'wasTalking'}
+            aria-label={ariaLabel}
+            aria-describedby={talking ? 'description' : null}
+          >
+            {talking ?
+              <div className={styles.talkingCircle}>
+                <div className={styles.pulsatingCircle}></div>
+              </div>
+              : null
+            }
+            <span>{callerName}</span>
+          </button>
+        </TooltipContainer>
+
         // <Button
         //   key={_.uniqueId(`${callerName}-`)}
         //   className={cx(style)}

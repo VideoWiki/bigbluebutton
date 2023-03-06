@@ -9,8 +9,8 @@ import logger from '/imports/startup/client/logger';
 import Modal from '/imports/ui/components/modal/simple/component';
 import browserInfo from '/imports/utils/browserInfo';
 import cx from 'classnames';
-import PreviewService from './service';
-import VideoService from '../video-provider/service';
+import PreviewService from '/imports/ui/components/video-preview/service';
+import VideoService from '/imports/ui/components/video-provider/service';
 import { styles } from './styles';
 import deviceInfo from '/imports/utils/deviceInfo';
 import MediaStreamUtils from '/imports/utils/media-stream-utils';
@@ -351,6 +351,26 @@ class VideoPreview extends Component {
     });
   }
 
+  // handleStartSharing() {
+  //   const { resolve, startSharing } = this.props;
+  //   const { webcamDeviceId } = this.state;
+  //   // Only streams that will be shared should be stored in the service.  // If the store call returns false, we're duplicating stuff. So clean this one
+  //   // up because it's an impostor.
+  //   if(!PreviewService.storeStream(webcamDeviceId, this.currentVideoStream)) {
+  //     this.currentVideoStream.stop();
+  //   }
+
+  //   // Update this session's virtual camera effect information if it's enabled
+  //   setSessionVirtualBackgroundInfo(
+  //     this.currentVideoStream.virtualBgType,
+  //     this.currentVideoStream.virtualBgName,
+  //     webcamDeviceId,
+  //   );
+  //   this.cleanupStreamAndVideo();
+  //   startSharing(webcamDeviceId);
+  //   if (resolve) resolve();
+  // }
+
   handleStartSharing() {
     const { resolve, startSharing } = this.props;
     const { webcamDeviceId } = this.state;
@@ -367,7 +387,7 @@ class VideoPreview extends Component {
       webcamDeviceId,
     );
     this.cleanupStreamAndVideo();
-    startSharing(webcamDeviceId);
+    // startSharing(webcamDeviceId);
     if (resolve) resolve();
   }
 
@@ -771,8 +791,10 @@ class VideoPreview extends Component {
             <Button
               data-test="startSharingWebcam"
               color={shared ? 'danger' : 'primary'}
-              label={intl.formatMessage(shared ? intlMessages.stopSharingLabel : intlMessages.startSharingLabel)}
-              onClick={shared ? this.handleStopSharing : this.handleStartSharing}
+              // label={intl.formatMessage(shared ? intlMessages.stopSharingLabel : intlMessages.startSharingLabel)}
+              label="Save"
+              // onClick={shared ? this.handleStopSharing : this.handleStartSharing}
+              onClick={this.handleStartSharing}
               disabled={isStartSharingDisabled || isStartSharingDisabled === null || shouldDisableButtons}
             />
           </div>

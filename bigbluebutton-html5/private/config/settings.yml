@@ -205,7 +205,7 @@ public:
   externalVideoPlayer:
     enabled: true
   kurento:
-    wsUrl: wss://room.video.wiki/bbb-webrtc-sfu
+    wsUrl: wss://dev.beta.room.video.wiki/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -344,7 +344,7 @@ public:
     # Default is undefined, which means the default setting in bbb-webrtc-sfu
     # prevails (videoMediaServer).
     #videoMediaServer: Kurento
-    autoShareWebcam: false
+    autoShareWebcam: true
     skipVideoPreview: false
     skipVideoPreviewOnFirstJoin: false
     # cameraSortingModes.paginationSorting: sorting mode to be applied when pagination is active
@@ -477,10 +477,10 @@ public:
     moderatorChatEmphasized: true
   note:
     enabled: true
-    url: https://room.video.wiki/pad
+    url: https://dev.beta.room.video.wiki/pad
   layout:
     autoSwapLayout: false
-    hidePresentation: false
+    hidePresentation: true
     showParticipantsOnLogin: true
   media:
     audio:

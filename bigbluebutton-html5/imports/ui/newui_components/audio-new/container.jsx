@@ -9,7 +9,7 @@ import Breakouts from '/imports/api/breakouts';
 import AppService from '/imports/ui/components/app/service';
 import { notify } from '/imports/ui/services/notification';
 import getFromUserSettings from '/imports/ui/services/users-settings';
-import VideoPreviewContainer from '/imports/ui/components/video-preview/container';
+import VideoPreviewContainer from '/imports/ui/newui_components/video-preview/container';
 import lockContextContainer from '/imports/ui/components/lock-viewers/context/container';
 import {
   joinMicrophone,

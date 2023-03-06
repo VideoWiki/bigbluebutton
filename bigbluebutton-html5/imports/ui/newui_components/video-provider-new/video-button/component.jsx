@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Button from '/imports/ui/newui_components/button/component';
 import ButtonEmoji from '/imports/ui/components/button/button-emoji/ButtonEmoji';
-import VideoService from '../service';
+import VideoService from '/imports/ui/components/video-provider/service.js';
 import { defineMessages, injectIntl } from 'react-intl';
 import { styles } from './styles';
 import { validIOSVersion } from '/imports/ui/components/app/service';
@@ -12,6 +12,7 @@ import { debounce } from 'lodash';
 
 import Webcamon from './icon/Webcamon'
 import Webcamoff from './icon/Webcamoff'
+import WebcamOptionsPopup from './options-popup/component'
 
 const ENABLE_WEBCAM_SELECTOR_BUTTON = Meteor.settings.public.app.enableWebcamSelectorButton;
 
@@ -59,6 +60,7 @@ const JoinVideoButton = ({
   hasVideoStream,
   disableReason,
   mountVideoPreview,
+  webcamDeviceId,
 }) => {
   const { isMobile } = deviceInfo;
   const shouldEnableWebcamSelectorButton = ENABLE_WEBCAM_SELECTOR_BUTTON
@@ -76,7 +78,8 @@ const JoinVideoButton = ({
     if (exitVideo()) {
       VideoService.exitVideo();
     } else {
-      mountVideoPreview();
+      VideoService.joinVideo(webcamDeviceId);
+      // mountVideoPreview();
     }
   }, JOIN_VIDEO_DELAY_MILLISECONDS);
 
@@ -93,24 +96,31 @@ const JoinVideoButton = ({
 
   const renderEmojiButton = () => (
     shouldEnableWebcamSelectorButton
-      && (
+    && (
       <ButtonEmoji
         onClick={handleOpenAdvancedOptions}
         emoji="device_list_selector"
         hideLabel
         label={intl.formatMessage(intlMessages.advancedVideo)}
       />
-      )
+    )
   );
 
   return (
-    <div className={styles.offsetBottom}>
+    <div className={`${styles.offsetBottom} ${styles.webcamIco}`}>
+      <div className={styles.webcamPopupWrap}>
+        <WebcamOptionsPopup
+          label={label}
+          buttonLabel={intl.formatMessage(intlMessages.advancedVideo)}
+          handleOpenAdvancedOptions={handleOpenAdvancedOptions}
+        />
+      </div>
       <Button
-        label={label}
+        // label={label}
         data-test={hasVideoStream ? 'leaveVideo' : 'joinVideo'}
         className={cx(hasVideoStream || styles.btn)}
         onClick={handleOnClick}
-        hideLabel
+        // hideLabel
         color={hasVideoStream ? 'primary' : 'default'}
         // icon={hasVideoStream ? 'video' : 'video_off'}
         customIcon={hasVideoStream ? <Webcamon /> : <Webcamoff />}
@@ -119,7 +129,7 @@ const JoinVideoButton = ({
         circle
         disabled={!!disableReason}
       />
-      {renderEmojiButton()}
+      {/* {renderEmojiButton()} */}
     </div>
   );
 };
