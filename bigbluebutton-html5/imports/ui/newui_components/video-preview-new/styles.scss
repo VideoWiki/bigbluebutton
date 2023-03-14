@@ -94,15 +94,16 @@
 .videoCol {
   @extend .col;
   align-items: center;
+  font-size: 1.2rem;
 
   @include mq($landscape) {
-    width: 33.3%;
+    width: 40%; //33.3% before
   }
 }
 
 .content {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-grow: 1;
   font-family: 'Montserrat';
@@ -115,6 +116,7 @@
 
 .footer {
   display: flex;
+  flex-direction: column;
 }
 
 .header {

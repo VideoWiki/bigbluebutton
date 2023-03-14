@@ -287,7 +287,7 @@ class ActionsDropdown extends PureComponent {
           id: "default-dropdown-menu",
           keepMounted: true,
           transitionDuration: 0,
-          elevation: 3,
+          elevation: 0,
           getContentAnchorEl: null,
           fullwidth: "true",
           anchorOrigin: { vertical: 'top', horizontal: 'left' },

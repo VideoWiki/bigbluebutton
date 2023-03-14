@@ -8,12 +8,18 @@ import {
   defineMessages, injectIntl, FormattedMessage,
 } from 'react-intl';
 import { styles } from './styles';
-import PermissionsOverlay from '../permissions-overlay/component';
-import AudioSettings from '../audio-settings/component';
-import EchoTest from '../echo-test/component';
-import Help from '../help/component';
-import AudioDial from '../audio-dial/component';
-import AudioAutoplayPrompt from '../autoplay/component';
+import PermissionsOverlay from '/imports/ui/newui_components/audio-new/permissions-overlay/component';
+import AudioSettings from '/imports/ui/newui_components/audio-new/audio-settings/component';
+import EchoTest from '/imports/ui/newui_components/audio-new/echo-test/component';
+import Help from '/imports/ui/newui_components/audio-new/help/component';
+import AudioDial from '/imports/ui/newui_components/audio-new/audio-dial/component';
+import AudioAutoplayPrompt from '/imports/ui/newui_components/audio-new/autoplay/component';
+
+import VideoPreviewContainer from '/imports/ui/newui_components/video-preview-new/container';
+import Micon from "./icons/Micon"
+import Micoff from "./icons/Micoff"
+import Webcamon from "./icons/Webcamon"
+import Webcamoff from "./icons/Webcamoff"
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -139,6 +145,8 @@ class AudioModal extends Component {
     this.handleJoinMicrophone = this.handleJoinMicrophone.bind(this);
     this.handleJoinListenOnly = this.handleJoinListenOnly.bind(this);
     this.skipAudioOptions = this.skipAudioOptions.bind(this);
+    this.handleToggMic = this.handleToggMic.bind(this);
+    this.handleToggWebcam = this.handleToggWebcam.bind(this);
 
     this.contents = {
       echoTest: {
@@ -172,6 +180,8 @@ class AudioModal extends Component {
       listenOnlyMode,
       audioLocked,
       isUsingAudio,
+      enableWebcam,
+      enableMic
     } = this.props;
 
     if (!isUsingAudio) {
@@ -188,7 +198,8 @@ class AudioModal extends Component {
     if (autoplayBlocked !== prevProps.autoplayBlocked) {
       if (autoplayBlocked) {
         this.setContent({ content: 'autoplayBlocked' });
-      } else {
+      }
+      else {
         closeModal();
       }
     }
@@ -384,7 +395,7 @@ class AudioModal extends Component {
       <div>
         <span className={styles.audioOptions}>
           {!showMicrophone && !isMobileNative
-              && (
+            && (
               <>
                 <Button
                   className={styles.audioBtn}
@@ -404,9 +415,9 @@ class AudioModal extends Component {
                   {intl.formatMessage(intlMessages.microphoneDesc)}
                 </span>
               </>
-              )}
+            )}
           {listenOnlyMode
-              && (
+            && (
               <>
                 <Button
                   className={styles.audioBtn}
@@ -421,7 +432,7 @@ class AudioModal extends Component {
                   {intl.formatMessage(intlMessages.listenOnlyDesc)}
                 </span>
               </>
-              )}
+            )}
         </span>
         {formattedDialNum ? (
           <Button
@@ -446,6 +457,7 @@ class AudioModal extends Component {
       isEchoTest,
       intl,
       isIOSChrome,
+      isConnected
     } = this.props;
 
     const { content } = this.state;
@@ -463,6 +475,17 @@ class AudioModal extends Component {
       );
     }
 
+    if (true) {
+      return (
+        <div className={styles.connecting} role="alert">
+          <span data-test={'connecting'}>
+            {intl.formatMessage(intlMessages.connecting)}
+          </span>
+          <span className={styles.connectingAnimation} />
+        </div>
+      );
+    }
+
     if (this.skipAudioOptions()) {
       return (
         <div className={styles.connecting} role="alert">
@@ -473,6 +496,7 @@ class AudioModal extends Component {
         </div>
       );
     }
+
     return content ? this.contents[content].component() : this.renderAudioOptions();
   }
 
@@ -550,6 +574,18 @@ class AudioModal extends Component {
     );
   }
 
+  handleToggWebcam() {
+    this.setState({
+      enableWebcam: !this.state.enableWebcam,
+    });
+  }
+
+  handleToggMic() {
+    this.setState({
+      enableMic: !this.state.enableMic,
+    });
+  }
+
   render() {
     const {
       intl,
@@ -557,9 +593,10 @@ class AudioModal extends Component {
       isIOSChrome,
       closeModal,
       isIE,
+      isConnected
     } = this.props;
 
-    const { content } = this.state;
+    const { content, enableWebcam, enableMic } = this.state;
 
     return (
       <span>
@@ -571,42 +608,58 @@ class AudioModal extends Component {
           hideBorder
           contentLabel={intl.formatMessage(intlMessages.ariaModalTitle)}
         >
-          {isIE ? (
-            <p className={cx(styles.text, styles.browserWarning)}>
-              <FormattedMessage
-                id="app.audioModal.unsupportedBrowserLabel"
-                description="Warning when someone joins with a browser that isnt supported"
-                values={{
-                  0: <a href="https://www.google.com/chrome/">Chrome</a>,
-                  1: <a href="https://getfirefox.com">Firefox</a>,
-                }}
-              />
-            </p>
-          ) : null}
-          {
-            !this.skipAudioOptions()
-              ? (
-                <header
-                  data-test="audioModalHeader"
-                  className={styles.header}
-                >
+          <VideoPreviewContainer enableWebcam={enableWebcam} enableMic={enableMic} closeModal={closeModal}>
+            {
+              !isConnected ?
+                <>
+                  {isIE ? (
+                    <p className={cx(styles.text, styles.browserWarning)}>
+                      <FormattedMessage
+                        id="app.audioModal.unsupportedBrowserLabel"
+                        description="Warning when someone joins with a browser that isnt supported"
+                        values={{
+                          0: <a href="https://www.google.com/chrome/">Chrome</a>,
+                          1: <a href="https://getfirefox.com">Firefox</a>,
+                        }}
+                      />
+                    </p>
+                  ) : null}
                   {
-                    isIOSChrome ? null
-                      : (
-                        <h2 className={styles.title}>
-                          {content
-                            ? intl.formatMessage(this.contents[content].title)
-                            : intl.formatMessage(intlMessages.audioChoiceLabel)}
-                        </h2>
+                    !this.skipAudioOptions()
+                      ? (
+                        <header
+                          data-test="audioModalHeader"
+                          className={styles.header}
+                        >
+                          {
+                            isIOSChrome ? null
+                              : (
+                                <h2 className={styles.title}>
+                                  {content
+                                    ? intl.formatMessage(this.contents[content].title)
+                                    : intl.formatMessage(intlMessages.audioChoiceLabel)}
+                                </h2>
+                              )
+                          }
+                        </header>
                       )
+                      : null
                   }
-                </header>
-              )
-              : null
-          }
-          <div className={styles.content}>
-            {this.renderContent()}
-          </div>
+                  <div className={styles.content}>
+                    {this.renderContent()}
+                  </div>
+                </>
+                :
+                <div className={styles.selectorDiv}>
+                  <button className={enableMic ? styles.enableResource : null} onClick={this.handleToggMic}>
+                    {enableMic ? <Micon /> : <Micoff />}
+                  </button>
+                  <button className={enableWebcam ? styles.enableResource : null} onClick={this.handleToggWebcam}>
+                    {enableWebcam ? <Webcamon /> : <Webcamoff />}
+                  </button>
+                </div>
+            }
+          </VideoPreviewContainer>
         </Modal>
       </span>
     );

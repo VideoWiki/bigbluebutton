@@ -6,6 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import TooltipContainer from '/imports/ui/components/tooltip/container';
 import { styles } from './styles';
 import Service from './service';
+import Micoff from '../icons/Micoff';
 
 const intlMessages = defineMessages({
   wasTalking: {
@@ -82,7 +83,7 @@ class TalkingIndicator extends PureComponent {
         <TooltipContainer
           title={!muted && amIModerator
             ? `${intl.formatMessage(intlMessages.muteLabel)} ${callerName}`
-            : null}
+            : `${callerName} Muted`}
         >
           <button
             // className={styles.talkingIndicator}
@@ -95,7 +96,14 @@ class TalkingIndicator extends PureComponent {
             data-test={talking ? 'isTalking' : 'wasTalking'}
             aria-label={ariaLabel}
             aria-describedby={talking ? 'description' : null}
+            disabled={muted}
           >
+            {muted ?
+              <div className={styles.speakMinOff}>
+              <Micoff/>
+              </div>
+              : null
+            }
             {talking ?
               <div className={styles.talkingCircle}>
                 <div className={styles.pulsatingCircle}></div>

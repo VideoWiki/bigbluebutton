@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import Modal from '/imports/ui/newui_components/modal/simple/component';
-import Button from '/imports/ui/newui_components/button/component';
+import Modal from '/imports/ui/components/modal/simple/component';
+import Button from '/imports/ui/components/button/component';
 import AudioService from '/imports/ui/components/audio/service';
 import { styles } from './styles';
 

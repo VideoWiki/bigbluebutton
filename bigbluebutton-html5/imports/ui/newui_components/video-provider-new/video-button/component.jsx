@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Button from '/imports/ui/newui_components/button/component';
@@ -62,6 +62,7 @@ const JoinVideoButton = ({
   mountVideoPreview,
   webcamDeviceId,
 }) => {
+  const [disableButton, setDisableButton] = useState(false)
   const { isMobile } = deviceInfo;
   const shouldEnableWebcamSelectorButton = ENABLE_WEBCAM_SELECTOR_BUTTON
     && hasVideoStream
@@ -70,17 +71,19 @@ const JoinVideoButton = ({
     && !isMobile
     && (!VideoService.isMultipleCamerasEnabled() || shouldEnableWebcamSelectorButton);
 
-  const handleOnClick = debounce(() => {
+  const handleOnClick = debounce(async () => {
+    setDisableButton(true)
     if (!validIOSVersion()) {
       return VideoService.notify(intl.formatMessage(intlMessages.iOSWarning));
     }
 
     if (exitVideo()) {
-      VideoService.exitVideo();
+      await VideoService.exitVideo();
     } else {
-      VideoService.joinVideo(webcamDeviceId);
+      await VideoService.joinVideo(webcamDeviceId);
       // mountVideoPreview();
     }
+    setDisableButton(false)
   }, JOIN_VIDEO_DELAY_MILLISECONDS);
 
   const handleOpenAdvancedOptions = (e) => {
@@ -127,7 +130,7 @@ const JoinVideoButton = ({
         ghost={!hasVideoStream}
         size="lg"
         circle
-        disabled={!!disableReason}
+        disabled={!!disableReason || disableButton}
       />
       {/* {renderEmojiButton()} */}
     </div>

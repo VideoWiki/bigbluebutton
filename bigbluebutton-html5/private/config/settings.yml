@@ -61,7 +61,7 @@ public:
     # restarting webcam.
     enableWebcamSelectorButton: true
     enableTalkingIndicator: true
-    mirrorOwnWebcam: false
+    mirrorOwnWebcam: true
     viewersInWebcam: 8
     ipv4FallbackDomain: ''
     allowLogout: true
@@ -479,8 +479,8 @@ public:
     enabled: true
     url: https://dev.beta.room.video.wiki/pad
   layout:
-    autoSwapLayout: false
-    hidePresentation: true
+    autoSwapLayout: true
+    hidePresentation: false
     showParticipantsOnLogin: true
   media:
     audio:

@@ -172,9 +172,8 @@
   display: flex;
   align-items: center;
   padding: 6px 8px;
-  padding-left: 14px;
+  // padding-left: 14px;
   margin-right: 6px;
-  cursor: pointer;
   opacity: 0.8;
 }
 
@@ -226,6 +225,10 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   -webkit-animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
           animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
+}
+
+.speakMinOff {
+  margin-right: 5px;
 }
 
 @-webkit-keyframes pulse-ring {

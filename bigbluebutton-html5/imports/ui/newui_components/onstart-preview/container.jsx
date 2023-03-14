@@ -15,11 +15,11 @@ import {
   closeModal,
   joinListenOnly,
   leaveEchoTest,
-} from '/imports/ui/components/audio/audio-modal/service';
+} from '/imports/ui/newui_components/audio-new/audio-modal/service';
 import Storage from '/imports/ui/services/storage/session';
-import Service from '../service';
+import Service from '/imports/ui/newui_components/audio-new/service';
 
-const AudioModalContainer = (props) => <AudioModal {...props} />;
+const VideoAudioPreviewContainer = (props) => <AudioModal {...props} />;
 
 const APP_CONFIG = Meteor.settings.public.app;
 
@@ -99,4 +99,4 @@ export default lockContextContainer(withModalMounter(withTracker(({ userLocks })
     isRTL,
     AudioError,
   });
-})(AudioModalContainer)));
+})(VideoAudioPreviewContainer)));

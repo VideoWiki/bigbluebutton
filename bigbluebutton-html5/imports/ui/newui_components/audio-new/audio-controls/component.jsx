@@ -54,10 +54,11 @@ const propTypes = {
 class AudioControls extends PureComponent {
   constructor(props) {
     super(props);
-    this.renderLeaveButtonWithoutLiveStreamSelector = this
-      .renderLeaveButtonWithoutLiveStreamSelector.bind(this);
+    // this.renderLeaveButtonWithoutLiveStreamSelector = this
+    //   .renderLeaveButtonWithoutLiveStreamSelector.bind(this);
 
     this.renderJoinLeaveButton = this.renderJoinLeaveButton.bind(this);
+    this.renderButtonsAndStreamSelector = this.renderButtonsAndStreamSelector.bind(this);
   }
 
   componentDidMount() {
@@ -96,53 +97,53 @@ class AudioControls extends PureComponent {
     );
   }
 
-  static renderLeaveButtonWithLiveStreamSelector(props) {
-    const { handleLeaveAudio } = props;
-    return (
-      <InputStreamLiveSelectorContainer {...{ handleLeaveAudio }} />
-    );
-  }
+  // static renderLeaveButtonWithLiveStreamSelector(props) {
+  //   const { handleLeaveAudio } = props;
+  //   return (
+  //     <InputStreamLiveSelectorContainer {...{ handleLeaveAudio }} />
+  //   );
+  // }
 
-  renderLeaveButtonWithoutLiveStreamSelector() {
-    const {
-      handleJoinAudio,
-      handleLeaveAudio,
-      disable,
-      inAudio,
-      listenOnly,
-      intl,
-      shortcuts,
-    } = this.props;
+  // renderLeaveButtonWithoutLiveStreamSelector() {
+  //   const {
+  //     handleJoinAudio,
+  //     handleLeaveAudio,
+  //     disable,
+  //     inAudio,
+  //     listenOnly,
+  //     intl,
+  //     shortcuts,
+  //   } = this.props;
 
-    let joinIcon = 'no_audio';
-    if (inAudio) {
-      if (listenOnly) {
-        joinIcon = 'listen';
-      } else {
-        joinIcon = 'volume_level_2';
-      }
-    }
+  //   let joinIcon = 'no_audio';
+  //   if (inAudio) {
+  //     if (listenOnly) {
+  //       joinIcon = 'listen';
+  //     } else {
+  //       joinIcon = 'volume_level_2';
+  //     }
+  //   }
 
-    return (
-      <Button
-        className={cx(inAudio || styles.btn)}
-        onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
-        disabled={disable}
-        data-test={inAudio ? 'leaveAudio' : 'joinAudio'}
-        hideLabel
-        aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-          : intl.formatMessage(intlMessages.joinAudio)}
-        label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
-          : intl.formatMessage(intlMessages.joinAudio)}
-        color={inAudio ? 'primary' : 'default'}
-        ghost={!inAudio}
-        icon={joinIcon}
-        size="lg"
-        circle
-        accessKey={inAudio ? shortcuts.leaveaudio : shortcuts.joinaudio}
-      />
-    );
-  }
+  //   return (
+  //     <Button
+  //       className={cx(inAudio || styles.btn)}
+  //       onClick={inAudio ? handleLeaveAudio : handleJoinAudio}
+  //       disabled={disable}
+  //       data-test={inAudio ? 'leaveAudio' : 'joinAudio'}
+  //       hideLabel
+  //       aria-label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
+  //         : intl.formatMessage(intlMessages.joinAudio)}
+  //       label={inAudio ? intl.formatMessage(intlMessages.leaveAudio)
+  //         : intl.formatMessage(intlMessages.joinAudio)}
+  //       color={inAudio ? 'primary' : 'default'}
+  //       ghost={!inAudio}
+  //       icon={joinIcon}
+  //       size="lg"
+  //       circle
+  //       accessKey={inAudio ? shortcuts.leaveaudio : shortcuts.joinaudio}
+  //     />
+  //   );
+  // }
 
   renderJoinLeaveButton() {
     const {
@@ -160,16 +161,41 @@ class AudioControls extends PureComponent {
     const _enableDynamicDeviceSelection = enableDynamicAudioDeviceSelection
       && !isMobile;
 
-    if (inAudio) {
-      if (_enableDynamicDeviceSelection) {
-        return AudioControls.renderLeaveButtonWithLiveStreamSelector(this
-          .props);
-      }
+    // if (inAudio) {
+    //   if (_enableDynamicDeviceSelection) {
+    //     return AudioControls.renderLeaveButtonWithLiveStreamSelector(this
+    //       .props);
+    //   }
 
-      return this.renderLeaveButtonWithoutLiveStreamSelector();
+    //   return this.renderLeaveButtonWithoutLiveStreamSelector();
+    // }
+
+    if (inAudio) {
+      return this.renderButtonsAndStreamSelector(_enableDynamicDeviceSelection);
     }
 
     return this.renderJoinButton();
+  }
+
+  renderButtonsAndStreamSelector(_enableDynamicDeviceSelection) {
+    const {
+      handleLeaveAudio, handleToggleMuteMicrophone, muted, disable, talking,
+    } = this.props;
+
+    const { isMobile } = deviceInfo;
+
+    return (
+      <InputStreamLiveSelectorContainer {...{
+        handleLeaveAudio,
+        handleToggleMuteMicrophone,
+        muted,
+        disable,
+        talking,
+        isMobile,
+        _enableDynamicDeviceSelection,
+      }}
+      />
+    );
   }
 
   render() {
@@ -191,23 +217,23 @@ class AudioControls extends PureComponent {
     const label = muted ? intl.formatMessage(intlMessages.unmuteAudio)
       : intl.formatMessage(intlMessages.muteAudio);
 
-    const toggleMuteBtn = (
-      <Button
-        className={cx(styles.muteToggle, !talking || styles.glow, !muted || styles.btn)}
-        onClick={handleToggleMuteMicrophone}
-        disabled={disable}
-        hideLabel
-        label={label}
-        aria-label={label}
-        color={!muted ? 'primary' : 'default'}
-        ghost={muted}
-        // icon={muted ? 'mute' : 'unmute'}
-        customIcon={muted ? <Micoff/> : <Micon/>}
-        size="lg"
-        circle
-        accessKey={shortcuts.togglemute}
-      />
-    );
+    // const toggleMuteBtn = (
+    //   <Button
+    //     className={cx(styles.muteToggle, !talking || styles.glow, !muted || styles.btn)}
+    //     onClick={handleToggleMuteMicrophone}
+    //     disabled={disable}
+    //     hideLabel
+    //     label={label}
+    //     aria-label={label}
+    //     color={!muted ? 'primary' : 'default'}
+    //     ghost={muted}
+    //     // icon={muted ? 'mute' : 'unmute'}
+    //     customIcon={muted ? <Micoff/> : <Micon/>}
+    //     size="lg"
+    //     circle
+    //     accessKey={shortcuts.togglemute}
+    //   />
+    // );
 
     const MUTE_ALERT_CONFIG = Meteor.settings.public.app.mutedAlert;
     const { enabled: muteAlertEnabled } = MUTE_ALERT_CONFIG;
@@ -220,7 +246,7 @@ class AudioControls extends PureComponent {
           }}
           />
         ) : null}
-        {showMute && isVoiceUser ? toggleMuteBtn : null}
+        {/* {showMute && isVoiceUser ? toggleMuteBtn : null} */}
         {
           this.renderJoinLeaveButton()
         }

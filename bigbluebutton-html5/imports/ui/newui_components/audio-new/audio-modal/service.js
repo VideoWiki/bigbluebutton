@@ -38,7 +38,8 @@ export const joinMicrophone = (skipEchoTest = false) => {
   });
 
   return call.then(() => {
-    showModal(null);
+    // showModal(null);
+    return true
   }).catch((error) => {
     throw error;
   });

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Button from '/imports/ui/newui_components/button/component';
+import Button from '/imports/ui/components/button/component';
 import cx from 'classnames';
 import { defineMessages, injectIntl } from 'react-intl';
 import ModalBase, { withModalState } from '../base/component';

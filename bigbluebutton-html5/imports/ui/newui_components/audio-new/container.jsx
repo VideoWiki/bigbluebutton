@@ -18,6 +18,8 @@ import {
   didUserSelectedListenOnly,
 } from '/imports/ui/components/audio/audio-modal/service';
 
+import VideoAudioPreviewContainer from '/imports/ui/newui_components/onstart-preview/container'
+
 import Service from './service';
 import AudioModalContainer from './audio-modal/container';
 import Settings from '/imports/ui/services/settings';
@@ -181,6 +183,10 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
     mountModal(<VideoPreviewContainer resolve={resolve} />);
   });
 
+  const openVideoAudioModal = () => new Promise((resolve) => {
+    mountModal(<VideoAudioPreviewContainer resolve={resolve} />);
+  });
+
   if (Service.isConnected() && !Service.isListenOnly()) {
     Service.updateAudioConstraints(microphoneConstraints);
 
@@ -229,7 +235,9 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
       }
       Session.set('audioModalIsOpen', true);
       if (enableVideo && autoShareWebcam) {
-        openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
+        openVideoAudioModal();
+        didMountAutoJoin = true;
+        // openAudioModal().then(() => { openVideoPreviewModal(); didMountAutoJoin = true; });
       } else if (!(
         userSelectedMicrophone
         && userSelectedListenOnly

@@ -193,6 +193,7 @@ class VideoPreview extends Component {
     this.handleSelectProfile = this.handleSelectProfile.bind(this);
     this.handleVirtualBgSelected = this.handleVirtualBgSelected.bind(this);
     this.handleSaveConfig = this.handleSaveConfig.bind(this);
+    this.handleMeetContinue = this.handleMeetContinue.bind(this);
 
     this._isMounted = false;
 
@@ -353,7 +354,7 @@ class VideoPreview extends Component {
   }
 
   handleStartSharing() {
-    const { resolve, startSharing } = this.props;
+    const { resolve, startSharing, closeModal} = this.props;
     const { webcamDeviceId } = this.state;
     // Only streams that will be shared should be stored in the service.  // If the store call returns false, we're duplicating stuff. So clean this one
     // up because it's an impostor.
@@ -370,6 +371,7 @@ class VideoPreview extends Component {
     this.cleanupStreamAndVideo();
     startSharing(webcamDeviceId);
     if (resolve) resolve();
+    closeModal()
   }
 
   handleSaveConfig() {
@@ -431,6 +433,7 @@ class VideoPreview extends Component {
   }
 
   handleDeviceError(logCode, error, description) {
+    console.log("error",error)
     logger.warn({
       logCode: `video_preview_${logCode}_error`,
       extraInfo: {
@@ -734,6 +737,19 @@ class VideoPreview extends Component {
     }
   }
 
+  handleMeetContinue() {
+    const { enableWebcam, enableMic, handleToggleMuteMicrophone } = this.props;
+    if(enableMic){
+      handleToggleMuteMicrophone()
+    }
+    
+    if(enableWebcam) {
+      this.handleStartSharing()
+    }else{
+      this.handleSaveConfig()
+    }
+  }
+
   renderModalContent() {
     const {
       intl,
@@ -767,11 +783,11 @@ class VideoPreview extends Component {
             />
           </p>
         ) : null}
-        <div>
+        {/* <div>
           <div className={styles.title}>
             {intl.formatMessage(intlMessages.webcamSettingsTitle)}
           </div>
-        </div>
+        </div> */}
 
         {this.renderContent()}
 
@@ -789,23 +805,26 @@ class VideoPreview extends Component {
             )
             : null
           }
+          {
+            this.props.children
+          }
           <div className={styles.actions}>
             <Button
               data-test="startSharingWebcam"
-              color={'primary'}
+              color={shared ? 'danger' : 'primary'}
               // label={intl.formatMessage(shared ? intlMessages.stopSharingLabel : intlMessages.startSharingLabel)}
-              label="Save settings"
+              label="Continue"
               // onClick={shared ? this.handleStopSharing : this.handleStartSharing}
-              onClick={this.handleSaveConfig}
+              onClick={this.handleMeetContinue}
               disabled={isStartSharingDisabled || isStartSharingDisabled === null || shouldDisableButtons}
             />
-            <Button
+            {/* <Button
               data-test="startSharingWebcam"
               color={shared ? 'danger' : 'primary'}
               label={intl.formatMessage(shared ? intlMessages.stopSharingLabel : intlMessages.startSharingLabel)}
               onClick={shared ? this.handleStopSharing : this.handleStartSharing}
               disabled={isStartSharingDisabled || isStartSharingDisabled === null || shouldDisableButtons}
-            />
+            /> */}
           </div>
         </div>
       </>
@@ -835,23 +854,23 @@ class VideoPreview extends Component {
     const allowCloseModal = !!(deviceError || previewError) || !PreviewService.getSkipVideoPreview();
 
     return (
-      <Modal
-        overlayClassName={styles.overlay}
-        className={cx({
-          [styles.modal]: true,
-          [styles.modalPhone]: deviceInfo.isPhone,
-        })}
-        onRequestClose={this.handleProceed}
-        hideBorder
-        contentLabel={intl.formatMessage(intlMessages.webcamSettingsTitle)}
-        shouldShowCloseButton={allowCloseModal}
-        shouldCloseOnOverlayClick={allowCloseModal}
+      <div
+        // overlayClassName={styles.overlay}
+        // className={cx({
+        //   [styles.modal]: true,
+        //   [styles.modalPhone]: deviceInfo.isPhone,
+        // })}
+        // onRequestClose={this.handleProceed}
+        // hideBorder
+        // contentLabel={intl.formatMessage(intlMessages.webcamSettingsTitle)}
+        // shouldShowCloseButton={allowCloseModal}
+        // shouldCloseOnOverlayClick={allowCloseModal}
       >
         {deviceInfo.hasMediaDevices
           ? this.renderModalContent()
           : this.supportWarning()
         }
-      </Modal>
+      </div>
     );
   }
 }

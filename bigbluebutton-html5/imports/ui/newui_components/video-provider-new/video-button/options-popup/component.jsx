@@ -9,16 +9,18 @@ import { styles } from '../styles.scss';
 
 function WebcamOptionsPopup(props) {
 
-    const {label, buttonLabel, handleOpenAdvancedOptions} = props
+    const { label, buttonLabel, handleOpenAdvancedOptions } = props
     return (
-        <div className={`${styles.leavePopup} ${styles.activeLeavePopup}`}>
-            <div className={styles.leavePopupWrapper}>
-                <div className={styles.outOptions}>
-                    <button className={styles.endcallButton} onClick={handleOpenAdvancedOptions} >{buttonLabel}</button>
-                    <span className={styles.webcamLabel} >{label}</span>
+        <div className={styles.popupCover}>
+            <div className={styles.webcamPopup}>
+                <div className={styles.webcamPopupWrapper}>
+                    <div className={styles.outWOptions}>
+                        <button className={styles.advOptButton} onClick={handleOpenAdvancedOptions} >{buttonLabel}</button>
+                        <span className={styles.webcamLabel} >{label}</span>
+                    </div>
                 </div>
+                <div className={styles.wPopupArrow}></div>
             </div>
-            <div className={styles.popupArrow}></div>
         </div>
     )
 }

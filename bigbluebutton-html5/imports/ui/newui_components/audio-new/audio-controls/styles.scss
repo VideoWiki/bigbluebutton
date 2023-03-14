@@ -12,7 +12,7 @@
   }
 
   .muteToggle {
-    margin-right: var(--sm-padding-x);
+    // margin-right: var(--sm-padding-x);
     margin-left: 0;
 
     @include mq($small-only) {
@@ -110,4 +110,9 @@
       bottom: 1px;
     }
   }
+}
+
+.laListItem > *{
+  padding-left: 8px;
+  align-items: center;
 }

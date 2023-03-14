@@ -86,6 +86,19 @@ class ActionsBar extends PureComponent {
             stopExternalVideoShare,
             isMeteorConnected,
           }}/> */}
+          {!isOldMinimizeButtonEnabled ||
+            (isOldMinimizeButtonEnabled && isLayoutSwapped && !isPresentationDisabled)
+            ? (
+              <PresentationOptionsContainer
+                isLayoutSwapped={isLayoutSwapped}
+                toggleSwapLayout={toggleSwapLayout}
+                layoutContextDispatch={layoutContextDispatch}
+                hasPresentation={isThereCurrentPresentation}
+                hasExternalVideo={isSharingVideo}
+                hasScreenshare={hasScreenshare}
+              />
+            )
+            : null}
           {isCaptionsAvailable
             ? (
               <CaptionsButtonContainer {...{ intl }} />
@@ -107,28 +120,15 @@ class ActionsBar extends PureComponent {
           />
         </div>
         <div className={styles.right}>
-          {!isOldMinimizeButtonEnabled ||
-            (isOldMinimizeButtonEnabled && isLayoutSwapped && !isPresentationDisabled)
-            ? (
-              <PresentationOptionsContainer
-                isLayoutSwapped={isLayoutSwapped}
-                toggleSwapLayout={toggleSwapLayout}
-                layoutContextDispatch={layoutContextDispatch}
-                hasPresentation={isThereCurrentPresentation}
-                hasExternalVideo={isSharingVideo}
-                hasScreenshare={hasScreenshare}
-              />
-            )
-            : null}
           {isRaiseHandButtonEnabled
             ? (
               <Button
                 // icon="hand"
-                customIcon={<Handraise/>}
+                customIcon={<Handraise />}
                 label={intl.formatMessage({
                   id: `app.actionsBar.emojiMenu.${currentUser.emoji === 'raiseHand'
-                      ? 'lowerHandLabel'
-                      : 'raiseHandLabel'
+                    ? 'lowerHandLabel'
+                    : 'raiseHandLabel'
                     }`,
                 })}
                 accessKey={shortcuts.raisehand}

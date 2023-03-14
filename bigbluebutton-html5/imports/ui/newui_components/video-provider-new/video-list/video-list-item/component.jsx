@@ -87,6 +87,11 @@ class VideoListItem extends Component {
   }
 
   componentDidUpdate() {
+
+    if(VideoService.mirrorOwnWebcam(props.userId)){
+      mirrorCamera()
+    }
+    
     const playElement = (elem) => {
       if (elem.paused) {
         elem.play().catch((error) => {
