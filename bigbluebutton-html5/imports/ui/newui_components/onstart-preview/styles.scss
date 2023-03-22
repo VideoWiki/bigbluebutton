@@ -14,15 +14,14 @@
 }
 
 .content {
-  flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  // justify-content: center;
   align-items: center;
-  padding: 0;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding: 0.5rem 0;
+  flex-grow: 1;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: $colorGray;
 
   .audioBtn:first-child {
     margin: 0 3rem 0 0;
@@ -69,7 +68,8 @@
 
 .modal {
   @extend .modal;
-  min-height: 20rem;
+  // min-height: 20rem;
+  font-family: 'Inter';
 }
 
 .closeBtn {
@@ -160,8 +160,8 @@
 .connecting {
   margin-top: auto;
   margin-bottom: auto;
-  font-size: 1.2rem;
-  font-family: 'Montserrat';
+  display: flex;
+  align-items: center;
 }
 
 .connectingAnimation {
@@ -204,18 +204,64 @@
     margin: 10px;
     border: none;
     outline: none;
-    height: 55px;
-    width: 55px;
+    height: 44px;
+    width: 44px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color: #00e3ff;
+    background-color: #F63D68;
     transition: 0.1s;
   }
 
   .enableResource{
     background-color: $SvgFill !important;
   }
+}
+
+.loadingLabel {
+  display: flex;
+  align-items: center;
+}
+
+.fetchingAnimation {
+  display: flex;
+  margin-left: 5px;
+
+  span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 4px;
+    animation: loading 0.5s infinite alternate;
+  }
+  span:nth-child(1) {
+    animation-delay: .10s;
+    background-color: #1DC20233;
+  }
+  span:nth-child(2) {
+    animation-delay: .20s;
+    background-color: #1DC20280;
+  }
+  span:nth-child(3) {
+    animation-delay: .30s;
+    background-color: #1DC202;
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.findingLabel {
+  margin-left: 14px;
+}
+.loadAudioIcon {
+  min-width: 24px;
 }

@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/mixins/_indicators";
 @import "/imports/ui/stylesheets/variables/placeholders";
 @import "../base/styles";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .modal {
   @extend %highContrastOutline;
@@ -10,7 +11,8 @@
   padding: calc(var(--line-height-computed) / 2) var(--line-height-computed);
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
   background-color: var(--color-white) !important;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
+  overflow: visible !important;
 }
 
 .content {
@@ -42,12 +44,21 @@
 
 .dismiss {
   flex: 0;
+  color: $SvgFill;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+
   > span:first-child {
     border-color: transparent;
     background-color: transparent;
 
     > i { color: var(--color-text); }
   }
+
 }
 
 .overlay {

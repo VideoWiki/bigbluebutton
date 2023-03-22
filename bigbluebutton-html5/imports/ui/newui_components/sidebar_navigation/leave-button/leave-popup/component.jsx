@@ -31,7 +31,7 @@ function LeavePopup(props) {
             const { usersList } = props
             const viewer = usersList.filter((user) => user.role == ROLE_VIEWER)
             setViewers(viewer)
-            if (viewer.length == usersList.length - 1) {
+            if (viewer.length > 0 && viewer.length == usersList.length - 1) {
                 setNewHost(viewer[viewer.length - 1].userId)
                 UserListService.changeRole(newHost, 'MODERATOR')
                 props.setShowList(true)

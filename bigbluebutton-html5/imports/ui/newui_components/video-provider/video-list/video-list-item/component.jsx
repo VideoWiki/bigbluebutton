@@ -80,6 +80,11 @@ class VideoListItem extends Component {
   componentDidMount() {
     const { onVideoItemMount, cameraId } = this.props;
 
+    console.log("mirrorWebcam")
+    if(VideoService.mirrorOwnWebcam(this.props.userId)){
+      this.mirrorCamera()
+    }
+
     onVideoItemMount(this.videoTag);
     this.videoTag.addEventListener('loadeddata', this.setVideoIsReady);
     this.videoContainer.addEventListener(FULLSCREEN_CHANGE_EVENT, this.onFullscreenChange);

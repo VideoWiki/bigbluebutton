@@ -78,7 +78,11 @@ class VideoListItem extends Component {
   }
 
   componentDidMount() {
-    const { onVideoItemMount, cameraId } = this.props;
+    const { onVideoItemMount, cameraId, userId } = this.props;
+
+    if(VideoService.mirrorOwnWebcam(userId)){
+      this.mirrorCamera()
+    }
 
     onVideoItemMount(this.videoTag);
     this.videoTag.addEventListener('loadeddata', this.setVideoIsReady);
@@ -86,12 +90,7 @@ class VideoListItem extends Component {
     subscribeToStreamStateChange(cameraId, this.onStreamStateChange);
   }
 
-  componentDidUpdate() {
-
-    if(VideoService.mirrorOwnWebcam(props.userId)){
-      mirrorCamera()
-    }
-    
+  componentDidUpdate() {    
     const playElement = (elem) => {
       if (elem.paused) {
         elem.play().catch((error) => {

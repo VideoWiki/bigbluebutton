@@ -15,11 +15,12 @@ import Help from '/imports/ui/newui_components/audio-new/help/component';
 import AudioDial from '/imports/ui/newui_components/audio-new/audio-dial/component';
 import AudioAutoplayPrompt from '/imports/ui/newui_components/audio-new/autoplay/component';
 
-import VideoPreviewContainer from '/imports/ui/newui_components/video-preview-new/container';
+import VideoPreviewContainer from '/imports/ui/newui_components/video-preview-onstart/container';
 import Micon from "./icons/Micon"
 import Micoff from "./icons/Micoff"
 import Webcamon from "./icons/Webcamon"
 import Webcamoff from "./icons/Webcamoff"
+import LoadAudioIcon from './icons/LoadAudioIcon';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -475,24 +476,19 @@ class AudioModal extends Component {
       );
     }
 
-    if (true) {
-      return (
-        <div className={styles.connecting} role="alert">
-          <span data-test={'connecting'}>
-            {intl.formatMessage(intlMessages.connecting)}
-          </span>
-          <span className={styles.connectingAnimation} />
-        </div>
-      );
-    }
-
     if (this.skipAudioOptions()) {
       return (
         <div className={styles.connecting} role="alert">
-          <span data-test={!isEchoTest ? 'connecting' : 'connectingToEchoTest'}>
+          <LoadAudioIcon/>
+          <span className={styles.findingLabel} data-test={!isEchoTest ? 'connecting' : 'connectingToEchoTest'}>
             {intl.formatMessage(intlMessages.connecting)}
           </span>
-          <span className={styles.connectingAnimation} />
+          {/* <span className={styles.connectingAnimation} /> */}
+          <div className={styles.fetchingAnimation}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       );
     }

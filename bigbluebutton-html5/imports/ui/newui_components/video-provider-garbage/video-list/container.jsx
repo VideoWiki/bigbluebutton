@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import VideoList from '/imports/ui/components/video-provider/video-list/component';
+import VideoList from '/imports/ui/newui_components/video-provider-new/video-list/component';
 import VideoService from '/imports/ui/components/video-provider/service';
 import LayoutContext from '../../layout/context';
 

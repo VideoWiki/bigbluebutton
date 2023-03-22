@@ -5,6 +5,7 @@ import Button from '/imports/ui/components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import ModalBase, { withModalState } from '../base/component';
 import { styles } from './styles';
+import DismissIcon from './icons/DismissIcon';
 
 const intlMessages = defineMessages({
   modalClose: {
@@ -89,7 +90,8 @@ class ModalSimple extends Component {
               className={styles.dismiss}
               label={intl.formatMessage(intlMessages.modalClose)}
               aria-label={`${intl.formatMessage(intlMessages.modalClose)} ${title || contentLabel}`}
-              icon="close"
+              // icon="close"
+              customIcon={<DismissIcon/>}
               circle
               hideLabel
               onClick={handleRequestClose}

@@ -23,7 +23,9 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
       box-sizing: border-box;
     }
 
-    *, *:before, *:after {
+    *,
+    *:before,
+    *:after {
       box-sizing: inherit;
     }
 
@@ -31,7 +33,8 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
       position: fixed;
       height: 100%;
       font-family: 'Source Sans Pro', Arial, sans-serif;
-      font-size: 1rem; /* 16px */
+      font-size: 1rem;
+      /* 16px */
       background-color: #06172A;
     }
 
@@ -56,7 +59,7 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
       padding: 0;
       margin: -1px;
       overflow: hidden;
-      clip: rect(0,0,0,0);
+      clip: rect(0, 0, 0, 0);
       border: 0;
     }
 
@@ -69,6 +72,7 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
     .remove-z-index {
       z-index: 0;
     }
+
     /* .full-screen {
       height: 100% !important;
       width: 100% !important;
@@ -84,8 +88,10 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
       opacity: 1;
     }
 
-    :-moz-placeholder, /* Firefox 4 to 18 */
-    ::-moz-placeholder { /* Firefox 19+ */
+    :-moz-placeholder,
+    /* Firefox 4 to 18 */
+    ::-moz-placeholder {
+      /* Firefox 19+ */
       color: var(--palette-placeholder-text);
       opacity: 1;
     }
@@ -101,20 +107,23 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
   <script src="compatibility/tflite-simd.js?v=VERSION" language="javascript"></script>
   <script src="compatibility/tflite.js?v=VERSION" language="javascript"></script>
   <!-- fonts -->
-  <link rel="preload" href="fonts/BbbIcons/bbb-icons.woff?j1ntjp" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Light.woff" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Regular.woff" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Semibold.woff" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Bold.woff" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-LightItalic.woff" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Italic.woff" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-SemiboldItalic.woff" as="font" crossorigin="anonymous"/>
-  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-BoldItalic.woff" as="font" crossorigin="anonymous"/>
+  <link rel="preload" href="fonts/BbbIcons/bbb-icons.woff?j1ntjp" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Light.woff" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Regular.woff" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Semibold.woff" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Bold.woff" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-LightItalic.woff" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-Italic.woff" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-SemiboldItalic.woff" as="font" crossorigin="anonymous" />
+  <link rel="preload" href="fonts/SourceSansPro/SourceSansPro-BoldItalic.woff" as="font" crossorigin="anonymous" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <!-- fonts -->
 </head>
+
 <body style="background-color: #fff">
   <div id="app" role="document" style="background-color: #fff"></div>
   <span id="destination"></span>

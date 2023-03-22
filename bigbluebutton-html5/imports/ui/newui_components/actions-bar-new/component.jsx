@@ -9,7 +9,7 @@ import { withModalMounter } from '/imports/ui/components/modal/service';
 import ActionsDropdown from './actions-dropdown/container';
 import ScreenshareButtonContainer from '/imports/ui/newui_components/actions-bar-new/screenshare/container';
 import AudioControlsContainer from '/imports/ui/newui_components/audio-new/audio-controls/container';
-import JoinVideoOptionsContainer from '/imports/ui/newui_components/video-provider-new/video-button/container';
+import JoinVideoOptionsContainer from '/imports/ui/newui_components/video-provider/video-button-new/container';
 import PresentationOptionsContainer from './presentation-options/component';
 import LeaveMeetingContainer from './modal/container'
 import LeaveButton from "./leave-button/component"
