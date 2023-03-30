@@ -4,7 +4,7 @@ import {
   defineMessages, injectIntl, FormattedMessage,
 } from 'react-intl';
 import Button from '/imports/ui/newui_components/button/component';
-import VirtualBgSelector from '/imports/ui/components/video-preview/virtual-background/component'
+import VirtualBgSelector from '/imports/ui/newui_components/video-preview/virtual-background/component'
 import logger from '/imports/startup/client/logger';
 import Modal from '/imports/ui/newui_components/modal/simple/component';
 import browserInfo from '/imports/utils/browserInfo';
@@ -22,6 +22,7 @@ import {
   isVirtualBackgroundEnabled,
   getSessionVirtualBackgroundInfo,
 } from '/imports/ui/services/virtual-background/service'
+import LoadCamIcon from './Icons/LoadCamIcon';
 
 const VIEW_STATES = {
   finding: 'finding',
@@ -689,9 +690,15 @@ class VideoPreview extends Component {
         return (
           <div className={styles.content}>
             <div className={styles.videoCol}>
-              <div>
-                <span>{intl.formatMessage(intlMessages.findingWebcamsLabel)}</span>
-                <span className={styles.fetchingAnimation} />
+              <div className={styles.loadingLabel}>
+                <LoadCamIcon />
+                <span className={styles.findingLabel}>{intl.formatMessage(intlMessages.findingWebcamsLabel)}</span>
+                {/* <span className={styles.fetchingAnimation} /> */}
+                <div className={styles.fetchingAnimation}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
             </div>
           </div>
@@ -776,21 +783,21 @@ class VideoPreview extends Component {
         {this.renderContent()}
 
         <div className={styles.footer}>
-          {hasVideoStream && VideoService.isMultipleCamerasEnabled()
-            ? (
-              <div className={styles.extraActions}>
+          <div className={styles.actions}>
+            {hasVideoStream && VideoService.isMultipleCamerasEnabled()
+              ? (
                 <Button
+                  className={styles.modalConBtnDn}
                   color="danger"
                   label={intl.formatMessage(intlMessages.stopSharingAllLabel)}
                   onClick={this.handleStopSharingAll}
                   disabled={shouldDisableButtons}
                 />
-              </div>
-            )
-            : null
-          }
-          <div className={styles.actions}>
+              )
+              : null
+            }
             <Button
+              className={styles.modalConBtn}
               data-test="startSharingWebcam"
               color={'primary'}
               // label={intl.formatMessage(shared ? intlMessages.stopSharingLabel : intlMessages.startSharingLabel)}
@@ -800,6 +807,7 @@ class VideoPreview extends Component {
               disabled={isStartSharingDisabled || isStartSharingDisabled === null || shouldDisableButtons}
             />
             <Button
+              className={styles.modalConBtn}
               data-test="startSharingWebcam"
               color={shared ? 'danger' : 'primary'}
               label={intl.formatMessage(shared ? intlMessages.stopSharingLabel : intlMessages.startSharingLabel)}

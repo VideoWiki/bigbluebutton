@@ -3,7 +3,7 @@
 
 .pollContainer{
     width: 350px;
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     height: 100vh;
     overflow-x: hidden;
     @include scrollbox-vertical(var(--user-list-bg));
@@ -14,7 +14,7 @@
 }
 
 .createClassWrapper h1 {
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -153,7 +153,7 @@
     background-color: rgba(121, 102, 250, 0.1);
 }
 .pollContent {
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -166,7 +166,7 @@
     align-items: center;
 }
 .pollContent1 {
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -195,12 +195,12 @@
     margin: 20px;
     box-sizing: border-box;
     border-radius: 12px;
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
 }
 
 .liveResTable tr{
     padding: 5px 0px;
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -238,7 +238,7 @@
     border-radius: 50%;
 }
 .ansBoxName{
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -256,7 +256,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -269,7 +269,7 @@
     height: 30px;
     width: 30px;
     border-radius: 8px;
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -301,5 +301,5 @@
     color: var(--color-danger);
     margin: 0px;
     padding-top: 1rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $fontPrimary, sans-serif;
 }

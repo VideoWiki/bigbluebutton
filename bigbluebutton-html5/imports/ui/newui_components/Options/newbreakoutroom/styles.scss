@@ -8,7 +8,7 @@
     position: relative;
 }
 .BreakoutroomHeading{
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -58,7 +58,7 @@
     margin-left: 4rem;
 }
 .createBreakoutHeading{
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -68,7 +68,7 @@
     color: #333333;
 }
 .InputHeadings{
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -80,7 +80,7 @@
 .InputRooms,.InputDuration,.mylabel{
     padding: 0.5rem;
     border: 1px solid #EBEDF0;
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -104,7 +104,7 @@
 }
 .Check{
     margin-top: 1rem;
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -179,7 +179,7 @@
 }
 
 .RoomName{
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -188,7 +188,7 @@
     color: #333333;
 }
 .RoomDuration{
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -229,7 +229,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 11px;
@@ -356,11 +356,11 @@
     color: var(--color-danger);
     margin: 0px;
     padding-top: 1rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $fontPrimary, sans-serif;
   }
 
   .endButton {
-    font-family: 'Montserrat', sans-serif;
+    font-family: $fontPrimary, sans-serif;
     background: #333333;
     padding: .7rem;
     margin: 0.9rem;
@@ -413,7 +413,7 @@
   .breakoutRoomListNameLabel {
     overflow: hidden;
     text-overflow: ellipsis;
-    font-family: 'Montserrat',sans-serif;
+    font-family: $fontPrimary,sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -435,7 +435,7 @@
 //     display: flex;
 //     justify-content: space-around;
 //     align-items: center;
-//     font-family: 'Montserrat',sans-serif;
+//     font-family: $fontPrimary,sans-serif;
 //     font-style: normal;
 //     font-weight: bold;
 //     font-size: 11px;
@@ -479,9 +479,9 @@
   top: 7px;
 }
 .sidebarTooltip span {
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   line-height: 26px;
   color: $tooltipColor;

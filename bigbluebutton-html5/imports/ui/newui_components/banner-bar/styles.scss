@@ -1,0 +1,24 @@
+@import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
+
+.bannerTextColor {
+  @extend %text-elipsis;
+  color: var(--color-white);
+}
+
+.bannerBar {
+  position: absolute;
+  top: 5px;
+  padding: 0px 10px;
+  height: 35px;
+
+  .bannerBarWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+    width: 100%;
+    border-radius: 5px;
+    background-color: $colorPrimary;
+  }
+}

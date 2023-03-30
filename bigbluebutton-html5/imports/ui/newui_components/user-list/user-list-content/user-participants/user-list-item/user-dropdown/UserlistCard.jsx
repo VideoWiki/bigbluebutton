@@ -57,7 +57,7 @@ export default function UserlistCard(props) {
             <UserAvatar
                 moderator={user.role === ROLE_MODERATOR}
                 presenter={user.presenter}
-                // talking={voiceUser.isTalking}
+                talking={voiceUser.isTalking}
                 // muted={voiceUser.isMuted}
                 // listenOnly={voiceUser.isListenOnly}
                 // voice={voiceUser.isVoiceUser}

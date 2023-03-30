@@ -1,4 +1,5 @@
 @import "/imports/ui/components/video-preview/styles";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 :root {
   --thumbnail-btn-md: 48px;
@@ -71,4 +72,15 @@
   border-radius: var(--border-size-large);
   height: var(--thumbnail-btn-md);
   width: var(--thumbnail-btn-md);
+}
+
+.label {
+  font-family: $fontPrimary;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #344054;
+  margin-bottom: 6px;
+  margin-top: 0px;
 }

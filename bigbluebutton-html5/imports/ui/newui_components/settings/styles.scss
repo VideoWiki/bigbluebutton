@@ -99,7 +99,7 @@
 }
 
 .settingWrapper h3{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -132,14 +132,14 @@
   padding: 15px;
   margin-bottom: 10px;
 
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 1em !important;
 }
 
 .settingHeader h4{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;

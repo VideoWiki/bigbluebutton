@@ -384,7 +384,7 @@ class AudioModal extends Component {
       <div>
         <span className={styles.audioOptions}>
           {!showMicrophone && !isMobileNative
-              && (
+            && (
               <>
                 <Button
                   className={styles.audioBtn}
@@ -404,9 +404,9 @@ class AudioModal extends Component {
                   {intl.formatMessage(intlMessages.microphoneDesc)}
                 </span>
               </>
-              )}
+            )}
           {listenOnlyMode
-              && (
+            && (
               <>
                 <Button
                   className={styles.audioBtn}
@@ -421,7 +421,7 @@ class AudioModal extends Component {
                   {intl.formatMessage(intlMessages.listenOnlyDesc)}
                 </span>
               </>
-              )}
+            )}
         </span>
         {formattedDialNum ? (
           <Button
@@ -469,7 +469,12 @@ class AudioModal extends Component {
           <span data-test={!isEchoTest ? 'connecting' : 'connectingToEchoTest'}>
             {intl.formatMessage(intlMessages.connecting)}
           </span>
-          <span className={styles.connectingAnimation} />
+          <div className={styles.fetchingAnimation}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          {/* <span className={styles.connectingAnimation} /> */}
         </div>
       );
     }

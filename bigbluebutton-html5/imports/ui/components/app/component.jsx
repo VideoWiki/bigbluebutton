@@ -63,6 +63,8 @@ import ActionsBarService from '/imports/ui/components/actions-bar/service';
 import UserListService from '/imports/ui/components/user-list/service';
 import AudioContainerNew from '/imports/ui/newui_components/audio-new/container';
 import NewModalContainer from '/imports/ui/newui_components/modal/container';
+import NewBannerBarContainer from '/imports/ui/newui_components/banner-bar/container';
+import NewNotificationsBarContainer from '/imports/ui/newui_components/notifications-bar/container';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -617,8 +619,8 @@ class App extends Component {
         >
           {this.renderActivityCheck()}
           {this.renderUserInformation()}
-          <BannerBarContainer />
-          {/* <NotificationsBarContainer /> */}
+          <NewBannerBarContainer main="new"/>
+          {/* <NewNotificationsBarContainer /> */}
           <MySidebar />
           <Option_Flow />
 

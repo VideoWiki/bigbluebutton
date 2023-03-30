@@ -1,4 +1,5 @@
 @import "/imports/ui/components/modal/simple/styles";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .title {
   color: var(--color-gray-dark);
@@ -59,7 +60,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-size: 18px;
 
   .leaveButtons{

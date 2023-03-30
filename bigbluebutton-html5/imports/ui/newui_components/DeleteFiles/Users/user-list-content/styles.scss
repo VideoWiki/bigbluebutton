@@ -3,6 +3,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/mixins/_indicators";
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .content {
   @extend %flex-column;
@@ -217,7 +218,7 @@
   height: 55px;
 }
 .userListHeader h3{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;

@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/variables/placeholders";
 @import "/imports/ui/stylesheets/variables/breakpoints";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .note {
   // background-color: var(--color-white);
@@ -114,7 +115,7 @@ iframe {
   height: 100%;
 }
 .noteboxHeading h3{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;

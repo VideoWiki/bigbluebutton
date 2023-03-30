@@ -1,3 +1,5 @@
+@import "/imports/ui/newui_components/css/variables.scss";
+
 .presentationPlaceholder {
   display: flex;
   flex-direction: column;
@@ -11,7 +13,7 @@
   align-items: center;
   color: var(--color-white);
   overflow: hidden;
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   padding-bottom: 1rem;
   opacity: 0.7;
 

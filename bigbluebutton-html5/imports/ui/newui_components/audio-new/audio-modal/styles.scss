@@ -1,5 +1,6 @@
 @import "/imports/ui/stylesheets/variables/breakpoints";
 @import "/imports/ui/components/modal/simple/styles";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 :root {
   --audioDial-margin-left: 2rem;
@@ -41,7 +42,7 @@
     margin: inherit 0 inherit inherit;
 
     [dir="rtl"] & {
-      margin: inherit!important inherit!important inherit!important 0;
+      margin: inherit !important inherit !important inherit !important 0;
     }
   }
 }
@@ -68,6 +69,7 @@
   @extend .modal;
   padding: 1.5rem;
   min-height: 20rem;
+  font-family: $fontPrimary;
 }
 
 .closeBtn {
@@ -81,17 +83,20 @@
   &:focus,
   &:hover {
     background-color: var(--color-gray-lighter);
+
     i {
       color: var(--color-gray);
     }
   }
 }
+
 .warning {
   text-align: center;
   font-weight: var(--headings-font-weight);
   font-size: 5rem;
   white-space: normal;
 }
+
 .text {
   margin: var(--line-height-computed);
   text-align: center;
@@ -159,6 +164,8 @@
   margin-top: auto;
   margin-bottom: auto;
   font-size: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 .connectingAnimation {
@@ -170,7 +177,8 @@
     overflow: hidden;
     display: inline-block;
     vertical-align: bottom;
-    content: "\2026"; /* ascii code for the ellipsis character */
+    content: "\2026";
+    /* ascii code for the ellipsis character */
     width: 0;
     margin-left: 0.25em;
 
@@ -190,4 +198,42 @@
   color: var(--color-text);
   display: inline-block;
   font-size: 0.9rem;
+}
+
+.fetchingAnimation {
+  display: flex;
+  margin-left: 5px;
+
+  span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 4px;
+    animation: loading 0.5s infinite alternate;
+  }
+
+  span:nth-child(1) {
+    animation-delay: .10s;
+    background-color: #1DC20233;
+  }
+
+  span:nth-child(2) {
+    animation-delay: .20s;
+    background-color: #1DC20280;
+  }
+
+  span:nth-child(3) {
+    animation-delay: .30s;
+    background-color: #1DC202;
+  }
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

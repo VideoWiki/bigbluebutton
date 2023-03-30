@@ -132,9 +132,9 @@
 }
 
 .sidebarTooltip span {
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   line-height: 26px;
   color: $tooltipColor;
@@ -223,7 +223,7 @@
 }
 
 .sidebarHelper span {
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -257,7 +257,7 @@
 }
 
 .userIconBadge span {
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;

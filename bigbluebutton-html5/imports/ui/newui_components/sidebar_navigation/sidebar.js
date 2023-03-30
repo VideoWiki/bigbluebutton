@@ -38,7 +38,8 @@ const MySidebar = (props) => {
     // console.log("polling",pollExists, poll)
 
     return (<div className={styles.OuterSideBox}>
-        <div className={styles.sidebarTop}>
+        {/* <div className={styles.sidebarTop}> */}
+        <div>
             {
                 showBranding
                     && CustomLogoUrl

@@ -407,7 +407,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   position: relative;
 }
 .BreakoutroomHeading{
-  font-family: 'Montserrat',sans-serif;
+  font-family: $fontPrimary,sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -457,7 +457,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   margin-left: 4rem;
 }
 .createBreakoutHeading{
-  font-family: 'Montserrat',sans-serif;
+  font-family: $fontPrimary,sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -467,7 +467,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   color: #333333;
 }
 .InputHeadings{
-  font-family: 'Montserrat',sans-serif;
+  font-family: $fontPrimary,sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -479,7 +479,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 .InputRooms,.InputDuration,.mylabel{
   padding: 0.5rem;
   border: 1px solid #EBEDF0;
-  font-family: 'Montserrat',sans-serif;
+  font-family: $fontPrimary,sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -503,7 +503,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 .Check{
   margin-top: 1rem;
-  font-family: 'Montserrat',sans-serif;
+  font-family: $fontPrimary,sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -576,7 +576,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 .RoomName{
-  font-family: 'Montserrat',sans-serif;
+  font-family: $fontPrimary,sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -585,7 +585,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   color: #333333;
 }
 .RoomDuration{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -625,7 +625,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: 'Montserrat',sans-serif;
+  font-family: $fontPrimary,sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 11px;
@@ -747,7 +747,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 .endButton {
-  font-family: 'Montserrat', sans-serif;
+  font-family: $fontPrimary, sans-serif;
   background: #333333;
   padding: .7rem;
   font-weight: var(--headings-font-weight) !important;

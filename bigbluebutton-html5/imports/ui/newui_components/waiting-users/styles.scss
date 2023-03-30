@@ -44,7 +44,7 @@
   }
 }
 .title h3{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -98,7 +98,7 @@
 
 .mainTitle {
   // color: var(--color-gray);
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -184,7 +184,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;

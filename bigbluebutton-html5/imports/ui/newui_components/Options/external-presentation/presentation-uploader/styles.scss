@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/mixins/_scrollable";
 @import "/imports/ui/stylesheets/variables/placeholders";
 @import "/imports/ui/stylesheets/variables/breakpoints";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 :root {
   --uploadIconSize: 2.286rem;
@@ -468,7 +469,7 @@
   // font-weight: normal;
 
   padding-top: var(--sm-padding-y);
-    font-family: 'Montserrat';
+    font-family: $fontPrimary;
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -528,7 +529,7 @@
   padding: 5px 20px;
 }
 .extPresentationDiv h3{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -537,7 +538,7 @@
   padding: 20px;
 }
 .videoUrl h4{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -562,7 +563,7 @@
   padding: 10px;
   border: none;
   outline: none;
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;

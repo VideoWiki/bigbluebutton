@@ -1,6 +1,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/mixins/_indicators";
 @import "/imports/ui/stylesheets/variables/_all";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .wrapper {
   display: flex;
@@ -11,7 +12,7 @@
   background: #FBFBFC;
   border: 1px solid #EBEDF0;
   border-radius: 6px;
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

@@ -18,6 +18,7 @@ import deviceInfo from '/imports/utils/deviceInfo';
 import { PANELS, ACTIONS } from '/imports/ui/components/layout/enums';
 import LayoutPopupContainer from './layout-popup/container';
 import LayoutButton from './layout-button/LayoutButton';
+import NewNotificationsBarContainer from '/imports/ui/newui_components/notifications-bar/container';
 
 const intlMessages = defineMessages({
   toggleUserListLabel: {
@@ -212,6 +213,7 @@ class NavBar extends Component {
                 {!isExpanded && <Icon iconName="right_arrow" className={styles.arrowRight} />}
               </div>
             </button>
+            <NewNotificationsBarContainer />
           </div>
           <div className={styles.center}>
             <h1 className={styles.presentationTitle}>{presentationTitle}</h1>

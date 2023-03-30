@@ -24,7 +24,7 @@
 }
 
 .PresenationTitle {
-    font-family: 'Montserrat', sans-serif;
+    font-family: $fontPrimary, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -40,7 +40,7 @@
     border-radius: 100px;
     padding: 0.3rem;
     padding-bottom: 0.2rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: $fontPrimary, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
@@ -98,7 +98,7 @@
 }
 
 .SpeakerName {
-    font-family: 'Montserrat', sans-serif;
+    font-family: $fontPrimary, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 12px;

@@ -62,7 +62,8 @@ class SmartLayout extends Component {
     const bannerHeight = bannerBar.hasBanner ? DEFAULT_VALUES.bannerHeight : 0;
     const notificationHeight = notificationsBar.hasNotification ? DEFAULT_VALUES.bannerHeight : 0;
 
-    return bannerHeight + notificationHeight;
+    // return bannerHeight + notificationHeight;
+    return bannerHeight;
   }
 
   init() {

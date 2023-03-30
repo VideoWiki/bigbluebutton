@@ -219,7 +219,7 @@
   align-items: center;
 }
 .userListHeader h3{
-  font-family: 'Montserrat';
+  font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -271,7 +271,7 @@
       z-index: 999;
     }
     .sidebarTooltip p {
-      font-family: 'Montserrat';
+      font-family: $fontPrimary;
       font-style: normal;
       font-weight: 500;
       font-size: 13px;

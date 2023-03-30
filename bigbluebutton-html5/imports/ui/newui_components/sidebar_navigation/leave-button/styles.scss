@@ -1,5 +1,6 @@
 @import "/imports/ui/newui_components/css/variables.scss";
 @import "/imports/ui/stylesheets/mixins/_scrollable";
+@import "/imports/ui/newui_components/css/variables.scss";
 
 .iconBg{
     background: $primaryColor;
@@ -49,7 +50,7 @@
             outline: none;
             background-color: $colorWhite;
             cursor: pointer;
-            font-family: 'Montserrat';
+            font-family: $fontPrimary;
             font-style: normal;
             font-weight: 500;
             border-radius: 8px;
@@ -57,17 +58,18 @@
         }
 
         .endcallButton {
-            margin-bottom: 10px;
-            // border: 1.5px solid #FF0000;
-            // color: #FF0000;   
-            background-image: linear-gradient(-20deg, red, #ff5c5c, red);
-            color: $colorWhite;
+            margin-bottom: 10px;   
+            // background-image: linear-gradient(-20deg, red, #ff5c5c, red);
+            // color: $colorWhite;
+            transition: 0.1s background-color ease-in-out;
+            color: red;
         }
         .endcallButton svg{
             margin-right: 10px;
         }
         .endcallButton:hover { 
-            background-image: linear-gradient(150deg, red, #ff4b4b, red);
+            // background-image: linear-gradient(150deg, red, #ff4b4b, red);
+            background-color: rgb(255, 235, 235);
         }
 
         .endcallButton2 {  
@@ -82,13 +84,17 @@
         }
 
         .leavecallButton{
-            color: $sidebarIconDark;
+            // color: $sidebarIconDark;
+            transition: 0.1s background-image ease-in-out;
+            background-image: linear-gradient(-20deg, $colorPrimary, #7966FA, #7966FA);
+            color: $colorWhite;
         }
         .leavecallButton svg{
             margin-right: 10px;
         }
         .leavecallButton:hover{
-            background-color: #ece9ff;
+            // background-color: #ece9ff;
+            background-image: linear-gradient(150deg, $colorPrimary, #6b54ff, #7966FA);
         }
     }
 
