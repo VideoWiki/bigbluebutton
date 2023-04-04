@@ -104,7 +104,7 @@ class ExternalVideoModal extends Component {
     );
   }
 
-  stopExternalVideo(){
+  stopExternalVideo() {
     ExternalVideoService.stopWatching()
     console.log("stoped")
   }
@@ -119,45 +119,47 @@ class ExternalVideoModal extends Component {
         {/* <header data-test="videoModalHeader" className={styles.header}>
           <h3 className={styles.title}>{intl.formatMessage(intlMessages.title)}</h3>
         </header> */}
-        <h3>{intl.formatMessage(intlMessages.sharevideoTitleLabel)}</h3>
+        <div className={styles.shareVidTitle}>
+          <h3>{intl.formatMessage(intlMessages.sharevideoTitleLabel)}</h3>
+        </div>
 
-        <div className={styles.content}>
-          <div className={styles.videoUrl}>
-            <h4>{intl.formatMessage(intlMessages.input)}</h4>
-            <label htmlFor="video-modal-input">
-              <input
-                id="video-modal-input"
-                onChange={this.updateVideoUrlHandler}
-                name="video-modal-input"
-                placeholder={intl.formatMessage(intlMessages.urlInput)}
-                disabled={sharing}
-                aria-describedby="exernal-video-note"
-              />
-            </label>
+        <div className={styles.shareVidDiv}>
+          <div className={styles.content}>
+            <div className={styles.videoUrl}>
+              <h4>{intl.formatMessage(intlMessages.input)}</h4>
+              <label htmlFor="video-modal-input">
+                <input
+                  id="video-modal-input"
+                  onChange={this.updateVideoUrlHandler}
+                  name="video-modal-input"
+                  placeholder={intl.formatMessage(intlMessages.urlInput)}
+                  disabled={sharing}
+                  aria-describedby="exernal-video-note"
+                />
+              </label>
 
+            </div>
+            {
+              Service.isSharingVideo() ?
+                <button className={styles.startBtn} onClick={this.stopExternalVideo}>
+                  {intl.formatMessage(intlMessages.stop)}
+                </button>
+                :
+                <button
+                  className={styles.startBtn}
+                  // label={intl.formatMessage(intlMessages.start)}
+                  onClick={this.startWatchingHandler}
+                  disabled={startDisabled}
+                >{intl.formatMessage(intlMessages.sharenowLabel)}</button>
+            }
+
+            <div className={styles.externalVideoNote} id="external-video-note">
+              {intl.formatMessage(intlMessages.note)}
+            </div>
+            <div>
+              {this.renderUrlError()}
+            </div>
           </div>
-          {
-            Service.isSharingVideo() ?
-              <button className={styles.startBtn} onClick={this.stopExternalVideo}>
-                {intl.formatMessage(intlMessages.stop)}
-              </button>
-               :
-              <button
-                className={styles.startBtn}
-                // label={intl.formatMessage(intlMessages.start)}
-                onClick={this.startWatchingHandler}
-                disabled={startDisabled}
-              >{intl.formatMessage(intlMessages.sharenowLabel)}</button>
-          }
-
-          <div className={styles.externalVideoNote} id="external-video-note">
-            {intl.formatMessage(intlMessages.note)}
-          </div>
-          <div>
-            {this.renderUrlError()}
-          </div>
-
-
         </div>
       </div>
       // <Modal

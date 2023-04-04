@@ -660,7 +660,7 @@ class UserDropdown extends PureComponent {
 
     const contents = (
       <div>
-        <UserlistCard {...this.props}/>
+        <UserlistCard {...this.props} />
       </div>
       // <div
       //   data-test={isMe(user.userId) ? 'userListItemCurrent' : 'userListItem'}
@@ -689,25 +689,28 @@ class UserDropdown extends PureComponent {
     if (!actions.length) return contents;
     return (
       <DropMenu
-          trigger={
-            (
-              <div
-                tabIndex={-1}
-                onClick={() => this.setState({ selected: true })}
-                className={cx(userItemContentsStyle)}
-                style={{ width: '100%', marginLeft: '.5rem' }}
-                onKeyPress={() => {}}
-                role="button"
-              >
-                {contents}
-              </div>
-            )
-          }
-          actions={actions}
-          selectedEmoji={user.emoji}
-          onCloseCallback={() => this.setState({ selected: false, showNestedOptions: false })}
+        trigger={
+          (
+            <div
+              tabIndex={-1}
+              onClick={() => this.setState({ selected: true })}
+              className={cx(userItemContentsStyle)}
+              style={{
+                width: '100%',
+                // marginLeft: '.5rem'
+              }}
+              onKeyPress={() => { }}
+              role="button"
+            >
+              {contents}
+            </div>
+          )
+        }
+        actions={actions}
+        selectedEmoji={user.emoji}
+        onCloseCallback={() => this.setState({ selected: false, showNestedOptions: false })}
       />
-        
+
       // <BBBMenu
       //   trigger={
       //     (

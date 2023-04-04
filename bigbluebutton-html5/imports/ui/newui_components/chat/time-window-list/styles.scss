@@ -22,7 +22,8 @@
     padding-left: var(--md-padding-y);
     margin-left: calc(-1 * var(--md-padding-x));
   }
-  height: calc(100vh - 162.72px);
+  // height: calc(100vh - 162.72px);
+  height: calc(100vh - (150px + (2 * var(--bars-padding))));
   // height: 75vh;
 }
 
@@ -47,7 +48,8 @@
     padding-left: var(--md-padding-y);
     margin-left: calc(-1 * var(--md-padding-x));
   }
-  height: calc(100vh - 158.72px);
+  height: calc(100vh - (146px + (2 * var(--bars-padding))));
+  // height: calc(100vh - 158.72px);
 }
 
 

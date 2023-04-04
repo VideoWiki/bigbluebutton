@@ -153,14 +153,14 @@
   width: 350px;
 }
 .shareUrlIcon{
-  height: 42px;
-  width: 42px;
+  height: 44px;
+  width: 44px;
   background: #FFFFFF;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 8px;
+  margin-left: var(--bars-padding);
   cursor: pointer;
   position: relative;
 }
@@ -232,10 +232,11 @@
 }
 
 .chatHeader {
-  height: auto;
-  padding: 8px;
+  // height: auto;
+  margin: var(--bars-padding);
   display: flex;
   align-items: center;
+  height: 44px;
 }
 .chatHeaderWrapper{
   width: calc(350px - 68px);

@@ -197,14 +197,15 @@
   padding: 10px;
   border-radius: 12px;
   outline: none;
-}
 
-.createBox h3 {
-  background-color: #FBFBFC;
-  border: 1px solid #EBEDF0;
-  box-sizing: border-box;
-  border-radius: 6px;
-  margin-bottom: 15px;
+  h3 {
+    background-color: #FBFBFC;
+    border: 1px solid #EBEDF0;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    color: var(--color-tip-bg);
+  }
 }
 
 .pollBar1 {

@@ -809,7 +809,7 @@ class PresentationUploader extends Component {
           <div className={styles.presentItem1}>
             <span>{item.filename}</span>
           </div>
-          <div className={styles.presentItem1}>
+          <div className={styles.presentItem2}>
             {allowDownloadable ? (
               <Button
                 disabled={disableActions}
@@ -1086,7 +1086,9 @@ class PresentationUploader extends Component {
     return (
       <>
         <div className={styles.extPresentationDiv}>
-          <h3>{intl.formatMessage(intlMessages.title)}</h3>
+          <div className={styles.extPreTitle}>
+            <h3>{intl.formatMessage(intlMessages.title)}</h3>
+          </div>
 
           <div className={styles.presentationWrapper}>
             <div className={styles.content}>

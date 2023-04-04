@@ -107,26 +107,31 @@ iframe {
   border-style: none;
   border-bottom: 1px solid var(--color-gray-lightest);
   width: 100%;
-  height: calc(100% - 2.5rem);
+  // height: calc(100% - 2.5rem);
+  height: 100%;
   border-radius: 12px;
 }
 
 .noteBox {
   height: 100%;
 }
+.noteboxHeading {
+  margin: var(--bars-padding);
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
 .noteboxHeading h3{
   font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  line-height: 20px;
-  padding: 0px;
-  margin: 0px;
-  margin-bottom: 20px;
 }
 .noteboxWrapper{
-  padding: 1.5rem;
-  height: 100%;
+  // padding: 1.5rem;
+  padding: 0 var(--bars-padding);
+  // height: 100%;
+  height: calc(100vh - (44px + (2 * var(--bars-padding))));
 }
 .noteboxBottom{
   height: 100%;

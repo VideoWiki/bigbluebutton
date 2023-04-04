@@ -3,6 +3,7 @@
 @import "/imports/ui/stylesheets/mixins/focus";
 @import "/imports/ui/stylesheets/mixins/_indicators";
 @import "/imports/ui/stylesheets/variables/placeholders";
+@import "/imports/ui/stylesheets/variables/breakpoints";
 @import "/imports/ui/newui_components/css/variables.scss";
 
 .content {
@@ -213,8 +214,9 @@
 }
 
 .userListHeader{
-  padding: 0px 25px;
-  height: 55px;
+  height: 44px;
+  margin: var(--bars-padding);
+  // height: 55px;
   display: flex;
   align-items: center;
 }

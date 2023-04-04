@@ -6,6 +6,7 @@
 .tabs {
   @extend %flex-row;
   justify-content: flex-start;
+
   @include mq($small-only) {
     width: 100%;
     flex-flow: column;
@@ -32,7 +33,7 @@
   font-size: var(--font-size-large);
 
   [dir="rtl"] & {
-     margin: 0 0 0 .5rem;
+    margin: 0 0 0 .5rem;
   }
 }
 
@@ -50,19 +51,21 @@
   align-items: center;
   flex-grow: 0;
   min-width: 0;
-  & > span {
+
+  &>span {
     @extend %text-elipsis;
   }
 
   @include mq($small-only) {
     max-width: 100%;
     margin: 0 var(--sm-padding-x) 0 0;
-    & > .icon {
+
+    &>.icon {
       display: none;
     }
 
     [dir="rtl"] & {
-       margin: 0 0 0 var(--sm-padding-x);
+      margin: 0 0 0 var(--sm-padding-x);
     }
   }
 }
@@ -72,7 +75,7 @@
   background-color: var(--color-primary);
   font-weight: bold;
 
-  & > .icon {
+  &>.icon {
     color: var(--color-white);
   }
 }
@@ -98,21 +101,28 @@
   display: block;
 }
 
-.settingWrapper h3{
-  font-family: $fontPrimary;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
-  padding: 0px;
-  margin: 0px;
-  padding: 20px;
+.settingWrapper {
+
+  .settingBarTitle {
+    height: 44px;
+    margin: var(--bars-padding);
+    display: flex;
+    align-items: center;
+
+    h3 {
+      font-family: $fontPrimary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+    }
+  }
 }
-.settingCardWrapper{
-  height: calc(100vh - 60px);
+
+.settingCardWrapper {
+  // height: calc(100vh - 60px);
+  height: calc(100vh - (44px + (2 * var(--bars-padding))));
   @include scrollbox-vertical(var(--user-list-bg));
-  // overflow-y: scroll;
-  padding: 5px 20px;
+  padding: 0 var(--bars-padding);
 }
 
 .toggleLabel {
@@ -123,7 +133,7 @@
   }
 }
 
-.settingCard{
+.settingCard {
   width: 100%;
   background: $colorWhite;
   border-radius: 12px;
@@ -138,7 +148,7 @@
   font-size: 1em !important;
 }
 
-.settingHeader h4{
+.settingHeader h4 {
   font-family: $fontPrimary;
   font-style: normal;
   font-weight: 600;
@@ -149,7 +159,7 @@
   margin-left: 14px;
 }
 
-.settingHeader{
+.settingHeader {
   display: flex;
   align-items: center;
   padding-bottom: 19px;
@@ -157,7 +167,7 @@
   justify-content: space-between;
 }
 
-.settingHeadMain{
+.settingHeadMain {
   display: flex;
   align-items: center;
 }

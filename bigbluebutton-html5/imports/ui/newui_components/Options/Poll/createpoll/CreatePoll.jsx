@@ -278,7 +278,7 @@ function CreatePoll(props) {
     if (question.length == 0) {
       setState({ ...state, hasFieldError: true })
       return false;
-    }else{
+    } else {
       setState({ ...state, hasFieldError: false })
     }
 
@@ -286,7 +286,7 @@ function CreatePoll(props) {
       if (optList[i].val.length == 0) {
         setState({ ...state, hasFieldError: true })
         return false;
-      }else{
+      } else {
         setState({ ...state, hasFieldError: false })
       }
     }
@@ -340,12 +340,14 @@ function CreatePoll(props) {
 
   const renderPollOptions = () => {
     const { intl } = props;
-    const { isQuesValid, isOptionsValid, optList, question} = state;
+    const { isQuesValid, isOptionsValid, optList, question } = state;
 
     return (
       <div className="createClass">
+        <div className={styles.pollTitleDiv}>
+          <h3 className={styles.createPollTitle}>{intl.formatMessage(intlMessages.createpollTitle)}</h3>
+        </div>
         <div className={styles.createClassWrapper}>
-          <h1>{intl.formatMessage(intlMessages.createpollTitle)}</h1>
           <div className={styles.createBox}>
             <h3>{intl.formatMessage(intlMessages.askquesLabel)}</h3>
             <input className={styles.quesInput} onChange={handleTextareaChange} type="text" placeholder={intl.formatMessage(intlMessages.quesplaceholderLabel)} value={question} />

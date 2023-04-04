@@ -5,11 +5,11 @@
 
 .panel {
   // background-color: var(--color-white);
-  padding:
-    var(--md-padding-x)
-    var(--md-padding-y)
-    var(--md-padding-x)
-    var(--md-padding-x);
+  // padding:
+  //   var(--md-padding-x)
+  //   var(--md-padding-y)
+  //   var(--md-padding-x)
+  //   var(--md-padding-x);
 
   display: flex;
   flex-grow: 1;
@@ -28,11 +28,13 @@
 
 .header {
   position: relative;
-  top: var(--poll-header-offset);
+  // top: var(--poll-header-offset);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: var(--bars-padding);
+  height: 44px;
 }
 
 .title {
@@ -48,12 +50,14 @@
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  line-height: 20px;
+  // line-height: 20px;
 }
 .scrollableArea {
   overflow-y: auto;
-  padding-right: 0.25rem;
-  // @include scrollbox-vertical();
+  padding: 0 var(--bars-padding);
+  height: calc(100vh - (44px + (2 * var(--bars-padding))));
+  // padding-right: 0.25rem;
+  @include scrollbox-vertical();
 }
 
 .hideBtn {

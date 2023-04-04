@@ -10,30 +10,48 @@
 }
 
 .createClassWrapper{
-    padding: 20px
+    // padding: 20px;
+    max-height: calc(100vh - (44px + (2 * var(--bars-padding))));
+    padding: 0 var(--bars-padding);
 }
 
-.createClassWrapper h1 {
-    font-family: $fontPrimary;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 20px;
-    padding-bottom: 20px;
+.pollTitleDiv {
+    height: 44px;
+    margin: var(--bars-padding);
+    display: flex;
+    align-items: center;
+
+    .createPollTitle {
+        font-family: $fontPrimary;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        // line-height: 20px;
+        // padding-bottom: 20px;
+    }
 }
+
 .createBox{
     background-color: $colorWhite;
-    padding: 15px;
+    padding: 20px;
     border-radius: 12px;
     outline: none;
-}
 
-.createBox input {
-    background-color: #FBFBFC;
-    border: 1px solid #EBEDF0;
-    box-sizing: border-box;
-    border-radius: 6px;
-    margin-bottom: 15px;
+    h3 {
+        margin-top: 0px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--color-tip-bg);
+        margin-bottom: 20px;
+    }
+
+    input {
+        background-color: #FBFBFC;
+        border: 1px solid #EBEDF0;
+        box-sizing: border-box;
+        border-radius: 6px;
+        margin-bottom: 15px;
+    }
 }
 
 .quesInput{

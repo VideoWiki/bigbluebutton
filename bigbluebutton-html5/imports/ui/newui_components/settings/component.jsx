@@ -83,7 +83,7 @@ const intlMessages = defineMessages({
 
   settingsTitleLabel: {
     id: 'app.settings.titleLabel',
-    description:'Settings title label'
+    description: 'Settings title label'
   },
   applicationTitleLabel: {
     id: 'app.submenu.application.applicationSectionTitle',
@@ -91,19 +91,19 @@ const intlMessages = defineMessages({
   },
   notificationTitlelabel: {
     id: 'app.settings.notificationTab.label',
-    description:'Notification Title Label'
+    description: 'Notification Title Label'
   },
   datasavingsTitlelabel: {
     id: 'app.settings.datasavingsTab.label',
-    description:'Data Savings Title Label'
+    description: 'Data Savings Title Label'
   },
   guestpolicyTitlelabel: {
     id: 'app.userList.userOptions.guestPolicyLabel',
-    description:'Guest Policy Title Label'
+    description: 'Guest Policy Title Label'
   },
   lockviewersTitlelabel: {
     id: 'app.lock-viewers.title',
-    description:'Lock Viewers Title Label'
+    description: 'Lock Viewers Title Label'
   },
 });
 
@@ -159,7 +159,7 @@ class Settings extends Component {
       selectedTab: 0,
       oldTab: 0,
     };
-    
+
     this.changeSetting = this.changeSetting.bind(this);
     this.updateSettings = props.updateSettings;
     this.handleUpdateSettings = this.handleUpdateSettings.bind(this);
@@ -305,7 +305,7 @@ class Settings extends Component {
       current,
       saved,
     } = this.state;
-    
+
     this.updateSettings(current, intl.formatMessage(intlMessages.savedAlertLabel));
     document.getElementsByTagName('html')[0].lang = current.application.locale;
     console.log("setting changed")
@@ -334,8 +334,9 @@ class Settings extends Component {
     return (
       <div>
         <div className={styles.settingWrapper}>
-          <h3>{intl.formatMessage(intlMessages.settingsTitleLabel)}</h3>
-
+          <div className={styles.settingBarTitle}>
+            <h3>{intl.formatMessage(intlMessages.settingsTitleLabel)}</h3>
+          </div>
           <div className={styles.settingCardWrapper}>
             <div className={styles.settingCard} style={selectedTab == 1 ? { height: 'auto' } : { height: '70px' }}>
               <div className={styles.settingHeader} onClick={(e) => { this.handleSelectTab(1) }}>

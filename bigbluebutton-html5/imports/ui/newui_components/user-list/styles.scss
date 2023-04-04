@@ -81,7 +81,8 @@
 
 .messages {
   // max-height: 30vh;
-  height: calc(100vh - 62.72px);
+  height: calc(100vh - (44px + (2 * var(--bars-padding))));
+  // height: calc(100vh - 62.72px);
 }
 
 .participants {

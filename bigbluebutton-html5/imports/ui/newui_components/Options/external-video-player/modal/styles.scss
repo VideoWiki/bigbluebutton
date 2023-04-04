@@ -10,16 +10,20 @@
   line-height: 2rem;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px 24px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-  background: #FFFFFF;
-  border-radius: 12px;
+.shareVidDiv {
+  padding: 0 var(--bars-padding);
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    // margin-right: auto;
+    // margin-left: auto;
+    // width: 100%;
+    background: #FFFFFF;
+    border-radius: 12px;
+  }
 }
 
 .videoOptions {
@@ -103,7 +107,7 @@
 }
 
 .videoUrl {
-  margin: 0 var(--border-size) 0 var(--border-size);
+  // margin: 0 var(--border-size) 0 var(--border-size);
 
   label {
     display: block;
@@ -119,8 +123,13 @@
     width: 100%;
     font-family: inherit;
     font-weight: inherit;
-    border: 1px solid var(--color-gray-lighter);
-    border-radius: var(--border-radius);
+    // border: 1px solid var(--color-gray-lighter);
+    // border-radius: var(--border-radius);
+
+    background: #FBFBFC;
+    border: 1px solid #EBEDF0;
+    box-sizing: border-box;
+    border-radius: 6px;
 
     :global(.animationsEnabled) & {
       transition: box-shadow .2s;
@@ -129,6 +138,16 @@
 
   span {
     font-weight: 600;
+  }
+
+  h4{
+    font-family: $fontPrimary;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--color-tip-bg);
+    margin: 0;
+    margin-bottom: 20px;
   }
 }
 
@@ -152,36 +171,18 @@
   color: #888888;
 }
 
-.extPlayerDiv {
-  padding: 20px;
-}
-.extPlayerDiv h3{
-  font-family: $fontPrimary;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
-  padding: 0px;
-  margin: 0px;
-  margin-bottom: 20px;
-}
+.shareVidTitle {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  margin: var(--bars-padding);
 
-.videoUrl h4{
-  font-family: $fontPrimary;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 22px;
-  color: #000000;
-  margin: 0;
-  margin-bottom: 15px;
-}
-
-.videoUrl input {
-  background: #FBFBFC;
-  border: 1px solid #EBEDF0;
-  box-sizing: border-box;
-  border-radius: 6px;
+  h3 {
+    font-family: $fontPrimary;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+  }
 }
 
 .startBtn {

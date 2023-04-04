@@ -76,10 +76,10 @@ const Note = ({
         </div>
       </header> */}
       <div className={styles.noteBox}>
+        <div className={styles.noteboxHeading}>
+          <h3>{intl.formatMessage(intlMessages.title)}</h3>
+        </div>
         <div className={styles.noteboxWrapper}>
-          <div className={styles.noteboxHeading}>
-            <h3>{intl.formatMessage(intlMessages.title)}</h3>
-          </div>
           <div className={styles.noteboxBottom}>
             <iframe
               title="etherpad"

@@ -11,27 +11,40 @@
   --iconLineHeight: 2.35rem;
   --iconPadding-md: .65rem;
   --fileLineWidth: 16.75rem;
-  --itemActionsWidth:  68px; // size of the 2 icons (check/trash)
+  --itemActionsWidth: 68px; // size of the 2 icons (check/trash)
   --uploadListHeight: 30vh;
   --modalInnerWidth: 40rem;
 }
 
 @keyframes bar-stripes {
-  from { background-position: 1rem 0; }
-  to { background-position: 0 0; }
+  from {
+    background-position: 1rem 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
 }
 
 @keyframes rotate {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .visuallyHidden {
   position: absolute;
   overflow: hidden;
   clip: rect(0 0 0 0);
-  height: 1px; width: 1px;
-  margin: -1px; padding: 0; border: 0;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
 }
 
 .fileList {
@@ -49,17 +62,16 @@
   border-spacing: 0;
   border-collapse: collapse;
 
-  > thead {
-  }
+  >thead {}
 
-  > tbody {
+  >tbody {
     text-align: left;
 
     [dir="rtl"] & {
       text-align: right;
     }
 
-    > tr {
+    >tr {
       border-bottom: 1px solid var(--color-gray-light);
 
       &:last-child {
@@ -82,8 +94,7 @@
         color: var(--color-gray-dark);
       }
 
-      td {
-      }
+      td {}
     }
   }
 }
@@ -105,10 +116,10 @@
 }
 
 .notDownloadable {
-	  min-width: 48px;
+  min-width: 48px;
 }
 
-.tableItemIcon > i {
+.tableItemIcon>i {
   font-size: 1.35rem;
 }
 
@@ -122,7 +133,7 @@
     visibility: hidden;
   }
 
-  > span {
+  >span {
     @extend %text-elipsis;
     position: absolute;
     left: 0;
@@ -170,14 +181,13 @@
 
 .tableItemAnimated {
   background-image: linear-gradient(45deg,
-	rgba(255, 255, 255, .15) 25%,
-	transparent 25%,
-	transparent 50%,
-	rgba(255, 255, 255, .15) 50%,
-	rgba(255, 255, 255, .15) 75%,
-	transparent 75%,
-	transparent
-  );
+      rgba(255, 255, 255, .15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, .15) 50%,
+      rgba(255, 255, 255, .15) 75%,
+      transparent 75%,
+      transparent);
   background-size: 1rem 1rem;
 
   :global(.animationsEnabled) & {
@@ -186,14 +196,15 @@
 }
 
 .itemAction {
-  margin-left: var(--sm-padding-x);
-  div > i {
+  margin-right: var(--sm-padding-x);
+
+  div>i {
     margin-top: .25rem;
   }
 }
 
 .itemAction,
-.itemAction > i {
+.itemAction>i {
   display: inline-block;
   border: 0;
   background: transparent;
@@ -206,7 +217,8 @@
     transition: all .25s;
   }
 
-  :hover, :focus {
+  :hover,
+  :focus {
     padding: unset !important;
   }
 }
@@ -215,8 +227,8 @@
   background-color: transparent;
   border: 0 !important;
 
-  & > i:focus,
-  & > i:hover {
+  &>i:focus,
+  &>i:hover {
     color: var(--color-danger) !important;
   }
 
@@ -228,7 +240,7 @@
   }
 }
 
-.checked > i {
+.checked>i {
   color: var(--color-success);
 }
 
@@ -322,24 +334,25 @@
 
 .toastFileName,
 .fileName {
-    margin-left: var(--lg-padding-x);
-    top: var(--border-size-large);
-    height: 1rem;
-    width: auto;
-    position: relative;
-    text-align: left;
-    font-weight: var(--headings-font-weight);
+  margin-left: var(--lg-padding-x);
+  top: var(--border-size-large);
+  height: 1rem;
+  width: auto;
+  position: relative;
+  text-align: left;
+  font-weight: var(--headings-font-weight);
 
-    [dir="rtl"] & {
-      margin-right: var(--lg-padding-x);
-      margin-left: 0;
-      text-align: right;
-    }
+  [dir="rtl"] & {
+    margin-right: var(--lg-padding-x);
+    margin-left: 0;
+    text-align: right;
+  }
 }
 
 .fileIcon {
   width: 1%;
   padding-bottom: var(--iconPadding-md);
+
   i {
     position: relative;
     top: var(--border-size-large);
@@ -364,7 +377,7 @@
 
 .loading,
 .done,
-.err{
+.err {
   position: relative;
   width: var(--statusIconSize);
   height: var(--statusIconSize);
@@ -393,7 +406,7 @@
   bottom: var(--toast-md-margin);
   position: relative;
   left: var(--border-size-large);
-  
+
   [dir="rtl"] & {
     right: var(--border-size-large);
     left: 0;
@@ -404,10 +417,11 @@
   display: flex;
   flex-direction: row;
   width: var(--fileLineWidth);
-} 
+}
 
 .statusIcon {
   margin-left: auto;
+
   [dir="rtl"] & {
     margin-right: auto;
     margin-left: 0;
@@ -439,7 +453,7 @@
   max-width: 100%;
   padding-bottom: .75rem;
   overflow-y: auto;
-  
+
   @include mq($small-only) {
     padding-left: var(--statusInfoHeight);
     padding-right: var(--statusInfoHeight);
@@ -469,13 +483,13 @@
   // font-weight: normal;
 
   padding-top: var(--sm-padding-y);
-    font-family: $fontPrimary;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 24px;
-    letter-spacing: -0.02em;
-    color: #888888;
+  font-family: $fontPrimary;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  color: #888888;
 }
 
 .actionWrapper {
@@ -515,44 +529,60 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px 24px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
+  padding: 20px;
+  // margin-right: auto;
+  // margin-left: auto;
+  // width: 100%;
   background: #FFFFFF;
   border-radius: 12px;
 }
+
 .presentationWrapper {
-  height: calc(100vh - 60px);
+  // height: calc(100vh - 60px);
+  height: calc(100vh - (44px + (2 * var(--bars-padding))));
   @include scrollbox-vertical(var(--user-list-bg));
+  padding: 0 var(--bars-padding);
   // overflow-y: scroll;
-  padding: 5px 20px;
-}
-.extPresentationDiv h3{
-  font-family: $fontPrimary;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
-  margin: 0px;
-  padding: 20px;
-}
-.videoUrl h4{
-  font-family: $fontPrimary;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 22px;
-  color: #000000;
-  margin: 0;
-  margin-bottom: 15px;
+  // padding: 5px 20px;
 }
 
-.videoUrl input {
-  background: #FBFBFC;
-  border: 1px solid #EBEDF0;
-  box-sizing: border-box;
-  border-radius: 6px;
+.extPresentationDiv {
+
+  .extPreTitle {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    margin: var(--bars-padding);
+
+    h3 {
+      font-family: $fontPrimary;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      // line-height: 20px;
+      // margin: 0px;
+      // padding: 20px;
+    }
+  }
+}
+
+.videoUrl {
+  h4 {
+    font-family: $fontPrimary;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--color-tip-bg);
+    margin: 0;
+    margin-bottom: 20px;
+  }
+
+  input {
+    background: #FBFBFC;
+    border: 1px solid #EBEDF0;
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
 }
 
 .startBtn {
@@ -573,10 +603,12 @@
   transition: 0.2s ease;
   flex: 1;
 }
+
 .startBtn:hover {
   color: #ffffff;
   background-color: #000000;
 }
+
 .startBtn:disabled {
   cursor: not-allowed;
 }
@@ -587,7 +619,16 @@
   flex-direction: column;
 }
 
-.presentItem1{
+.presentItem1 {
+  display: flex;
+  align-items: center;
+
+  span {
+    font-family: Inter;
+    margin-bottom: 10px;
+  }
+}
+.presentItem2 {
   display: flex;
   align-items: center;
 }
@@ -596,7 +637,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px 24px;
+  padding: 20px;
   margin-right: auto;
   margin-left: auto;
   width: 100%;
@@ -605,9 +646,9 @@
   margin-top: 10px;
 }
 
-.inpRadio{
+.inpRadio {
   height: 20px;
   width: 20px;
-  margin-left: 0.75rem;
+  margin-right: var(--sm-padding-x);
   cursor: pointer;
 }

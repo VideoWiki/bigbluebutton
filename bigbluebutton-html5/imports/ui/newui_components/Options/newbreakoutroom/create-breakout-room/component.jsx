@@ -1182,7 +1182,7 @@ class BreakoutRoom extends PureComponent {
                     <label className={styles.mylabel}>Minutes</label>
                   </div>
                 </div>
-                <div className={styles.centerAlign}>
+                <div className={styles.brCheckBox}>
                   <div className={styles.Tick}>
                     <input type="checkbox"
                       id="freeJoinCheckbox"

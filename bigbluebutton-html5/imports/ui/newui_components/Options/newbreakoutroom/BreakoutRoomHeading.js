@@ -21,7 +21,7 @@ function BreakoutroomHeading(props)
     const {intl} = props;
     
     return (<div className={styles.BreakoutroomHeadingOuter}>
-        <div className={styles.BreakoutroomHeading}>{intl.formatMessage(intlMessages.breakoutRoomTitle)}</div>
+        <h3 className={styles.BreakoutroomHeading}>{intl.formatMessage(intlMessages.breakoutRoomTitle)}</h3>
         </div>);
 }
 BreakoutroomHeading.propTypes = propTypes;
