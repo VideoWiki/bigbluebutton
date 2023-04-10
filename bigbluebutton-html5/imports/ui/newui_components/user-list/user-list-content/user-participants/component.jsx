@@ -241,15 +241,27 @@ class UserParticipants extends Component {
             : <hr className={styles.separator} />
         } */}
         <div className={styles.userListHeader}>
-          <h3>{intl.formatMessage(intlMessages.usersTitle)} ({users.length})</h3>
-          {
-            !meetingIsBreakout &&
-            <div className={styles.shareUrlIcon} onClick={this.copyLink}><Share />
-              <div className={styles.sideTooltipWrapper}>
-                <div className={styles.sidebarTipArrow}></div>
-                <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
+          <div className={styles.userHeaderTitle}>
+            <h3>{intl.formatMessage(intlMessages.usersTitle)} ({users.length})</h3>
+            {
+              !meetingIsBreakout &&
+              <div className={styles.shareUrlIcon} onClick={this.copyLink}><Share />
+                <div className={styles.sideTooltipWrapper}>
+                  <div className={styles.sidebarTipArrow}></div>
+                  <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
+                </div>
               </div>
-            </div>
+            }
+          </div>
+          {currentUser.role === ROLE_MODERATOR
+            ? (
+              <UserOptionsContainer {...{
+                users,
+                clearAllEmojiStatus,
+                meetingIsBreakout,
+              }}
+              />
+            ) : null
           }
         </div>
 

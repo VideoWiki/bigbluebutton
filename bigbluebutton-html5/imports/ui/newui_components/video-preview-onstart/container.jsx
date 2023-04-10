@@ -5,6 +5,7 @@ import Service from './service';
 import VideoPreview from './component';
 import VideoService from '/imports/ui/components/video-provider/service';
 import AudioService from '/imports/ui/newui_components/audio-new/service.js'
+import AudioManager from '/imports/ui/services/audio-manager';
 
 const VideoPreviewContainer = (props) => <VideoPreview {...props} />;
 
@@ -32,4 +33,5 @@ export default withTracker(() => ({
   webcamDeviceId: Service.webcamDeviceId(),
   hasVideoStream: VideoService.hasVideoStream(),
   handleToggleMuteMicrophone: () => toggleMuteMicrophone(),
+  isMuted: () => AudioManager.isMuted,
 }))(VideoPreviewContainer);

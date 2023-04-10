@@ -66,8 +66,8 @@ class DropMenu extends React.Component {
 
     renderIcon(icon) {
         switch (icon) {
-            case "mute":
-                return <Micoff/>
+            // case "mute":
+            //     return <Micoff/>
             case "chat":
                 return <ChatIcon />
             case "presentation":

@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 
-.container{
+.container {
   display: flex;
   align-items: center;
   margin-bottom: var(--lg-padding-y);
@@ -24,7 +24,7 @@
   @include scrollbox-vertical(var(--user-list-bg));
 
   outline: none;
-  
+
   &:hover {
     @extend %highContrastOutline;
   }
@@ -44,8 +44,8 @@
 .virtulizedScrollableList {
   @include elementFocus(var(--list-item-bg-hover));
   @include scrollbox-vertical(var(--user-list-bg));
-  
-  > div {
+
+  >div {
     outline: none;
   }
 
@@ -68,6 +68,7 @@
   [dir="rtl"] & {
     margin: 0 var(--md-padding-y) 1px 0;
   }
+
   margin-left: 0;
   padding-top: 1px;
 }
@@ -96,24 +97,25 @@
   color: var(--color-gray-dark);
   background-color: var(--color-off-white);
 
-  [dir="rtl"]  & {
+  [dir="rtl"] & {
     padding-right: var(--lg-padding-y);
     padding-left: 0;
   }
 
-  > i {
+  >i {
     display: flex;
     font-size: 175%;
     color: var(--color-gray-light);
     flex: 0 0 2.2rem;
     margin-right: var(--sm-padding-x);
-    [dir="rtl"]  & {
+
+    [dir="rtl"] & {
       margin-right: 0;
       margin-left: var(--sm-padding-x);
     }
   }
 
-  > span {
+  >span {
     font-weight: 400;
     font-size: var(--font-size-small);
     color: var(--color-gray-dark);
@@ -148,6 +150,7 @@
   @extend %flex-column;
   justify-content: center;
   margin-left: auto;
+
   [dir="rtl"] & {
     margin-right: auto;
     margin-left: 0;
@@ -200,7 +203,7 @@
   font-size: var(--font-size-smaller);
   color: var(--color-gray);
 
-  > i {
+  >i {
     font-size: var(--font-size-xs);
   }
 }
@@ -209,27 +212,35 @@
   font-weight: 400;
   font-size: var(--font-size-small);
 }
-.mbSep{
+
+.mbSep {
   margin-bottom: 14px;
 }
 
-.userListHeader{
+.userListHeader {
   height: 44px;
   margin: var(--bars-padding);
   // height: 55px;
   display: flex;
   align-items: center;
-}
-.userListHeader h3{
-  font-family: $fontPrimary;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
-  color: $colorBlack;
+  justify-content: space-between;
+
+  .userHeaderTitle {
+    display: flex;
+    align-items: center;
+  }
+
+  h3 {
+    font-family: $fontPrimary;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 20px;
+    color: $colorBlack;
+  }
 }
 
-.shareUrlIcon{
+.shareUrlIcon {
   height: 35px;
   width: 35px;
   background: #FFFFFF;
@@ -247,7 +258,7 @@
     transition: 0.3s all ease-in-out;
     pointer-events: none;
 
-    .sidebarTooltip{
+    .sidebarTooltip {
       height: 23px;
       position: absolute;
       background-color: $tooltipBgColor;
@@ -262,7 +273,8 @@
       transition: all 0.2s ease;
       z-index: 999;
     }
-    .sidebarTipArrow{
+
+    .sidebarTipArrow {
       height: 8px;
       width: 20px;
       background-color: $tooltipBgColor;
@@ -272,6 +284,7 @@
       top: 15px;
       z-index: 999;
     }
+
     .sidebarTooltip p {
       font-family: $fontPrimary;
       font-style: normal;

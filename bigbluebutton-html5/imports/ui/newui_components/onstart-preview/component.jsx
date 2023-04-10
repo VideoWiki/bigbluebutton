@@ -21,6 +21,7 @@ import Micoff from "./icons/Micoff"
 import Webcamon from "./icons/Webcamon"
 import Webcamoff from "./icons/Webcamoff"
 import LoadAudioIcon from './icons/LoadAudioIcon';
+import Actions from './Actions';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -137,6 +138,8 @@ class AudioModal extends Component {
       content: null,
       hasError: false,
       errCode: null,
+      enableWebcam: false,
+      enableMic: false
     };
 
     this.handleGoToAudioOptions = this.handleGoToAudioOptions.bind(this);
@@ -148,6 +151,7 @@ class AudioModal extends Component {
     this.skipAudioOptions = this.skipAudioOptions.bind(this);
     this.handleToggMic = this.handleToggMic.bind(this);
     this.handleToggWebcam = this.handleToggWebcam.bind(this);
+    this.setInitialMicStatus = this.setInitialMicStatus.bind(this);
 
     this.contents = {
       echoTest: {
@@ -181,10 +185,8 @@ class AudioModal extends Component {
       listenOnlyMode,
       audioLocked,
       isUsingAudio,
-      enableWebcam,
-      enableMic
     } = this.props;
-
+    
     if (!isUsingAudio) {
       if (forceListenOnlyAttendee || audioLocked) return this.handleJoinListenOnly();
 
@@ -582,6 +584,12 @@ class AudioModal extends Component {
     });
   }
 
+  setInitialMicStatus(status){
+    this.setState({
+      enableMic: status,
+    });
+  }
+
   render() {
     const {
       intl,
@@ -589,7 +597,8 @@ class AudioModal extends Component {
       isIOSChrome,
       closeModal,
       isIE,
-      isConnected
+      isConnected,
+      isMuted
     } = this.props;
 
     const { content, enableWebcam, enableMic } = this.state;
@@ -646,14 +655,15 @@ class AudioModal extends Component {
                   </div>
                 </>
                 :
-                <div className={styles.selectorDiv}>
-                  <button className={enableMic ? styles.enableResource : null} onClick={this.handleToggMic}>
-                    {enableMic ? <Micon /> : <Micoff />}
-                  </button>
-                  <button className={enableWebcam ? styles.enableResource : null} onClick={this.handleToggWebcam}>
-                    {enableWebcam ? <Webcamon /> : <Webcamoff />}
-                  </button>
-                </div>
+                <Actions handleToggMic={this.handleToggMic} handleToggWebcam={this.handleToggWebcam} enableMic={enableMic} enableWebcam={enableWebcam} isMuted={isMuted} setInitialMicStatus={this.setInitialMicStatus}/>
+                // <div className={styles.selectorDiv}>
+                //   <button className={enableMic ? styles.enableResource : null} onClick={this.handleToggMic}>
+                //     {enableMic ? <Micon /> : <Micoff />}
+                //   </button>
+                //   <button className={enableWebcam ? styles.enableResource : null} onClick={this.handleToggWebcam}>
+                //     {enableWebcam ? <Webcamon /> : <Webcamoff />}
+                //   </button>
+                // </div>
             }
           </VideoPreviewContainer>
         </Modal>

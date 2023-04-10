@@ -13,6 +13,9 @@ import BBBMenu from '/imports/ui/components/menu/component';
 import { styles } from './styles';
 import { getUserNamesLink } from '/imports/ui/components/user-list/service';
 import Settings from '/imports/ui/services/settings';
+import DropMenu from '/imports/ui/newui_components/Drop-Menu/DropMenu';
+import Micoff from '../user-list-item/user-dropdown/icons/Micoff';
+import MoreIcon from './icons/MoreIcon';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -256,35 +259,35 @@ class UserOptions extends PureComponent {
           });
         }
 
-        this.menuItems.push({
-          key: this.lockId,
-          label: intl.formatMessage(intlMessages.lockViewersLabel),
-          // description: intl.formatMessage(intlMessages.lockViewersDesc),
-          onClick: () => mountModal(<LockViewersContainer />),
-          icon: 'lock',
-        });
+        // this.menuItems.push({
+        //   key: this.lockId,
+        //   label: intl.formatMessage(intlMessages.lockViewersLabel),
+        //   // description: intl.formatMessage(intlMessages.lockViewersDesc),
+        //   onClick: () => mountModal(<LockViewersContainer />),
+        //   icon: 'lock',
+        // });
 
-        if (dynamicGuestPolicy) {
-          this.menuItems.push({
-            key: this.guestPolicyId,
-            icon: 'user',
-            label: intl.formatMessage(intlMessages.guestPolicyLabel),
-            // description: intl.formatMessage(intlMessages.guestPolicyDesc),
-            onClick: () => mountModal(<GuestPolicyContainer />),
-            dataTest: 'guestPolicyLabel',
-          });
-        }
+        // if (dynamicGuestPolicy) {
+        //   this.menuItems.push({
+        //     key: this.guestPolicyId,
+        //     icon: 'user',
+        //     label: intl.formatMessage(intlMessages.guestPolicyLabel),
+        //     // description: intl.formatMessage(intlMessages.guestPolicyDesc),
+        //     onClick: () => mountModal(<GuestPolicyContainer />),
+        //     dataTest: 'guestPolicyLabel',
+        //   });
+        // }
       }
 
-      if (amIModerator) {
-        this.menuItems.push({
-          key: this.saveUsersNameId,
-          label: intl.formatMessage(intlMessages.saveUserNames),
-          // description: ,
-          onClick: this.onSaveUserNames,
-          icon: 'download',
-        });
-      }
+      // if (amIModerator) {
+      //   this.menuItems.push({
+      //     key: this.saveUsersNameId,
+      //     label: intl.formatMessage(intlMessages.saveUserNames),
+      //     // description: ,
+      //     onClick: this.onSaveUserNames,
+      //     icon: 'download',
+      //   });
+      // }
 
       this.menuItems.push({
         key: this.clearStatusId,
@@ -292,52 +295,52 @@ class UserOptions extends PureComponent {
         // description: intl.formatMessage(intlMessages.clearAllDesc),
         onClick: toggleStatus,
         icon: 'clear_status',
-        divider: true,
+        // divider: true,
       });
 
-      if (canCreateBreakout) {
-        this.menuItems.push({
-          key: this.createBreakoutId,
-          icon: 'rooms',
-          label: intl.formatMessage(intlMessages.createBreakoutRoom),
-          // description: intl.formatMessage(intlMessages.createBreakoutRoomDesc),
-          onClick: this.onCreateBreakouts,
-          dataTest: 'createBreakoutRooms',
-        });
-      }
+      // if (canCreateBreakout) {
+      //   this.menuItems.push({
+      //     key: this.createBreakoutId,
+      //     icon: 'rooms',
+      //     label: intl.formatMessage(intlMessages.createBreakoutRoom),
+      //     // description: intl.formatMessage(intlMessages.createBreakoutRoomDesc),
+      //     onClick: this.onCreateBreakouts,
+      //     dataTest: 'createBreakoutRooms',
+      //   });
+      // }
 
-      if (canInviteUsers) {
-        this.menuItems.push({
-          icon: 'rooms',
-          dataTest: 'inviteBreakoutRooms',
-          label: intl.formatMessage(intlMessages.invitationItem),
-          key: this.createBreakoutId,
-          onClick: this.onInvitationUsers,
-        });
-      }
+      // if (canInviteUsers) {
+      //   this.menuItems.push({
+      //     icon: 'rooms',
+      //     dataTest: 'inviteBreakoutRooms',
+      //     label: intl.formatMessage(intlMessages.invitationItem),
+      //     key: this.createBreakoutId,
+      //     onClick: this.onInvitationUsers,
+      //   });
+      // }
 
-      if (amIModerator && CaptionsService.isCaptionsEnabled()) {
-        this.menuItems.push({
-          icon: 'closed_caption',
-          label: intl.formatMessage(intlMessages.captionsLabel),
-          // description: intl.formatMessage(intlMessages.captionsDesc),
-          key: this.captionsId,
-          onClick: this.handleCaptionsClick,
-        });
-      }
-      if (amIModerator) {
-        if (learningDashboardEnabled === true) {
-          this.menuItems.push({
-            icon: 'multi_whiteboard',
-            iconRight: 'popout_window',
-            label: intl.formatMessage(intlMessages.learningDashboardLabel),
-            description: intl.formatMessage(intlMessages.learningDashboardDesc),
-            key: this.learningDashboardId,
-            onClick: () => { openLearningDashboardUrl(locale); },
-            dividerTop: true,
-          });
-        }
-      }
+      // if (amIModerator && CaptionsService.isCaptionsEnabled()) {
+      //   this.menuItems.push({
+      //     icon: 'closed_caption',
+      //     label: intl.formatMessage(intlMessages.captionsLabel),
+      //     // description: intl.formatMessage(intlMessages.captionsDesc),
+      //     key: this.captionsId,
+      //     onClick: this.handleCaptionsClick,
+      //   });
+      // }
+      // if (amIModerator) {
+      //   if (learningDashboardEnabled === true) {
+      //     this.menuItems.push({
+      //       icon: 'multi_whiteboard',
+      //       iconRight: 'popout_window',
+      //       label: intl.formatMessage(intlMessages.learningDashboardLabel),
+      //       description: intl.formatMessage(intlMessages.learningDashboardDesc),
+      //       key: this.learningDashboardId,
+      //       onClick: () => { openLearningDashboardUrl(locale); },
+      //       dividerTop: true,
+      //     });
+      //   }
+      // }
     }
 
     return this.menuItems;
@@ -347,14 +350,15 @@ class UserOptions extends PureComponent {
     const { intl } = this.props;
 
     return (
-      <BBBMenu
+      <DropMenu
         trigger={(
           <Button
             label={intl.formatMessage(intlMessages.optionsLabel)}
             data-test="manageUsers"
-            icon="settings"
+            // icon="settings"
+            customIcon={<MoreIcon/>}
             ghost
-            color="primary"
+            // color="primary"
             hideLabel
             className={styles.optionsButton}
             size="sm"

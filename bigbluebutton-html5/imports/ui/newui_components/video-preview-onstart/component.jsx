@@ -749,9 +749,15 @@ class VideoPreview extends Component {
   }
 
   handleMeetContinue() {
-    const { enableWebcam, enableMic, handleToggleMuteMicrophone } = this.props;
+    const { enableWebcam, enableMic, handleToggleMuteMicrophone, isMuted } = this.props;
     if (enableMic) {
-      handleToggleMuteMicrophone()
+      if (isMuted()) {
+        handleToggleMuteMicrophone()
+      }
+    } else {
+      if (!isMuted()) {
+        handleToggleMuteMicrophone()
+      }
     }
 
     if (enableWebcam) {
