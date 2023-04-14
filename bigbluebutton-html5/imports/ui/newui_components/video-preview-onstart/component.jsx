@@ -9,7 +9,7 @@ import logger from '/imports/startup/client/logger';
 import Modal from '/imports/ui/newui_components/modal/simple/component';
 import browserInfo from '/imports/utils/browserInfo';
 import cx from 'classnames';
-import PreviewService from '/imports/ui/components/video-preview/service';
+import PreviewService from './service';
 import VideoService from '/imports/ui/components/video-provider/service';
 import { styles } from './styles';
 import deviceInfo from '/imports/utils/deviceInfo';
@@ -195,6 +195,8 @@ class VideoPreview extends Component {
     this.handleVirtualBgSelected = this.handleVirtualBgSelected.bind(this);
     this.handleSaveConfig = this.handleSaveConfig.bind(this);
     this.handleMeetContinue = this.handleMeetContinue.bind(this);
+    this.onStartCamera = this.onStartCamera.bind(this);
+    this.startRetryTimer = this.startRetryTimer.bind(this);
 
     this._isMounted = false;
 
@@ -206,6 +208,8 @@ class VideoPreview extends Component {
       viewState: VIEW_STATES.finding,
       deviceError: null,
       previewError: null,
+      retryingPreview: false,
+      retryTimer: 10
     };
   }
 
@@ -221,9 +225,40 @@ class VideoPreview extends Component {
     const {
       webcamDeviceId,
     } = this.props;
+    this.onStartCamera(webcamDeviceId)
+  }
 
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+    clearInterval(this.interval);
+    const { webcamDeviceId } = this.state;
+    PreviewService.terminateCameraStream(this.currentVideoStream, webcamDeviceId);
+    this.cleanupStreamAndVideo();
+    this._isMounted = false;
+  }
+
+  startRetryTimer() {
+    if (this.state.previewError && !this.state.retryingPreview) {
+      this.setState({
+        retryingPreview: true,
+      });
+      this.timerId = setInterval(() => {
+        this.setState({ retryTimer: this.state.retryTimer - 1 });
+      }, 1000);
+      this.interval = setInterval(() => {
+        this.onStartCamera(this.props.webcamDeviceId);
+        // this.timerId = setInterval(() => {
+        //   this.setState({ retryTimer: this.state.retryTimer - 1 });
+        // }, 1000);
+      }, 10000);
+    }
+  }
+
+  onStartCamera(webcamDeviceId) {
+    this.setState({
+      retryTimer: 10
+    });
     this._isMounted = true;
-
     if (deviceInfo.hasMediaDevices) {
       navigator.mediaDevices.enumerateDevices().then((devices) => {
         VideoService.updateNumberOfDevices(devices);
@@ -250,7 +285,9 @@ class VideoPreview extends Component {
           this.getInitialCameraStream(webcams[0].deviceId)
             .then(async () => {
               // Late gUM resolve, stop.
-              if (!this._isMounted) return;
+              if (!this._isMounted) {
+                return;
+              }
 
               if (!areLabelled || !areIdentified) {
                 // If they aren't labelled or have nullish deviceIds, run
@@ -271,7 +308,6 @@ class VideoPreview extends Component {
                   }, 'enumerateDevices for relabelling failed');
                 }
               }
-
               this.setState({
                 availableWebcams: webcams,
                 viewState: VIEW_STATES.found,
@@ -294,13 +330,6 @@ class VideoPreview extends Component {
       const error = new Error('NotSupportedError');
       this.handleDeviceError('mount', error, ': navigator.mediaDevices unavailable');
     }
-  }
-
-  componentWillUnmount() {
-    const { webcamDeviceId } = this.state;
-    PreviewService.terminateCameraStream(this.currentVideoStream, webcamDeviceId);
-    this.cleanupStreamAndVideo();
-    this._isMounted = false;
   }
 
   handleSelectWebcam(event) {
@@ -431,6 +460,7 @@ class VideoPreview extends Component {
     this.setState({
       previewError: this.handleGUMError(error),
     });
+    this.startRetryTimer()
   }
 
   handleDeviceError(logCode, error, description) {
@@ -527,9 +557,12 @@ class VideoPreview extends Component {
       this.setState({
         isStartSharingDisabled: false,
       });
+      clearInterval(this.timerId);
+      clearInterval(this.interval);
     }).catch((error) => {
       // When video preview is set to skip, we need some way to bubble errors
       // up to users; so re-throw the error
+
       if (!PreviewService.getSkipVideoPreview()) {
         this.handlePreviewError('do_gum_preview', error, 'displaying final selection');
       } else {
@@ -685,13 +718,14 @@ class VideoPreview extends Component {
       viewState,
       deviceError,
       previewError,
+      retryTimer
     } = this.state;
 
     switch (viewState) {
       case VIEW_STATES.finding:
         return (
           <div className={styles.content}>
-            <div className={styles.videoCol}>
+            <div>
               <div className={styles.loadingLabel}>
                 <LoadCamIcon />
                 <span className={styles.findingLabel}>{intl.formatMessage(intlMessages.findingWebcamsLabel)}</span>
@@ -708,18 +742,21 @@ class VideoPreview extends Component {
       case VIEW_STATES.error:
         return (
           <div className={styles.content}>
-            <div className={styles.videoCol}><div>{deviceError}</div></div>
+            <div><div>{deviceError}</div></div>
           </div>
         );
       case VIEW_STATES.found:
       default:
         return (
           <div className={styles.content}>
-            <div className={styles.videoCol}>
+            <div>
               {
                 previewError
                   ? (
-                    <div>{previewError}</div>
+                    <>
+                      <div>{previewError}</div>
+                      <div>Retrying in {retryTimer}sec...</div>
+                    </>
                   )
                   : (
                     <>
