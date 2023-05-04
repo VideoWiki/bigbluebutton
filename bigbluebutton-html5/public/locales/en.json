@@ -960,6 +960,7 @@
     "app.createBreakoutRoom.roomLabels": "Rooms",
     "app.createBreakoutRoom.createRoom": "Create Room",
     "app.createBreakoutRoom.selectRandParticipantLabel": "Select random participant",
+    "app.createBreakoutRoom.noParticipantError": "Please make sure there must be atleast one user with Participant role",
 
     "app.settings.titleLabel": "Settings", 
     "app.settings.notificationTab.label": "Notification",

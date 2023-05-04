@@ -153,6 +153,10 @@ const intlMessages = defineMessages({
     id: 'app.createBreakoutRoom.selectRandParticipantLabel',
     description: 'Label for selecting a random user',
   },
+  noParticipantError: {
+    id: 'app.createBreakoutRoom.noParticipantError',
+    description: 'No participant error',
+  },
 });
 
 const BREAKOUT_LIM = Meteor.settings.public.app.breakouts.breakoutRoomLimit;
@@ -227,6 +231,7 @@ class BreakoutRoom extends PureComponent {
       durationIsValid: true,
       breakoutJoinedUsers: null,
       openRoom: 0,
+      noParticipant: false,
     };
 
     this.btnLevelId = _.uniqueId('btn-set-level-');
@@ -443,6 +448,9 @@ class BreakoutRoom extends PureComponent {
     // all users each run so that clicking the button again will reshuffle
     const viewers = users.filter((user) => !user.isModerator);
     // We want to keep assigning users until all viewers have been assigned a room
+    const noParticipant = viewers.length < 1;
+    this.setState({ noParticipant });
+
     while (viewers.length > 0) {
       // We cycle through the rooms picking one user for each room so that the rooms
       // will have an equal number of people in each one
@@ -992,7 +1000,8 @@ class BreakoutRoom extends PureComponent {
       numberOfRoomsIsValid,
       roomNameDuplicatedIsValid,
       roomNameEmptyIsValid,
-      durationIsValid
+      durationIsValid,
+      noParticipant
     } = this.state;
     return (
       <>
@@ -1023,7 +1032,13 @@ class BreakoutRoom extends PureComponent {
         {!durationIsValid
           && (
             <p className={styles.withError}>
-              {intl.formatMessage(intlMessages.minimumDurationWarnBreakout,{ 0: MIN_BREAKOUT_TIME },)}
+              {intl.formatMessage(intlMessages.minimumDurationWarnBreakout, { 0: MIN_BREAKOUT_TIME },)}
+            </p>
+          )}
+        {noParticipant
+          && (
+            <p className={styles.withError}>
+              {intl.formatMessage(intlMessages.noParticipantError)}
             </p>
           )}
       </>

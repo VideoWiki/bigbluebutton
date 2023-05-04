@@ -205,7 +205,7 @@ public:
   externalVideoPlayer:
     enabled: true
   kurento:
-    wsUrl: wss://dev.beta.room.video.wiki/bbb-webrtc-sfu
+    wsUrl: wss://beta.room.video.wiki/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -477,7 +477,7 @@ public:
     moderatorChatEmphasized: true
   note:
     enabled: true
-    url: https://dev.beta.room.video.wiki/pad
+    url: https://beta.room.video.wiki/pad
   layout:
     autoSwapLayout: true
     hidePresentation: false
@@ -763,7 +763,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: fe51f777965ba59153d0a79769cc65117ae72a6d4c0c6a1570bc5089cb61e2cc
+    apikey: sdXwYtKzArHrkXod65SULykPer88NhcXxCGIiiXjBhy5QTCzNkHgobIv4euagwr
     version: 1.2.13
     host: 127.0.0.1
     port: 9001

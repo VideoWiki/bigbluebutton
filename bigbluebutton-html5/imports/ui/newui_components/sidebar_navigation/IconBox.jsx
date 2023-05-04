@@ -72,15 +72,8 @@ const propTypes = {
 
 function IconBox(props) {
 
-    const { sidebarContent, icon, contextDispatch, intl, meetingIsBreakout } = props;
+    const { sidebarContent, icon, contextDispatch, intl, meetingIsBreakout, hasUnreadNotes } = props;
     const { sidebarContentPanel } = sidebarContent;
-    // const users = UserListService.getUsers();
-    // const [userCount, setUserCount] = useState(UserListService.getUsers().length);
-    // let userCount = UserListService.getUsers().length;
-    // useEffect(()=>{
-    //     setUserCount(UserListService.getUsers().length);
-    //     console.log("updateUser", UserListService.getUsers().length)
-    // },[UserListService.getUsers])
 
     function updateSelectedFeature() {
         if (sidebarContentPanel === icon) {
@@ -123,7 +116,6 @@ function IconBox(props) {
         return hasUnreadMessages;
     };
 
-    const hasUnreadNotes = NoteService.hasUnreadNotes(sidebarContentPanel);
     const hasUnreadMessages = checkUnreadMessages(
         { groupChatsMessages, groupChats, users: users[Auth.meetingID] },
     );
@@ -132,15 +124,16 @@ function IconBox(props) {
         <div onClick={() => updateSelectedFeature()} className={styles.sidebar}>
             {icon === "chat" &&
                 <div className={`${styles.IconBox} ${sidebarContentPanel === icon ? styles.IconFill : styles.IconUnfill}`}>
-                    <div className={hasUnreadMessages ? styles.btnWithNotificationDot : null}>
+                    {/* <div className={hasUnreadMessages ? styles.btnWithNotificationDot : null}> */}
                         <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}`}>
                             <Chat sidebarContentPanel={sidebarContentPanel} />
+                            <div className={hasUnreadMessages ? styles.btnWithNotificationDot : null}></div>
                             <div className={styles.sideTooltipWrapper}>
                                 <div className={styles.sidebarTipArrow}></div>
                                 <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.chatLabel)}</span></div>
                             </div>
                         </div>
-                    </div>
+                    {/* </div> */}
                 </div>
             }
             {icon === "user" &&
@@ -161,17 +154,18 @@ function IconBox(props) {
             }
             {icon === "document" &&
                 <div className={`${styles.IconBox} ${sidebarContentPanel === icon ? styles.IconFill : styles.IconUnfill}`}>
-                    <div className={hasUnreadNotes ? styles.btnWithNotificationDot : null}>
+                    {/* <div className={hasUnreadNotes ? styles.btnWithNotificationDot : null}> */}
                         <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}`}>
                             <Document
                                 sidebarContentPanel={sidebarContentPanel}
                             />
+                            <div className={hasUnreadNotes ? styles.btnWithNotificationDot : null}></div>
                             <div className={styles.sideTooltipWrapper}>
                                 <div className={styles.sidebarTipArrow}></div>
                                 <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.notesTitle)}</span></div>
                             </div>
                         </div>
-                    </div>
+                    {/* </div> */}
                 </div>
             }
             {icon === "newbreakoutroom" &&
@@ -271,7 +265,11 @@ function IconBox(props) {
 }
 // export default IconBox;
 IconBox.propTypes = propTypes;
-export default withTracker(() => {
+export default withTracker(({...props}) => {
+
+    const { sidebarContent } = props;
+    const { sidebarContentPanel } = sidebarContent;
+    const hasUnreadNotes = NoteService.hasUnreadNotes(sidebarContentPanel);
 
     const guestUsers = GuestUsers.find({
         meetingId: Auth.meetingID,
@@ -292,5 +290,6 @@ export default withTracker(() => {
         guestUsers,
         authenticatedUsers,
         users: UserListService.getUsers(),
+        hasUnreadNotes,
     });
 })(injectIntl(IconBox));
