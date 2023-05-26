@@ -126,6 +126,16 @@ class JoinHandler extends Component {
         meetingID, internalUserID, authToken, logoutUrl,
         fullname, externUserID, confname,
       } = resp;
+      Session.set('userRole', resp.role);
+      if(resp.metadata.length > 7){
+        Session.set('moderatorUrl', resp.metadata[8]['pmoderatorurl']);
+        Session.set('participantUrl', resp.metadata[7]['participanturl']);
+      }else{
+        Session.set('moderatorUrl', null);
+        Session.set('participantUrl', null);
+      }
+
+  
       return new Promise((resolve) => {
         Auth.set(
           meetingID, internalUserID, authToken, logoutUrl,

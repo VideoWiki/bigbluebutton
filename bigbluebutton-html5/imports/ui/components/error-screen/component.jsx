@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import AudioManager from '/imports/ui/services/audio-manager';
 import logger from '/imports/startup/client/logger';
+import Auth from '/imports/ui/services/auth';
 import { styles } from './styles';
 
 const intlMessages = defineMessages({
@@ -77,7 +78,17 @@ class ErrorScreen extends PureComponent {
     let errorMessageDescription = Session.get('errorMessageDescription');
 
     if (code === 403 && errorMessageDescription in intlMessages) {
-      errorMessageDescription = intl.formatMessage(intlMessages[errorMessageDescription]);
+      if (Session.get('participantUrl') == null) {
+        window.location.href = Auth._logoutURL
+        return
+      }else if(Session.get('userRole') == 'MODERATOR'){
+        window.location.href = Session.get('moderatorUrl')
+        return
+      }else {
+        window.location.href = Session.get('participantUrl')
+        return
+      }
+      // errorMessageDescription = intl.formatMessage(intlMessages[errorMessageDescription]);
     }
 
     return (

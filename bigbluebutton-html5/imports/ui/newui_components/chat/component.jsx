@@ -12,13 +12,17 @@ import TimeWindowList from './time-window-list/container';
 import ChatDropdownContainer from './chat-dropdown/container';
 import { PANELS, ACTIONS } from '../../components/layout/enums';
 import { UserSentMessageCollection } from './service';
+import { Session } from 'meteor/session';
+
 import Auth from '/imports/ui/services/auth';
 import Share from "./Icons/share";
 import Cross from './Icons/Cross';
 import BackIcon from './Icons/BackIcon';
 import { useState } from 'react';
 import PrivateMessageContainer from './private-window-list/container';
+import CopyPopupContainer from './copy-popup/container'
 import { useEffect } from 'react';
+import AddUser from './Icons/AddUser';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
@@ -86,6 +90,7 @@ const Chat = (props) => {
 
   const [publicChatActive, setPublicChatActive] = useState(true);
   const [isPrivateFormActive, setPrivateFormActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (chatID != PUBLIC_CHAT_ID) {
@@ -126,6 +131,14 @@ const Chat = (props) => {
     p.innerText = intl.formatMessage(intlMessages.copiedLabel);
   }
 
+
+  window.addEventListener('click', function (e) {
+    const ele = document.getElementById('addUser')
+    if (ele && !ele.contains(e.target) && !e.target.id) {
+      setIsOpen(false)
+    }
+  });
+
   return (
     <div
       data-test={chatID !== PUBLIC_CHAT_ID ? 'privateChat' : 'publicChat'}
@@ -146,11 +159,22 @@ const Chat = (props) => {
         </div>
         {
           !meetingIsBreakout &&
-          <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
-            <div className={styles.sideTooltipWrapper}>
-              <div className={styles.sidebarTipArrow}></div>
-              <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
-            </div>
+          <div className={styles.shareUrlIcon} id="addUser">
+            {
+              Session.get('participantUrl') == null ?
+                <div className={styles.copyLinkWrap} onClick={copyLink}>
+                  <Share />
+                  <div className={styles.sideTooltipWrapper} >
+                    <div className={styles.sidebarTipArrow}></div>
+                    <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
+                  </div>
+                </div>
+                :
+                <>
+                  <AddUser />
+                  <CopyPopupContainer />
+                </>
+            }
           </div>
         }
       </div>
@@ -296,7 +320,8 @@ const Chat = (props) => {
                     </div>
                     {
                       chatID == PUBLIC_CHAT_ID && !meetingIsBreakout &&
-                      <div className={styles.shareUrlIcon} onClick={copyLink}><Share />
+                      <div className={styles.shareUrlIcon} onClick={copyLink}>
+                        <Share />
                         <div className={styles.sideTooltipWrapper}>
                           <div className={styles.sidebarTipArrow}></div>
                           <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>

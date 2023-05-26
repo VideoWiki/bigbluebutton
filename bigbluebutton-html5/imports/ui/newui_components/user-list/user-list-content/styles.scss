@@ -240,9 +240,9 @@
   }
 }
 
-.shareUrlIcon {
-  height: 35px;
-  width: 35px;
+.shareUrlIcon1 {
+  height: 42px;
+  width: 42px;
   background: #FFFFFF;
   border-radius: 8px;
   display: flex;
@@ -252,51 +252,181 @@
   cursor: pointer;
   position: relative;
 
-  .sideTooltipWrapper {
-    opacity: 0;
-    z-index: 999;
-    transition: 0.3s all ease-in-out;
-    pointer-events: none;
+}
 
-    .sidebarTooltip {
-      height: 23px;
-      position: absolute;
-      background-color: $tooltipBgColor;
-      color: $tooltipColor;
-      top: 8px;
-      left: 45px;
-      border-radius: 100px;
-      padding: 5px 8px;
+// .shareUrlIcon1:hover .sideTooltipWrapper {
+//   opacity: 1;
+// }
+
+.sidebarTooltip {
+  height: 23px;
+  position: absolute;
+  background-color: $tooltipBgColor;
+  color: $tooltipColor;
+  top: 8px;
+  left: 45px;
+  border-radius: 100px;
+  padding: 5px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 999;
+}
+
+.sidebarTipArrow {
+  height: 8px;
+  width: 20px;
+  background-color: $tooltipBgColor;
+  border-radius: 100%;
+  position: absolute;
+  left: 40px;
+  top: 15px;
+  z-index: 999;
+}
+
+.sidebarTooltip p {
+  font-family: $fontPrimary;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+
+.copyLinkWrap {
+  display: flex;
+}
+
+.addUserPopup1 {
+  opacity: 0;
+  background-color: $colorWhite;
+  border-radius: 12px;
+  position: absolute;
+  left: -10px;
+  top: 47px;
+  // bottom: 35px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+  -webkit-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+  -moz-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: -10;
+
+  .addUserPopupWrapper {
+    // z-index: -10;
+    padding: 10px;
+    background-color: $colorWhite;
+    border-radius: 12px;
+
+    button {
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      z-index: 999;
-    }
-
-    .sidebarTipArrow {
-      height: 8px;
-      width: 20px;
-      background-color: $tooltipBgColor;
-      border-radius: 100%;
-      position: absolute;
-      left: 40px;
-      top: 15px;
-      z-index: 999;
-    }
-
-    .sidebarTooltip p {
+      width: 200px;
+      padding: 8px;
+      border: none;
+      outline: none;
+      background-color: $colorWhite;
+      cursor: pointer;
       font-family: $fontPrimary;
       font-style: normal;
       font-weight: 500;
-      font-size: 13px;
-      line-height: 26px;
-      color: rgba(255, 255, 255, 0.9);
-      white-space: nowrap;
+      border-radius: 8px;
+      color: $darkPink;
+      transition: 0.2s background-image ease-in-out;
+
+      svg {
+        margin-right: 5px;
+      }
+    }
+
+    .endcallButton {
+      margin-bottom: 10px;
+      // background-image: linear-gradient(-20deg, red, #ff5c5c, red);
+      // color: $colorWhite;
+      transition: 0.1s background-color ease-in-out;
+      color: red;
+    }
+
+    .endcallButton svg {
+      margin-right: 10px;
+    }
+
+    .endcallButton:hover {
+      // background-image: linear-gradient(150deg, red, #ff4b4b, red);
+      background-color: rgb(255, 235, 235);
+    }
+
+    .endcallButton2 {
+      background-image: linear-gradient(-20deg, red, #ff5c5c, red);
+      color: $colorWhite;
+    }
+
+    .endcallButton2 svg {
+      margin-right: 10px;
+    }
+
+    .endcallButton2:hover {
+      background-image: linear-gradient(150deg, red, #ff4b4b, red);
+    }
+
+    .leavecallButton {
+      // color: $sidebarIconDark;
+      transition: 0.1s background-image ease-in-out;
+      background-image: linear-gradient(-20deg, $colorPrimary, #7966FA, #7966FA);
+      color: $colorWhite;
+    }
+
+    .leavecallButton svg {
+      margin-right: 10px;
+    }
+
+    .leavecallButton:hover {
+      // background-color: #ece9ff;
+      background-image: linear-gradient(150deg, $colorPrimary, #6b54ff, #7966FA);
+    }
+  }
+
+  .popupArrow {
+    height: 25px;
+    width: 25px;
+    left: 20px;
+    background-color: $colorWhite;
+    transform: rotate(45deg);
+    position: absolute;
+    top: -5px;
+    z-index: -10;
+    box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    -webkit-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    -moz-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+.shareUrlIcon1:hover .addUserPopup1 {
+  opacity: 1;
+  top: 52px;
+  // bottom: 70px;
+  z-index: 999;
+
+  .addUserPopupWrapper {
+    z-index: 999;
+
+    .popupArrow {
+      z-index: 996;
     }
   }
 }
 
-.shareUrlIcon:hover .sideTooltipWrapper {
+.shareUrlIcon1 .sideTooltipWrapper {
+  opacity: 0;
+  z-index: 999;
+  transition: 0.3s all ease-in-out;
+  pointer-events: none;
+}
+
+.shareUrlIcon1:hover .sideTooltipWrapper {
   opacity: 1;
 }

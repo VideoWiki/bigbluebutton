@@ -15,6 +15,7 @@ import NoteContainer from './note/container'
 import SettingsMenuContainer from '/imports/ui/newui_components/settings/container';
 import PresentationUploader from './external-presentation/presentation-uploader/container'
 import WaitingUsersPanel from '../waiting-users/container';
+// import TeamDynamicsContainer from './teamdynamics/container'
 
 const Option_flow = (props) => {
     
@@ -29,6 +30,7 @@ const Option_flow = (props) => {
         {sidebarContentPanel === "newbreakoutroom" && <NewBreakoutRoom/>}
         {sidebarContentPanel === "document" && <NoteContainer/>}
         {sidebarContentPanel === "user" && <UsersContainer />}
+        {/* {sidebarContentPanel === "teamdynamics" && <TeamDynamicsContainer />} */}
         {sidebarContentPanel === "poll" && <PollContainer/>}
         {sidebarContentPanel === "video" && <ExtVideoPlayer/>}
         {sidebarContentPanel === "settings" && <SettingsMenuContainer />}

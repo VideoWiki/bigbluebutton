@@ -4,15 +4,15 @@
 @import "/imports/ui/newui_components/css/variables.scss";
 
 :root {
-  --toast-content-width: 98%; 
+  --toast-content-width: 98%;
   --toast-font-size: 80%;
-  --toast-content-margin-sm: .4rem; 
+  --toast-content-margin-sm: .4rem;
   --toast-content-margin-md: 1.4rem;
 }
 
 @mixin lineClamp($lineHeight: 1em, $lineCount: 1) {
   position: relative;
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: $lineHeight;
@@ -22,10 +22,7 @@
 .chat {
   background-color: var(--color-white);
   padding:
-    var(--md-padding-x)
-    var(--md-padding-y)
-    var(--md-padding-x)
-    var(--md-padding-x);
+    var(--md-padding-x) var(--md-padding-y) var(--md-padding-x) var(--md-padding-x);
 
   display: flex;
   flex-grow: 1;
@@ -37,7 +34,7 @@
   :global(.browser-chrome) & {
     transform: translateZ(0);
   }
-    
+
   @include mq($small-only) {
     transform: none !important;
   }
@@ -56,7 +53,8 @@
   @extend %text-elipsis;
   flex: 1;
 
-  & > button, button:hover {
+  &>button,
+  button:hover {
     max-width: var(--toast-content-width);
   }
 }
@@ -76,21 +74,21 @@
     padding-right: 0;
   }
 
-  > i {
-      color: var(--color-gray-dark);
-      font-size: smaller;
+  >i {
+    color: var(--color-gray-dark);
+    font-size: smaller;
 
-      [dir="rtl"] & {
-        -webkit-transform: scale(-1, 1);
-        -moz-transform: scale(-1, 1);
-        -ms-transform: scale(-1, 1);
-        -o-transform: scale(-1, 1);
-        transform: scale(-1, 1);
-      }
+    [dir="rtl"] & {
+      -webkit-transform: scale(-1, 1);
+      -moz-transform: scale(-1, 1);
+      -ms-transform: scale(-1, 1);
+      -o-transform: scale(-1, 1);
+      transform: scale(-1, 1);
+    }
   }
 
   &:hover {
-      background-color: var(--color-white);
+    background-color: var(--color-white);
   }
 }
 
@@ -124,35 +122,38 @@
   @include lineClamp(var(--font-size-small), 10);
 }
 
-.ChatHeading{
+.ChatHeading {
   font-family: $fontPrimary;
   font-style: normal;
   font-weight: 500 !important;
   font-size: 1.17em;
-  line-height: 20px;  
-  display:flex;
+  line-height: 20px;
+  display: flex;
   align-items: center;
 }
-.ChatHeadingOuter{
+
+.ChatHeadingOuter {
   padding: 4px 8px;
   // padding-left: 1rem;
   // position: fixed;
   width: 350px;
   // background: rgba(255, 255, 255, 0.2);
   // backdrop-filter: blur(35px);
-  z-index:999;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
 }
-.CustomInline{
+
+.CustomInline {
   display: flex;
   // justify-content: space-between;
 }
 
-.chatWidth { 
+.chatWidth {
   width: 350px;
 }
-.shareUrlIcon{
+
+.shareUrlIcon {
   height: 44px;
   width: 44px;
   background: #FFFFFF;
@@ -169,7 +170,7 @@
   }
 }
 
-.sidebarTooltip{
+.sidebarTooltip {
   height: 23px;
   position: absolute;
   background-color: $tooltipBgColor;
@@ -184,7 +185,8 @@
   transition: all 0.2s ease;
   z-index: 999;
 }
-.sidebarTipArrow{
+
+.sidebarTipArrow {
   height: 8px;
   width: 20px;
   background-color: $tooltipBgColor;
@@ -194,6 +196,7 @@
   top: 15px;
   z-index: 999;
 }
+
 .sidebarTooltip p {
   font-family: $fontPrimary;
   font-style: normal;
@@ -225,7 +228,8 @@
   width: 28px;
   height: 28px;
 }
-.cutButton button{
+
+.cutButton button {
   border: none;
   outline: none;
   background: none;
@@ -242,7 +246,8 @@
   align-items: center;
   height: 44px;
 }
-.chatHeaderWrapper{
+
+.chatHeaderWrapper {
   // width: calc(350px - 68px);
   width: 100%;
   background-color: #FFFFFF;
@@ -255,7 +260,7 @@
   line-height: 20px;
   letter-spacing: -0.24px;
   cursor: pointer;
-  
+
   .chTab {
     border-radius: 6px;
     padding: 6px;
@@ -264,12 +269,13 @@
     align-items: center;
     justify-content: center;
 
-    h3{
+    h3 {
       margin: 0;
       padding: 0;
       font-weight: 600 !important;
     }
-    span{
+
+    span {
       width: 20px;
       height: 20px;
       text-align: center;
@@ -279,12 +285,13 @@
       background-color: #E64980;
     }
   }
-  .chTabOn{
+
+  .chTabOn {
     color: #FFFFFF;
     background-color: $sidebarIconDark;
   }
 
-  .chTabOff{
+  .chTabOff {
     color: #000000;
   }
 }
@@ -293,6 +300,145 @@
   // height: calc(100vh - 168.72px);
   height: auto;
 }
+
 // .messageList1 {
 //   height: calc(100vh - 96.72px);
+// }
+.copyLinkWrap {
+  display: flex;
+}
+
+.addUserPopup {
+  opacity: 0;
+  background-color: $colorWhite;
+  border-radius: 12px;
+  position: absolute;
+  left: -10px;
+  top: 45px;
+  // bottom: 35px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+  -webkit-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+  -moz-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: -10;
+
+  .addUserPopupWrapper {
+    // z-index: -10;
+    padding: 10px;
+    background-color: $colorWhite;
+    border-radius: 12px;
+
+    button {
+      display: flex;
+      align-items: center;
+      width: 200px;
+      padding: 8px;
+      border: none;
+      outline: none;
+      background-color: $colorWhite;
+      cursor: pointer;
+      font-family: $fontPrimary;
+      font-style: normal;
+      font-weight: 500;
+      border-radius: 8px;
+      color: $darkPink;
+      transition: 0.2s background-image ease-in-out;
+
+      svg {
+        margin-right: 5px;
+      }
+    }
+
+    .endcallButton {
+      margin-bottom: 10px;
+      // background-image: linear-gradient(-20deg, red, #ff5c5c, red);
+      // color: $colorWhite;
+      transition: 0.1s background-color ease-in-out;
+      color: red;
+    }
+
+    .endcallButton svg {
+      margin-right: 10px;
+    }
+
+    .endcallButton:hover {
+      // background-image: linear-gradient(150deg, red, #ff4b4b, red);
+      background-color: rgb(255, 235, 235);
+    }
+
+    .endcallButton2 {
+      background-image: linear-gradient(-20deg, red, #ff5c5c, red);
+      color: $colorWhite;
+    }
+
+    .endcallButton2 svg {
+      margin-right: 10px;
+    }
+
+    .endcallButton2:hover {
+      background-image: linear-gradient(150deg, red, #ff4b4b, red);
+    }
+
+    .leavecallButton {
+      // color: $sidebarIconDark;
+      transition: 0.1s background-image ease-in-out;
+      background-image: linear-gradient(-20deg, $colorPrimary, #7966FA, #7966FA);
+      color: $colorWhite;
+    }
+
+    .leavecallButton svg {
+      margin-right: 10px;
+    }
+
+    .leavecallButton:hover {
+      // background-color: #ece9ff;
+      background-image: linear-gradient(150deg, $colorPrimary, #6b54ff, #7966FA);
+    }
+  }
+
+  .popupArrow {
+    height: 25px;
+    width: 25px;
+    left: 20px;
+    background-color: $colorWhite;
+    transform: rotate(45deg);
+    position: absolute;
+    top: -5px;
+    z-index: -10;
+    box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    -webkit-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    -moz-box-shadow: 0px 1px 10px -3px rgba(0, 0, 0, 0.49);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+.shareUrlIcon:hover .addUserPopup {
+  opacity: 1;
+  top: 55px;
+  // bottom: 70px;
+  z-index: 999;
+
+  .addUserPopupWrapper {
+    z-index: 999;
+
+    .popupArrow {
+      z-index: 996;
+    }
+  }
+}
+
+// .activeLeavePopup {
+//     opacity: 1;
+//     top: 65px;
+//     // bottom: 70px;
+//     z-index: 999;
+
+//     .addUserPopupWrapper {
+//         z-index: 999;
+//         .popupArrow{ 
+//             z-index: 996;
+//         }
+//     }
 // }

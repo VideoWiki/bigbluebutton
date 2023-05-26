@@ -15,6 +15,8 @@ import UserOptionsContainer from './user-options/container';
 import Settings from '/imports/ui/services/settings';
 import Share from '../../../chat/Icons/share';
 import Auth from '/imports/ui/services/auth';
+import AddUser from '../../../chat/Icons/AddUser';
+import CopyPopupContainer from '../copy-popup/container';
 
 const propTypes = {
   compact: PropTypes.bool,
@@ -72,8 +74,8 @@ class UserParticipants extends Component {
     this.changeState = this.changeState.bind(this);
     this.rowRenderer = this.rowRenderer.bind(this);
     this.handleClickSelectedUser = this.handleClickSelectedUser.bind(this);
-    this.selectEl = this.selectEl.bind(this);
     this.copyLink = this.copyLink.bind(this);
+    this.selectEl = this.selectEl.bind(this);
   }
 
   componentDidMount() {
@@ -174,14 +176,6 @@ class UserParticipants extends Component {
     );
   }
 
-  copyLink() {
-    const { intl } = this.props;
-    let joinUrl = Auth._logoutURL;
-    navigator.clipboard.writeText(joinUrl.substring(0, joinUrl.length - 6));
-    const p = document.getElementById("shareUrlIcon");
-    p.innerText = intl.formatMessage(intlMessages.copiedLabel);
-  }
-
   handleClickSelectedUser(event) {
     let selectedUser = null;
     if (event.path) {
@@ -199,6 +193,13 @@ class UserParticipants extends Component {
 
   changeState(ref) {
     this.setState({ selectedUser: ref });
+  }
+  copyLink() {
+    const { intl } = this.props;
+    let joinUrl = Auth._logoutURL;
+    navigator.clipboard.writeText(joinUrl.substring(0, joinUrl.length - 6));
+    const p = document.getElementById("shareUrlIcon");
+    p.innerText = intl.formatMessage(intlMessages.copiedLabel);
   }
 
   render() {
@@ -245,11 +246,22 @@ class UserParticipants extends Component {
             <h3>{intl.formatMessage(intlMessages.usersTitle)} ({users.length})</h3>
             {
               !meetingIsBreakout &&
-              <div className={styles.shareUrlIcon} onClick={this.copyLink}><Share />
-                <div className={styles.sideTooltipWrapper}>
-                  <div className={styles.sidebarTipArrow}></div>
-                  <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
-                </div>
+              <div className={styles.shareUrlIcon1}>
+                {
+                  Session.get('participantUrl') == null ?
+                    <div className={styles.copyLinkWrap}  onClick={this.copyLink}>
+                      <Share />
+                      <div className={styles.sideTooltipWrapper}>
+                        <div className={styles.sidebarTipArrow}></div>
+                        <div className={styles.sidebarTooltip}><p id="shareUrlIcon">{intl.formatMessage(intlMessages.copyLinkLabel)}</p></div>
+                      </div>
+                    </div>
+                    :
+                    <>
+                      <AddUser />
+                      <CopyPopupContainer />
+                    </>
+                }
               </div>
             }
           </div>

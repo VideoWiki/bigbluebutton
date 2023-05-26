@@ -152,6 +152,17 @@ function IconBox(props) {
                     </div>
                 </div>
             }
+            {/* {icon === "teamdynamics" &&
+                <div className={`${styles.IconBox} ${sidebarContentPanel === icon ? styles.IconFill : styles.IconUnfill}`}>
+                    <div className={`${styles.sidebarIcon} ${sidebarContentPanel === icon ? styles.selectedBox : styles.IconShadow}`}>
+                        <User sidebarContentPanel={sidebarContentPanel} />\
+                        <div className={styles.sideTooltipWrapper}>
+                            <div className={styles.sidebarTipArrow}></div>
+                            <div className={styles.sidebarTooltip}><span>{intl.formatMessage(intlMessages.usersTitle)}</span></div>
+                        </div>
+                    </div>
+                </div>
+            } */}
             {icon === "document" &&
                 <div className={`${styles.IconBox} ${sidebarContentPanel === icon ? styles.IconFill : styles.IconUnfill}`}>
                     {/* <div className={hasUnreadNotes ? styles.btnWithNotificationDot : null}> */}

@@ -6,6 +6,7 @@ import CreateBreakoutRoomModal from './component';
 
 const CreateBreakoutRoomContainer = (props) => {
   const { amIModerator } = props;
+  console.log("Record",props);
   return (
     amIModerator
     && (
